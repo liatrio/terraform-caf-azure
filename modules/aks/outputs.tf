@@ -4,3 +4,4 @@ output "cluster_name" {
 
 output "resource_group_name" {
   value = var.azurerm_resource_group.aks.name
+}
