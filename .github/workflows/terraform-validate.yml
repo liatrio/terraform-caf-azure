@@ -64,7 +64,6 @@ jobs:
         shell: bash
 
     steps:
-
       - name: Checkout
         uses: actions/checkout@v2
 
@@ -75,8 +74,11 @@ jobs:
       - name: Terraform Format
         run: terraform fmt -check -recursive
 
+  tfsec:
+    name: "TF-sec"
+    runs-on: ubuntu-latest
+    steps:
       - name: Run tfsec with reviewdog
-        # uses: reviewdog/action-tfsec@v1.11.0
         uses: reviewdog/action-tfsec@v1.14.0
         if: ${{ always() }}
         with:
@@ -85,7 +87,11 @@ jobs:
           fail_on_error: "true"
           filter_mode: "nofilter"
           tfsec_flags: "-e general-secrets-sensitive-in-variable,general-secrets-sensitive-in-local,general-secrets-sensitive-in-attribute"
-
+  
+  tflint:
+    name: "TF-lint"
+    runs-on: ubuntu-latest
+    steps:
       - name: Run tflint with reviewdog
         uses: reviewdog/action-tflint@v1.15.0
         if: ${{ always() }}
