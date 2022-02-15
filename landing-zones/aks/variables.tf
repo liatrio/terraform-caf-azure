@@ -1,7 +1,3 @@
-variable "resource_group_name" {
-  description = "The name of the Azure resource group"
-}
-
 variable "location" {
   default     = "eastus"
   description = "The Azure Region in which all resources should be provisioned"
@@ -17,10 +13,6 @@ variable "aks_subnet_address_range" {
 
 variable "prefix" {
   description = "A prefix used for resources"
-}
-
-variable "cluster_name" {
-  description = "The name of the AKS cluster"
 }
 
 variable "pool_name" {

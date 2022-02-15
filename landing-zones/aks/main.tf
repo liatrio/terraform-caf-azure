@@ -28,7 +28,7 @@ module "aks" {
   providers = {
     azurerm = azurerm.subscription_liatrio_dev
   }
-  resource_group_name      = var.resource_group_name
+  resource_group_name      = "${var.prefix}-aks-landing-zone"
   location                 = var.location
   prefix                   = var.prefix
   cluster_name             = var.cluster_name
