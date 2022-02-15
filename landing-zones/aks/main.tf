@@ -10,9 +10,6 @@ terraform {
 module "aks-vnet" {
   source = "../../modules/aks-vnet"
 
-  providers = {
-    azurerm = azurerm.subscription_liatrio_dev
-  }
   resource_group_name      = var.resource_group_name
   location                 = var.location
   vnet_address_range       = var.vnet_address_range
@@ -22,9 +19,6 @@ module "aks-vnet" {
 module "aks" {
   source = "../../modules/aks"
 
-  providers = {
-    azurerm = azurerm.subscription_liatrio_dev
-  }
   resource_group_name      = "${var.prefix}-aks-landing-zone"
   location                 = var.location
   prefix                   = var.prefix
