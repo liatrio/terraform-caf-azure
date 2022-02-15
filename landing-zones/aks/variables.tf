@@ -11,7 +11,7 @@ variable "aks_subnet_address_range" {
   description = "The address range of the aks subnet"
 }
 
-variable "prefix" {
+variable "name" {
   description = "A prefix used for resources"
 }
 

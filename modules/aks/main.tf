@@ -7,7 +7,7 @@ terraform {
   }
 }
 
-resource "azurerm_resource_group" "aks_caf_poc" {
+resource "azurerm_resource_group" "aks" {
   name     = var.resource_group_name
   location = var.location
 }
@@ -16,10 +16,10 @@ resource "azurerm_resource_group" "aks_caf_poc" {
 #tfsec:ignore:azure-container-logging
 #tfsec:ignore:azure-container-limit-authorized-ips
 resource "azurerm_kubernetes_cluster" "main" {
-  name                    = var.cluster_name
+  name                    = var.name
   location                = var.location
-  resource_group_name     = azurerm_resource_group.aks_caf_poc.name
-  dns_prefix              = "${var.prefix}-k8s"
+  resource_group_name     = azurerm_resource_group.aks.name
+  dns_prefix              = var.name
   private_cluster_enabled = true
   default_node_pool {
     name           = var.pool_name
@@ -32,9 +32,7 @@ resource "azurerm_kubernetes_cluster" "main" {
     type = "SystemAssigned"
   }
 
-  tags = {
-    Project = "aks-caf-poc"
-  }
+  tags = var.tags
 
   addon_profile {
     aci_connector_linux {

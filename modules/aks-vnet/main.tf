@@ -7,19 +7,17 @@ terraform {
   }
 }
 
-resource "azurerm_resource_group" "aks_caf_poc" {
-  name     = var.resource_group_name
+resource "azurerm_resource_group" "aks" {
+  name     = var.name
   location = var.location
 }
 
 resource "azurerm_network_security_group" "aks_security_group" {
   name                = "aks-security-group"
-  location            = azurerm_resource_group.aks_caf_poc.location
-  resource_group_name = azurerm_resource_group.aks_caf_poc.name
+  location            = azurerm_resource_group.aks.location
+  resource_group_name = azurerm_resource_group.aks.name
 
-  tags = {
-    Project = "aks-caf-poc"
-  }
+  tags = var.tags
 }
 
 resource "azurerm_network_security_rule" "aks_sec_rules" {
@@ -34,22 +32,20 @@ resource "azurerm_network_security_rule" "aks_sec_rules" {
   destination_port_range      = each.value.destination_port_range
   source_address_prefix       = each.value.source_address_prefix
   destination_address_prefix  = each.value.destination_address_prefix
-  resource_group_name         = azurerm_resource_group.aks_caf_poc.name
+  resource_group_name         = azurerm_resource_group.aks.name
   network_security_group_name = azurerm_network_security_group.aks_security_group.name
 }
 
 # Create Virtual Network
 resource "azurerm_virtual_network" "aksvnet" {
   name                = "aks-network"
-  location            = azurerm_resource_group.aks_caf_poc.location
-  resource_group_name = azurerm_resource_group.aks_caf_poc.name
+  location            = azurerm_resource_group.aks.location
+  resource_group_name = azurerm_resource_group.aks.name
   address_space       = [var.vnet_address_range]
   subnet {
     name           = "aks-subnet1"
     address_prefix = var.aks_subnet_address_range
     security_group = azurerm_network_security_group.aks_security_group.id
   }
-  tags = {
-    Project = "aks-caf-poc"
-  }
+  tags = var.tags
 }

@@ -18,3 +18,9 @@ variable "aks_subnet_address_range" {
   description = "The address range of the aks subnet"
   type        = string
 }
+
+variable "tags" {
+  description = "Resource tags"
+  type        = map
+  default     = {}
+}

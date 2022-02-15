@@ -9,14 +9,8 @@ variable "location" {
   type        = string
 }
 
-variable "prefix" {
-  description = "A prefix used for resources"
-  type        = string
-}
-
-## Kubernetes Cluster
-variable "cluster_name" {
-  description = "The name of the AKS cluster"
+variable "name" {
+  description = "Unique resources name for AKS cluster"
   type        = string
 }
 
@@ -38,4 +32,10 @@ variable "vm_size" {
 variable "vnet_subnet_id" {
   description = "Vnet subnet ID"
   type        = string
+}
+
+variable "tags" {
+  description = "Resource tags"
+  type        = map
+  default     = {}
 }

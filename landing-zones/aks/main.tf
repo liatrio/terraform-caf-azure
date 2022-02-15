@@ -10,7 +10,7 @@ terraform {
 module "aks-vnet" {
   source = "../../modules/aks-vnet"
 
-  resource_group_name      = var.resource_group_name
+  name                     = var.name
   location                 = var.location
   vnet_address_range       = var.vnet_address_range
   aks_subnet_address_range = var.aks_subnet_address_range
@@ -19,10 +19,9 @@ module "aks-vnet" {
 module "aks" {
   source = "../../modules/aks"
 
-  resource_group_name      = "${var.prefix}-aks-landing-zone"
+  resource_group_name      = module.aks-vnet.resource_group_name
   location                 = var.location
-  prefix                   = var.prefix
-  cluster_name             = "${var.prefix}-aks-landing-zone"
+  prefix                   = var.name
   pool_name                = var.pool_name
   node_count               = var.node_count
   vm_size                  = var.vm_size
