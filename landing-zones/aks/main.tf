@@ -21,7 +21,7 @@ module "aks" {
 
   resource_group_name      = module.aks-vnet.resource_group_name
   location                 = var.location
-  prefix                   = var.name
+  name                   = var.name
   pool_name                = var.pool_name
   node_count               = var.node_count
   vm_size                  = var.vm_size
