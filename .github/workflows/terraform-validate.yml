@@ -59,9 +59,6 @@ jobs:
   terraform_format:
     name: "Format"
     runs-on: ubuntu-latest
-    defaults:
-      run:
-        shell: bash
 
     steps:
       - name: Checkout
@@ -78,6 +75,12 @@ jobs:
     name: "TF-sec"
     runs-on: ubuntu-latest
     steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+
+      - name: Setup Terraform
+        uses: hashicorp/setup-terraform@v1
+
       - name: Run tfsec with reviewdog
         uses: reviewdog/action-tfsec@v1.14.0
         if: ${{ always() }}
@@ -92,6 +95,12 @@ jobs:
     name: "TF-lint"
     runs-on: ubuntu-latest
     steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+
+      - name: Setup Terraform
+        uses: hashicorp/setup-terraform@v1
+
       - name: Run tflint with reviewdog
         uses: reviewdog/action-tflint@v1.15.0
         if: ${{ always() }}
