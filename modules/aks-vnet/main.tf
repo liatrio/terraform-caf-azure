@@ -7,20 +7,20 @@ terraform {
   }
 }
 
-resource "azurerm_resource_group" "aks" {
-  name     = var.name
+resource "azurerm_resource_group" "aks_vnet" {
+  name     = "${var.name}-vnet"
   location = var.location
 }
 
-resource "azurerm_network_security_group" "aks_security_group" {
+resource "azurerm_network_security_group" "aks_vnet" {
   name                = var.name
-  location            = azurerm_resource_group.aks.location
-  resource_group_name = azurerm_resource_group.aks.name
+  location            = azurerm_resource_group.aks_vnet.location
+  resource_group_name = azurerm_resource_group.aks_vnet.name
 
   tags = var.tags
 }
 
-resource "azurerm_network_security_rule" "aks_sec_rules" {
+resource "azurerm_network_security_rule" "aks_vnet" {
   for_each                    = local.nsgrules
   name                        = each.key
   direction                   = each.value.direction
@@ -32,20 +32,20 @@ resource "azurerm_network_security_rule" "aks_sec_rules" {
   destination_port_range      = each.value.destination_port_range
   source_address_prefix       = each.value.source_address_prefix
   destination_address_prefix  = each.value.destination_address_prefix
-  resource_group_name         = azurerm_resource_group.aks.name
-  network_security_group_name = azurerm_network_security_group.aks_security_group.name
+  resource_group_name         = azurerm_resource_group.aks_vnet.name
+  network_security_group_name = azurerm_network_security_group.aks_vnet.name
 }
 
 # Create Virtual Network
-resource "azurerm_virtual_network" "aksvnet" {
+resource "azurerm_virtual_network" "aks_vnet" {
   name                = var.name
-  location            = azurerm_resource_group.aks.location
-  resource_group_name = azurerm_resource_group.aks.name
+  location            = azurerm_resource_group.aks_vnet.location
+  resource_group_name = azurerm_resource_group.aks_vnet.name
   address_space       = [var.vnet_address_range]
   subnet {
     name           = var.name
     address_prefix = var.aks_subnet_address_range
-    security_group = azurerm_network_security_group.aks_security_group.id
+    security_group = azurerm_network_security_group.aks_vnet.id
   }
   tags = var.tags
 }

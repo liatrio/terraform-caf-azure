@@ -8,14 +8,14 @@ terraform {
 }
 
 resource "azurerm_resource_group" "aks" {
-  name     = var.resource_group_name
+  name     = var.name
   location = var.location
 }
 
 #tfsec:ignore:azure-container-use-rbac-permissions
 #tfsec:ignore:azure-container-logging
 #tfsec:ignore:azure-container-limit-authorized-ips
-resource "azurerm_kubernetes_cluster" "main" {
+resource "azurerm_kubernetes_cluster" "aks" {
   name                    = var.name
   location                = var.location
   resource_group_name     = azurerm_resource_group.aks.name
