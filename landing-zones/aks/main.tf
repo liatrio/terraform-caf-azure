@@ -2,10 +2,7 @@ terraform {
   required_providers {
     azurerm = {
       source  = "hashicorp/azurerm"
-      version = "~> 2.83"
-      configuration_aliases = [
-        azurerm.subscription_liatrio_dev
-      ]
+      version = "~> 2.96.0"
     }
   }
 }
