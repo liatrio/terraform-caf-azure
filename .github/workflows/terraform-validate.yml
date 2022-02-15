@@ -1,0 +1,112 @@
+name: "Terraform Code Quality"
+
+on:
+  pull_request:
+  push:
+
+jobs:
+  discover_stages:
+    name: Discover
+    runs-on: ubuntu-latest
+    steps:
+
+      - name: Checkout
+        uses: actions/checkout@v2
+
+      # here we create the json, we need the "id:" so we can use it in "outputs" below
+      - id: set-matrix
+
+        # find main.tf files in root directory, exclude modules/ folder, trim to path, store as array, remove any empty.
+        run: echo "::set-output name=matrix::$(find . -name ".terraform.lock.hcl" | sed 's:[^/]*$::' | jq -R -s -c 'split("\n") | map(select(length > 0))')"
+
+    outputs:
+        matrix: ${{ steps.set-matrix.outputs.matrix }}
+
+  terraform_validate:
+    name: "Validate"
+    runs-on: ubuntu-latest
+
+    needs: discover_stages
+    strategy:
+        # ↓ create dynamic matrix from the json
+        matrix:
+          validate: ${{ fromJson(needs.discover_stages.outputs.matrix) }}
+        fail-fast: false
+    defaults:
+      run:
+        shell: bash
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+
+      - name: Setup
+        uses: hashicorp/setup-terraform@v1
+
+      # Checks that all Terraform configuration is syntactically valid and internally consistent, regardless of any provided variables or existing state.
+      - name: Validate
+        env:
+          FOLDER: ${{ matrix.validate }}
+        run: |
+          cd $FOLDER
+          if [ ! -f ".terraform.lock.hcl" ]; then
+            echo "Terraform lockfile doesn't exist in this root module. Please create one using \"terraform init -backend=false\""
+            exit 1
+          fi
+          terraform init -backend=false
+          terraform validate
+
+  terraform_format:
+    name: "Format"
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+
+      - name: Setup Terraform
+        uses: hashicorp/setup-terraform@v1
+
+      # Checks that all Terraform configuration files adhere to a canonical format
+      - name: Terraform Format
+        run: terraform fmt -check -recursive
+
+  tfsec:
+    name: "TF-sec"
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+
+      - name: Setup Terraform
+        uses: hashicorp/setup-terraform@v1
+
+      - name: Run tfsec with reviewdog
+        uses: reviewdog/action-tfsec@v1.14.0
+        if: ${{ always() }}
+        with:
+          github_token: ${{ secrets.github_token }}
+          tfsec_version: "v1.1.5" 
+          fail_on_error: "true"
+          filter_mode: "nofilter"
+          tfsec_flags: "-e general-secrets-sensitive-in-variable,general-secrets-sensitive-in-local,general-secrets-sensitive-in-attribute"
+  
+  tflint:
+    name: "TF-lint"
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+
+      - name: Setup Terraform
+        uses: hashicorp/setup-terraform@v1
+
+      - name: Run tflint with reviewdog
+        uses: reviewdog/action-tflint@v1.15.0
+        if: ${{ always() }}
+        with:
+          github_token: ${{ secrets.github_token }}
+          fail_on_error: "true"
+          filter_mode: "nofilter"
+
+
