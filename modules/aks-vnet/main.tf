@@ -13,7 +13,7 @@ resource "azurerm_resource_group" "aks" {
 }
 
 resource "azurerm_network_security_group" "aks_security_group" {
-  name                = "aks-security-group"
+  name                = var.name
   location            = azurerm_resource_group.aks.location
   resource_group_name = azurerm_resource_group.aks.name
 
@@ -38,12 +38,12 @@ resource "azurerm_network_security_rule" "aks_sec_rules" {
 
 # Create Virtual Network
 resource "azurerm_virtual_network" "aksvnet" {
-  name                = "aks-network"
+  name                = var.name
   location            = azurerm_resource_group.aks.location
   resource_group_name = azurerm_resource_group.aks.name
   address_space       = [var.vnet_address_range]
   subnet {
-    name           = "aks-subnet1"
+    name           = var.name
     address_prefix = var.aks_subnet_address_range
     security_group = azurerm_network_security_group.aks_security_group.id
   }
