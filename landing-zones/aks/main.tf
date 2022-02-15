@@ -31,10 +31,9 @@ module "aks" {
   resource_group_name      = "${var.prefix}-aks-landing-zone"
   location                 = var.location
   prefix                   = var.prefix
-  cluster_name             = var.cluster_name
+  cluster_name             = "${var.prefix}-aks-landing-zone"
   pool_name                = var.pool_name
   node_count               = var.node_count
   vm_size                  = var.vm_size
-  vnet_address_range       = var.vnet_address_range
-  aks_subnet_address_range = var.aks_subnet_address_range
+  vnet_subnet_id           = module.aks-vnet.vnet_subnet_id
 }
