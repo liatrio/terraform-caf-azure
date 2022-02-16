@@ -37,6 +37,9 @@ data "azurerm_subscription" "connectivity" {
   subscription_id = data.azurerm_client_config.connectivity.subscription_id
 }
 module "connectivity" {
+  providers = {
+azurerm.connectivity = azurerm.connectivity
+}
   source = "./connectivity"
   location                             = var.location
   vhub_subnet_cidr                     = var.vhub_subnet_cidr

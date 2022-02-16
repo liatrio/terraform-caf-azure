@@ -1,6 +1,6 @@
 resource "azurerm_vpn_server_configuration" "vpn_server_config" {
   provider            = azurerm.connectivity
-  name                = "${var.resource_name_prefix}-vpn-server-config-aad"
+  name                = "${var.prefix}-vpn-server-config-aad"
   resource_group_name = azurerm_resource_group.caf_connectivity.name
   location            = azurerm_resource_group.caf_connectivity.location
   vpn_authentication_types = [
@@ -8,7 +8,7 @@ resource "azurerm_vpn_server_configuration" "vpn_server_config" {
   ]
 
   azure_active_directory_authentication {
-    audience = azuread_service_principal.azure_vpn.application_id
+    audience = var.vpn_service_principal_application_id
     issuer   = "https://sts.windows.net/${var.tenant_id}/"
     tenant   = "https://login.microsoftonline.com/${var.tenant_id}"
   }
@@ -16,7 +16,7 @@ resource "azurerm_vpn_server_configuration" "vpn_server_config" {
 
 resource "azurerm_point_to_site_vpn_gateway" "hub_vpn_gateway" {
   provider                    = azurerm.connectivity
-  name                        = "${var.resource_name_prefix}-hub-vpn-gateway-${azurerm_resource_group.caf_connectivity.location}"
+  name                        = "${var.prefix}-hub-vpn-gateway-${azurerm_resource_group.caf_connectivity.location}"
   location                    = azurerm_resource_group.caf_connectivity.location
   resource_group_name         = azurerm_resource_group.caf_connectivity.name
   virtual_hub_id              = azurerm_virtual_hub.caf_hub.id

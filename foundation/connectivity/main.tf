@@ -1,3 +1,11 @@
+terraform {
+  required_providers {
+    azurerm = {
+configuration_aliases = [ azurerm.connectivity ]
+}
+  }
+}
+
 resource "azurerm_resource_group" "caf_connectivity" {
   name     = "${var.prefix}-connectivity"
   location = var.location
