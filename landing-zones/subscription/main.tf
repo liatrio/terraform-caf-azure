@@ -14,7 +14,7 @@ data "azurerm_billing_mca_account_scope" "billing" {
 }
 
 resource "azurerm_subscription" "landing_zone" {
-  subscription_name = "${var.name}"
+  subscription_name = var.name
   billing_scope_id  = data.azurerm_billing_mca_account_scope.billing.id
 
   tags = {}

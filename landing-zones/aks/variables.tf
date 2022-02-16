@@ -21,12 +21,12 @@ variable "pool_name" {
 }
 
 variable "node_count" {
-    default = "2"
-    description = "The number of nodes"
+  default     = "2"
+  description = "The number of nodes"
 }
 
 variable "vm_size" {
-    default = "Standard_D2_v2"
-    description = "The size of the VM"
+  default     = "Standard_D2_v2"
+  description = "The size of the VM"
 }
 

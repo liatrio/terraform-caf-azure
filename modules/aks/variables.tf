@@ -30,6 +30,6 @@ variable "vnet_subnet_id" {
 
 variable "tags" {
   description = "Resource tags"
-  type        = map
+  type        = map(any)
   default     = {}
 }

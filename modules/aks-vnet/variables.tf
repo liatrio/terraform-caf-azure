@@ -20,6 +20,6 @@ variable "aks_subnet_address_range" {
 
 variable "tags" {
   description = "Resource tags"
-  type        = map
+  type        = map(any)
   default     = {}
 }
