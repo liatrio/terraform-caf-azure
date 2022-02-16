@@ -1,6 +1,6 @@
 resource "azurerm_management_group" "foundation" {
   name         = var.group_prefix
-  display_name = "Foundation"
+  display_name = "Foundation" #this should be a var
 }
 
 resource "azurerm_management_group" "platform" {
@@ -13,39 +13,45 @@ resource "azurerm_management_group" "connectivity" {
   name                       = "${var.group_prefix}-connectivity"
   display_name               = "Connectivity"
   parent_management_group_id = azurerm_management_group.platform.id
-}
-
-resource "azurerm_management_group_subscription_association" "connectivity" {
-  management_group_id = azurerm_management_group.connectivity.id
-  subscription_id     = data.azurerm_subscription.connectivity.id
+  subscription_ids = [
+    data.azurerm_subscription.connectivity.id
+  ]
 }
 
 resource "azurerm_management_group" "identity" {
   name                       = "${var.group_prefix}-identity"
   display_name               = "Identity"
   parent_management_group_id = azurerm_management_group.platform.id
-}
-
-resource "azurerm_management_group_subscription_association" "identity" {
-  management_group_id = azurerm_management_group.identity.id
-  subscription_id     = data.azurerm_subscription.identity.id
+  subscription_ids = [
+    data.azurerm_subscription.identity.id
+  ]
 }
 
 resource "azurerm_management_group" "management" {
   name                       = "${var.group_prefix}-management"
   display_name               = "Management"
   parent_management_group_id = azurerm_management_group.platform.id
-}
-
-resource "azurerm_management_group_subscription_association" "management" {
-  management_group_id = azurerm_management_group.management.id
-  subscription_id     = data.azurerm_subscription.management.id
+  subscription_ids = [
+    data.azurerm_subscription.management.id
+  ]
 }
 
 resource "azurerm_management_group" "landing_zones" {
   name                       = "${var.group_prefix}-landing-zones"
   display_name               = "Landing Zones"
   parent_management_group_id = azurerm_management_group.foundation.id
+}
+
+resource "azurerm_management_group" "corp" {
+  name                       = "${var.group_prefix}-landing-zones"
+  display_name               = "Corp"
+  parent_management_group_id = azurerm_management_group.landing_zones.id
+}
+
+resource "azurerm_management_group" "online" {
+  name                       = "${var.group_prefix}-landing-zones"
+  display_name               = "Online"
+  parent_management_group_id = azurerm_management_group.landing_zones.id
 }
 
 resource "azurerm_management_group" "sandboxes" {
