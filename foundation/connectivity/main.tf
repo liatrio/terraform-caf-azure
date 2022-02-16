@@ -1,8 +1,9 @@
 terraform {
   required_providers {
     azurerm = {
-configuration_aliases = [ azurerm.connectivity ]
-}
+      source  = "hashicorp/azurerm"
+      version = "~> 2.96"
+    }
   }
 }
 

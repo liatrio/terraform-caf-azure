@@ -38,9 +38,9 @@ data "azurerm_subscription" "connectivity" {
 }
 module "connectivity" {
   providers = {
-azurerm.connectivity = azurerm.connectivity
-}
-  source = "./connectivity"
+    azurerm = azurerm.connectivity
+  }
+  source                               = "./connectivity"
   location                             = var.location
   vhub_subnet_cidr                     = var.vhub_subnet_cidr
   vpn_client_pool_subnet_cidr          = var.vpn_client_pool_subnet_cidr
