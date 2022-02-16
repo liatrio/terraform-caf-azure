@@ -1,7 +1,3 @@
-variable "group_prefix" {
-  type    = string
-  default = "caf"
-}
 variable "location" {
   type    = string
   default = "southcentralus"
@@ -15,8 +11,11 @@ variable "vpn_client_pool_subnet_cidr" {
   description = "The subnet CIDR for the VPN user pool"
 }
 variable "tenant_id" {
-  type        = string
-  description = "Tenant to deploy CAF"
+  type = string
+}
+variable "prefix" {
+  type    = string
+  default = "caf"
 }
 variable "vpn_service_principal_application_id" {
   type        = string

@@ -36,3 +36,16 @@ data "azurerm_client_config" "connectivity" {
 data "azurerm_subscription" "connectivity" {
   subscription_id = data.azurerm_client_config.connectivity.subscription_id
 }
+module "connectivity" {
+  source = "connectivity"
+  providers = {
+    azurerm = azurerm.connectivity
+  }
+
+  location                             = var.location
+  vhub_subnet_cidr                     = var.vhub_subnet_cidr
+  vpn_client_pool_subnet_cidr          = var.vpn_client_pool_subnet_cidr
+  tenant_id                            = var.tenant_id
+  prefix                               = var.group_prefix
+  vpn_service_principal_application_id = var.vpn_service_principal_application_id
+}
