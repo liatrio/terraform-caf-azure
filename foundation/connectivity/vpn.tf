@@ -1,5 +1,5 @@
 resource "azurerm_vpn_server_configuration" "vpn_server_config" {
-  provider            = azurerm
+  provider            = azurerm.connectivity
   name                = "${var.resource_name_prefix}-vpn-server-config-aad"
   resource_group_name = azurerm_resource_group.caf_connectivity.name
   location            = azurerm_resource_group.caf_connectivity.location
@@ -15,7 +15,7 @@ resource "azurerm_vpn_server_configuration" "vpn_server_config" {
 }
 
 resource "azurerm_point_to_site_vpn_gateway" "hub_vpn_gateway" {
-  provider                    = azurerm
+  provider                    = azurerm.connectivity
   name                        = "${var.resource_name_prefix}-hub-vpn-gateway-${azurerm_resource_group.caf_connectivity.location}"
   location                    = azurerm_resource_group.caf_connectivity.location
   resource_group_name         = azurerm_resource_group.caf_connectivity.name
