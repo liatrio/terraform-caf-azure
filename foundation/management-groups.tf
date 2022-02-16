@@ -59,3 +59,11 @@ resource "azurerm_management_group" "decommissioned" {
   display_name               = "Decommissioned"
   parent_management_group_id = azurerm_management_group.foundation.id
 }
+
+resource "azurerm_management_group" "environments" {
+  name                       = "${var.group_prefix}-environments"
+  display_name               = "Environments"
+  parent_management_group_id = azurerm_management_group.landing_zones.id
+  subscription_ids           = var.environment_subscriptions
+}
+
