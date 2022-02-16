@@ -15,6 +15,7 @@ resource "azurerm_resource_group" "aks" {
 #tfsec:ignore:azure-container-use-rbac-permissions
 #tfsec:ignore:azure-container-logging
 #tfsec:ignore:azure-container-limit-authorized-ips
+#tfsec:ignore:azure-container-configured-network-policy
 resource "azurerm_kubernetes_cluster" "aks" {
   name                    = var.name
   location                = var.location
