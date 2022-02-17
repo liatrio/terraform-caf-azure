@@ -14,7 +14,7 @@ resource "azurerm_management_group" "connectivity" {
   display_name               = "Connectivity"
   parent_management_group_id = azurerm_management_group.platform.id
   subscription_ids = [
-    data.azurerm_subscription.connectivity.id
+    var.connectivity_id
   ]
 }
 
@@ -23,7 +23,7 @@ resource "azurerm_management_group" "identity" {
   display_name               = "Identity"
   parent_management_group_id = azurerm_management_group.platform.id
   subscription_ids = [
-    data.azurerm_subscription.identity.id
+    var.identity_id
   ]
 }
 
@@ -32,7 +32,7 @@ resource "azurerm_management_group" "management" {
   display_name               = "Management"
   parent_management_group_id = azurerm_management_group.platform.id
   subscription_ids = [
-    data.azurerm_subscription.management.id
+    var.management_id
   ]
 }
 
