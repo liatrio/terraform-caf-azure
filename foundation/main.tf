@@ -45,6 +45,7 @@ module "connectivity" {
   location                             = var.location
   virtual_hub_address_cidr             = var.virtual_hub_address_cidr
   vpn_client_pool_address_cidr         = var.vpn_client_pool_address_cidr
+  connectivity_apps_address_cidr       = var.connectivity_apps_address_cidr
   tenant_id                            = var.tenant_id
   prefix                               = var.group_prefix
   vpn_service_principal_application_id = var.vpn_service_principal_application_id
