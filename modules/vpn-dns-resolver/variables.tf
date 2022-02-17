@@ -5,8 +5,8 @@ variable "prefix" {
 
 variable "upstream_dns_server" {
   type        = string
-  description = "The IP address of the DNS server to proxy requests to. Defaults to Azure's special (magical) internal DNS server"
-  default     = "168.63.129.16"
+  description = "The IP address of the DNS server to proxy requests to. Defaults to Azure's special internal DNS server"
+  default     = "168.63.129.16" # https://docs.microsoft.com/en-us/azure/virtual-network/what-is-ip-address-168-63-129-16
 }
 
 variable "location" {
