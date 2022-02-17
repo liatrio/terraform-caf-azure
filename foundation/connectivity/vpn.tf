@@ -1,3 +1,12 @@
+module "vpn_dns_resolver" {
+  source    = "../../modules/vpn-dns-resolver"
+
+  location             = var.location
+  resource_group_name  = azurerm_resource_group.caf_connectivity.name
+  virtual_network_name = azurerm_virtual_network.connectivity_vnet.name
+  subnet_cidr          = local.coredns_subnet_cidr
+}
+
 resource "azurerm_vpn_server_configuration" "vpn_server_config" {
   name                = "${var.prefix}-vpn-server-config-aad"
   resource_group_name = azurerm_resource_group.caf_connectivity.name
@@ -20,6 +29,10 @@ resource "azurerm_point_to_site_vpn_gateway" "hub_vpn_gateway" {
   virtual_hub_id              = azurerm_virtual_hub.caf_hub.id
   vpn_server_configuration_id = azurerm_vpn_server_configuration.vpn_server_config.id
   scale_unit                  = 1
+
+  dns_servers = [
+    module.vpn_dns_resolver.ip_address
+  ]
 
   connection_configuration {
     name                      = "hub-vpn-gateway-config"
