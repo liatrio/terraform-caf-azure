@@ -36,3 +36,12 @@ variable "vpn_service_principal_application_id" {
   type        = string
   description = "The ApplicationID of the Azure VPN service principal, used for AAD authentication to the point-to-site VPN"
 }
+
+variable "landing_zone_mg" {
+  type = map(object({
+    display_name = string
+    policy_ids   = list(string)
+  }))
+  default = {}
+  description = "Dynamic landing zone creation"
+}

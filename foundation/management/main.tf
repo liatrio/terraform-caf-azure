@@ -42,15 +42,10 @@ resource "azurerm_management_group" "landing_zones" {
   parent_management_group_id = azurerm_management_group.foundation.id
 }
 
-resource "azurerm_management_group" "corp" {
-  name                       = "${var.group_prefix}-landing-zones"
-  display_name               = "Corp"
-  parent_management_group_id = azurerm_management_group.landing_zones.id
-}
-
-resource "azurerm_management_group" "online" {
-  name                       = "${var.group_prefix}-landing-zones"
-  display_name               = "Online"
+resource "azurerm_management_group" "dynamic" {
+  for_each                   = var.landing_zone_mg
+  name                       = "${var.group_prefix}-${each.key}"
+  display_name               = each.value.display_name
   parent_management_group_id = azurerm_management_group.landing_zones.id
 }
 

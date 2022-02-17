@@ -17,3 +17,10 @@ variable "identity_id" {
 variable "management_id" {
   type = string
 }
+
+variable "landing_zone_mg" {
+  type = map(object({
+    display_name = string
+    policy_ids   = list(string)
+  }))
+}
