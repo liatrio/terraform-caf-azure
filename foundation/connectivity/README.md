@@ -1,1 +1,1 @@
-# Connectiving CAF Foundation module 
+# Connectivity CAF Foundation module 

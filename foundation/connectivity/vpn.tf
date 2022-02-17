@@ -22,7 +22,8 @@ resource "azurerm_point_to_site_vpn_gateway" "hub_vpn_gateway" {
   scale_unit                  = 1
 
   connection_configuration {
-    name = "hub-vpn-gateway-config"
+    name                      = "hub-vpn-gateway-config"
+    internet_security_enabled = true
 
     vpn_client_address_pool {
       address_prefixes = [
