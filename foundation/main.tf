@@ -36,6 +36,7 @@ data "azurerm_client_config" "connectivity" {
 data "azurerm_subscription" "connectivity" {
   subscription_id = data.azurerm_client_config.connectivity.subscription_id
 }
+
 module "connectivity" {
   providers = {
     azurerm = azurerm.connectivity
