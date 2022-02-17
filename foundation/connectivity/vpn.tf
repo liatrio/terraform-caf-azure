@@ -27,7 +27,7 @@ resource "azurerm_point_to_site_vpn_gateway" "hub_vpn_gateway" {
 
     vpn_client_address_pool {
       address_prefixes = [
-        var.vpn_client_pool_subnet_cidr
+        var.vpn_client_pool_address_cidr
       ]
     }
   }

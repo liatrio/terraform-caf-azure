@@ -2,13 +2,13 @@ variable "location" {
   type    = string
   default = "southcentralus"
 }
-variable "vhub_subnet_cidr" {
+variable "virtual_hub_address_cidr" {
   type        = string
-  description = "The subnet CIDR for the Virtual Hub"
+  description = "The network CIDR for the Virtual Hub"
 }
-variable "vpn_client_pool_subnet_cidr" {
+variable "vpn_client_pool_address_cidr" {
   type        = string
-  description = "The subnet CIDR for the VPN user pool"
+  description = "The network CIDR for the VPN user pool"
 }
 variable "tenant_id" {
   type = string

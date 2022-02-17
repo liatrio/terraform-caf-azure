@@ -23,5 +23,5 @@ resource "azurerm_virtual_hub" "caf_hub" {
   resource_group_name = azurerm_resource_group.caf_connectivity.name
   location            = azurerm_resource_group.caf_connectivity.location
   virtual_wan_id      = azurerm_virtual_wan.caf_vwan.id
-  address_prefix      = var.vhub_subnet_cidr
+  address_prefix      = var.virtual_hub_address_cidr
 }
