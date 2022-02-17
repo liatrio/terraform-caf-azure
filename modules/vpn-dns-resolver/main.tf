@@ -24,7 +24,7 @@ resource "azurerm_subnet" "coredns_subnet" {
     name = "delegation"
 
     service_delegation {
-      name    = "Microsoft.ContainerInstance/containerGroups"
+      name = "Microsoft.ContainerInstance/containerGroups"
       actions = [
         "Microsoft.Network/virtualNetworks/subnets/action"
       ]

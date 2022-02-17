@@ -1,5 +1,5 @@
 module "vpn_dns_resolver" {
-  source    = "../../modules/vpn-dns-resolver"
+  source = "../../modules/vpn-dns-resolver"
 
   location             = var.location
   resource_group_name  = azurerm_resource_group.caf_connectivity.name

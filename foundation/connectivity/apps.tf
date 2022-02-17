@@ -8,7 +8,7 @@ resource "azurerm_virtual_network" "connectivity_vnet" {
   name                = "connectivity-apps"
   location            = var.location
   resource_group_name = azurerm_resource_group.caf_connectivity.name
-  address_space       = [
+  address_space = [
     var.connectivity_apps_address_cidr
   ]
 }
