@@ -50,3 +50,11 @@ module "connectivity" {
   prefix                               = var.group_prefix
   vpn_service_principal_application_id = var.vpn_service_principal_application_id
 }
+
+module "shared-services" {
+  source          = "./shared-services"
+  for_each        = var.subscription_ids
+  subscription_id = each.key
+  tenant_id       = var.tenant_id
+  shared_services = var.shared_services["${each.value}"]
+}
