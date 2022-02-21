@@ -23,7 +23,6 @@ output "landing_zones" {
 }
 
 output "dynamic_management_groups" {
-  // value = azurerm_management_group.dynamic_management_group[*].id
   value = [for k, v in azurerm_management_group.dynamic : v.id]
 }
 
