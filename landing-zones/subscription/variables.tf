@@ -13,3 +13,7 @@ variable "billing_profile_name" {
 variable "invoice_section_name" {
   type = string
 }
+
+variable "management_group_display_name" {
+  type = string
+}
