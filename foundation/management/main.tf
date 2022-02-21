@@ -1,3 +1,12 @@
+terraform {
+  required_providers {
+    azurerm = {
+      source  = "hashicorp/azurerm"
+      version = "~> 2.96"
+    }
+  }
+}
+
 resource "azurerm_management_group" "foundation" {
   name         = var.group_prefix
   display_name = "Foundation" #this should be a var
@@ -46,6 +55,18 @@ resource "azurerm_management_group" "dynamic" {
   for_each                   = var.landing_zone_mg
   name                       = "${var.group_prefix}-${each.key}"
   display_name               = each.value.display_name
+  parent_management_group_id = azurerm_management_group.landing_zones.id
+}
+resource "azurerm_management_group" "dynamic" {
+  for_each                   = var.landing_zone_mg
+  name                       = "${var.group_prefix}-${each.key}"
+  display_name               = each.value.display_name
+  parent_management_group_id = azurerm_management_group.landing_zones.id
+}
+
+resource "azurerm_management_group" "shared_svc" {
+  name                       = "${var.group_prefix}-shared-svc"
+  display_name               = "Shared Services"
   parent_management_group_id = azurerm_management_group.landing_zones.id
 }
 

@@ -42,6 +42,6 @@ variable "landing_zone_mg" {
     display_name = string
     policy_ids   = list(string)
   }))
-  default = {}
+  default     = {}
   description = "Dynamic landing zone creation"
 }
