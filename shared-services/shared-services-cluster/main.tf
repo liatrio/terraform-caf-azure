@@ -5,13 +5,14 @@ terraform {
       version = "~> 2.96.0"
     }
   }
-  module "aks_vnet" {
-    source                   = "../../modules/aks-vnet"
-    name                     = "shared-service1"
-    location                 = "southcentralus"
-    vnet_address_range       = "10.137.0.0/23"
-    aks_subnet_address_range = "10.137.0.0/24"
-  }
+}
+
+module "aks_vnet" {
+  source                   = "../../modules/aks-vnet"
+  name                     = "shared-service1"
+  location                 = "southcentralus"
+  vnet_address_range       = "10.137.0.0/23"
+  aks_subnet_address_range = "10.137.0.0/24"
 }
 
 module "aks" {
@@ -35,9 +36,4 @@ resource "azurerm_virtual_hub_connection" "aks_vnet_hub_connection" {
   virtual_hub_id            = azurerm_virtual_hub.connectivity_hub.id
   remote_virtual_network_id = module.aks_vnet.vnet_id
 }
-
-#  location                 = "southcentralus"
-#  vnet_address_range       = "10.137.0.0/23"
-#  aks_subnet_address_range = "10.137.0.0/24"
-#}
 
