@@ -9,7 +9,7 @@ terraform {
 
 resource "azurerm_management_group" "foundation" {
   name         = var.group_prefix
-  display_name = "Foundation" #this should be a var
+  display_name = var.foundation_name
 }
 
 resource "azurerm_management_group" "platform" {

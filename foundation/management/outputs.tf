@@ -34,3 +34,7 @@ output "sandboxes" {
 output "decommissioned" {
   value = azurerm_management_group.decommissioned.id
 }
+
+output "shared_svc" {
+  value = azurerm_management_group.shared_svc.id
+}

@@ -2,6 +2,11 @@ variable "company_name" {
   type = string
 }
 
+variable "foundation_name" {
+  type    = string
+  default = "Foundation"
+}
+
 variable "group_prefix" {
   type = string
 }
