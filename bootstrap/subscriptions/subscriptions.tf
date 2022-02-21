@@ -18,11 +18,3 @@ resource "azurerm_subscription" "identity" {
 
   tags = {}
 }
-
-resource "azurerm_subscription" "shared_services" {
-  for_each          = var.shared_services
-  subscription_name = "${var.group_prefix}-${each.key}"
-  billing_scope_id  = data.azurerm_billing_mca_account_scope.billing.id
-
-  tags = {}
-}

@@ -36,9 +36,3 @@ variable "vpn_service_principal_application_id" {
   type        = string
   description = "The ApplicationID of the Azure VPN service principal, used for AAD authentication to the point-to-site VPN"
 }
-variable "shared_service_subscription_ids" {
-  type = map(any)
-}
-variable "shared_services" {
-  type = map(any)
-}
