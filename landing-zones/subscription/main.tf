@@ -21,7 +21,7 @@ resource "azurerm_subscription" "landing_zone" {
 }
 
 data "azurerm_management_group" "landing_zone_mg" {
-  name = "var.management_group_display_name"
+  name = "var.management_group_name"
 }
 
 resource "azurerm_management_group_subscription_association" "landing_zone_mg_association" {
