@@ -17,7 +17,7 @@ data "azurerm_policy_set_definition" "current" {
 
 resource "random_id" "policy_association_name" {
   keepers = {
-      id = var.policy_id
+    id = var.policy_id
   }
 
   byte_length = 12
