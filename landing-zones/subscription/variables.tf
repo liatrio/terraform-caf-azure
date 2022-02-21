@@ -14,6 +14,6 @@ variable "invoice_section_name" {
   type = string
 }
 
-variable "management_group_display_name" {
+variable "management_group_name" {
   type = string
 }
