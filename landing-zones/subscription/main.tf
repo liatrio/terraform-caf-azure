@@ -24,7 +24,12 @@ data "azurerm_management_group" "landing_zone_mg" {
   name = var.management_group_name
 }
 
+# This is because the `azurerm_subscription` resource's `id` is actually an alias ID, not a subscription ID
+data "azurerm_subscription" "landing_zone" {
+  subscription_id = azurerm_subscription.landing_zone.subscription_id
+}
+
 resource "azurerm_management_group_subscription_association" "landing_zone_mg_association" {
-  subscription_id     = azurerm_subscription.landing_zone.id
+  subscription_id     = data.azurerm_subscription.landing_zone.id
   management_group_id = data.azurerm_management_group.landing_zone_mg.id
 }
