@@ -47,3 +47,8 @@ variable "vnet_name" {
   type        = string
   description = "vnet name"
 }
+
+variable "kubernetes_version" {
+  type        = string
+  description = "kubernetes version"
+}

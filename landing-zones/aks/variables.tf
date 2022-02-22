@@ -29,4 +29,7 @@ variable "vm_size" {
   default     = "Standard_D2_v2"
   description = "The size of the VM"
 }
-
+variable "kubernetes_version" {
+  type        = string
+  description = "kubernetes version"
+}

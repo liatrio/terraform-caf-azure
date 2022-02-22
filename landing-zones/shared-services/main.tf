@@ -16,13 +16,14 @@ module "aks_vnet" {
 }
 
 module "aks" {
-  source         = "../../modules/aks"
-  location       = var.location
-  name           = var.aks_name
-  pool_name      = var.pool_name
-  node_count     = var.node_count
-  vm_size        = var.vm_size
-  vnet_subnet_id = module.aks_vnet.vnet_subnet_id
+  source             = "../../modules/aks"
+  location           = var.location
+  name               = var.aks_name
+  pool_name          = var.pool_name
+  node_count         = var.node_count
+  vm_size            = var.vm_size
+  vnet_subnet_id     = module.aks_vnet.vnet_subnet_id
+  kubernetes_version = var.kubernetes_version
 }
 
 data "azurerm_virtual_hub" "connectivity_hub" {
