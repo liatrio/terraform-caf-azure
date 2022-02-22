@@ -16,7 +16,3 @@ variable "invoice_section_name" {
   type = string
 
 }
-
-variable "shared_services" {
-  type = map(any)
-}
