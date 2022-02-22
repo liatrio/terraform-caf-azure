@@ -1,6 +1,5 @@
 variable "aks_name" {
   type    = string
-  default = ""
 }
 
 variable "prefix" {
