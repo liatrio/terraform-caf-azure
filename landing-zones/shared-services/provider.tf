@@ -1,6 +1,9 @@
 # This is a placehold to allow terraform validate to run
 
 provider "azurerm" {
-  alias = "shared_services"
+  alias = "connectivity"
+  features {}
+}
+provider "azurerm" {
   features {}
 }
