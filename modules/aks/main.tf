@@ -22,6 +22,7 @@ resource "azurerm_kubernetes_cluster" "aks" {
   resource_group_name     = azurerm_resource_group.aks.name
   dns_prefix              = var.name
   private_cluster_enabled = true
+  kubernetes_version      = var.kubernetes_version
   default_node_pool {
     name           = var.pool_name
     node_count     = var.node_count

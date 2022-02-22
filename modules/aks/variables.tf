@@ -33,3 +33,8 @@ variable "tags" {
   type        = map(any)
   default     = {}
 }
+
+variable "kubernetes_version" {
+  type        = string
+  description = "kubernetes version"
+}
