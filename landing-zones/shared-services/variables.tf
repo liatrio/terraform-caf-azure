@@ -1,5 +1,5 @@
 variable "aks_name" {
-  type    = string
+  type = string
 }
 
 variable "prefix" {
