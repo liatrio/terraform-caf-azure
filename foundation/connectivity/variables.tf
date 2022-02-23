@@ -1,5 +1,5 @@
 variable "location" {
-  type    = string
+  type = string
 }
 
 variable "virtual_hub_address_cidr" {
