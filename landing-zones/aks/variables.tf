@@ -42,6 +42,6 @@ variable "prefix" {
 }
 
 variable "connectivity_hub_location" {
-  description = "Supplies location of caf-connectivity rg"
+  description = "Supplies location of connectivity hub"
   type        = string
 }
