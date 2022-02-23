@@ -53,12 +53,15 @@ variable "kubernetes_version" {
 }
 
 variable "sub_id" {
-  type = string
+  type        = string
   description = "Subscription ID for provisioning resources in Azure"
 }
-
+variable "connectivity_sub_id" {
+  type        = string
+  description = "Subscription ID for provisioning resources in Azure"
+}
 variable "service_principal" {
-  type = string
+  type        = string
   description = "The name of the service principal"
   default     = ""
 }
