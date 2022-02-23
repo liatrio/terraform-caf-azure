@@ -4,8 +4,7 @@ variable "group_prefix" {
 }
 
 variable "location" {
-  type    = string
-  default = "southcentralus"
+  type = string
 }
 
 variable "virtual_hub_address_cidr" {
