@@ -51,3 +51,14 @@ variable "kubernetes_version" {
   type        = string
   description = "kubernetes version"
 }
+
+variable "sub_id" {
+  type = string
+  description = "Subscription ID for provisioning resources in Azure"
+}
+
+variable "service_principal" {
+  type = string
+  description = "The name of the service principal"
+  default     = ""
+}
