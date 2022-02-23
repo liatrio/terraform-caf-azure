@@ -1,6 +1,5 @@
 variable "location" {
   type    = string
-  default = "southcentralus"
 }
 
 variable "virtual_hub_address_cidr" {

@@ -1,5 +1,4 @@
 variable "location" {
-  default     = "eastus"
   description = "The Azure Region in which all resources should be provisioned"
 }
 
@@ -39,9 +38,4 @@ variable "prefix" {
   description = "A prefix used for resources"
   type        = string
   default     = "caf"
-}
-
-variable "connectivity_hub_location" {
-  description = "Supplies location of connectivity hub"
-  type        = string
 }
