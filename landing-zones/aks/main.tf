@@ -30,7 +30,6 @@ module "aks" {
 
 data "azurerm_virtual_hub" "connectivity_hub" {
   provider            = azurerm.connectivity
-  # name                = "${var.prefix}-hub-${var.location}"
   name                = "${var.prefix}-hub-${var.connectivity_hub_location}"
   resource_group_name = "${var.prefix}-connectivity"
 }
