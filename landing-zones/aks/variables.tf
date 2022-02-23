@@ -29,7 +29,19 @@ variable "vm_size" {
   default     = "Standard_D2_v2"
   description = "The size of the VM"
 }
+
 variable "kubernetes_version" {
   type        = string
   description = "kubernetes version"
+}
+
+variable "prefix" {
+  description = "A prefix used for resources"
+  type        = string
+  default     = "caf"
+}
+
+variable "connectivity_hub_location" {
+  description = "Supplies location of caf-connectivity rg"
+  type        = string
 }
