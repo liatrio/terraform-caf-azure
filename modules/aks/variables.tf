@@ -51,6 +51,6 @@ variable "kubernetes_managed_identity" {
 }
 
 variable "private_dns_zone_id" {
-  type = string
+  type        = string
   description = "private dns zone id"
 }
