@@ -44,3 +44,18 @@ variable "autoscaler_config" {
   description = "auto_scaler_profile config values"
   default     = {}
 }
+
+variable "kubernetes_managed_identity" {
+  type        = string
+  description = "kubernetes managed identity"
+}
+
+variable "private_dns_zone_id" {
+  type        = string
+  description = "private dns zone id"
+}
+
+variable "lz_resource_group" {
+  type        = string
+  description = "resource group for landing-zone"
+}
