@@ -1,6 +1,7 @@
 data "azurerm_subscription" "current" {
   subscription_id = var.sub_id
 }
+
 data "azurerm_subscription" "connectivity" {
   subscription_id = var.connectivity_sub_id
 }
