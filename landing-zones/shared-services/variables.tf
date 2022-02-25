@@ -1,4 +1,4 @@
-variable "aks_name" {
+variable "name" {
   type = string
 }
 
@@ -40,11 +40,6 @@ variable "vm_size" {
   type        = string
   default     = "Standard_D2_v2"
   description = "The size of the VM"
-}
-
-variable "vnet_name" {
-  type        = string
-  description = "vnet name"
 }
 
 variable "kubernetes_version" {

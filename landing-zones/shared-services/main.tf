@@ -7,23 +7,43 @@ terraform {
   }
 }
 
+resource "azurerm_resource_group" "lz_resource_group" {
+  name     = "${var.prefix}-${var.name}-rg"
+  location = var.location
+}
+
 module "aks_vnet" {
   source                   = "../../modules/aks-vnet"
-  name                     = var.vnet_name
+  name                     = var.name
   location                 = var.location
   vnet_address_range       = var.vnet_address_range
   aks_subnet_address_range = var.aks_subnet_address_range
+  lz_resource_group        = azurerm_resource_group.lz_resource_group.name
+}
+
+data "azurerm_private_dns_zone" "aks_private_dns_id" {
+  name                = "privatelink.${var.location}.azmk8s.io"
+  resource_group_name = "caf-connectivity"
+  provider            = azurerm.connectivity
 }
 
 module "aks" {
-  source             = "../../modules/aks"
-  location           = var.location
-  name               = var.aks_name
-  pool_name          = var.pool_name
-  node_count         = var.node_count
-  vm_size            = var.vm_size
-  vnet_subnet_id     = module.aks_vnet.vnet_subnet_id
-  kubernetes_version = var.kubernetes_version
+  source                      = "../../modules/aks"
+  location                    = var.location
+  name                        = var.name
+  pool_name                   = var.pool_name
+  node_count                  = var.node_count
+  vm_size                     = var.vm_size
+  vnet_subnet_id              = module.aks_vnet.vnet_subnet_id
+  kubernetes_version          = var.kubernetes_version
+  kubernetes_managed_identity = azurerm_user_assigned_identity.shared_services_msi.id
+  lz_resource_group           = azurerm_resource_group.lz_resource_group.name
+  private_dns_zone_id         = data.azurerm_private_dns_zone.aks_private_dns_id.id
+  depends_on = [
+    azurerm_role_assignment.network_contributor,
+    azurerm_role_assignment.cluster_contributor,
+    azurerm_role_assignment.subscription_connectivity_dns_contributor
+  ]
 }
 
 data "azurerm_virtual_hub" "connectivity_hub" {
