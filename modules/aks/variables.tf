@@ -42,7 +42,6 @@ variable "kubernetes_version" {
 variable "service_principal" {
   type        = string
   description = "The name of the service principal"
-  default     = ""
 }
 
 variable "kubernetes_managed_identity" {
