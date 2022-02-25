@@ -38,3 +38,9 @@ variable "kubernetes_version" {
   type        = string
   description = "kubernetes version"
 }
+
+variable "autoscaler_config" {
+  type        = map(string)
+  description = "auto_scaler_profile config values"
+  default     = {}
+}
