@@ -8,7 +8,7 @@ terraform {
 }
 
 resource "azurerm_dns_zone" "public_dns_zone" {
-  name                = var.azure_caf_root_dns
+  name                = var.root_dns_zone
   resource_group_name = var.resource_group_name
   tags                = var.tags
 }
