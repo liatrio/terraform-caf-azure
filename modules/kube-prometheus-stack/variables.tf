@@ -21,12 +21,12 @@ variable "alertmanager_hostname" {
 
 variable "alertmanager_ingress_annotations" {
   type    = map(string)
-  default = ""
+  default = {}
 }
 
 variable "grafana_ingress_annotations" {
   type    = map(string)
-  default = ""
+  default = {}
 }
 
 variable "enable_grafana" {}
