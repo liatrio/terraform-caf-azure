@@ -8,7 +8,6 @@ variable "resource_group_name" {
 
 variable "root_dns_zone" {
   type        = string
-  description = "root dns zone"
 }
 
 variable "tags" {
