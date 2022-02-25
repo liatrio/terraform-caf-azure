@@ -1,5 +1,6 @@
 data "azurerm_subscription" "current" {
 }
+
 data "azurerm_subscription" "connectivity" {
   provider = azurerm.connectivity
 }

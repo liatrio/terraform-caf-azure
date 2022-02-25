@@ -52,6 +52,7 @@ variable "sub_id" {
   description = "Subscription ID for provisioning resources in Azure"
 }
 
+
 variable "connectivity_sub_id" {
   type        = string
   description = "Subscription ID for provisioning resources in Azure"
