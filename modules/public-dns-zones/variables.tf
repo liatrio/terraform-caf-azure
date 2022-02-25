@@ -5,9 +5,9 @@ variable "location" {
 variable "resource_group_name" {
   type = string
 }
-variable "azure_caf_root_dns" {
+variable "root_dns_zone" {
   type        = string
-  description = "(optional) describe your variable"
+  description = "root dns zone"
 }
 
 variable "tags" {
