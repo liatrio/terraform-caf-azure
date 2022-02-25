@@ -7,7 +7,7 @@ variable "resource_group_name" {
 }
 
 variable "root_dns_zone" {
-  type        = string
+  type = string
 }
 
 variable "tags" {
