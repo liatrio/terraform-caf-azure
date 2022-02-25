@@ -1,9 +1,8 @@
 data "azurerm_subscription" "current" {
-  subscription_id = var.sub_id
 }
 
 data "azurerm_subscription" "connectivity" {
-  subscription_id = var.connectivity_sub_id
+  provider = azurerm.connectivity
 }
 
 resource "azurerm_resource_group" "shared_services_msi_rg" {
