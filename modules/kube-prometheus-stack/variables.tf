@@ -7,8 +7,8 @@ variable "prometheus_slack_channel" {
 }
 
 variable "namespace" {
-    type = string
-    default = "monitoring"
+  type    = string
+  default = "monitoring"
 }
 
 variable "grafana_hostname" {
@@ -20,12 +20,12 @@ variable "alertmanager_hostname" {
 }
 
 variable "alertmanager_ingress_annotations" {
-  type = map(string)
+  type    = map(string)
   default = ""
 }
 
 variable "grafana_ingress_annotations" {
-  type = map(string)
+  type    = map(string)
   default = ""
 }
 

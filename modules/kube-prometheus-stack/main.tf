@@ -1,7 +1,3 @@
-locals {
-  enable_alertmanager = var.prometheus_slack_channel != "" && var.prometheus_slack_webhook_url != ""
-}
-
 resource "random_password" "password" {
   length           = 16
   special          = true
