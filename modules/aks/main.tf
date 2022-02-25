@@ -21,6 +21,7 @@ resource "azurerm_kubernetes_cluster" "aks" {
   location                = var.location
   resource_group_name     = azurerm_resource_group.aks.name
   dns_prefix              = var.name
+  private_dns_zone_id     = var.private_dns_zone_id
   private_cluster_enabled = true
   kubernetes_version      = var.kubernetes_version
   default_node_pool {
@@ -31,7 +32,8 @@ resource "azurerm_kubernetes_cluster" "aks" {
   }
 
   identity {
-    type = "SystemAssigned"
+    user_assigned_identity_id = var.kubernetes_managed_identity
+    type                      = "UserAssigned"
   }
 
   tags = var.tags

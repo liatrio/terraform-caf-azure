@@ -44,3 +44,13 @@ variable "service_principal" {
   description = "The name of the service principal"
   default     = ""
 }
+
+variable "kubernetes_managed_identity" {
+  type        = string
+  description = "kubernetes managed identity"
+}
+
+variable "private_dns_zone_id" {
+  type = string
+  description = "private dns zone id"
+}

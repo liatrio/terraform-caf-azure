@@ -25,7 +25,6 @@ variable "node_count" {
 }
 
 variable "vm_size" {
-  default     = "Standard_D2_v2"
   description = "The size of the VM"
 }
 
@@ -38,4 +37,20 @@ variable "prefix" {
   description = "A prefix used for resources"
   type        = string
   default     = "caf"
+}
+
+variable "sub_id" {
+  type        = string
+  description = "Subscription ID for provisioning resources in Azure"
+}
+
+variable "connectivity_sub_id" {
+  type        = string
+  description = "Subscription ID for provisioning resources in Azure"
+}
+
+variable "service_principal" {
+  type        = string
+  description = "The name of the service principal"
+  default     = ""
 }
