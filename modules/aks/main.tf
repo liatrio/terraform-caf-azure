@@ -7,11 +7,6 @@ terraform {
   }
 }
 
-resource "azurerm_resource_group" "aks" {
-  name     = var.name
-  location = var.location
-}
-
 #tfsec:ignore:azure-container-use-rbac-permissions
 #tfsec:ignore:azure-container-logging
 #tfsec:ignore:azure-container-limit-authorized-ips
@@ -19,7 +14,7 @@ resource "azurerm_resource_group" "aks" {
 resource "azurerm_kubernetes_cluster" "aks" {
   name                    = var.name
   location                = var.location
-  resource_group_name     = azurerm_resource_group.aks.name
+  resource_group_name     = var.lz_resource_group
   dns_prefix              = var.name
   private_dns_zone_id     = var.private_dns_zone_id
   private_cluster_enabled = true

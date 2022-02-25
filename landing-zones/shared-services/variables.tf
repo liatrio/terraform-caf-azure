@@ -46,8 +46,3 @@ variable "kubernetes_version" {
   type        = string
   description = "kubernetes version"
 }
-
-variable "service_principal" {
-  type        = string
-  description = "The name of the service principal"
-}

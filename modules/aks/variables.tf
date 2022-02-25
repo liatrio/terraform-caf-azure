@@ -48,3 +48,8 @@ variable "private_dns_zone_id" {
   type        = string
   description = "private dns zone id"
 }
+
+variable "lz_resource_group" {
+  type        = string
+  description = "resource group for landing-zone"
+}

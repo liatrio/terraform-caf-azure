@@ -5,13 +5,8 @@ data "azurerm_subscription" "connectivity" {
   provider = azurerm.connectivity
 }
 
-resource "azurerm_resource_group" "aks_msi_rg" {
-  name     = "${var.prefix}-${var.name}-msi-rg"
-  location = var.location
-}
-
 resource "azurerm_user_assigned_identity" "aks_msi" {
-  resource_group_name = azurerm_resource_group.aks_msi_rg.name
+  resource_group_name = azurerm_resource_group.lz_resource_group.name
   location            = var.location
 
   name = "${var.prefix}-${var.name}-msi"

@@ -23,3 +23,8 @@ variable "tags" {
   type        = map(any)
   default     = {}
 }
+
+variable "lz_resource_group" {
+  type        = string
+  description = "resource group name for landing-zone"
+}
