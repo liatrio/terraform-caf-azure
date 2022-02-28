@@ -13,7 +13,7 @@ variable "pool_name" {
   type        = string
 }
 
-variable "node_count" {
+variable "node_count_min" {
   description = "Initial and minimum node count"
   type        = number
   default     = 2
