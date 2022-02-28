@@ -35,7 +35,7 @@ variable "vpn_service_principal_application_id" {
   description = "The ApplicationID of the Azure VPN service principal, used for AAD authentication to the point-to-site VPN"
 }
 
-variable "public_dns_root_zone" {
+variable "root_dns_zone" {
   type = string
 }
 variable "root_dns_tag" {

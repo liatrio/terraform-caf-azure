@@ -45,7 +45,7 @@ variable "landing_zone_mg" {
   description = "Dynamic landing zone creation"
 }
 
-variable "public_dns_root_zone" {
+variable "root_dns_zone" {
   type = string
 }
 

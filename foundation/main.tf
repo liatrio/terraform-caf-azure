@@ -49,6 +49,6 @@ module "connectivity" {
   tenant_id                            = var.tenant_id
   prefix                               = var.group_prefix
   vpn_service_principal_application_id = var.vpn_service_principal_application_id
-  public_dns_root_zone                 = var.public_dns_root_zone
+  root_dns_zone                        = var.root_dns_zone
   root_dns_tag                         = var.root_dns_tag
 }
