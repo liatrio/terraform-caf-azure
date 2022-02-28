@@ -45,10 +45,6 @@ variable "landing_zone_mg" {
   description = "Dynamic landing zone creation"
 }
 
-variable "private_dns_zones" {
-  type = map(any)
-}
-
 variable "public_dns_root_zone" {
   type = string
 }
