@@ -34,3 +34,10 @@ variable "vpn_service_principal_application_id" {
   type        = string
   description = "The ApplicationID of the Azure VPN service principal, used for AAD authentication to the point-to-site VPN"
 }
+
+variable "root_dns_zone" {
+  type = string
+}
+variable "root_dns_tags" {
+  type = map(any)
+}

@@ -44,3 +44,11 @@ variable "landing_zone_mg" {
   default     = {}
   description = "Dynamic landing zone creation"
 }
+
+variable "root_dns_zone" {
+  type = string
+}
+
+variable "root_dns_tags" {
+  type = map(any)
+}
