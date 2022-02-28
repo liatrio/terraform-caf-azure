@@ -50,5 +50,5 @@ module "connectivity" {
   prefix                               = var.group_prefix
   vpn_service_principal_application_id = var.vpn_service_principal_application_id
   root_dns_zone                        = var.root_dns_zone
-  root_dns_tag                         = var.root_dns_tag
+  root_dns_tags                        = var.root_dns_tags
 }

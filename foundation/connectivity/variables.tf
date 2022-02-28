@@ -38,6 +38,6 @@ variable "vpn_service_principal_application_id" {
 variable "root_dns_zone" {
   type = string
 }
-variable "root_dns_tag" {
+variable "root_dns_tags" {
   type = map(any)
 }

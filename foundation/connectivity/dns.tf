@@ -21,5 +21,5 @@ module "public_dns" {
   location            = azurerm_point_to_site_vpn_gateway.hub_vpn_gateway.location
   resource_group_name = azurerm_resource_group.caf_connectivity.name
   root_dns_zone       = var.root_dns_zone
-  tags                = var.root_dns_tag
+  tags                = var.root_dns_tags
 }

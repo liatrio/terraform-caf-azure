@@ -49,6 +49,6 @@ variable "root_dns_zone" {
   type = string
 }
 
-variable "root_dns_tag" {
+variable "root_dns_tags" {
   type = map(any)
 }
