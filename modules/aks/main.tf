@@ -19,11 +19,15 @@ resource "azurerm_kubernetes_cluster" "aks" {
   private_dns_zone_id     = var.private_dns_zone_id
   private_cluster_enabled = true
   kubernetes_version      = var.kubernetes_version
+
   default_node_pool {
-    name           = var.pool_name
-    node_count     = var.node_count
-    vm_size        = var.vm_size
-    vnet_subnet_id = var.vnet_subnet_id
+    name                = var.pool_name
+    vm_size             = var.vm_size
+    vnet_subnet_id      = var.vnet_subnet_id
+    enable_auto_scaling = true
+    node_count          = var.node_count
+    min_count           = var.node_count
+    max_count           = var.node_count_max
   }
 
   identity {

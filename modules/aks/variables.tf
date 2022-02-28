@@ -14,8 +14,15 @@ variable "pool_name" {
 }
 
 variable "node_count" {
-  description = "The number of nodes"
+  description = "Initial and minimum node count"
   type        = number
+  default     = 2
+}
+
+variable "node_count_max" {
+  description = "Maximum node count"
+  type        = number
+  default     = 3
 }
 
 variable "vm_size" {
