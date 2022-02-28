@@ -20,7 +20,7 @@ variable "pool_name" {
 }
 
 variable "node_count_min" {
-  description = "Initial and minimum node count"
+  description = "Minimum node count"
   type        = number
   default     = 2
 }
