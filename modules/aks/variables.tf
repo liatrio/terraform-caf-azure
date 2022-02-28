@@ -13,8 +13,13 @@ variable "pool_name" {
   type        = string
 }
 
-variable "node_count" {
-  description = "The number of nodes"
+variable "node_count_min" {
+  description = "Initial and minimum node count"
+  type        = number
+}
+
+variable "node_count_max" {
+  description = "Maximum node count"
   type        = number
 }
 
