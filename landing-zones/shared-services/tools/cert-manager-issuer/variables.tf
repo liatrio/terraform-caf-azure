@@ -41,17 +41,17 @@ variable "ca_secret" {
 }
 
 variable "azure_subscription_id" {
-    type = string
+  type = string
 }
 
 variable "azure_resource_group_name" {
-    type = string
+  type = string
 }
 
 variable "dns_zone_name" {
-    type = string
+  type = string
 }
 
 variable "azure_managed_identity_client_id" {
-    type = string
+  type = string
 }
