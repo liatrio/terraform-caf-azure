@@ -8,7 +8,7 @@ terraform {
 }
 
 module "policy_assignment" {
-  source = "./policy_assignment"
+  source = "./policy-assignment"
 
   for_each            = toset(var.policy_ids)
   management_group_id = var.management_group_id

@@ -13,7 +13,7 @@ resource "azurerm_resource_group" "lz_resource_group" {
 }
 
 module "aks_vnet" {
-  source = "../../modules/aks-vnet"
+  source = "../../modules/azure/aks-vnet"
 
   name                     = var.name
   location                 = var.location
@@ -29,7 +29,7 @@ data "azurerm_private_dns_zone" "aks_private_dns_id" {
 }
 
 module "aks" {
-  source = "../../modules/aks"
+  source = "../../modules/azure/aks"
 
   location                    = var.location
   name                        = var.name
