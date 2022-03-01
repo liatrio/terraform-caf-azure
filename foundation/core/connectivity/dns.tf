@@ -8,7 +8,7 @@ locals {
 }
 
 module "private_dns" {
-  source = "../../modules/azure/private-dns-zones"
+  source = "../../../modules/azure/private-dns-zones"
 
   location                     = azurerm_point_to_site_vpn_gateway.hub_vpn_gateway.location
   resource_group_name          = azurerm_resource_group.caf_connectivity.name

@@ -1,5 +1,5 @@
 module "policy" {
-  source = "../../modules/azure/policy-assignments"
+  source = "../../../modules/azure/policy-assignments"
 
   for_each = var.landing_zone_mg
 
