@@ -17,7 +17,7 @@ module "private_dns" {
 }
 
 module "public_dns" {
-  source              = "../../modules/azure/public-dns-zones"
+  source              = "../../../modules/azure/public-dns-zones"
   location            = azurerm_point_to_site_vpn_gateway.hub_vpn_gateway.location
   resource_group_name = azurerm_resource_group.caf_connectivity.name
   root_dns_zone       = var.root_dns_zone
