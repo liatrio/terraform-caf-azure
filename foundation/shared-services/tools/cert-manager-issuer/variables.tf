@@ -37,7 +37,6 @@ variable "enabled" {
 }
 
 variable "ca_secret" {
-  default = "ca-certificate"
 }
 
 variable "azure_subscription_id" {
