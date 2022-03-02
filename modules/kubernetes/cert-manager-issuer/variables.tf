@@ -6,6 +6,10 @@ variable "issuer_name" {
   default = "toolchain-namespace-issuer"
 }
 
+variable "issuer_kind" {
+  default = "ClusterIssuer"
+}
+
 variable "issuer_server" {
   default = "https://acme-v02.api.letsencrypt.org/directory"
 }

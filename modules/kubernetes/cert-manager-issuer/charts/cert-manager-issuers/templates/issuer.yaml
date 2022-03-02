@@ -17,5 +17,5 @@ spec:
           hostedZoneName: {{ .Values.azure.zoneName }}
           environment: AzurePublicCloud
           managedIdentity:
-            clientID: {{ .Values.azure.managedidentity.clientID }}
+            clientID: {{ .Values.azure.managedIdentity.clientID }}
 {{- end}}
