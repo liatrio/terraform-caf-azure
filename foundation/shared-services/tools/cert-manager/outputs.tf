@@ -1,9 +1,23 @@
-# Client Id Used for identity binding
-output "identity_client_id" {
-  value = azurerm_user_assigned_identity.cert_mgr_dns_identity.client_id
+output "azure_resource_group" {
+  value = var.azure_resource_group
 }
 
-# Resource Id Used for identity binding
-output "identity_resource_id" {
-  value = azurerm_user_assigned_identity.cert_mgr_dns_identity.id
+output "identity_client_id" {
+  value = var.cert_mgr_dns_contributor_client_id
+}
+
+output "shared_services_cluster_host" {
+  value = module.aks.cluster_host
+}
+
+output "cluster_client_certificate" {
+  value = module.aks.cluster_client_certificate
+}
+
+output "cluster_client_key" {
+  value = module.aks.cluster_client_key
+}
+
+output "cluster_ca_certificate" {
+  value = module.aks.cluster_ca_certificate
 }

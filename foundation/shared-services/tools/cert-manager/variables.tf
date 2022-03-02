@@ -2,18 +2,26 @@ variable "namespace" {
   default = "default"
 }
 
-variable "location" {
-  description = "The Azure Region in which all resources should be provisioned"
-  type        = string
-  default     = "centralus"
+variable "cert_mgr_dns_contributor_client_id" {
+  type = string
 }
 
-variable "lz_resource_group" {
-  type        = string
-  description = "resource group for landing-zone"
+variable "azure_resource_group" {
+  type = string
 }
 
-variable "dns_zone_id" {
-  type        = string
-  description = "Public DNS zone ID to assign to cert manager"
+variable "shared_services_cluster_host" {
+  type = string
+}
+
+variable "cluster_client_certificate" {
+  type = string
+}
+
+variable "cluster_client_key" {
+  type = string
+}
+
+variable "cluster_ca_certificate" {
+  type = string
 }
