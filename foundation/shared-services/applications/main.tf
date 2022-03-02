@@ -8,7 +8,7 @@ resource "kubernetes_namespace" "toolchain_namespace" {
 }
 
 module "cert_manager" {
-  source = "../../../../modules/kubernetes/cert-manager"
+  source = "../../../modules/kubernetes/cert-manager"
 
   namespace = kubernetes_namespace.toolchain_namespace.metadata.0.name
 }
@@ -20,7 +20,7 @@ resource "time_sleep" "wait_for_cert_manager" {
 }
 
 module "cert_manager_issuer" {
-  source = "../../../../modules/kubernetes/cert-manager-issuer"
+  source = "../../../modules/kubernetes/cert-manager-issuer"
 
   namespace                        = kubernetes_namespace.toolchain_namespace.metadata.0.name
   issuer_type                      = var.issuer_type
@@ -35,5 +35,5 @@ module "cert_manager_issuer" {
   dns_zone_name                    = var.dns_zone_name
   azure_managed_identity_client_id = var.azure_managed_identity_client_id
 
-  depends_on = time_sleep.wait_for_cert_manager
+  depends_on = [time_sleep.wait_for_cert_manager]
 }
