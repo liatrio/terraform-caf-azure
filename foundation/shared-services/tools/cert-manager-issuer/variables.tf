@@ -28,14 +28,6 @@ variable "provider_http_ingress_class" {
   default = "nginx"
 }
 
-variable "provider_dns_type" {
-  default = "azureDNS"
-}
-
-variable "enabled" {
-  default = true
-}
-
 variable "ca_secret" {
 }
 

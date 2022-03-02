@@ -11,7 +11,7 @@ resource "helm_release" "cert_issuer" {
     issuer_type                      = var.issuer_type
     issuer_kind                      = var.issuer_kind
     acme_solver                      = var.acme_solver
-    provider_dns_type                = var.provider_dns_type
+    provider_dns_type                = "azureDNS"
     ca_secret                        = var.ca_secret
     azure_subscription_id            = var.azure_subscription_id
     azure_resource_group_name        = var.azure_resource_group_name
