@@ -2,6 +2,14 @@ variable "namespace" {
   default = "default"
 }
 
+variable "cert_mgr_dns_contributor_client_id" {
+  type = string
+}
+
+variable "azure_resource_group" {
+  type = string
+}
+
 variable "issuer_type" {}
 
 variable "issuer_name" {
