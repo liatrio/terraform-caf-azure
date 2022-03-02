@@ -1,7 +1,3 @@
-variable "location" {
-  type = string
-}
-
 variable "resource_group_name" {
   type = string
 }
@@ -12,4 +8,12 @@ variable "root_dns_zone" {
 
 variable "tags" {
   default = {}
+}
+
+variable "parent_dns_zone_resource_group_name" {
+  type = string
+}
+
+variable "parent_dns_zone_name" {
+  default = ""
 }
