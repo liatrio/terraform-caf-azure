@@ -52,3 +52,8 @@ variable "kubernetes_version" {
   type        = string
   description = "kubernetes version"
 }
+
+variable "public_dns_zone_id" {
+  type        = string
+  description = "Public DNS zone ID for role assignment"
+}

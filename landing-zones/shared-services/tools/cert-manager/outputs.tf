@@ -1,5 +1,9 @@
-output "lz_resource_group_id" {
-  value = azurerm_resource_group.lz_resource_group.id
+output "azure_resource_group" {
+  value = var.azure_resource_group
+}
+
+output "identity_client_id" {
+  value = var.cert_mgr_dns_contributor_client_id
 }
 
 output "shared_services_cluster_host" {
@@ -16,8 +20,4 @@ output "cluster_client_key" {
 
 output "cluster_ca_certificate" {
   value = module.aks.cluster_ca_certificate
-}
-
-output "cert_mgr_dns_contributor_client_id" {
-  value = azurerm_user_assigned_identity.cert_mgr_dns_contributor.client_id
 }

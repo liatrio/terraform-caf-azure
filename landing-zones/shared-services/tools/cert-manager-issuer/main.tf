@@ -1,19 +1,19 @@
 module "cert_manager_issuer" {
   source = "../../../../modules/tools/cert-manager-issuer"
 
-  namespace                        = "toolchain"
-  issuer_type                      = "acme"
-  issuer_name                      = "toolchain-namespace-issuer"
-  issuer_server                    = "https://acme-v02.api.letsencrypt.org/directory"
-  issuer_email                     = "cloudservices@liatr.io"
-  issuer_kind                      = "ClusterIssuer"
-  acme_solver                      = "dns"
-  provider_http_ingress_class      = "nginx"
-  provider_dns_type                = "azureDNS"
-  enabled                          = true
-  ca_secret                        = "ca-certificate"
-  azure_subscription_id            = string
-  azure_resource_group_name        = string
-  dns_zone_name                    = string
-  azure_managed_identity_client_id = string
+  namespace                        = var.namespace
+  issuer_type                      = var.issuer_type
+  issuer_name                      = var.issuer_name
+  issuer_server                    = var.issuer_server
+  issuer_email                     = var.issuer_email
+  issuer_kind                      = var.issuer_kind
+  acme_solver                      = var.acme_solver
+  provider_http_ingress_class      = var.provider_http_ingress_class
+  provider_dns_type                = var.provider_dns_type
+  enabled                          = var.enabled
+  ca_secret                        = var.ca_secret
+  azure_subscription_id            = var.azure_subscription_id
+  azure_resource_group_name        = var.azure_resource_group_name
+  dns_zone_name                    = var.dns_zone_name
+  azure_managed_identity_client_id = var.azure_managed_identity_client_id
 }
