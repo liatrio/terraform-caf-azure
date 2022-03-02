@@ -2,8 +2,6 @@ variable "namespace" {
   default = "default"
 }
 
-variable "issuer_type" {}
-
 variable "issuer_name" {
   default = "toolchain-namespace-issuer"
 }
@@ -14,21 +12,6 @@ variable "issuer_server" {
 
 variable "issuer_email" {
   default = "cloudservices@liatr.io"
-}
-
-variable "issuer_kind" {
-  default = "Issuer"
-}
-
-variable "acme_solver" {
-  default = "dns"
-}
-
-variable "provider_http_ingress_class" {
-  default = "nginx"
-}
-
-variable "ca_secret" {
 }
 
 variable "azure_subscription_id" {
