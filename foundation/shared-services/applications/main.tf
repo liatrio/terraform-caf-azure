@@ -35,7 +35,7 @@ module "cert_manager_issuer" {
 }
 
 module "toolchain_wildcard" {
-  source = "../../../modules/certificates"
+  source = "../../../modules/kubernetes/certificates"
 
   name      = "toolchain-wildcard"
   namespace = var.namespace
