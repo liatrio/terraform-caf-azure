@@ -11,9 +11,11 @@ variable "tags" {
 }
 
 variable "parent_dns_zone_resource_group_name" {
-  type = string
+  default = ""
+  type    = string
 }
 
 variable "parent_dns_zone_name" {
+  type    = string
   default = ""
 }
