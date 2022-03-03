@@ -51,3 +51,7 @@ variable "kubernetes_version" {
   type        = string
   description = "kubernetes version"
 }
+
+variable "monitoring_namespace" {
+  default = "monitoring"
+}
