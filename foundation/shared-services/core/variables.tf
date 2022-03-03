@@ -52,3 +52,18 @@ variable "kubernetes_version" {
   type        = string
   description = "kubernetes version"
 }
+
+variable "parent_dns_zone_name" {
+  type        = string
+  description = "Optional parent DNS zone name which causes a child zone to be created"
+}
+
+variable "connectivity_resource_group_name" {
+  type        = string
+  description = "Connectivity resource group name"
+}
+
+variable "public_dns_zone_name" {
+  type        = string
+  description = "public dns zone to create"
+}
