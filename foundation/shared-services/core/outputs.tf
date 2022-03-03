@@ -1,4 +1,4 @@
-output "lz_resource_group_name" {
+output "resource_group_name" {
   value = azurerm_resource_group.resource_group.name
 }
 
@@ -21,6 +21,6 @@ output "cluster_ca_certificate" {
   sensitive = true
 }
 
-output "cert_mgr_dns_contributor_client_id" {
-  value = azurerm_user_assigned_identity.cert_mgr_dns_contributor.client_id
+output "cert_manager_managed_identity_client_id" {
+  value = azurerm_user_assigned_identity.cert_manager.client_id
 }

@@ -1,3 +1,4 @@
 variable "namespace" {
-  default = "default"
+  type        = string
+  description = "Supply a namespace to associate with cert-manager deployment. e.g. toolchain"
 }

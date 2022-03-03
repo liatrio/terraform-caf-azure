@@ -3,7 +3,6 @@ kind: {{ .Values.issuerKind }}
 metadata:
   name: {{ .Values.issuerName }}
 spec:
-{{- if .Values.acme.enabled }}
   acme:
     server: {{ .Values.acme.server }}
     email: {{ .Values.acme.email }}
@@ -18,4 +17,3 @@ spec:
           environment: AzurePublicCloud
           managedIdentity:
             clientID: {{ .Values.azure.managedIdentity.clientID }}
-{{- end}}

@@ -2,16 +2,16 @@ issuerName: cluster-issuer
 issuerKind: ClusterIssuer
 acme:
   enabled: true
-  server: https://acme-v02.api.letsencrypt.org/directory
-  email: cloudservices@liatr.io
+  server: ${ issuer_server )
+  email: ${ issuer_email }
   privateKeySecretRef:
     name: letsencrypt
   dnsProvider:
     type: azureDNS
   solver: dns
 azure:
-  subscriptionID: ${subscription_id}
-  resourceGroup: ${resourceGroup}
+  subscriptionID: ${ subscription_id }
+  resourceGroup: ${ resource_group }
   managedIdentity:
-    clientID: ${client_id}
-  zoneName: ${dns_zone_name}
+    clientID: ${ client_id }
+  zoneName: ${ dns_zone_name }
