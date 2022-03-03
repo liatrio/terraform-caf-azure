@@ -31,16 +31,9 @@ resource "azurerm_role_assignment" "subscription_connectivity_dns_contributor" {
   principal_id         = azurerm_user_assigned_identity.shared_services_msi.principal_id
 }
 
-resource "azurerm_user_assigned_identity" "cert_manager" {
-  resource_group_name = azurerm_resource_group.resource_group.name
-  location            = var.location
-
-  name = "${var.prefix}-${var.name}-cert-manager-msi"
-}
-
 resource "azurerm_role_assignment" "dns_contributor" {
   provider             = azurerm.connectivity
   scope                = module.shared_services_public_dns_zone.dns_zone_id
   role_definition_name = "DNS Zone Contributor"
-  principal_id         = azurerm_user_assigned_identity.cert_manager.principal_id
+  principal_id         = module.aks.kubelet_identity_object_id
 }
