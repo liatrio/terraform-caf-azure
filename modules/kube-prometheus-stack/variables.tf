@@ -7,7 +7,7 @@ variable "prometheus_slack_channel" {
 }
 
 variable "namespace" {
-  type    = string
+  type = string
 }
 
 variable "grafana_hostname" {
