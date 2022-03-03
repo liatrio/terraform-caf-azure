@@ -11,4 +11,6 @@ module "kube_prometheus_stack" {
   source = "../../../modules/kube-prometheus-stack"
 
   namespace = module.monitoring_namespace.name
+  enable_grafana = false
+  enable_alertmanager = false
 }
