@@ -33,3 +33,14 @@ module "cert_manager_issuer" {
 
   depends_on = [time_sleep.wait_for_cert_manager]
 }
+
+module "toolchain_wildcard" {
+  source = "../../../modules/certificates"
+
+  name      = "toolchain-wildcard"
+  namespace = var.namespace
+  domain    = "toolchain.${var.dns_zone_name}"
+  enabled   = true
+
+  issuer_name = var.issuer_name
+}

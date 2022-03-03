@@ -1,0 +1,6 @@
+domain: sandbox
+altname: ""
+waitForCert: false
+issuer:
+  kind: ClusterIssuer
+  name:
