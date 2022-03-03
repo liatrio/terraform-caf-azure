@@ -3,7 +3,7 @@ module "monitoring_namespace" {
   namespace = var.monitoring_namespace
   annotations = {
     name    = var.monitoring_namespace
-    cluster = var.aks_name
+    cluster = var.name
   }
 }
 
