@@ -7,7 +7,7 @@ resource "kubernetes_namespace" "monitoring" {
 module "kube_prometheus_stack" {
   source = "../../../modules/kube-prometheus-stack"
 
-  namespace           = kubernetes_namespace.monitoring.name
+  namespace           = kubernetes_namespace.monitoring.metadata.name
   enable_grafana      = true
   enable_alertmanager = true
 }
