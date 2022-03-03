@@ -42,5 +42,6 @@ variable "azure_managed_identity_client_id" {
 }
 
 variable "monitoring_namespace" {
-  type = string
+  type    = string
+  default = "monitoring"
 }
