@@ -1,20 +1,31 @@
+variable "name" {
+  type = string
+}
+
+variable "prefix" {
+  description = "A prefix used for resources"
+  type        = string
+  default     = "caf"
+}
+
 variable "location" {
   description = "The Azure Region in which all resources should be provisioned"
+  type        = string
+  default     = "centralus"
 }
 
 variable "vnet_address_range" {
   description = "The address range of vnet"
+  type        = string
 }
 
 variable "aks_subnet_address_range" {
   description = "The address range of the aks subnet"
-}
-
-variable "name" {
-  description = "A prefix used for resources"
+  type        = string
 }
 
 variable "pool_name" {
+  type        = string
   default     = "default"
   description = "The name of the default_node pool"
 }
@@ -32,6 +43,8 @@ variable "node_count_max" {
 }
 
 variable "vm_size" {
+  type        = string
+  default     = "Standard_D2_v2"
   description = "The size of the VM"
 }
 
@@ -40,8 +53,21 @@ variable "kubernetes_version" {
   description = "kubernetes version"
 }
 
-variable "prefix" {
-  description = "A prefix used for resources"
+variable "parent_dns_zone_name" {
   type        = string
-  default     = "caf"
+  description = "Optional parent DNS zone name which causes a child zone to be created"
+}
+
+variable "connectivity_resource_group_name" {
+  type        = string
+  description = "Connectivity resource group name"
+}
+
+variable "public_dns_zone_name" {
+  type        = string
+  description = "public dns zone to create"
+}
+
+variable "monitoring_namespace" {
+  default = "monitoring"
 }

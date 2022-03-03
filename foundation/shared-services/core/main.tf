@@ -7,19 +7,18 @@ terraform {
   }
 }
 
-resource "azurerm_resource_group" "lz_resource_group" {
+resource "azurerm_resource_group" "resource_group" {
   name     = "${var.prefix}-${var.name}-rg"
   location = var.location
 }
 
 module "aks_vnet" {
-  source = "../../modules/azure/aks-vnet"
-
+  source                   = "../../../modules/azure/aks-vnet"
   name                     = var.name
   location                 = var.location
   vnet_address_range       = var.vnet_address_range
   aks_subnet_address_range = var.aks_subnet_address_range
-  lz_resource_group        = azurerm_resource_group.lz_resource_group.name
+  lz_resource_group        = azurerm_resource_group.resource_group.name
 }
 
 data "azurerm_private_dns_zone" "aks_private_dns_id" {
@@ -29,8 +28,7 @@ data "azurerm_private_dns_zone" "aks_private_dns_id" {
 }
 
 module "aks" {
-  source = "../../modules/azure/aks"
-
+  source                      = "../../../modules/azure/aks"
   location                    = var.location
   name                        = var.name
   pool_name                   = var.pool_name
@@ -39,8 +37,8 @@ module "aks" {
   vm_size                     = var.vm_size
   vnet_subnet_id              = module.aks_vnet.vnet_subnet_id
   kubernetes_version          = var.kubernetes_version
-  kubernetes_managed_identity = azurerm_user_assigned_identity.aks_msi.id
-  lz_resource_group           = azurerm_resource_group.lz_resource_group.name
+  kubernetes_managed_identity = azurerm_user_assigned_identity.shared_services_msi.id
+  lz_resource_group           = azurerm_resource_group.resource_group.name
   private_dns_zone_id         = data.azurerm_private_dns_zone.aks_private_dns_id.id
   depends_on = [
     azurerm_role_assignment.network_contributor,
@@ -57,7 +55,7 @@ data "azurerm_virtual_hub" "connectivity_hub" {
 
 resource "azurerm_virtual_hub_connection" "aks_vnet_hub_connection" {
   provider                  = azurerm.connectivity
-  name                      = "${var.name}-connection"
+  name                      = "${var.prefix}-${var.name}-connection"
   virtual_hub_id            = data.azurerm_virtual_hub.connectivity_hub.id
   remote_virtual_network_id = module.aks_vnet.vnet_id
 }

@@ -1,0 +1,19 @@
+apiVersion: cert-manager.io/v1
+kind: {{ .Values.issuerKind }}
+metadata:
+  name: {{ .Values.issuerName }}
+spec:
+  acme:
+    server: {{ .Values.acme.server }}
+    email: {{ .Values.acme.email }}
+    privateKeySecretRef:
+      name: letsencrypt
+    solvers:
+    - dns01:
+        azureDNS:
+          subscriptionID: {{ .Values.azure.subscriptionID }}
+          resourceGroupName: {{ .Values.azure.resourceGroup }}
+          hostedZoneName: {{ .Values.azure.zoneName }}
+          environment: AzurePublicCloud
+          managedIdentity:
+            clientID: {{ .Values.azure.managedIdentity.clientID }}
