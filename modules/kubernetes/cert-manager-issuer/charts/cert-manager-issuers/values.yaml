@@ -2,16 +2,16 @@ issuerName: cluster-issuer
 issuerKind: ClusterIssuer
 acme:
   enabled: true
-  server: ${ issuer_server )
-  email: ${ issuer_email }
+  server: ""
+  email: ""
   privateKeySecretRef:
     name: letsencrypt
   dnsProvider:
     type: azureDNS
   solver: dns
 azure:
-  subscriptionID: ${ subscription_id }
-  resourceGroup: ${ resource_group }
+  subscriptionID: ""
+  resourceGroup: ""
   managedIdentity:
-    clientID: ${ client_id }
-  zoneName: ${ dns_zone_name }
+    clientID: ""
+  zoneName: ""
