@@ -24,6 +24,6 @@ module "public_dns" {
 
   source              = "../../../modules/azure/public-dns-zone"
   resource_group_name = azurerm_resource_group.caf_connectivity.name
-  root_dns_zone       = var.root_dns_zone
+  dns_zone_name       = var.root_dns_zone
   tags                = var.root_dns_tags
 }

@@ -2,7 +2,7 @@ variable "resource_group_name" {
   type = string
 }
 
-variable "root_dns_zone" {
+variable "dns_zone_name" {
   type = string
 }
 
