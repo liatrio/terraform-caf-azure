@@ -68,6 +68,3 @@ variable "public_dns_zone_name" {
   description = "public dns zone to create"
 }
 
-variable "monitoring_namespace" {
-  default = "monitoring"
-}

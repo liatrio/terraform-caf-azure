@@ -40,3 +40,7 @@ variable "azure_managed_identity_client_id" {
   type        = string
   description = "Azure managed identity client ID to associate with issuer helm chart. Must have 'DNS Zone Contributor' role assignment"
 }
+
+variable "monitoring_namespace" {
+  type = string
+}
