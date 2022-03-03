@@ -34,13 +34,12 @@ module "cert_manager_issuer" {
   depends_on = [time_sleep.wait_for_cert_manager]
 }
 
-module "toolchain_wildcard" {
+module "cluster_wildcard" {
   source = "../../../modules/kubernetes/certificates"
 
-  name      = "toolchain-wildcard"
+  name      = "cluster-wildcard"
   namespace = var.namespace
-  domain    = "toolchain.${var.dns_zone_name}"
-  enabled   = true
+  domain    = var.dns_zone_name
 
   issuer_name = var.issuer_name
 }

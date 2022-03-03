@@ -1,5 +1,4 @@
 resource "helm_release" "certificates" {
-  count     = var.enabled ? 1 : 0
   name      = var.name
   namespace = var.namespace
   chart     = "${path.module}/charts/certificates"
