@@ -8,7 +8,6 @@ variable "prometheus_slack_channel" {
 
 variable "namespace" {
   type    = string
-  default = "monitoring"
 }
 
 variable "grafana_hostname" {
