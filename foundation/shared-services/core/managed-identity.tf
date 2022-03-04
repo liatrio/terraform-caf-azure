@@ -32,7 +32,6 @@ resource "azurerm_role_assignment" "subscription_connectivity_dns_contributor" {
 }
 
 resource "azurerm_role_assignment" "dns_contributor" {
-  provider             = azurerm.connectivity
   scope                = module.shared_services_public_dns_zone.dns_zone_id
   role_definition_name = "DNS Zone Contributor"
   principal_id         = module.aks.kubelet_identity_object_id
