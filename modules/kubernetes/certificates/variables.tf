@@ -1,10 +1,13 @@
 variable "namespace" {
+  description = "Cluster namespace in which to create the certificate"
 }
 
 variable "name" {
+  description = "Release name to apply to the helm chart for the certificate, and thus also the certificate and its secret"
 }
 
 variable "domain" {
+  description = "DNS domain for which to generate a wildcard certificate"
 }
 
 variable "issuer_name" {
