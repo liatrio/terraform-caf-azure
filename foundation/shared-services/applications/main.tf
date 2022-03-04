@@ -27,9 +27,19 @@ module "cert_manager_issuer" {
   issuer_server                    = var.issuer_server
   issuer_email                     = var.issuer_email
   azure_subscription_id            = var.azure_subscription_id
-  azure_resource_group_name        = var.azure_resource_group_name
+  dns_zone_resource_group_name     = var.dns_zone_resource_group_name
   dns_zone_name                    = var.dns_zone_name
   azure_managed_identity_client_id = var.azure_managed_identity_client_id
 
   depends_on = [time_sleep.wait_for_cert_manager]
+}
+
+module "cluster_wildcard" {
+  source = "../../../modules/kubernetes/certificates"
+
+  name      = "cluster-wildcard"
+  namespace = var.namespace
+  domain    = var.dns_zone_name
+
+  issuer_name = var.issuer_name
 }
