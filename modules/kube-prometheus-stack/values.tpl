@@ -115,7 +115,7 @@ alertmanager:
     global:
       resolve_timeout: 5m
     route:
-      reciever: 'null'
+      receiver: 'null'
       group_by: ['namespace', 'pod']
       group_wait: 30s
       group_interval: 5m
