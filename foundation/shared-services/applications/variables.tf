@@ -50,11 +50,3 @@ variable "aad_pod_identity_resource_id" {
   type        = string
   description = "AAD Pod Identities managed identity resource ID"
 }
-
-variable "cert_manager_pod_labels" {
-  type        = list(string)
-  description = "List of pod labels to apply to cert-manager. Must include AAD pod identity label"
-  default = [
-    "cert-manager-pod-identity"
-  ]
-}

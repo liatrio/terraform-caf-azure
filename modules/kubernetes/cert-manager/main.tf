@@ -7,28 +7,18 @@ resource "helm_release" "cert_manager" {
   version    = "v1.7.1"
   wait       = true
 
-  set {
-    name  = "global.leaderElection.namespace"
-    value = var.namespace
-  }
-  set {
-    name  = "installCRDs"
-    value = true
-  }
-  set {
-    name  = "serviceAccount.name"
-    value = "cert-manager"
-  }
-  set {
-    name  = "securityContext.enabled"
-    value = true
-  }
-  set {
-    name  = "securityContext.fsGroup"
-    value = 1001
-  }
-  set {
-    name  = "podLabels"
-    value = var.podLabels
-  }
+  values = [<<-EOF
+  global:
+    leaderElection:
+      namespace: ${var.namespace}
+  installCRDs: true
+  serviceAccount:
+    name: cert-manager
+  securityContext:
+    enabled: true
+    fsGroup: 1001
+  podLabels:
+    aadpodidbinding: ${var.pod_identity}
+  EOF
+  ]
 }

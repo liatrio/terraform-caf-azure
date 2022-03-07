@@ -3,7 +3,7 @@ variable "namespace" {
   description = "Supply a namespace to associate with cert-manager deployment. e.g. toolchain"
 }
 
-variable "pod_labels" {
-  type        = list(string)
-  description = "List of labels to apply to cert-manager pod. Must include AAD pod identity label"
+variable "pod_identity" {
+  type = string
+  description = "Identity label to be used by AAD Pod Identities to bind to cert-manager pod"
 }

@@ -2,12 +2,12 @@ resource "helm_release" "identity" {
   name  = (var.helm_name != null ? var.helm_name : "pod-id-${var.identity_name}")
   chart = "${path.module}/charts/identity"
 
-  namespace        = var.namespace
-  create_namespace = var.create_namespace
+  namespace = var.namespace
 
-  values = [<<-EOT
+  values = [<<-EOF
   azureIdentity:
     name: "${var.identity_name}"
+    behavior: namespaced
     type: 0
     resourceID: "${var.identity_resource_id}"
     clientID: "${var.identity_client_id}"
@@ -15,6 +15,6 @@ resource "helm_release" "identity" {
   azureIdentityBinding:
     name: "${var.identity_name}-binding"
     selector: "${var.identity_name}"
-  EOT
+  EOF
   ]
 }
