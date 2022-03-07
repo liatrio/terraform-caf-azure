@@ -31,6 +31,6 @@ jobs:
           fetch-depth: 0
       - name: Release
         id: release
-        uses: liatrio/github-actions/conventional-release@master
+        uses: liatrio/github-actions/conventional-release@master #adding temp comment
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
