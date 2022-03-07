@@ -1,6 +1,6 @@
-variable "namespace" {
-  type        = string
-  description = "Supply a namespace that matches cert-manager"
+variable "github_runner_namespace" {
+  default     = "github-runners"
+  description = "Namespace for github runner controller and github runners"
 }
 
 variable "issuer_name" {
@@ -40,3 +40,18 @@ variable "azure_managed_identity_client_id" {
   type        = string
   description = "Azure managed identity client ID to associate with issuer helm chart. Must have 'DNS Zone Contributor' role assignment"
 }
+
+variable "release_name" {
+  type        = string
+  default     = ""
+}
+
+variable "ingress_domain" {
+  type    = string
+}
+
+variable "github_runners" {
+  type    = map(any)
+  default = {}
+}
+

@@ -1,9 +1,6 @@
 resource "kubernetes_namespace" "toolchain_namespace" {
   metadata {
-    annotations = {
-      name = var.namespace
-    }
-    name = var.namespace
+    name = "toolchain"
   }
 }
 
@@ -33,3 +30,19 @@ module "cert_manager_issuer" {
 
   depends_on = [time_sleep.wait_for_cert_manager]
 }
+
+module "github_runner_controller" {
+  source = "../../../modules/kubernetes/github-runners-controllers"
+
+  namespace                   = var.github_runner_namespace
+  release_name                = var.release_name
+  github_org                  = var.github_org
+  ingress_domain              = var.ingress_domain
+
+  // auth_secret_name            = 
+  // github_webhook_annotations  = 
+  // github_webhook_secret_token = 
+  // controller_replica_count    = 
+}
+
+
