@@ -10,10 +10,10 @@ module "kube_prometheus_stack" {
   namespace                        = kubernetes_namespace.monitoring.metadata[0].name
   enable_grafana                   = true
   enable_alertmanager              = true
-  grafana_hostname                 = ""
-  alertmanager_hostname            = ""
+  grafana_hostname                 = "placeholder-domain"
+  alertmanager_hostname            = "placeholder-domain"
   prometheus_slack_webhook_url     = ""
   prometheus_slack_channel         = ""
-  grafana_ingress_annotations      = ""
-  alertmanager_ingress_annotations = ""
+  grafana_ingress_annotations      = {}
+  alertmanager_ingress_annotations = {}
 }
