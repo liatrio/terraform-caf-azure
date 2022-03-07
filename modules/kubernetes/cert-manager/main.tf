@@ -27,4 +27,8 @@ resource "helm_release" "cert_manager" {
     name  = "securityContext.fsGroup"
     value = 1001
   }
+  set {
+    name  = "podLabels"
+    value = var.podLabels
+  }
 }

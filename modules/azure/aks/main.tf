@@ -36,6 +36,11 @@ resource "azurerm_kubernetes_cluster" "aks" {
 
   tags = var.tags
 
+  # changing from kubenet plugin to azure to support AAD pod identities by default
+  network_profile {
+    network_plugin = "azure"
+  }
+
   addon_profile {
     aci_connector_linux {
       enabled = false

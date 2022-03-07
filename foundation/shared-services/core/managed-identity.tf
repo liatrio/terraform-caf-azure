@@ -31,8 +31,26 @@ resource "azurerm_role_assignment" "subscription_connectivity_dns_contributor" {
   principal_id         = azurerm_user_assigned_identity.shared_services_msi.principal_id
 }
 
+resource "azurerm_user_assigned_identity" "cert_manager_pod_identity" {
+  name                = "cert-manager-dns01"
+  resource_group_name = azurerm_resource_group.resource_group
+  location            = var.location
+}
+
 resource "azurerm_role_assignment" "dns_contributor" {
   scope                = module.shared_services_public_dns_zone.dns_zone_id
   role_definition_name = "DNS Zone Contributor"
+  principal_id         = azurerm_user_assigned_identity.cert_manager_pod_identity.principal_id
+}
+
+resource "azurerm_role_assignment" "aks_virtual_machine_contributor" {
+  scope                = module.aks.cluster_node_resource_group
+  role_definition_name = "Virtual Machine Contributor"
+  principal_id         = module.aks.kubelet_identity_object_id
+}
+
+resource "azurerm_role_assignment" "aks_managed_identity_operator" {
+  scope                = module.aks.cluster_node_resource_group
+  role_definition_name = "Managed Identity Operator"
   principal_id         = module.aks.kubelet_identity_object_id
 }

@@ -15,5 +15,3 @@ spec:
           resourceGroupName: {{ .Values.azure.resourceGroup }}
           hostedZoneName: {{ .Values.azure.zoneName }}
           environment: AzurePublicCloud
-          managedIdentity:
-            clientID: {{ .Values.azure.managedIdentity.clientID }}

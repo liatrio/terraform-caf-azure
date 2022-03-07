@@ -1,0 +1,4 @@
+apiVersion: v2
+name: pod-identity
+version: 0.0.1
+description: A Helm chart for azure identity and identity binding
