@@ -33,7 +33,7 @@ resource "azurerm_role_assignment" "subscription_connectivity_dns_contributor" {
 
 resource "azurerm_user_assigned_identity" "cert_manager_pod_identity" {
   name                = "cert-manager-dns01"
-  resource_group_name = azurerm_resource_group.resource_group
+  resource_group_name = azurerm_resource_group.resource_group.name
   location            = var.location
 }
 

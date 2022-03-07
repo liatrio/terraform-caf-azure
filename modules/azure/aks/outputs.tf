@@ -30,5 +30,5 @@ output "kubelet_identity_object_id" {
 }
 
 output "cluster_node_resource_group" {
-  value = azurerm_kubernetes_cluster.aks.node_resource_group
+  value = data.azurerm_resource_group.aks_node_pool_resource_group.id
 }
