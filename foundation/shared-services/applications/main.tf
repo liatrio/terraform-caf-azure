@@ -19,9 +19,9 @@ module "aad_pod_identity" {
 
 module "cert_manager_pod_identity" {
   depends_on = [module.aad_pod_identity]
-  source = "../../../modules/kubernetes/aad-pod-identity-instance"
+  source     = "../../../modules/kubernetes/aad-pod-identity-instance"
 
-  namespace        = kubernetes_namespace.toolchain_namespace.metadata.0.name
+  namespace = kubernetes_namespace.toolchain_namespace.metadata.0.name
 
   identity_name        = "cert-manager-pod-identity"
   identity_client_id   = var.aad_pod_identity_client_id
@@ -31,11 +31,15 @@ module "cert_manager_pod_identity" {
 module "cert_manager" {
   source = "../../../modules/kubernetes/cert-manager"
 
-  namespace = kubernetes_namespace.toolchain_namespace.metadata.0.name
+  namespace    = kubernetes_namespace.toolchain_namespace.metadata.0.name
   pod_identity = module.cert_manager_pod_identity.identity_name
 }
 
 module "cert_manager_issuer" {
+  depends_on = [
+    time_sleep.wait_for_cert_manager,
+    module.cert_manager_pod_identity
+  ]
   source = "../../../modules/kubernetes/cert-manager-issuer"
 
   namespace                    = kubernetes_namespace.toolchain_namespace.metadata.0.name
@@ -45,10 +49,6 @@ module "cert_manager_issuer" {
   azure_subscription_id        = var.azure_subscription_id
   dns_zone_resource_group_name = var.dns_zone_resource_group_name
   dns_zone_name                = var.dns_zone_name
-
-  depends_on = [
-    time_sleep.wait_for_cert_manager,
-  module.cert_manager_pod_identity]
 }
 
 module "cluster_wildcard" {

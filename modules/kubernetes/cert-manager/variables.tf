@@ -4,6 +4,6 @@ variable "namespace" {
 }
 
 variable "pod_identity" {
-  type = string
+  type        = string
   description = "Identity label to be used by AAD Pod Identities to bind to cert-manager pod"
 }
