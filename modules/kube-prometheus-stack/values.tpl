@@ -115,7 +115,8 @@ alertmanager:
     global:
       resolve_timeout: 5m
     route:
-      receiver: 'slack'
+      # receiver: 'slack'
+      reciever: 'null'
       group_by: ['namespace', 'pod']
       group_wait: 30s
       group_interval: 5m
@@ -146,35 +147,35 @@ alertmanager:
     - /etc/alertmanager/config/template*.tmpl
     receivers:
     - name: 'null'
-    - name: 'slack'
-      slack_configs:
-      - api_url: ${prometheus_slack_webhook_url}
-        channel: ${prometheus_slack_channel}
-        color: '{{ range .Alerts }}{{ if eq .Status "firing" }}{{ if eq .Labels.severity "warning" }}#FFAA00{{ else if eq .Labels.severity "critical" }}#FF5100{{ else}}#00C1DB{{ end }}{{ else }}#24AE1D{{ end }}{{ end }}'
-        send_resolved: true
-        title: '[{{ .Status | toUpper }}{{ if eq .Status "firing" }}:{{ .Alerts.Firing | len }}{{ end }}] Monitoring Event Notification'
-        title_link: 'https://${alertmanager_hostname}'
-        actions: 
-          - type: button
-            text: 'Silence :hear_no_evil:'
-            url: '{{ template "__alert_silence_link" . }}'
-        text: |-
-          {{ range .Alerts }}
-            {{ if (and (eq .Labels.severity "critical") (ne .Status "resolved")) }} <!here> {{ end }}{{ if eq .Status "firing" }}{{ if eq .Labels.severity "warning" }} :warning: {{ else if eq .Labels.severity "critical" }} :super_dumpster_fire: {{ else }} :information_source: {{ end }}{{ else }} :white_check_mark: {{ end }} *Alert:* {{ .Labels.alertname }} - `{{ .Labels.severity }}`
-            *Description:* {{ .Annotations.description }}
-            *Details:*
-            {{ range .Labels.SortedPairs }} • *{{ .Name }}:* `{{ .Value }}`
-            {{ end }}
-          {{ end }}
+    # - name: 'slack'
+    #   slack_configs:
+    #   - api_url: ${prometheus_slack_webhook_url}
+    #     channel: ${prometheus_slack_channel}
+    #     color: '{{ range .Alerts }}{{ if eq .Status "firing" }}{{ if eq .Labels.severity "warning" }}#FFAA00{{ else if eq .Labels.severity "critical" }}#FF5100{{ else}}#00C1DB{{ end }}{{ else }}#24AE1D{{ end }}{{ end }}'
+    #     send_resolved: true
+    #     title: '[{{ .Status | toUpper }}{{ if eq .Status "firing" }}:{{ .Alerts.Firing | len }}{{ end }}] Monitoring Event Notification'
+    #     title_link: 'https://${alertmanager_hostname}'
+    #     actions: 
+    #       - type: button
+    #         text: 'Silence :hear_no_evil:'
+    #         url: '{{ template "__alert_silence_link" . }}'
+    #     text: |-
+    #       {{ range .Alerts }}
+    #         {{ if (and (eq .Labels.severity "critical") (ne .Status "resolved")) }} <!here> {{ end }}{{ if eq .Status "firing" }}{{ if eq .Labels.severity "warning" }} :warning: {{ else if eq .Labels.severity "critical" }} :super_dumpster_fire: {{ else }} :information_source: {{ end }}{{ else }} :white_check_mark: {{ end }} *Alert:* {{ .Labels.alertname }} - `{{ .Labels.severity }}`
+    #         *Description:* {{ .Annotations.description }}
+    #         *Details:*
+    #         {{ range .Labels.SortedPairs }} • *{{ .Name }}:* `{{ .Value }}`
+    #         {{ end }}
+    #       {{ end }}
 
-    - name: 'slack-receiver' # Not in use but if we want to configure additional templates we can
-      slack_configs:
-      - api_url: ${prometheus_slack_webhook_url}
-        channel: ${prometheus_slack_channel}
-        icon_url: https://avatars3.githubusercontent.com/u/3380462
-        send_resolved: true
-        title: '{{ template "custom_title" . }}'
-        text: '{{ template "custom_slack_message" . }}'
+    # - name: 'slack-receiver' # Not in use but if we want to configure additional templates we can
+    #   slack_configs:
+    #   - api_url: ${prometheus_slack_webhook_url}
+    #     channel: ${prometheus_slack_channel}
+    #     icon_url: https://avatars3.githubusercontent.com/u/3380462
+    #     send_resolved: true
+    #     title: '{{ template "custom_title" . }}'
+    #     text: '{{ template "custom_slack_message" . }}'
   templateFiles:
     template_1.tmpl: |-
       {{ define "__single_message_title" }}{{ range .Alerts.Firing }}{{ .Labels.alertname }} @ {{ .Annotations.identifier }}{{ end }}{{ range .Alerts.Resolved }}{{ .Labels.alertname }} @ {{ .Annotations.identifier }}{{ end }}{{ end }}
