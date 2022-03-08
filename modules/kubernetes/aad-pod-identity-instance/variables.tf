@@ -3,11 +3,9 @@ variable "identity_name" {
   type        = string
 }
 
-
 variable "namespace" {
   description = "kubernetes namespace in which to create identity"
   type        = string
-  default     = "default"
 }
 
 variable "identity_client_id" {
@@ -15,12 +13,10 @@ variable "identity_client_id" {
   type        = string
 }
 
-
 variable "identity_resource_id" {
   description = "resource id of the managed identity"
   type        = string
 }
-
 
 variable "helm_name" {
   description = "name of helm installation (defaults to pod-id-<identity_name>"
