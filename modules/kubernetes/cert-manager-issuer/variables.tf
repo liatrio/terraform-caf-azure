@@ -32,17 +32,12 @@ variable "azure_subscription_id" {
   description = "Azure subscription ID to associate with issuer helm chart"
 }
 
-variable "azure_resource_group_name" {
+variable "dns_zone_resource_group_name" {
   type        = string
-  description = "Azure resource group name to associate with issuer helm chart"
+  description = "Azure resource group name to associate with issuer helm chart. Must match resource group of dns zone"
 }
 
 variable "dns_zone_name" {
   type        = string
   description = "Azure DNS zone name to associate with issuer helm chart"
-}
-
-variable "azure_managed_identity_client_id" {
-  type        = string
-  description = "Azure managed identity client ID to associate with issuer helm chart. Must have 'DNS Zone Contributor' role assignment"
 }
