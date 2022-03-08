@@ -39,7 +39,7 @@ resource "azurerm_virtual_network" "aks_vnet" {
   address_space       = [var.vnet_address_range]
   subnet {
     name           = var.name
-    address_prefix = var.aks_subnet_address_range
+    address_prefix = cidrsubnet(var.vnet_address_range, 1, 0)
     security_group = azurerm_network_security_group.aks_vnet.id
   }
   tags = var.tags

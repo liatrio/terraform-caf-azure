@@ -13,12 +13,11 @@ resource "azurerm_resource_group" "resource_group" {
 }
 
 module "aks_vnet" {
-  source                   = "../../../modules/azure/aks-vnet"
-  name                     = var.name
-  location                 = var.location
-  vnet_address_range       = var.vnet_address_range
-  aks_subnet_address_range = var.aks_subnet_address_range
-  lz_resource_group        = azurerm_resource_group.resource_group.name
+  source             = "../../../modules/azure/aks-vnet"
+  name               = var.name
+  location           = var.location
+  vnet_address_range = var.vnet_address_range
+  lz_resource_group  = azurerm_resource_group.resource_group.name
 }
 
 data "azurerm_private_dns_zone" "aks_private_dns_id" {
@@ -36,8 +35,8 @@ module "aks" {
   node_count_max              = var.node_count_max
   vm_size                     = var.vm_size
   vnet_subnet_id              = module.aks_vnet.vnet_subnet_id
-  aks_service_subnet_cidr     = var.aks_service_subnet_cidr
-  aks_dns_service_ip          = var.aks_dns_service_ip
+  aks_service_subnet_cidr     = module.aks_vnet.aks_service_subnet_cidr
+  aks_dns_service_ip          = module.aks_vnet.aks_dns_service_host
   kubernetes_version          = var.kubernetes_version
   kubernetes_managed_identity = azurerm_user_assigned_identity.shared_services_msi.id
   lz_resource_group           = azurerm_resource_group.resource_group.name

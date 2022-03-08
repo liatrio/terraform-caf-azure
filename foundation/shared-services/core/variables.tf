@@ -15,13 +15,12 @@ variable "location" {
 }
 
 variable "vnet_address_range" {
-  description = "The address range of vnet"
+  description = "The CIDR expression (e.g. '10.0.0.0/8') giving an IPv4 network address range for the vnet. Should be a /16 or larger to allow room for AKS cluster operations using Azure CNI"
   type        = string
-}
-
-variable "aks_subnet_address_range" {
-  description = "The address range of the aks subnet"
-  type        = string
+  validation {
+    condition     = split("/", var.vnet_address_range)[1] <= 16
+    error_message = "The vnet CIDR range must be at least size /16 (i.e. must use no more than 16 network bits)"
+  }
 }
 
 variable "pool_name" {
@@ -66,14 +65,4 @@ variable "connectivity_resource_group_name" {
 variable "public_dns_zone_name" {
   type        = string
   description = "public dns zone to create"
-}
-
-variable "aks_service_subnet_cidr" {
-  type        = string
-  description = "Subnet carved from shared services vnet from which to assign aks service IPs"
-}
-
-variable "aks_dns_service_ip" {
-  type        = string
-  description = "IP drawn from service address range to be used for cluster discover service (kube-dns)"
 }
