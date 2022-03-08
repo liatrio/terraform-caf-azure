@@ -8,12 +8,6 @@ variable "namespace" {
   description = "Namespace to deploy the controller to"
 }
 
-variable "auth_secret_name" {
-  type        = string
-  default     = "controller-manager"
-  description = "Used with deployment_name to create the full secret name"
-}
-
 variable "github_org" {
   type = string
 }
@@ -24,13 +18,8 @@ variable "github_webhook_annotations" {
   default     = {}
 }
 
-variable "github_webhook_secret_token" {
-  description = "Secret token sent by GitHub webhook"
-  type        = string
-}
-
 variable "ingress_domain" {
-  type    = string
+  type = string
 }
 
 variable "controller_replica_count" {

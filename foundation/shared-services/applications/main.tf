@@ -32,16 +32,13 @@ module "cert_manager_issuer" {
 }
 
 module "github_runner_controller" {
-  source = "../../../modules/kubernetes/github-runners-controllers"
+  source = "../../../modules/kubernetes/github-runners-controller"
 
-  namespace                   = var.github_runner_namespace
-  release_name                = var.release_name
-  github_org                  = var.github_org
-  ingress_domain              = var.ingress_domain
+  namespace      = var.github_runner_namespace
+  github_org     = var.github_org
+  ingress_domain = var.dns_zone_name
 
-  // auth_secret_name            = 
   // github_webhook_annotations  = 
-  // github_webhook_secret_token = 
   // controller_replica_count    = 
 }
 

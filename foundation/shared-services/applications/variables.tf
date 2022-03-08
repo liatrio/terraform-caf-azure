@@ -41,13 +41,8 @@ variable "azure_managed_identity_client_id" {
   description = "Azure managed identity client ID to associate with issuer helm chart. Must have 'DNS Zone Contributor' role assignment"
 }
 
-variable "release_name" {
-  type        = string
-  default     = ""
-}
-
-variable "ingress_domain" {
-  type    = string
+variable "github_org" {
+  type = string
 }
 
 variable "github_runners" {
