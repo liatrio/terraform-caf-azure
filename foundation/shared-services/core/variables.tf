@@ -19,7 +19,7 @@ variable "vnet_address_range" {
   type        = string
   validation {
     condition     = split("/", var.vnet_address_range)[1] <= 16
-    error_message = "The vnet CIDR range must be at least size /16 (i.e. must use no more than 16 network bits)"
+    error_message = "The vnet_address_range must be at least size /16 (i.e. must use no more than 16 network bits)."
   }
 }
 
