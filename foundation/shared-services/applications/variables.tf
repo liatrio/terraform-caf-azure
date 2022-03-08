@@ -50,3 +50,8 @@ variable "aad_pod_identity_resource_id" {
   type        = string
   description = "AAD Pod Identities managed identity resource ID"
 }
+
+variable "monitoring_namespace" {
+  type    = string
+  default = "monitoring"
+}

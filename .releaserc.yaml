@@ -1,0 +1,10 @@
+branches:
+  - main
+repositoryUrl: 'git@github.com:liatrio/terraform-caf-azure.git'
+preset: conventionalcommits
+plugins:
+  - '@semantic-release/commit-analyzer'
+  - '@semantic-release/release-notes-generator'
+  - path: '@semantic-release/github'
+    failComment: false
+    successComment: false
