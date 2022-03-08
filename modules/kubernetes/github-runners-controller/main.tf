@@ -12,7 +12,7 @@ resource "helm_release" "github_runner_controller" {
   wait       = true
 
   values = [
-    templatefile("${path.module}/runner-controller-values.tpl", {
+    templatefile("${path.module}/runner-controller-values.yaml.tpl", {
       secret_name : "${local.release_name}-auth-pat"
       controller_replica_count : var.controller_replica_count
       ingress_hostname : local.ingress_hostname
