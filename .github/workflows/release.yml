@@ -5,10 +5,8 @@ on:
     branches:
       - main
     paths:
-      - "foundation/**"
-      - "landing-zones/**"
-      - "modules/**"
-      - "subscriptions/**"
+      - "**/*.tf"
+      - "**/charts/*"
       - ".github/workflows/release.yml"
       - ".releaserc.yaml"
   workflow_dispatch: {}
