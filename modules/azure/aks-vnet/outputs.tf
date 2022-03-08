@@ -7,9 +7,9 @@ output "vnet_id" {
 }
 
 output "aks_service_subnet_cidr" {
-  value = cidrsubnet(var.vnet_address_range, 2, 2)
+  value = local.aks_services_subnet
 }
 
 output "aks_dns_service_host" {
-  value = cidrhost(cidrsubnet(var.vnet_address_range, 2, 2), 2)
+  value = local.aks_dns_service_host
 }
