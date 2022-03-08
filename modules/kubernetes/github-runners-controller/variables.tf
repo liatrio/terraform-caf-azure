@@ -1,9 +1,3 @@
-variable "release_name" {
-  type        = string
-  description = "Used with auth_secret to create the full secret name"
-  default     = ""
-}
-
 variable "namespace" {
   description = "Namespace to deploy the controller to"
 }

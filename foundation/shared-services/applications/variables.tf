@@ -1,13 +1,3 @@
-variable "toolchain_namespace" {
-  type        = string
-  description = "Namespace for cert manager resources"
-}
-
-variable "github_runner_namespace" {
-  default     = "github-runners"
-  description = "Namespace for github runner controller and github runners"
-}
-
 variable "issuer_name" {
   default     = "cluster-issuer"
   type        = string

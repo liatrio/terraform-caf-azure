@@ -1,9 +1,6 @@
 resource "kubernetes_namespace" "toolchain_namespace" {
   metadata {
-    annotations = {
-      name = var.toolchain_namespace
-    }
-    name = var.toolchain_namespace
+    name = "toolchain"
   }
 }
 

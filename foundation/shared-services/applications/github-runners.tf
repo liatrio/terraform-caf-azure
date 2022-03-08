@@ -1,3 +1,9 @@
+resource "kubernetes_namespace" "github_runner_namespace" {
+  metadata {
+    name = "github-runners"
+  }
+}
+
 module "github_runner_controller" {
   source = "../../../modules/kubernetes/github-runners-controller"
 
