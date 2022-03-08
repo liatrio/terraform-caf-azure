@@ -95,7 +95,8 @@ prometheus:
 alertmanager:
   enabled: ${enable_alertmanager}
   ingress:
-    enabled: true
+    # enabled: true
+    enabled: false
     path: /
     annotations: 
       ${indent( 6, yamlencode( alertmanager_ingress_annotations ) ) }
