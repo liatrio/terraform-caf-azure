@@ -7,7 +7,7 @@ resource "kubernetes_namespace" "github_runner_namespace" {
 module "github_runner_controller" {
   source = "../../../modules/kubernetes/github-runners-controller"
 
-  namespace      = var.github_runner_namespace
+  namespace      = kubernetes_namespace.github_runner_namespace.metadata.0.name
   github_org     = var.github_org
   ingress_domain = var.dns_zone_name
 
