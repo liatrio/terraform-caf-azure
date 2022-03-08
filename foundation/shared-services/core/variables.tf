@@ -15,12 +15,7 @@ variable "location" {
 }
 
 variable "vnet_address_range" {
-  description = "The address range of vnet"
-  type        = string
-}
-
-variable "aks_subnet_address_range" {
-  description = "The address range of the aks subnet"
+  description = "The CIDR address range of the vnet"
   type        = string
 }
 

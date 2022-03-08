@@ -9,13 +9,12 @@ variable "location" {
 }
 
 variable "vnet_address_range" {
-  description = "The address range of vnet"
+  description = "The CIDR expression (e.g. '10.0.0.0/8') giving an IPv4 network address range for the vnet. Should be a /16 or larger to allow room for AKS cluster operations using Azure CNI"
   type        = string
-}
-
-variable "aks_subnet_address_range" {
-  description = "The address range of the aks subnet"
-  type        = string
+  validation {
+    condition     = cidrnetmask(var.vnet_address_range) == "255.255.0.0"
+    error_message = "The vnet_address_range must be a /16 (i.e. Subnet mask of 255.255.0.0)."
+  }
 }
 
 variable "tags" {

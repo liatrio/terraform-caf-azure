@@ -12,6 +12,4 @@ acme:
 azure:
   subscriptionID: ${ subscription_id }
   resourceGroup: ${ resource_group }
-  managedIdentity:
-    clientID: ${ client_id }
   zoneName: ${ dns_zone_name }

@@ -64,3 +64,13 @@ variable "lz_resource_group" {
   type        = string
   description = "resource group for landing-zone"
 }
+
+variable "aks_service_subnet_cidr" {
+  type        = string
+  description = "Subnet carved from shared services vnet from which to assign aks service IPs"
+}
+
+variable "aks_dns_service_ip" {
+  type        = string
+  description = "IP drawn from service address range to be used for cluster discover service (kube-dns)"
+}

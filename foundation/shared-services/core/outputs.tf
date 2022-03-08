@@ -24,3 +24,12 @@ output "cluster_ca_certificate" {
 output "kubelet_identity_client_id" {
   value = module.aks.kubelet_identity_client_id
 }
+
+output "aad_pod_identity_client_id" {
+  value = azurerm_user_assigned_identity.cert_manager_pod_identity.client_id
+}
+
+# Resource Id Used for identity binding
+output "aad_pod_identity_resource_id" {
+  value = azurerm_user_assigned_identity.cert_manager_pod_identity.id
+}

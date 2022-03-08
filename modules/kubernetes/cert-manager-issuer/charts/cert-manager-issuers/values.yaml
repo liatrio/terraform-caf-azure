@@ -12,6 +12,4 @@ acme:
 azure:
   subscriptionID: ""
   resourceGroup: ""
-  managedIdentity:
-    clientID: ""
   zoneName: ""

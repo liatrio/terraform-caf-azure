@@ -41,6 +41,16 @@ variable "azure_managed_identity_client_id" {
   description = "Azure managed identity client ID to associate with issuer helm chart. Must have 'DNS Zone Contributor' role assignment"
 }
 
+variable "aad_pod_identity_client_id" {
+  type        = string
+  description = "AAD Pod Identities managed identity client ID"
+}
+
+variable "aad_pod_identity_resource_id" {
+  type        = string
+  description = "AAD Pod Identities managed identity resource ID"
+}
+
 variable "monitoring_namespace" {
   type    = string
   default = "monitoring"

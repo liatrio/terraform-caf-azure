@@ -41,8 +41,3 @@ variable "dns_zone_name" {
   type        = string
   description = "Azure DNS zone name to associate with issuer helm chart"
 }
-
-variable "azure_managed_identity_client_id" {
-  type        = string
-  description = "Azure managed identity client ID to associate with issuer helm chart. Must have 'DNS Zone Contributor' role assignment"
-}

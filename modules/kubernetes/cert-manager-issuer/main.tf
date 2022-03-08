@@ -11,6 +11,5 @@ resource "helm_release" "cert_issuer" {
     subscription_id = var.azure_subscription_id
     resource_group  = var.dns_zone_resource_group_name
     dns_zone_name   = var.dns_zone_name
-    client_id       = var.azure_managed_identity_client_id
   })]
 }

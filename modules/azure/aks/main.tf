@@ -36,6 +36,13 @@ resource "azurerm_kubernetes_cluster" "aks" {
 
   tags = var.tags
 
+  network_profile {
+    network_plugin     = "azure"
+    docker_bridge_cidr = "172.17.0.1/16"
+    service_cidr       = var.aks_service_subnet_cidr
+    dns_service_ip     = var.aks_dns_service_ip
+  }
+
   addon_profile {
     aci_connector_linux {
       enabled = false
@@ -73,4 +80,8 @@ resource "azurerm_kubernetes_cluster" "aks" {
     skip_nodes_with_local_storage    = lookup(var.autoscaler_config, "skip_nodes_with_local_storage", true)
     skip_nodes_with_system_pods      = lookup(var.autoscaler_config, "skip_nodes_with_system_pods", true)
   }
+}
+
+data "azurerm_resource_group" "aks_node_pool_resource_group" {
+  name = azurerm_kubernetes_cluster.aks.node_resource_group
 }
