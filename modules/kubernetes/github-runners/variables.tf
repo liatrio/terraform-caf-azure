@@ -32,7 +32,7 @@ variable "github_runners_service_account_annotations" {
 
 variable "runner_autoscaler_min_replicas" {
   type    = number
-  default = 0
+  default = 1
 }
 
 variable "runner_autoscaler_max_replicas" {

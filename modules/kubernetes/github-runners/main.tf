@@ -9,7 +9,7 @@ resource "helm_release" "github_runners" {
   wait      = true
 
   values = [
-    templatefile("${path.module}/runner-values.tpl", {
+    templatefile("${path.module}/runners-values.tpl", {
       github_org                = var.github_org
       github_repo               = var.github_repo
       image                     = var.image
