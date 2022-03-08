@@ -4,7 +4,6 @@ on:
   push:
     branches:
       - main
-      - semantic-versioning
     paths:
       - "foundation/**"
       - "landing-zones/**"
