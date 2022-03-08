@@ -47,7 +47,7 @@ module "cluster_wildcard" {
   source = "../../../modules/kubernetes/certificates"
 
   name      = "cluster-wildcard"
-  namespace = var.namespace
+  namespace = kubernetes_namespace.toolchain_namespace.metadata.0.name
   domain    = var.dns_zone_name
 
   issuer_name = var.issuer_name

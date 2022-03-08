@@ -1,8 +1,3 @@
-variable "namespace" {
-  type        = string
-  description = "Supply a namespace that matches cert-manager"
-}
-
 variable "issuer_name" {
   default     = "cluster-issuer"
   type        = string
@@ -39,6 +34,15 @@ variable "dns_zone_name" {
 variable "azure_managed_identity_client_id" {
   type        = string
   description = "Azure managed identity client ID to associate with issuer helm chart. Must have 'DNS Zone Contributor' role assignment"
+}
+
+variable "github_org" {
+  type = string
+}
+
+variable "github_runners" {
+  type    = map(any)
+  default = {}
 }
 
 variable "aad_pod_identity_client_id" {

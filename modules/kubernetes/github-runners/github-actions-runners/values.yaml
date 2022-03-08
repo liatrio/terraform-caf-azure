@@ -1,0 +1,30 @@
+initialReplicas: 0
+githubOrg:
+githubRepo:
+labels: []
+image:
+
+horizontalRunnerAutoscaler:
+  minReplicas: 0
+  maxReplicas: 10
+  scaleAmount: 1
+  scaleDuration: "5m"
+
+resources: {}
+
+dockerdContainerResources: {}
+#  limits:
+#    cpu: "2"
+#    memory: 4Gi
+#  requests:
+#    cpu: "1"
+#    memory: 2Gi
+
+serviceAccount:
+  # Specifies whether a service account should be created
+  create: true
+  # Annotations to add to the service account
+  annotations: {}
+  # The name of the service account to use.
+  # If not set and create is true, a name is generated using the fullname template
+  name: "actions-runner"
