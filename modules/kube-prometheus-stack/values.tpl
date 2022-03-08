@@ -1,6 +1,8 @@
 grafana:
+  enabled: ${enable_grafana}
   ingress:
-    enabled: ${enable_grafana}
+    enable: false
+    # enabled: true
     annotations:
       ${indent( 6, yamlencode( grafana_ingress_annotations ) ) }
     tls:

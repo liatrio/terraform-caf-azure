@@ -8,7 +8,7 @@ module "kube_prometheus_stack" {
   source = "../../../modules/kube-prometheus-stack"
 
   namespace                        = kubernetes_namespace.monitoring.metadata[0].name
-  enable_grafana                   = false
+  enable_grafana                   = true
   enable_alertmanager              = true
   grafana_hostname                 = "placeholder-domain"
   alertmanager_hostname            = "placeholder-domain"
