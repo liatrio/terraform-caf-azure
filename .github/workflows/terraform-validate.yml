@@ -16,15 +16,17 @@ jobs:
 
       - name: Validate
         run: |
-          modules=$(find . -name ".terraform.lock.hcl" | sed 's:[^/]*$::' | jq -R -r -s -c 'split("\n") | map(select(length > 0)) | .[]')
+          set -e
           
-          for module in ${modules}; do
-            printf "\n\nValidating module ${module}\n
+          rootModules=$(find . ! -path "*/modules/*" -name "main.tf" | sed 's:[^/]*$::' | jq -R -r -s -c 'split("\n") | map(select(length > 0)) | .[]')
           
-            pushd "${module}" || exit
+          for rootModule in ${rootModules}; do
+            printf "\n\nValidating root module ${rootModule}\n
+          
+            pushd "${rootModule}" || exit
           
             if [ ! -f ".terraform.lock.hcl" ]; then
-              echo "Terraform lockfile doesn't exist in this root module ${module}. Please create one using \"terraform init -backend=false\""
+              echo "Terraform lockfile doesn't exist in this root module ${rootModule}. Please create one using \"terraform init -backend=false\""
               exit 1
             fi
           
