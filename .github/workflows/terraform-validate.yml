@@ -2,7 +2,6 @@ name: "Terraform Code Quality"
 
 on:
   pull_request:
-  push:
 
 jobs:
   discover_stages:
