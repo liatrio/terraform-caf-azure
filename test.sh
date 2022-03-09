@@ -2,7 +2,7 @@
 
 set -e
 
-rootModules=$(find . ! -path "*/modules/*" -name "main.tf" | sed 's:[^/]*$::' | jq -R -r -s -c 'split("\n") | map(select(length > 0)) | .[]')
+rootModules=$(find . ! -path "*/modules/*" -name "main.tf" | sed 's:[^/]*$::')
 
 for rootModule in ${rootModules}; do
   printf "\nValidating root module %s\n\n" ${rootModule}
