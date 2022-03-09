@@ -19,7 +19,7 @@ jobs:
           modules=$(find . -name ".terraform.lock.hcl" | sed 's:[^/]*$::' | jq -R -r -s -c 'split("\n") | map(select(length > 0)) | .[]')
           
           for module in ${modules}; do
-            echo "\n\nValidating module ${module}..."
+            printf "\n\nValidating module ${module}\n
           
             pushd "${module}" || exit
           
