@@ -14,14 +14,14 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v2
 
-      - name: Discover Terraform Modules
-        id: find-modules
-        run: echo "::set-output name=modules::$(find . -name ".terraform.lock.hcl" | sed 's:[^/]*$::' | jq -R -r -s -c 'split("\n") | map(select(length > 0)) | .[]')"
-
       - name: Validate
         run: |
-          for module in $(echo ${{ steps.find-modules.outputs.modules }}); do
-            pushd "${module}"
+          modules=$(find . -name ".terraform.lock.hcl" | sed 's:[^/]*$::' | jq -R -r -s -c 'split("\n") | map(select(length > 0)) | .[]')
+          
+          for module in ${modules}; do
+            echo "Validating module ${module}..."
+          
+            pushd "${module}" || exit
           
             if [ ! -f ".terraform.lock.hcl" ]; then
               echo "Terraform lockfile doesn't exist in this root module ${module}. Please create one using \"terraform init -backend=false\""
@@ -31,7 +31,7 @@ jobs:
             terraform init -backend=false
             terraform validate
           
-            popd
+            popd || exit
           done;
 
   format:
