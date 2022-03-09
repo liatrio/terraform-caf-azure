@@ -4,6 +4,7 @@ resource "kubernetes_namespace" "github_runner_namespace" {
   }
 }
 
+# This secret is expected to be manually created in key vault, between the `core` and `application` stages
 data "azurerm_key_vault_secret" "github_pat" {
   name         = "runners-controller-pat"
   key_vault_id = var.key_vault_id
