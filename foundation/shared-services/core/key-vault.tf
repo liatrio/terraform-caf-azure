@@ -2,6 +2,8 @@ locals {
   shared_services_environment = split("-", var.name)[2]
 }
 
+#tfsec:ignore:azure-keyvault-no-purge
+#tfsec:ignore:azure-keyvault-specify-network-acl
 resource "azurerm_key_vault" "key_vault" {
   name                      = "${var.prefix}-${local.shared_services_environment}"
   location                  = var.location
