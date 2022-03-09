@@ -13,7 +13,3 @@ output "aks_service_subnet_cidr" {
 output "aks_dns_service_host" {
   value = local.aks_dns_service_host
 }
-
-output "ingress_host_ip" {
-  value = local.ingress_host_ip
-}

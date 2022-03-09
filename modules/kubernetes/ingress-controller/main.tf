@@ -9,7 +9,6 @@ resource "helm_release" "nginx_ingress" {
     replicaCount: 2
     service:
       type: LoadBalancer
-      loadBalancerIP: ${var.load_balancer_ip}
       annotations:
         service.beta.kubernetes.io/azure-load-balancer-internal: "true"      
   EOF
