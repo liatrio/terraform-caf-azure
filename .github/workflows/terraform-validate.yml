@@ -21,18 +21,18 @@ jobs:
           rootModules=$(find . ! -path "*/modules/*" -name "main.tf" | sed 's:[^/]*$::' | jq -R -r -s -c 'split("\n") | map(select(length > 0)) | .[]')
           
           for rootModule in ${rootModules}; do
-            printf "\n\nValidating root module ${rootModule}\n
-          
+            printf "\n\nValidating root module %s\n" ${rootModule}
+            
             pushd "${rootModule}" || exit
-          
+            
             if [ ! -f ".terraform.lock.hcl" ]; then
               echo "Terraform lockfile doesn't exist in this root module ${rootModule}. Please create one using \"terraform init -backend=false\""
               exit 1
             fi
-          
+            
             terraform init -backend=false
             terraform validate
-          
+            
             popd || exit
           done;
 
