@@ -1,3 +1,11 @@
+<<<<<<< Updated upstream
+=======
+variable "namespace" {
+  type        = string
+  description = "Supply a namespace that matches cert-manager"
+}
+
+>>>>>>> Stashed changes
 variable "issuer_name" {
   default     = "cluster-issuer"
   type        = string
@@ -58,4 +66,9 @@ variable "aad_pod_identity_resource_id" {
 variable "monitoring_namespace" {
   type    = string
   default = "monitoring"
+}
+
+variable "ingress_host_ip" {
+  type = string
+  description = "IP address designated from aks_vnet module for use by ingress controller"
 }
