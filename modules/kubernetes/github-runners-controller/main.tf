@@ -13,7 +13,7 @@ resource "helm_release" "github_runner_controller" {
 
   values = [
     templatefile("${path.module}/runner-controller-values.yaml.tpl", {
-      secret_name : "${local.release_name}-auth-pat"
+      secret_name : var.auth_pat_secret_name
       controller_replica_count : var.controller_replica_count
       ingress_hostname : local.ingress_hostname
       github_webhook_annotations : var.github_webhook_annotations
