@@ -21,7 +21,7 @@ jobs:
       - name: Validate
         run: |
           for module in $(echo ${{ steps.find-modules.outputs.modules }}); do
-            pushd "${module}" || exit
+            pushd "${module}"
           
             if [ ! -f ".terraform.lock.hcl" ]; then
               echo "Terraform lockfile doesn't exist in this root module ${module}. Please create one using \"terraform init -backend=false\""
@@ -31,7 +31,7 @@ jobs:
             terraform init -backend=false
             terraform validate
           
-            popd || exit
+            popd
           done;
 
   format:
