@@ -2,7 +2,11 @@ name: "Terraform Code Quality"
 
 on:
   pull_request:
-  push:
+    paths:
+      - 'foundation/**'
+      - 'landing-zones/**'
+      - 'subscriptions/**'
+      - 'modules/**'
 
 jobs:
   discover_stages:
