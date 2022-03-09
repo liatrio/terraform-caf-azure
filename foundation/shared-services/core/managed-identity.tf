@@ -54,3 +54,9 @@ resource "azurerm_role_assignment" "aks_managed_identity_operator" {
   role_definition_name = "Managed Identity Operator"
   principal_id         = module.aks.kubelet_identity_object_id
 }
+
+resource "azurerm_role_assignment" "aks_managed_identity_operator_for_cert_manager_identity" {
+  scope                = azurerm_user_assigned_identity.cert_manager_pod_identity.id
+  role_definition_name = "Managed Identity Operator"
+  principal_id         = module.aks.kubelet_identity_object_id
+}

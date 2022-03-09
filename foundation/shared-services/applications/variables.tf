@@ -59,8 +59,3 @@ variable "monitoring_namespace" {
   type    = string
   default = "monitoring"
 }
-
-variable "ingress_host_ip" {
-  type        = string
-  description = "IP address designated from aks_vnet module for use by ingress controller"
-}

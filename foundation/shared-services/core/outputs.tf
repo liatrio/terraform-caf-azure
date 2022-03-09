@@ -33,7 +33,3 @@ output "aad_pod_identity_client_id" {
 output "aad_pod_identity_resource_id" {
   value = azurerm_user_assigned_identity.cert_manager_pod_identity.id
 }
-
-output "ingress_host_ip" {
-  value = module.aks_vnet.ingress_host_ip
-}

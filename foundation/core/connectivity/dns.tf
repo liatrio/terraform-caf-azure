@@ -8,12 +8,13 @@ locals {
 }
 
 module "private_dns" {
-  source = "../../../modules/azure/private-dns-zones"
+  source = "../../../modules/azure/private-dns-zone"
 
-  location                     = azurerm_point_to_site_vpn_gateway.hub_vpn_gateway.location
-  resource_group_name          = azurerm_resource_group.caf_connectivity.name
-  linked_virtual_network_id    = azurerm_virtual_network.connectivity_vnet.id
-  azure_paas_private_dns_zones = local.azure_paas_private_dns_zones
+  for_each                  = local.azure_paas_private_dns_zones
+  location                  = azurerm_point_to_site_vpn_gateway.hub_vpn_gateway.location
+  resource_group_name       = azurerm_resource_group.caf_connectivity.name
+  linked_virtual_network_id = azurerm_virtual_network.connectivity_vnet.id
+  dns_zone_name             = each.value
 }
 
 module "public_dns" {
