@@ -39,7 +39,7 @@ data "azurerm_subscription" "connectivity" {
 
 module "connectivity" {
   providers = {
-    azurerm              = azurerm.connectivity
+    azurerm = azurerm.connectivity
   }
   source                               = "./connectivity"
   location                             = var.location
