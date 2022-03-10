@@ -19,7 +19,3 @@ output "connectivity_private_dns_zone_ids" {
     for k, zone in local.azure_paas_private_dns_zones : k => module.private_dns[k].dns_zone_id
   }
 }
-
-output "connectivity_vnet_id" {
-  value = azurerm_virtual_network.connectivity_vnet.id
-}

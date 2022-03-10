@@ -1,7 +1,8 @@
 module "shared_services_public_dns_zone" {
   providers = {
-    azurerm              = azurerm
-    azurerm.connectivity = azurerm.connectivity
+    azurerm                 = azurerm
+    azurerm.parent_dns_zone = azurerm.connectivity
+    azurerm.connectivity    = azurerm.connectivity
   }
   source                              = "../../../modules/azure/public-dns-zone"
   resource_group_name                 = azurerm_resource_group.resource_group.name
@@ -18,8 +19,10 @@ data "azurerm_virtual_network" "connectivity_vnet" {
 
 module "shared_services_internal_public_dns_zone" {
   providers = {
-    azurerm              = azurerm
-    azurerm.connectivity = azurerm.connectivity
+    azurerm                 = azurerm
+    azurerm.parent_dns_zone = azurerm
+    azurerm.connectivity    = azurerm.connectivity
+
   }
   source = "../../../modules/azure/public-dns-zone"
 
@@ -39,6 +42,6 @@ module "shared_services_internal_private_dns_zone" {
 
   dns_zone_name             = "internal.${var.public_dns_zone_name}"
   location                  = var.location
-  resource_group_name       = var.connectivity_resource_group_name
+  resource_group_name       = azurerm_resource_group.resource_group.name
   linked_virtual_network_id = data.azurerm_virtual_network.connectivity_vnet.id
 }
