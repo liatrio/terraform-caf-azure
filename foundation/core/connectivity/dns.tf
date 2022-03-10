@@ -7,7 +7,7 @@ locals {
   }
 }
 
-module "private_dns" {
+module "azure_paas_private_dns" {
   providers = {
     azurerm              = azurerm
     azurerm.connectivity = azurerm

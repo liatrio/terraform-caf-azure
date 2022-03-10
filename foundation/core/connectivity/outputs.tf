@@ -16,6 +16,6 @@ output "connectivity_vpn_id" {
 
 output "connectivity_private_dns_zone_ids" {
   value = {
-    for k, zone in local.azure_paas_private_dns_zones : k => module.private_dns[k].dns_zone_id
+    for k, zone in local.azure_paas_private_dns_zones : k => module.azure_paas_private_dns[k].dns_zone_id
   }
 }
