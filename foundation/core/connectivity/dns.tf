@@ -10,7 +10,7 @@ locals {
 module "private_dns" {
   providers = {
     azurerm              = azurerm
-    azurerm.connectivity = azurerm.connectivity
+    azurerm.connectivity = azurerm
   }
 
   source = "../../../modules/azure/private-dns-zone"
@@ -25,9 +25,9 @@ module "private_dns" {
 
 module "public_dns" {
   providers = {
-    azurerm                 = azurerm.connectivity
-    azurerm.parent_dns_zone = azurerm.connectivity
-    azurerm.connectivity    = azurerm.connectivity
+    azurerm                 = azurerm
+    azurerm.parent_dns_zone = azurerm
+    azurerm.connectivity    = azurerm
   }
 
   source              = "../../../modules/azure/public-dns-zone"
