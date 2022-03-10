@@ -9,8 +9,8 @@ locals {
 
 module "private_dns" {
   providers = {
-    azurerm                 = azurerm
-    azurerm.connectivity    = azurerm.connectivity
+    azurerm              = azurerm
+    azurerm.connectivity = azurerm.connectivity
   }
 
   source = "../../../modules/azure/private-dns-zone"
@@ -20,7 +20,7 @@ module "private_dns" {
   resource_group_name       = azurerm_resource_group.caf_connectivity.name
   linked_virtual_network_id = azurerm_virtual_network.connectivity_vnet.id
   dns_zone_name             = each.value
-  tags                      = {"resource" = each.key}
+  tags                      = { "resource" = each.key }
 }
 
 module "public_dns" {
