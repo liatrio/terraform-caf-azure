@@ -59,3 +59,7 @@ variable "monitoring_namespace" {
   type    = string
   default = "monitoring"
 }
+
+variable "key_vault_id" {
+  type = string
+}

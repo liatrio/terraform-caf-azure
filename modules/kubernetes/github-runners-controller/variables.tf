@@ -21,3 +21,8 @@ variable "controller_replica_count" {
   default     = 1
   description = "How many actions runner controller instances to deploy"
 }
+
+variable "auth_pat_secret_name" {
+  type        = string
+  description = "Github pat for github runners"
+}
