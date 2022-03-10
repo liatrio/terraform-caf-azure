@@ -14,6 +14,6 @@ variable "linked_virtual_network_id" {
   type = string
 }
 
-variable "azure_paas_private_dns_zones" {
-  type = map(string)
+variable "dns_zone_name" {
+  type = string
 }
