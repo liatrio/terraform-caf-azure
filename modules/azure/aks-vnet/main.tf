@@ -7,10 +7,6 @@ terraform {
   }
 }
 
-locals {
-
-}
-
 resource "azurerm_network_security_group" "aks_vnet" {
   name                = var.name
   location            = var.location

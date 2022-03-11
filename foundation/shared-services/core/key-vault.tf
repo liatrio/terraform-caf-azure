@@ -22,7 +22,7 @@ resource "azurerm_key_vault" "key_vault" {
 data "azurerm_private_dns_zone" "key_vault" {
   provider            = azurerm.connectivity
   name                = "privatelink.vaultcore.azure.net"
-  resource_group_name = local.connectivity_rg
+  resource_group_name = var.connectivity_resource_group_name
 }
 
 resource "azurerm_private_endpoint" "key_vault" {

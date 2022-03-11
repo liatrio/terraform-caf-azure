@@ -10,10 +10,6 @@ terraform {
   }
 }
 
-locals {
-  connectivity_rg = "${var.prefix}-connectivity"
-}
-
 data "azurerm_client_config" "current" {}
 
 resource "azurerm_resource_group" "resource_group" {
