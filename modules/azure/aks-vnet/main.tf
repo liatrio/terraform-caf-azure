@@ -37,12 +37,19 @@ resource "azurerm_virtual_network" "aks_vnet" {
   location            = var.location
   resource_group_name = var.lz_resource_group
   address_space       = [var.vnet_address_range]
-  subnet {
-    name           = var.name
-    address_prefix = local.aks_pods_nodes_subnet
-    security_group = azurerm_network_security_group.aks_vnet.id
-  }
-  tags = var.tags
+  tags                = var.tags
+}
+
+resource "azurerm_subnet" "aks_nodes_and_pods" {
+  name                 = var.name
+  resource_group_name  = azurerm_virtual_network.aks_vnet.resource_group_name
+  virtual_network_name = azurerm_virtual_network.aks_vnet.name
+  address_prefixes     = [local.aks_pods_nodes_subnet]
+}
+
+resource "azurerm_subnet_network_security_group_association" "aks_vnet" {
+  network_security_group_id = azurerm_network_security_group.aks_vnet.id
+  subnet_id                 = azurerm_subnet.aks_nodes_and_pods.id
 }
 
 resource "azurerm_subnet" "service_endpoints" {
