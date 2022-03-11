@@ -13,3 +13,7 @@ output "aks_service_subnet_cidr" {
 output "aks_dns_service_host" {
   value = local.aks_dns_service_host
 }
+
+output "service_endpoints_subnet_cidr" {
+  value = azurerm_subnet.service_endpoints.address_prefixes.0
+}

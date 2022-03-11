@@ -44,3 +44,12 @@ resource "azurerm_virtual_network" "aks_vnet" {
   }
   tags = var.tags
 }
+
+resource "azurerm_subnet" "service_endpoints" {
+  name                 = "service-endpoints"
+  resource_group_name  = var.lz_resource_group
+  virtual_network_name = azurerm_virtual_network.aks_vnet.name
+  address_prefixes     = [local.service_endpoints_subnet]
+
+  service_endpoints = ["Microsoft.KeyVault"]
+}
