@@ -15,10 +15,10 @@ resource "azurerm_resource_group" "lz_resource_group" {
 module "aks_vnet" {
   source = "../../modules/azure/aks-vnet"
 
-  name               = var.name
-  location           = var.location
-  vnet_address_range = var.vnet_address_range
-  resource_group_name  = azurerm_resource_group.lz_resource_group.name
+  name                = var.name
+  location            = var.location
+  vnet_address_range  = var.vnet_address_range
+  resource_group_name = azurerm_resource_group.lz_resource_group.name
 }
 
 data "azurerm_private_dns_zone" "aks_private_dns_id" {
