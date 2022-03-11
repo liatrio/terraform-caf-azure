@@ -7,6 +7,10 @@ terraform {
   }
 }
 
+locals {
+
+}
+
 resource "azurerm_network_security_group" "aks_vnet" {
   name                = var.name
   location            = var.location
@@ -45,6 +49,7 @@ resource "azurerm_subnet" "aks_nodes_and_pods" {
   resource_group_name  = azurerm_virtual_network.aks_vnet.resource_group_name
   virtual_network_name = azurerm_virtual_network.aks_vnet.name
   address_prefixes     = [local.aks_pods_nodes_subnet]
+
   # This needs to be enabled for the kube-apiserver endpoint to be created
   enforce_private_link_endpoint_network_policies = true
 }
@@ -59,7 +64,9 @@ resource "azurerm_subnet" "service_endpoints" {
   resource_group_name  = var.lz_resource_group
   virtual_network_name = azurerm_virtual_network.aks_vnet.name
   address_prefixes     = [local.service_endpoints_subnet]
+
   # This needs to be enabled for Key Vault etc service endpoints to be created
   enforce_private_link_endpoint_network_policies = true
-  service_endpoints                              = ["Microsoft.KeyVault"]
+
+  service_endpoints = ["Microsoft.KeyVault"]
 }
