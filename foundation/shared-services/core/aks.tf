@@ -8,7 +8,7 @@ module "aks_vnet" {
 
 data "azurerm_private_dns_zone" "aks_private_dns_id" {
   name                = "privatelink.${var.location}.azmk8s.io"
-  resource_group_name = "caf-connectivity"
+  resource_group_name = local.connectivity_rg
   provider            = azurerm.connectivity
 }
 
