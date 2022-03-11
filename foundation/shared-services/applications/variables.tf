@@ -1,9 +1,3 @@
-variable "issuer_name" {
-  default     = "cluster-issuer"
-  type        = string
-  description = "Descriptive name for the issuer. Consider scope when selecting"
-}
-
 variable "issuer_server" {
   default     = "https://acme-v02.api.letsencrypt.org/directory"
   type        = string
@@ -28,7 +22,7 @@ variable "dns_zone_resource_group_name" {
 
 variable "dns_zone_name" {
   type        = string
-  description = "Azure DNS zone name to associate with issuer helm chart"
+  description = "External Public Azure DNS zone name to associate with issuer helm chart"
 }
 
 variable "azure_managed_identity_client_id" {
