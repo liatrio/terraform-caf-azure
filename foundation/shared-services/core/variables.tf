@@ -1,5 +1,6 @@
 variable "name" {
-  type = string
+  description = "Name of the shared services environment (prod, staging, etc)"
+  type        = string
 }
 
 variable "prefix" {
