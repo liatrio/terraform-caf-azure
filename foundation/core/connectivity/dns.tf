@@ -4,6 +4,7 @@ locals {
   azure_paas_private_dns_zones = {
     kubernetes_cluster = "privatelink.${var.location}.azmk8s.io"
     container_registry = "privatelink.azurecr.io"
+    key_vault          = "privatelink.vaultcore.azure.net"
   }
 }
 
