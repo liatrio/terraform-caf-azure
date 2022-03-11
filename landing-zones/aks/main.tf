@@ -18,7 +18,7 @@ module "aks_vnet" {
   name               = var.name
   location           = var.location
   vnet_address_range = var.vnet_address_range
-  lz_resource_group  = azurerm_resource_group.lz_resource_group.name
+  resource_group_name  = azurerm_resource_group.lz_resource_group.name
 }
 
 data "azurerm_private_dns_zone" "aks_private_dns_id" {

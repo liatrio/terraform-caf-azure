@@ -14,7 +14,7 @@ locals {
 resource "azurerm_network_security_group" "aks_vnet" {
   name                = var.name
   location            = var.location
-  resource_group_name = var.lz_resource_group
+  resource_group_name = var.resource_group_name
 
   tags = var.tags
 }
@@ -31,7 +31,7 @@ resource "azurerm_network_security_rule" "aks_vnet" {
   destination_port_range      = each.value.destination_port_range
   source_address_prefix       = each.value.source_address_prefix
   destination_address_prefix  = each.value.destination_address_prefix
-  resource_group_name         = var.lz_resource_group
+  resource_group_name         = var.resource_group_name
   network_security_group_name = azurerm_network_security_group.aks_vnet.name
 }
 
@@ -39,7 +39,7 @@ resource "azurerm_network_security_rule" "aks_vnet" {
 resource "azurerm_virtual_network" "aks_vnet" {
   name                = var.name
   location            = var.location
-  resource_group_name = var.lz_resource_group
+  resource_group_name = var.resource_group_name
   address_space       = [var.vnet_address_range]
   tags                = var.tags
 }
@@ -61,7 +61,7 @@ resource "azurerm_subnet_network_security_group_association" "aks_vnet" {
 
 resource "azurerm_subnet" "service_endpoints" {
   name                 = "service-endpoints"
-  resource_group_name  = var.lz_resource_group
+  resource_group_name  = var.resource_group_name
   virtual_network_name = azurerm_virtual_network.aks_vnet.name
   address_prefixes     = [local.service_endpoints_subnet]
 
