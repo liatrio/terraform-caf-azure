@@ -1,0 +1,15 @@
+issuerName: cluster-issuer
+issuerKind: ClusterIssuer
+acme:
+  enabled: true
+  server: ""
+  email: ""
+  privateKeySecretRef:
+    name: letsencrypt
+  dnsProvider:
+    type: azureDNS
+  solver: dns
+azure:
+  subscriptionID: ""
+  resourceGroup: ""
+  zoneName: ""

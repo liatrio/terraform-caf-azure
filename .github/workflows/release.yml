@@ -1,0 +1,33 @@
+name: Release
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - "**/*.tf"
+      - "**/charts/*"
+      - ".github/workflows/release.yml"
+      - ".releaserc.yaml"
+  workflow_dispatch: {}
+
+concurrency:
+  group: release
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    outputs:
+      changed: ${{ steps.release.outputs.changed }}
+      previousVersion: ${{ steps.release.outputs.previousVersion }}
+      newVersion: ${{ steps.release.outputs.newVersion }}
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v2
+        with:
+          fetch-depth: 0
+      - name: Release
+        id: release
+        uses: liatrio/github-actions/conventional-release@master
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

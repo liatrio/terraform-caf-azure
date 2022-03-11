@@ -2,61 +2,41 @@ name: "Terraform Code Quality"
 
 on:
   pull_request:
-  push:
+    branches:
+      - main
 
 jobs:
-  discover_stages:
-    name: Discover
+  validate:
+    name: Validate
     runs-on: ubuntu-latest
     steps:
 
       - name: Checkout
         uses: actions/checkout@v2
 
-      # here we create the json, we need the "id:" so we can use it in "outputs" below
-      - id: set-matrix
-
-        # find main.tf files in root directory, exclude modules/ folder, trim to path, store as array, remove any empty.
-        run: echo "::set-output name=matrix::$(find . -name ".terraform.lock.hcl" | sed 's:[^/]*$::' | jq -R -s -c 'split("\n") | map(select(length > 0))')"
-
-    outputs:
-        matrix: ${{ steps.set-matrix.outputs.matrix }}
-
-  terraform_validate:
-    name: "Validate"
-    runs-on: ubuntu-latest
-
-    needs: discover_stages
-    strategy:
-        # ↓ create dynamic matrix from the json
-        matrix:
-          validate: ${{ fromJson(needs.discover_stages.outputs.matrix) }}
-        fail-fast: false
-    defaults:
-      run:
-        shell: bash
-
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v2
-
-      - name: Setup
-        uses: hashicorp/setup-terraform@v1
-
-      # Checks that all Terraform configuration is syntactically valid and internally consistent, regardless of any provided variables or existing state.
       - name: Validate
-        env:
-          FOLDER: ${{ matrix.validate }}
         run: |
-          cd $FOLDER
-          if [ ! -f ".terraform.lock.hcl" ]; then
-            echo "Terraform lockfile doesn't exist in this root module. Please create one using \"terraform init -backend=false\""
-            exit 1
-          fi
-          terraform init -backend=false
-          terraform validate
+          set -e
+          
+          rootModules=$(find . ! -path "*/modules/*" -name "main.tf" | sed 's:[^/]*$::')
+          
+          for rootModule in ${rootModules}; do
+            printf "\n\nValidating root module %s\n" ${rootModule}
+            
+            pushd "${rootModule}" || exit
+            
+            if [ ! -f ".terraform.lock.hcl" ]; then
+              echo "Terraform lockfile doesn't exist in the root module ${rootModule}. Please create one using \"terraform init -backend=false\""
+              exit 1
+            fi
+            
+            terraform init -backend=false
+            terraform validate
+            
+            popd || exit
+          done;
 
-  terraform_format:
+  format:
     name: "Format"
     runs-on: ubuntu-latest
 

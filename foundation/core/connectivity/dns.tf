@@ -4,22 +4,35 @@ locals {
   azure_paas_private_dns_zones = {
     kubernetes_cluster = "privatelink.${var.location}.azmk8s.io"
     container_registry = "privatelink.azurecr.io"
+    key_vault          = "privatelink.vaultcore.azure.net"
   }
 }
 
-module "private_dns" {
-  source = "../../../modules/azure/private-dns-zones"
+module "azure_paas_private_dns" {
+  providers = {
+    azurerm              = azurerm
+    azurerm.connectivity = azurerm
+  }
 
-  location                     = azurerm_point_to_site_vpn_gateway.hub_vpn_gateway.location
-  resource_group_name          = azurerm_resource_group.caf_connectivity.name
-  linked_virtual_network_id    = azurerm_virtual_network.connectivity_vnet.id
-  azure_paas_private_dns_zones = local.azure_paas_private_dns_zones
+  source = "../../../modules/azure/private-dns-zone"
+
+  for_each                  = local.azure_paas_private_dns_zones
+  location                  = azurerm_point_to_site_vpn_gateway.hub_vpn_gateway.location
+  resource_group_name       = azurerm_resource_group.caf_connectivity.name
+  linked_virtual_network_id = azurerm_virtual_network.connectivity_vnet.id
+  dns_zone_name             = each.value
+  tags                      = { "resource" = each.key }
 }
 
 module "public_dns" {
-  source              = "../../../modules/azure/public-dns-zones"
-  location            = azurerm_point_to_site_vpn_gateway.hub_vpn_gateway.location
+  providers = {
+    azurerm                 = azurerm
+    azurerm.parent_dns_zone = azurerm
+    azurerm.connectivity    = azurerm
+  }
+
+  source              = "../../../modules/azure/public-dns-zone"
   resource_group_name = azurerm_resource_group.caf_connectivity.name
-  root_dns_zone       = var.root_dns_zone
+  dns_zone_name       = var.root_dns_zone
   tags                = var.root_dns_tags
 }

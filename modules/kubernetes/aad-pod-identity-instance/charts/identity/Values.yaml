@@ -1,0 +1,10 @@
+azureIdentity:
+  name: "azure-identity"
+  behavior: "namespaced"
+  type: 0
+  resourceID:
+  clientID:
+
+azureIdentityBinding:
+  name: "azure-identity-binding"
+  selector:
