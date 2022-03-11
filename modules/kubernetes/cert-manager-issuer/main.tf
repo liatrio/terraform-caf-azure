@@ -1,5 +1,5 @@
 resource "helm_release" "cert_issuer" {
-  name      = "cert-issuer"
+  name      = var.issuer_name
   namespace = var.namespace
   chart     = "${path.module}/charts/cert-manager-issuers"
   timeout   = 120
