@@ -23,7 +23,7 @@ variable "tags" {
   default     = {}
 }
 
-variable "lz_resource_group" {
+variable "resource_group_name" {
   type        = string
-  description = "resource group name for landing-zone"
+  description = "Resource group name the resources in this module"
 }

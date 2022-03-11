@@ -10,7 +10,7 @@ terraform {
 resource "azurerm_network_security_group" "aks_vnet" {
   name                = var.name
   location            = var.location
-  resource_group_name = var.lz_resource_group
+  resource_group_name = var.resource_group_name
 
   tags = var.tags
 }
@@ -27,7 +27,7 @@ resource "azurerm_network_security_rule" "aks_vnet" {
   destination_port_range      = each.value.destination_port_range
   source_address_prefix       = each.value.source_address_prefix
   destination_address_prefix  = each.value.destination_address_prefix
-  resource_group_name         = var.lz_resource_group
+  resource_group_name         = var.resource_group_name
   network_security_group_name = azurerm_network_security_group.aks_vnet.name
 }
 
@@ -35,12 +35,34 @@ resource "azurerm_network_security_rule" "aks_vnet" {
 resource "azurerm_virtual_network" "aks_vnet" {
   name                = var.name
   location            = var.location
-  resource_group_name = var.lz_resource_group
+  resource_group_name = var.resource_group_name
   address_space       = [var.vnet_address_range]
-  subnet {
-    name           = var.name
-    address_prefix = local.aks_pods_nodes_subnet
-    security_group = azurerm_network_security_group.aks_vnet.id
-  }
-  tags = var.tags
+  tags                = var.tags
+}
+
+resource "azurerm_subnet" "aks_nodes_and_pods" {
+  name                 = var.name
+  resource_group_name  = azurerm_virtual_network.aks_vnet.resource_group_name
+  virtual_network_name = azurerm_virtual_network.aks_vnet.name
+  address_prefixes     = [local.aks_pods_nodes_subnet]
+
+  # This needs to be enabled for the kube-apiserver endpoint to be created
+  enforce_private_link_endpoint_network_policies = true
+}
+
+resource "azurerm_subnet_network_security_group_association" "aks_vnet" {
+  network_security_group_id = azurerm_network_security_group.aks_vnet.id
+  subnet_id                 = azurerm_subnet.aks_nodes_and_pods.id
+}
+
+resource "azurerm_subnet" "service_endpoints" {
+  name                 = "service-endpoints"
+  resource_group_name  = var.resource_group_name
+  virtual_network_name = azurerm_virtual_network.aks_vnet.name
+  address_prefixes     = [local.service_endpoints_subnet]
+
+  # This needs to be enabled for Key Vault etc service endpoints to be created
+  enforce_private_link_endpoint_network_policies = true
+
+  service_endpoints = ["Microsoft.KeyVault"]
 }

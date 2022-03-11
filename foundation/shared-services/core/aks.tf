@@ -1,35 +1,19 @@
-terraform {
-  required_providers {
-    azurerm = {
-      source  = "hashicorp/azurerm"
-      version = "~> 2.96.0"
-    }
-  }
-}
-
-resource "azurerm_resource_group" "lz_resource_group" {
-  name     = "${var.prefix}-${var.name}-rg"
-  location = var.location
-}
-
 module "aks_vnet" {
-  source = "../../modules/azure/aks-vnet"
-
+  source              = "../../../modules/azure/aks-vnet"
   name                = var.name
   location            = var.location
   vnet_address_range  = var.vnet_address_range
-  resource_group_name = azurerm_resource_group.lz_resource_group.name
+  resource_group_name = azurerm_resource_group.resource_group.name
 }
 
 data "azurerm_private_dns_zone" "aks_private_dns_id" {
   name                = "privatelink.${var.location}.azmk8s.io"
-  resource_group_name = "caf-connectivity"
+  resource_group_name = var.connectivity_resource_group_name
   provider            = azurerm.connectivity
 }
 
 module "aks" {
-  source = "../../modules/azure/aks"
-
+  source                      = "../../../modules/azure/aks"
   location                    = var.location
   name                        = var.name
   pool_name                   = var.pool_name
@@ -40,8 +24,8 @@ module "aks" {
   aks_service_subnet_cidr     = module.aks_vnet.aks_service_subnet_cidr
   aks_dns_service_ip          = module.aks_vnet.aks_dns_service_host
   kubernetes_version          = var.kubernetes_version
-  kubernetes_managed_identity = azurerm_user_assigned_identity.aks_msi.id
-  lz_resource_group           = azurerm_resource_group.lz_resource_group.name
+  kubernetes_managed_identity = azurerm_user_assigned_identity.shared_services_msi.id
+  lz_resource_group           = azurerm_resource_group.resource_group.name
   private_dns_zone_id         = data.azurerm_private_dns_zone.aks_private_dns_id.id
   depends_on = [
     azurerm_role_assignment.network_contributor,
@@ -58,7 +42,7 @@ data "azurerm_virtual_hub" "connectivity_hub" {
 
 resource "azurerm_virtual_hub_connection" "aks_vnet_hub_connection" {
   provider                  = azurerm.connectivity
-  name                      = "${var.name}-connection"
+  name                      = "${var.prefix}-${var.name}-connection"
   virtual_hub_id            = data.azurerm_virtual_hub.connectivity_hub.id
   remote_virtual_network_id = module.aks_vnet.vnet_id
 }
