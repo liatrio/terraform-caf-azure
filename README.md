@@ -1,57 +1,54 @@
 # Liatrio Cloud Adoption Framework for Azure
 
-Liatrio’s implementation of a [Cloud Adoption Framework on Azure](https://docs.microsoft.com/en-us/azure/cloud-adoption-framework/) using Terraform to build a foundation for deploying workload landing zones. This repo is composed of several Terraform modules designed to make getting started with Azure using best practices easier.
+This is Liatrio’s implementation of a [Cloud Adoption Framework on Azure](https://docs.microsoft.com/en-us/azure/cloud-adoption-framework/) using Terraform to build a foundation for deploying workload [landing zones](https://docs.microsoft.com/en-us/azure/cloud-adoption-framework/ready/landing-zone/). This repo is composed of several Terraform modules designed to make getting started with Azure using best practices easier.
+
+![](./images/LiatrioCAFAzure.png)
+
+## Subscriptions
+
+Several subscriptions are required for the CAF foundation as well as shared services and landing zones. Each top level Terraform modules need azurerm Terraform providers configured with the need subscriptions. See the [examples](./examples/) folder for examples configuring the providers use Terraform and Terragrunt. 
+
+ - **Foundation**: Requires subscriptions for connectivity, identity, management resources
+ - **Shared Services**: Each shared services environment requires its own subscriptions
+ - **Landing Zones**: Each landing zone requires its own subscription
+
+Creation of subscriptions is not handled as part of the main CAF Terraform modules. This is done to allow them to be managed by an external process and to avoid requiring extra billing permissions to apply the CAF modules. 
+
+There are also several extra Terraform modules included in this repo which can manage the creation of subscriptions if the extra billing permissions are not a concern and you would like to manage them as part of the same process.
+
+**Terraform Modules**:
+ - [subscriptions/foundation](./subscriptions/foundation): Creates connectivity, identity and management subscriptions
+ - [subscriptions/landing-zone](./subscriptions/landing-zone): Creates a subscription which can be used for Landing Zones or Shared Services Environments
+
 
 ## Foundation Deployment
 
 The framework foundation sets up the required resources to support shared services and landing zones which are deployed on top of the foundation. It uses management groups to start off with a structured approach to organizing resources and creates policies to ensure best practices continue to be observed as resources are added.
 
-### Subscriptions
-
-Subscriptions must be created before deploying the core foundation module. This is intentential to allow the rest of the foundation to be managed without requiring billing permissions. The subscriptions can be manually created or there is an included Terraform module for automating their management.
-
-**Terraform Module**: [subscriptions/foundation](./subscriptions/foundation)
-
-*Required Subscriptions*
-Connectivity
-Identity
-Management
-
 ### Foundation Core
 
 This Terraform module manages areas of concern using three sub modules. Connectivity for managing the networking required for our hub and spoke model to connect shared services resources to our landing zones; Identity to manage authentication and authorization services and Management to manage logging, monitoring and billing services.
 
-**Terraform Module**: [foundation](./foundation)
+**Terraform Module**: [foundation/core](./foundation/core/)
 
-## Shared Services Deployment
+### Shared Services
 
-Shared service environments are specialized landing zones to deploy tools to support workloads and run pipelines shared across multiple landing zones. They can be managed independently of the framework foundation and a foundation can support any number of shared service environments but we generally recommend one staging and one production shared services environment.
+Shared services are similar to landing zones in that they create an environment to run applications in, however they have special significance in our framework and therefor are managed separately. Shared services manage tools and service to deploy and be used by workloads in our landing zones. They represent the center of our hub and spoke networking model.
 
-### Subscription
+Each shared services environment is deployed separately after foundation core. Any number of shared services environment can be created but we recommend one staging environment to test changes to the shared tools and services and one production environment which supports production landing zone workloads.
 
-Each shared service environment requires its own subscription which must be created before the environment. There is an included Terraform module for automating creation of the subscription.
+Shared services deploy an AKS cluster and software delivery toolchain and configures the environment to be used as a shared hub for our landing zones.
 
-**Terraform Module**: [subscriptions\landing-zone](./subscriptions\landing-zone)
-
-### Shared Service Core
-
-Deploys an AKS cluster and software delivery toolchain and configures the environment to be used as a shared hub for our landing zones.
-
-**Terraform Module**: [shared-services](./shared-services)
+**Terraform Modules**: [foundation/shared-services](./foundation/shared-services/)
 
 ## Landing Zones Deployment
 
 Landing Zones are the infrastructure needed to support a specific type or category of workloads. They can be as small as a project or as large as an environment depending on the type of workload and the structure of the organization. For example a landing zone may be an entire AKS cluster for running production workloads or a testing environment for staging an product deployed via Virtual Machine Scale Sets.
 
-### Subscription
-
-Each landing zone requires its own subscription which must be created beforehand. There is an included Terraform module for automating creating of the subscription.
-
-**Terraform Module**: [subscriptions\landing-zone](./subscriptions\landing-zone)
-
 ### Landing Zone Core
 
 There are several landing zone types to support different workload requirements. 
 
-**Terraform Module**: [landing-zones/LANDING-ZONE-TYPE](./landing-zones)
+**Terraform Modules**: 
+- AKS [landing-zones/aks](./landing-zones/aks/)
 
