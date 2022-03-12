@@ -41,3 +41,16 @@ variable "root_dns_zone" {
 variable "root_dns_tags" {
   type = map(any)
 }
+
+variable "group_prefix" {
+  type = string
+}
+
+variable "connectivity_policy_sets" {
+  type    = list(string)
+  default = []
+}
+
+variable "connectivity_id" {
+  type = string
+}

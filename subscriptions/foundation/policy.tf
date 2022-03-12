@@ -1,6 +1,5 @@
 data "azurerm_policy_set_definition" "deny_paas_public_network" {
-  display_name          = "Public network access should be disabled for PaaS services"
-  management_group_name = "Enterprise-Scale"
+  name = "Deny-PublicPaaSEndpoints"
 }
 
 resource "azurerm_subscription_policy_assignment" "management" {

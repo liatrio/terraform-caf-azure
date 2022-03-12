@@ -1,8 +1,9 @@
-module "policy" {
-  source = "../../../modules/azure/policy-assignments"
+locals {
+  management_policy_sets = []
+}
 
-  for_each = var.landing_zone_mg
-
-  management_group_id = "${var.group_prefix}-${each.key}"
-  policy_ids          = each.value.policy_ids
+module "management-policy-sets" {
+  source                     = "../../../modules/azure/policy-set-assignments-mg"
+  target_management_group_id = var.group_prefix
+  policy_set_ids             = concat(local.management_policy_sets, var.management_policy_sets)
 }

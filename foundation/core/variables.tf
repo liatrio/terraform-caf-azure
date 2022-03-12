@@ -45,6 +45,46 @@ variable "landing_zone_mg" {
   description = "Dynamic landing zone creation"
 }
 
+variable "foundation_name" {
+  type    = string
+  default = "Foundation"
+}
+
+variable "foundation_policy_sets" {
+  type    = list(string)
+  default = []
+}
+
+variable "platform_policy_sets" {
+  type    = list(string)
+  default = []
+}
+
+variable "connectivity_policy_sets" {
+  type    = list(string)
+  default = []
+}
+
+variable "identity_policy_sets" {
+  type    = list(string)
+  default = []
+}
+
+variable "management_policy_sets" {
+  type    = list(string)
+  default = []
+}
+
+variable "landing_zones_policy_sets" {
+  type    = list(string)
+  default = []
+}
+
+variable "shared_svc_policy_sets" {
+  type    = list(string)
+  default = []
+}
+
 variable "root_dns_zone" {
   type = string
 }
