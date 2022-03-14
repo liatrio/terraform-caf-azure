@@ -10,8 +10,8 @@ locals {
 
 module "azure_paas_private_dns" {
   providers = {
-    azurerm              = azurerm
-    azurerm.connectivity = azurerm
+    azurerm              = azurerm.connectivity
+    azurerm.connectivity = azurerm.connectivity
   }
 
   source = "../../modules/azure/private-dns-zone"
@@ -26,9 +26,9 @@ module "azure_paas_private_dns" {
 
 module "public_dns" {
   providers = {
-    azurerm                 = azurerm
-    azurerm.parent_dns_zone = azurerm
-    azurerm.connectivity    = azurerm
+    azurerm                 = azurerm.connectivity
+    azurerm.parent_dns_zone = azurerm.connectivity
+    azurerm.connectivity    = azurerm.connectivity
   }
 
   source              = "../../modules/azure/public-dns-zone"

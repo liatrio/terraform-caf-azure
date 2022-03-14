@@ -1,5 +1,8 @@
 module "vpn_dns_resolver" {
-  source = "../../modules/azure/vpn-dns-resolver"
+  providers = {
+    azurerm = azurerm.connectivity
+  }
+  source    = "../../modules/azure/vpn-dns-resolver"
 
   location             = var.location
   resource_group_name  = azurerm_resource_group.caf_connectivity.name
@@ -8,9 +11,10 @@ module "vpn_dns_resolver" {
 }
 
 resource "azurerm_vpn_server_configuration" "vpn_server_config" {
-  name                = "${var.group_prefix}-vpn-server-config-aad"
-  resource_group_name = azurerm_resource_group.caf_connectivity.name
-  location            = azurerm_resource_group.caf_connectivity.location
+  provider                 = azurerm.connectivity
+  name                     = "${var.group_prefix}-vpn-server-config-aad"
+  resource_group_name      = azurerm_resource_group.caf_connectivity.name
+  location                 = azurerm_resource_group.caf_connectivity.location
   vpn_authentication_types = [
     "AAD"
   ]
@@ -23,6 +27,7 @@ resource "azurerm_vpn_server_configuration" "vpn_server_config" {
 }
 
 resource "azurerm_point_to_site_vpn_gateway" "hub_vpn_gateway" {
+  provider                    = azurerm.connectivity
   name                        = "${var.group_prefix}-hub-vpn-gateway-${azurerm_resource_group.caf_connectivity.location}"
   location                    = azurerm_resource_group.caf_connectivity.location
   resource_group_name         = azurerm_resource_group.caf_connectivity.name
