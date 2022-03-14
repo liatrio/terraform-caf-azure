@@ -23,8 +23,8 @@ resource "azurerm_vpn_server_configuration" "vpn_server_config" {
 
   azure_active_directory_authentication {
     audience = var.vpn_service_principal_application_id
-    issuer   = "https://sts.windows.net/${var.tenant_id}/"
-    tenant   = "https://login.microsoftonline.com/${var.tenant_id}"
+    issuer   = "https://sts.windows.net/${data.azurerm_client_config.default.tenant_id}/"
+    tenant   = "https://login.microsoftonline.com/${data.azurerm_client_config.default.tenant_id}"
   }
 }
 

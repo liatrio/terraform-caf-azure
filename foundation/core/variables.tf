@@ -26,11 +26,6 @@ variable "connectivity_apps_address_cidr" {
   }
 }
 
-variable "tenant_id" {
-  type        = string
-  description = "Tenant to deploy CAF"
-}
-
 variable "vpn_service_principal_application_id" {
   type        = string
   description = "The ApplicationID of the Azure VPN service principal, used for AAD authentication to the point-to-site VPN"

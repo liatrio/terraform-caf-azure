@@ -13,6 +13,8 @@ terraform {
   }
 }
 
+data "azurerm_client_config" "default" {}
+
 data "azurerm_client_config" "management" {
   provider = azurerm.management
 }
