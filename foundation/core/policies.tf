@@ -1,22 +1,24 @@
 locals {
+  policy_set_location = "/providers/Microsoft.Management/managementGroups/${data.azurerm_client_config.default.tenant_id}/providers/Microsoft.Authorization/policySetDefinitions"
+
   foundation_policy_sets = [
-    "/providers/Microsoft.Management/managementGroups/${data.azurerm_client_config.default.tenant_id}/providers/Microsoft.Authorization/policySetDefinitions/Enforce-Encryption-CMK"
+    "${local.policy_set_location}/Enforce-Encryption-CMK"
   ]
 
   platform_policy_sets = []
 
   landing_zones_policy_sets = [
-    "/providers/Microsoft.Management/managementGroups/${data.azurerm_client_config.default.tenant_id}/providers/Microsoft.Authorization/policySetDefinitions/Deploy-Sql-Security",
-    "/providers/Microsoft.Management/managementGroups/${data.azurerm_client_config.default.tenant_id}/providers/Microsoft.Authorization/policySetDefinitions/Deny-PublicPaaSEndpoints"
+    "${local.policy_set_location}/Deploy-Sql-Security",
+    "${local.policy_set_location}/Deny-PublicPaaSEndpoints"
   ]
 
   shared_svc_policy_sets = [
-    "/providers/Microsoft.Management/managementGroups/${data.azurerm_client_config.default.tenant_id}/providers/Microsoft.Authorization/policySetDefinitions/Deploy-Sql-Security",
-    "/providers/Microsoft.Management/managementGroups/${data.azurerm_client_config.default.tenant_id}/providers/Microsoft.Authorization/policySetDefinitions/Deny-PublicPaaSEndpoints"
+    "${local.policy_set_location}/Deploy-Sql-Security",
+    "${local.policy_set_location}/Deny-PublicPaaSEndpoints"
   ]
 
   connectivity_policy_sets = [
-    "/providers/Microsoft.Management/managementGroups/${data.azurerm_client_config.default.tenant_id}/providers/Microsoft.Authorization/policySetDefinitions/Deny-PublicPaaSEndpoints"
+    "${local.policy_set_location}/Deny-PublicPaaSEndpoints"
   ]
 
   management_policy_sets = []
