@@ -13,5 +13,4 @@ module "policy_assignment" {
   for_each                   = toset(var.policy_set_ids)
   target_management_group_id = var.target_management_group_id
   policy_set_id              = each.value
-  policy_management_group_id = var.policy_management_group_id
 }

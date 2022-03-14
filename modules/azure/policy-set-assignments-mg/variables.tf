@@ -1,12 +1,10 @@
 variable "target_management_group_id" {
-  type = string
+  type        = string
+  description = "Management group to apply policy set to"
 }
 
 variable "policy_set_ids" {
-  type = list(string)
+  type        = list(string)
+  description = "Full IDs of policy sets to apply"
 }
 
-variable "policy_management_group_id" {
-  type    = string
-  default = null
-}
