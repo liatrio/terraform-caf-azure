@@ -1,1 +1,0 @@
-# Core CAF Foundation module
