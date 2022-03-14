@@ -1,10 +1,6 @@
-locals {
-  shared_services_environment = split("-", var.name)[2]
-}
-
 #tfsec:ignore:azure-keyvault-no-purge
 resource "azurerm_key_vault" "key_vault" {
-  name                      = "${var.prefix}-${local.shared_services_environment}"
+  name                      = "${var.prefix}-${var.environment}"
   location                  = azurerm_resource_group.resource_group.location
   resource_group_name       = azurerm_resource_group.resource_group.name
   tenant_id                 = data.azurerm_client_config.current.tenant_id

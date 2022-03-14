@@ -1,6 +1,6 @@
 module "aks_vnet" {
   source              = "../../../modules/azure/aks-vnet"
-  name                = var.name
+  name                = local.shared_services_name
   location            = var.location
   vnet_address_range  = var.vnet_address_range
   resource_group_name = azurerm_resource_group.resource_group.name
@@ -15,7 +15,7 @@ data "azurerm_private_dns_zone" "aks_private_dns_id" {
 module "aks" {
   source                      = "../../../modules/azure/aks"
   location                    = var.location
-  name                        = var.name
+  name                        = local.shared_services_name
   pool_name                   = var.pool_name
   node_count_min              = var.node_count_min
   node_count_max              = var.node_count_max
@@ -42,7 +42,7 @@ data "azurerm_virtual_hub" "connectivity_hub" {
 
 resource "azurerm_virtual_hub_connection" "aks_vnet_hub_connection" {
   provider                  = azurerm.connectivity
-  name                      = "${var.prefix}-${var.name}-connection"
+  name                      = "${var.prefix}-${local.shared_services_name}-connection"
   virtual_hub_id            = data.azurerm_virtual_hub.connectivity_hub.id
   remote_virtual_network_id = module.aks_vnet.vnet_id
 }

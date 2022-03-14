@@ -9,7 +9,7 @@ resource "azurerm_user_assigned_identity" "shared_services_msi" {
   resource_group_name = azurerm_resource_group.resource_group.name
   location            = var.location
 
-  name = "${var.prefix}-${var.name}-msi"
+  name = "${var.prefix}-${local.shared_services_name}-msi"
 }
 
 resource "azurerm_role_assignment" "cluster_contributor" {

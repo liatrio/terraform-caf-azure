@@ -1,4 +1,4 @@
-variable "name" {
+variable "environment" {
   description = "Name of the shared services environment (prod, staging, etc)"
   type        = string
 }

@@ -26,6 +26,8 @@ resource "kubernetes_secret" "github_pat" {
 module "github_runner_controller" {
   source = "../../../modules/kubernetes/github-runners-controller"
 
+  depends_on = [time_sleep.wait_for_cert_manager]
+
   namespace            = kubernetes_namespace.github_runner_namespace.metadata.0.name
   github_org           = var.github_org
   ingress_domain       = var.dns_zone_name
