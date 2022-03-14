@@ -14,7 +14,7 @@ module "azure_paas_private_dns" {
     azurerm.connectivity = azurerm
   }
 
-  source = "../../../modules/azure/private-dns-zone"
+  source = "../../modules/azure/private-dns-zone"
 
   for_each                  = local.azure_paas_private_dns_zones
   location                  = azurerm_point_to_site_vpn_gateway.hub_vpn_gateway.location
@@ -31,7 +31,7 @@ module "public_dns" {
     azurerm.connectivity    = azurerm
   }
 
-  source              = "../../../modules/azure/public-dns-zone"
+  source              = "../../modules/azure/public-dns-zone"
   resource_group_name = azurerm_resource_group.caf_connectivity.name
   dns_zone_name       = var.root_dns_zone
   tags                = var.root_dns_tags

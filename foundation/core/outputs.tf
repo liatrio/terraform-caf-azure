@@ -1,5 +1,7 @@
 output "connectivity_private_dns_zone_ids" {
-  value = module.connectivity.connectivity_private_dns_zone_ids
+  value = {
+    for k, zone in local.azure_paas_private_dns_zones : k => module.azure_paas_private_dns[k].dns_zone_id
+  }
 }
 
 output "foundation" {
