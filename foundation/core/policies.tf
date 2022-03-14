@@ -1,16 +1,16 @@
 locals {
-  foundation_policy_sets    = [
+  foundation_policy_sets = [
     "/providers/Microsoft.Management/managementGroups/aac9fb06-16d1-43ae-9c85-6df179535e1e/providers/Microsoft.Authorization/policySetDefinitions/Enforce-Encryption-CMK"
   ]
 
-  platform_policy_sets      = []
+  platform_policy_sets = []
 
   landing_zones_policy_sets = [
     "/providers/Microsoft.Management/managementGroups/management_group_id/providers/Microsoft.Authorization/policySetDefinitions/Deploy-Sql-Security",
     "/providers/Microsoft.Management/managementGroups/management_group_id/providers/Microsoft.Authorization/policySetDefinitions/Deny-PublicPaaSEndpoints"
   ]
 
-  shared_svc_policy_sets    = [
+  shared_svc_policy_sets = [
     "/providers/Microsoft.Management/managementGroups/management_group_id/providers/Microsoft.Authorization/policySetDefinitions/Deploy-Sql-Security",
     "/providers/Microsoft.Management/managementGroups/management_group_id/providers/Microsoft.Authorization/policySetDefinitions/Deny-PublicPaaSEndpoints"
   ]

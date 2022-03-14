@@ -7,4 +7,3 @@ variable "policy_set_ids" {
   type        = list(string)
   description = "Full IDs of policy sets to apply"
 }
-
