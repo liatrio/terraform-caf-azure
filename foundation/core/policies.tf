@@ -1,8 +1,27 @@
 locals {
-  foundation_policy_sets    = ["/providers/Microsoft.Management/managementGroups/aac9fb06-16d1-43ae-9c85-6df179535e1e/providers/Microsoft.Authorization/policySetDefinitions/Enforce-Encryption-CMK"]
+  foundation_policy_sets    = [
+    "/providers/Microsoft.Management/managementGroups/aac9fb06-16d1-43ae-9c85-6df179535e1e/providers/Microsoft.Authorization/policySetDefinitions/Enforce-Encryption-CMK"
+  ]
+
   platform_policy_sets      = []
-  landing_zones_policy_sets = ["/providers/Microsoft.Management/managementGroups/management_group_id/providers/Microsoft.Authorization/policySetDefinitions/Deploy-Sql-Security", "/providers/Microsoft.Management/managementGroups/management_group_id/providers/Microsoft.Authorization/policySetDefinitions/Deny-PublicPaaSEndpoints"]
-  shared_svc_policy_sets    = ["/providers/Microsoft.Management/managementGroups/management_group_id/providers/Microsoft.Authorization/policySetDefinitions/Deploy-Sql-Security", "/providers/Microsoft.Management/managementGroups/management_group_id/providers/Microsoft.Authorization/policySetDefinitions/Deny-PublicPaaSEndpoints"]
+
+  landing_zones_policy_sets = [
+    "/providers/Microsoft.Management/managementGroups/management_group_id/providers/Microsoft.Authorization/policySetDefinitions/Deploy-Sql-Security",
+    "/providers/Microsoft.Management/managementGroups/management_group_id/providers/Microsoft.Authorization/policySetDefinitions/Deny-PublicPaaSEndpoints"
+  ]
+
+  shared_svc_policy_sets    = [
+    "/providers/Microsoft.Management/managementGroups/management_group_id/providers/Microsoft.Authorization/policySetDefinitions/Deploy-Sql-Security",
+    "/providers/Microsoft.Management/managementGroups/management_group_id/providers/Microsoft.Authorization/policySetDefinitions/Deny-PublicPaaSEndpoints"
+  ]
+
+  connectivity_policy_sets = [
+    "/providers/Microsoft.Management/managementGroups/management_group_id/providers/Microsoft.Authorization/policySetDefinitions/Deny-PublicPaaSEndpoints"
+  ]
+
+  management_policy_sets = []
+
+  identity_policy_sets = []
 }
 
 module "foundation-policy-sets" {
@@ -36,4 +55,22 @@ module "policy-sets-dynamic-mgs" {
 
   target_management_group_id = "${var.group_prefix}-${each.value.display_name}"
   policy_set_ids             = each.value.policy_ids
+}
+
+module "connectivity-policy-sets" {
+  source                     = "../../modules/azure/policy-set-assignments-mg"
+  target_management_group_id = var.group_prefix
+  policy_set_ids             = concat(local.connectivity_policy_sets, var.connectivity_policy_sets)
+}
+
+module "management-policy-sets" {
+  source                     = "../../modules/azure/policy-set-assignments-mg"
+  target_management_group_id = var.group_prefix
+  policy_set_ids             = concat(local.management_policy_sets, var.management_policy_sets)
+}
+
+module "identity-policy-sets" {
+  source                     = "../../modules/azure/policy-set-assignments-mg"
+  target_management_group_id = var.group_prefix
+  policy_set_ids             = concat(local.identity_policy_sets, var.identity_policy_sets)
 }

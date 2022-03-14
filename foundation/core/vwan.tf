@@ -19,5 +19,3 @@ resource "azurerm_virtual_hub" "caf_hub" {
   virtual_wan_id      = azurerm_virtual_wan.caf_vwan.id
   address_prefix      = var.virtual_hub_address_cidr
 }
-
-
