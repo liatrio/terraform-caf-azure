@@ -57,3 +57,8 @@ variable "monitoring_namespace" {
 variable "key_vault_id" {
   type = string
 }
+
+variable "internal_cluster_domain" {
+  type = string
+  default = "internal.shared-svc-staging.azurecaf.liatr.io"
+}

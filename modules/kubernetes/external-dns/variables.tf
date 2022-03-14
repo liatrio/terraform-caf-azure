@@ -5,6 +5,7 @@ variable "enabled" {
 
 variable "istio_enabled" {
   type = bool
+  default = false
 }
 
 variable "watch_services" {
@@ -59,4 +60,8 @@ variable "use_managed_identity_extension" {
 variable "domain_filters" {
   type = list(string)
   default = ["internal.shared-svc-staging.azurecaf.liatr.io"]
+}
+variable "pod_identity" {
+  type        = string
+  description = "Identity label to be used by AAD Pod Identities to bind to cert-manager pod"
 }

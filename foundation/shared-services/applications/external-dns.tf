@@ -33,7 +33,7 @@ module "external_dns_private" {
   domain_filters = [
     var.internal_cluster_domain
   ]
-  namespace      = module.system_namespace.name
+  namespace      = kubernetes_namespace.toolchain_namespace.metadata.0.name
   watch_services = true
 
 }

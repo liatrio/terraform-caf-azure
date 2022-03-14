@@ -12,17 +12,19 @@ resource "helm_release" "external_dns" {
       tenant_id                       = var.tenant_id
       subscription_id                 = var.subscription_id
       use_managed_identity_extension  = var.use_managed_identity_extension
-      domain_provider                 = var.dns_provider
+      user_assigned_identity_id       = ""
+      dns_provider                    = var.dns_provider
       domain_filters                  = yamlencode(var.domain_filters)
       istio_enabled                   = var.istio_enabled
       watch_services                  = var.watch_services
       exclude_domains                 = var.exclude_domains
+      pod_identity                    = var.pod_identity
     })
   ]
 
   set {
     name  = "serviceAccount.name"
-    value = kubernetes_service_account.external_dns_service_account[0].metadata[0].name
+    value = kubernetes_service_account.external_dns_service_account.metadata[0].name
   }
   set {
     name  = "serviceAccount.create"
@@ -104,11 +106,11 @@ resource "kubernetes_cluster_role_binding" "external_dns_role_binding" {
   role_ref {
     api_group = "rbac.authorization.k8s.io"
     kind      = "ClusterRole"
-    name      = kubernetes_cluster_role.external_dns_role[0].metadata[0].name
+    name      = kubernetes_cluster_role.external_dns_role.metadata[0].name
   }
   subject {
     kind      = "ServiceAccount"
-    name      = kubernetes_service_account.external_dns_service_account[0].metadata[0].name
+    name      = kubernetes_service_account.external_dns_service_account.metadata[0].name
     namespace = var.namespace
   }
 }

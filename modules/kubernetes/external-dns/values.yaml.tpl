@@ -17,6 +17,6 @@ azure:
   tenantId: ${tenant_id}
   subscriptionId: ${subscription_id}
   useManagedIdentityExtension: ${use_managed_identity_extension}
-  user_assigned_identity_ID: ${user_assigned_identity_id}
+  userAssignedIdentityID: ${user_assigned_identity_id}
 podLabels:
-  aadpodidbinding: external-dns
+  aadpodidbinding: ${pod_identity}
