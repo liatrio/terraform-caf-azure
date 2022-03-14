@@ -1,10 +1,12 @@
 resource "azurerm_network_security_group" "connectivity_security_group" {
+  provider            = azurerm.connectivity
   name                = "base"
   location            = var.location
   resource_group_name = azurerm_resource_group.caf_connectivity.name
 }
 
 resource "azurerm_virtual_network" "connectivity_vnet" {
+  provider            = azurerm.connectivity
   name                = "connectivity-apps"
   location            = var.location
   resource_group_name = azurerm_resource_group.caf_connectivity.name
@@ -14,6 +16,7 @@ resource "azurerm_virtual_network" "connectivity_vnet" {
 }
 
 resource "azurerm_virtual_hub_connection" "connectivity_hub_connection" {
+  provider                  = azurerm.connectivity
   name                      = "connectivity"
   virtual_hub_id            = azurerm_virtual_hub.caf_hub.id
   remote_virtual_network_id = azurerm_virtual_network.connectivity_vnet.id

@@ -1,5 +1,9 @@
 module "vpn_dns_resolver" {
-  source = "../../../modules/azure/vpn-dns-resolver"
+  providers = {
+    azurerm = azurerm.connectivity
+  }
+
+  source = "../../modules/azure/vpn-dns-resolver"
 
   location             = var.location
   resource_group_name  = azurerm_resource_group.caf_connectivity.name
@@ -8,22 +12,25 @@ module "vpn_dns_resolver" {
 }
 
 resource "azurerm_vpn_server_configuration" "vpn_server_config" {
-  name                = "${var.prefix}-vpn-server-config-aad"
+  provider            = azurerm.connectivity
+  name                = "${var.group_prefix}-vpn-server-config-aad"
   resource_group_name = azurerm_resource_group.caf_connectivity.name
   location            = azurerm_resource_group.caf_connectivity.location
+
   vpn_authentication_types = [
     "AAD"
   ]
 
   azure_active_directory_authentication {
     audience = var.vpn_service_principal_application_id
-    issuer   = "https://sts.windows.net/${var.tenant_id}/"
-    tenant   = "https://login.microsoftonline.com/${var.tenant_id}"
+    issuer   = "https://sts.windows.net/${data.azurerm_client_config.default.tenant_id}/"
+    tenant   = "https://login.microsoftonline.com/${data.azurerm_client_config.default.tenant_id}"
   }
 }
 
 resource "azurerm_point_to_site_vpn_gateway" "hub_vpn_gateway" {
-  name                        = "${var.prefix}-hub-vpn-gateway-${azurerm_resource_group.caf_connectivity.location}"
+  provider                    = azurerm.connectivity
+  name                        = "${var.group_prefix}-hub-vpn-gateway-${azurerm_resource_group.caf_connectivity.location}"
   location                    = azurerm_resource_group.caf_connectivity.location
   resource_group_name         = azurerm_resource_group.caf_connectivity.name
   virtual_hub_id              = azurerm_virtual_hub.caf_hub.id

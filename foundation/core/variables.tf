@@ -26,11 +26,6 @@ variable "connectivity_apps_address_cidr" {
   }
 }
 
-variable "tenant_id" {
-  type        = string
-  description = "Tenant to deploy CAF"
-}
-
 variable "vpn_service_principal_application_id" {
   type        = string
   description = "The ApplicationID of the Azure VPN service principal, used for AAD authentication to the point-to-site VPN"
@@ -43,6 +38,46 @@ variable "landing_zone_mg" {
   }))
   default     = {}
   description = "Dynamic landing zone creation"
+}
+
+variable "foundation_name" {
+  type    = string
+  default = "Foundation"
+}
+
+variable "foundation_policy_sets" {
+  type    = list(string)
+  default = []
+}
+
+variable "platform_policy_sets" {
+  type    = list(string)
+  default = []
+}
+
+variable "connectivity_policy_sets" {
+  type    = list(string)
+  default = []
+}
+
+variable "identity_policy_sets" {
+  type    = list(string)
+  default = []
+}
+
+variable "management_policy_sets" {
+  type    = list(string)
+  default = []
+}
+
+variable "landing_zones_policy_sets" {
+  type    = list(string)
+  default = []
+}
+
+variable "shared_svc_policy_sets" {
+  type    = list(string)
+  default = []
 }
 
 variable "root_dns_zone" {
