@@ -8,12 +8,10 @@ locals {
   platform_policy_sets = []
 
   landing_zones_policy_sets = [
-    "${local.policy_set_location}/Deploy-Sql-Security",
     "${local.policy_set_location}/Deny-PublicPaaSEndpoints"
   ]
 
   shared_svc_policy_sets = [
-    "${local.policy_set_location}/Deploy-Sql-Security",
     "${local.policy_set_location}/Deny-PublicPaaSEndpoints"
   ]
 
