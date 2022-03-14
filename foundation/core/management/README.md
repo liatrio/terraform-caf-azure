@@ -1,1 +1,0 @@
-# Management CAF Foundation module
