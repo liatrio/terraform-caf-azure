@@ -34,7 +34,7 @@ variable "vpn_service_principal_application_id" {
 variable "landing_zone_mg" {
   type = map(object({
     display_name = string
-    policy_ids   = list(string)
+    policy_ids   = list(map(string))
   }))
   default     = {}
   description = "Dynamic landing zone creation"
@@ -46,37 +46,37 @@ variable "foundation_name" {
 }
 
 variable "foundation_policy_sets" {
-  type    = list(string)
+  type    = list(map(string))
   default = []
 }
 
 variable "platform_policy_sets" {
-  type    = list(string)
+  type    = list(map(string))
   default = []
 }
 
 variable "connectivity_policy_sets" {
-  type    = list(string)
+  type    = list(map(string))
   default = []
 }
 
 variable "identity_policy_sets" {
-  type    = list(string)
+  type    = list(map(string))
   default = []
 }
 
 variable "management_policy_sets" {
-  type    = list(string)
+  type    = list(map(string))
   default = []
 }
 
 variable "landing_zones_policy_sets" {
-  type    = list(string)
+  type    = list(map(string))
   default = []
 }
 
 variable "shared_svc_policy_sets" {
-  type    = list(string)
+  type    = list(map(string))
   default = []
 }
 
