@@ -1,8 +1,7 @@
 grafana:
   enabled: ${enable_grafana}
   ingress:
-    enable: false
-    # enabled: true
+    enabled: true
     annotations:
       ${indent( 6, yamlencode( grafana_ingress_annotations ) ) }
     tls:
@@ -97,8 +96,7 @@ prometheus:
 alertmanager:
   enabled: ${enable_alertmanager}
   ingress:
-    # enabled: true
-    enabled: false
+    enabled: true
     path: /
     annotations: 
       ${indent( 6, yamlencode( alertmanager_ingress_annotations ) ) }

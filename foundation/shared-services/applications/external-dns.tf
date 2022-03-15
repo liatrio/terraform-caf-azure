@@ -5,35 +5,20 @@ module "external_dns_pod_identity" {
   namespace = kubernetes_namespace.toolchain_namespace.metadata.0.name
 
   identity_name        = "external-dns-pod-identity"
-  identity_client_id   = var.aad_pod_identity_client_id
-  identity_resource_id = var.aad_pod_identity_resource_id
+  identity_client_id   = var.external_dns_aad_pod_identity_client_id
+  identity_resource_id = var.external_dns_aad_pod_identity_resource_id
 }
-
-# module "external_dns_public" {
-#   source = "../../../modules/tools/external-dns"
-
-#   release_name  = "external-dns-public"
-#   dns_provider  = "azure"
-#   service_account_annotations = {
-#     "eks.amazonaws.com/role-arn" = var.external_dns_public_service_account_arn
-#   }
-#   domain_filters = [
-#     var.cluster_domain
-#   ]
-#   namespace       = module.system_namespace.name
-#   aws_zone_type   = "public"
-#   watch_services  = true
-#   exclude_domains = [var.internal_cluster_domain]
-# }
 
 module "external_dns_private" {
   source = "../../../modules/kubernetes/external-dns"
   pod_identity = module.external_dns_pod_identity.identity_name
-  dns_provider  = "azure"
+  dns_provider  = "azure-private-dns"
   domain_filters = [
-    var.internal_cluster_domain
+    var.dns_zone_name
   ]
-  namespace      = kubernetes_namespace.toolchain_namespace.metadata.0.name
-  watch_services = true
-
+  namespace       = kubernetes_namespace.toolchain_namespace.metadata.0.name
+  resource_group  = var.resource_group_name
+  tenant_id       = var.tenant_id
+  azure_subscription_id = var.azure_subscription_id
+  release_name    = "external-dns"
 }

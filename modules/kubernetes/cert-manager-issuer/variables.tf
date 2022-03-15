@@ -32,7 +32,7 @@ variable "azure_subscription_id" {
   description = "Azure subscription ID to associate with issuer helm chart"
 }
 
-variable "dns_zone_resource_group_name" {
+variable "resource_group_name" {
   type        = string
   description = "Azure resource group name to associate with issuer helm chart. Must match resource group of dns zone"
 }

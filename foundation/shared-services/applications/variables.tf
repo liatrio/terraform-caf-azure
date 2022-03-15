@@ -15,7 +15,7 @@ variable "azure_subscription_id" {
   description = "Azure subscription ID to associate with issuer helm chart"
 }
 
-variable "dns_zone_resource_group_name" {
+variable "resource_group_name" {
   type        = string
   description = "Azure resource group name to associate with issuer helm chart. Must match resource group of dns zone"
 }
@@ -49,6 +49,16 @@ variable "aad_pod_identity_resource_id" {
   description = "AAD Pod Identities managed identity resource ID"
 }
 
+variable "external_dns_aad_pod_identity_client_id" {
+  type = string
+  description = "AAD Pod Identities managed identity client ID for External-DNS"
+}
+
+variable "external_dns_aad_pod_identity_resource_id" {
+  type = string
+  description = "AAD Pod Identities managed identity resource ID for External-DNS"
+}
+
 variable "monitoring_namespace" {
   type    = string
   default = "monitoring"
@@ -58,7 +68,6 @@ variable "key_vault_id" {
   type = string
 }
 
-variable "internal_cluster_domain" {
+variable "tenant_id" {
   type = string
-  default = "internal.shared-svc-staging.azurecaf.liatr.io"
 }

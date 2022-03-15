@@ -40,7 +40,7 @@ module "external_issuer" {
   issuer_server                = var.issuer_server
   issuer_email                 = var.issuer_email
   azure_subscription_id        = var.azure_subscription_id
-  dns_zone_resource_group_name = var.dns_zone_resource_group_name
+  resource_group_name          = var.resource_group_name
   dns_zone_name                = var.dns_zone_name
 }
 
@@ -55,7 +55,7 @@ module "internal_issuer" {
   issuer_server                = var.issuer_server
   issuer_email                 = var.issuer_email
   azure_subscription_id        = var.azure_subscription_id
-  dns_zone_resource_group_name = var.dns_zone_resource_group_name
+  resource_group_name = var.resource_group_name
   dns_zone_name                = local.internal_dns_zone_name
 }
 

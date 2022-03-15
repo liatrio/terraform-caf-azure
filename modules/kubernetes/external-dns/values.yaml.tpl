@@ -1,9 +1,6 @@
 provider: ${dns_provider}
 sources:
 - ingress
-%{~ if watch_services == true }
-- service
-%{~ endif }
 domainFilters:
 ${domain_filters}
 %{~ if length(exclude_domains) > 0 ~}

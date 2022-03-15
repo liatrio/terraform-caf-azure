@@ -34,6 +34,18 @@ output "aad_pod_identity_resource_id" {
   value = azurerm_user_assigned_identity.cert_manager_pod_identity.id
 }
 
+output "external_dns_aad_pod_identity_client_id" {
+  value = azurerm_user_assigned_identity.external_dns_pod_identity.client_id
+}
+
+# Resource Id Used for identity binding
+output "external_dns_aad_pod_identity_resource_id" {
+  value = azurerm_user_assigned_identity.external_dns_pod_identity.id
+}
+
 output "key_vault_id" {
   value = azurerm_key_vault.key_vault.id
+}
+output "dns_zone_name" {
+  value = var.public_dns_zone_name
 }

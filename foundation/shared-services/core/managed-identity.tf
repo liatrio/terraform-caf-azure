@@ -31,10 +31,22 @@ resource "azurerm_role_assignment" "subscription_connectivity_dns_contributor" {
   principal_id         = azurerm_user_assigned_identity.shared_services_msi.principal_id
 }
 
-resource "azurerm_user_assigned_identity" "cert_manager_pod_identity" {
+resource "azurerm_user_assigned_identity" "external_dns_pod_identity" {
   name                = "external-dns"
   resource_group_name = azurerm_resource_group.resource_group.name
   location            = var.location
+}
+
+resource "azurerm_role_assignment" "subscription_shared_services_reader" {
+  scope                = azurerm_resource_group.resource_group.id
+  role_definition_name = "Reader"
+  principal_id         = azurerm_user_assigned_identity.external_dns_pod_identity.principal_id
+}
+
+resource "azurerm_role_assignment" "subscription_shared_services_dns_contributor" {
+  scope                = data.azurerm_subscription.current.id
+  role_definition_name = "Private DNS Zone Contributor"
+  principal_id         = azurerm_user_assigned_identity.external_dns_pod_identity.principal_id
 }
 
 resource "azurerm_user_assigned_identity" "cert_manager_pod_identity" {
@@ -63,6 +75,12 @@ resource "azurerm_role_assignment" "aks_managed_identity_operator" {
 
 resource "azurerm_role_assignment" "aks_managed_identity_operator_for_cert_manager_identity" {
   scope                = azurerm_user_assigned_identity.cert_manager_pod_identity.id
+  role_definition_name = "Managed Identity Operator"
+  principal_id         = module.aks.kubelet_identity_object_id
+}
+
+resource "azurerm_role_assignment" "aks_managed_identity_operator_for_external_dns_identity" {
+  scope                = azurerm_user_assigned_identity.external_dns_pod_identity.id
   role_definition_name = "Managed Identity Operator"
   principal_id         = module.aks.kubelet_identity_object_id
 }

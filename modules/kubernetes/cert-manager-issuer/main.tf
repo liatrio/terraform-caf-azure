@@ -9,7 +9,7 @@ resource "helm_release" "cert_issuer" {
     issuer_server   = var.issuer_server
     issuer_email    = var.issuer_email
     subscription_id = var.azure_subscription_id
-    resource_group  = var.dns_zone_resource_group_name
+    resource_group  = var.resource_group_name
     dns_zone_name   = var.dns_zone_name
   })]
 }
