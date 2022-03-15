@@ -87,3 +87,8 @@ variable "root_dns_zone" {
 variable "root_dns_tags" {
   type = map(any)
 }
+
+variable "default_policies_enabled" {
+  type = string
+  default = true
+}
