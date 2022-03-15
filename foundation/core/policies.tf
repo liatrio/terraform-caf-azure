@@ -60,20 +60,17 @@ module "policy-sets-dynamic-mgs" {
 module "connectivity-policy-sets" {
   source                     = "../../modules/azure/policy-set-assignments-mg"
   target_management_group_id = azurerm_management_group.connectivity.id
-  policy_set_ids             = concat(local.connectivity_policy_sets, var.connectivity_policy_sets)
   policy_set_ids             = var.default_policies_enabled == true ? concat(local.connectivity_policy_sets, var.connectivity_policy_sets) : var.connectivity_policy_sets
 }
 
 module "management-policy-sets" {
   source                     = "../../modules/azure/policy-set-assignments-mg"
   target_management_group_id = azurerm_management_group.management.id
-  policy_set_ids             = concat(local.management_policy_sets, var.management_policy_sets)
   policy_set_ids             = var.default_policies_enabled == true ? concat(local.management_policy_sets, var.management_policy_sets) : var.management_policy_sets
 }
 
 module "identity-policy-sets" {
   source                     = "../../modules/azure/policy-set-assignments-mg"
   target_management_group_id = azurerm_management_group.identity.id
-  policy_set_ids             = concat(local.identity_policy_sets, var.identity_policy_sets)
   policy_set_ids             = var.default_policies_enabled == true ? concat(local.identity_policy_sets, var.identity_policy_sets) : var.identity_policy_sets
 }

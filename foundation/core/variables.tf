@@ -89,6 +89,6 @@ variable "root_dns_tags" {
 }
 
 variable "default_policies_enabled" {
-  type = string
+  type    = string
   default = true
 }
