@@ -3,7 +3,7 @@ variable "target_management_group_id" {
   description = "Management group to apply policy set to"
 }
 
-variable "policy_set_ids" {
-  type        = list(string)
-  description = "Full IDs of policy sets to apply"
+variable "policy_sets" {
+  type        = list(map(any))
+  description = "Full IDs of policy sets to apply along with required parameters"
 }
