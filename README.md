@@ -23,7 +23,7 @@ There are also several extra Terraform modules included in this repo which can m
 
 ## Foundation Deployment
 
-The framework foundation sets up the required resources to support shared services and landing zones which are deployed on top of the foundation. It uses management groups to start off with a structured approach to organizing resources and creates policies to ensure best practices continue to be observed as resources are added.
+The framework foundation sets up the required resources to support shared services and landing zones. It uses management groups to start off with a structured approach to organizing resources and creates policies to ensure best practices continue to be observed as resources are added.
 
 ### Foundation Core
 
