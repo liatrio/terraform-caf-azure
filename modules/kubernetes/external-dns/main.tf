@@ -8,15 +8,15 @@ resource "helm_release" "external_dns" {
 
   values = [
     templatefile("${path.module}/values.yaml.tpl", {
-      resource_group                  = var.resource_group
-      tenant_id                       = var.tenant_id
-      subscription_id                 = var.azure_subscription_id
-      use_managed_identity_extension  = var.use_managed_identity_extension
-      user_assigned_identity_id       = ""
-      dns_provider                    = var.dns_provider
-      domain_filters                  = yamlencode(var.domain_filters)
-      exclude_domains                 = var.exclude_domains
-      pod_identity                    = var.pod_identity
+      resource_group                 = var.resource_group
+      tenant_id                      = var.tenant_id
+      subscription_id                = var.azure_subscription_id
+      use_managed_identity_extension = var.use_managed_identity_extension
+      user_assigned_identity_id      = ""
+      dns_provider                   = var.dns_provider
+      domain_filters                 = yamlencode(var.domain_filters)
+      exclude_domains                = var.exclude_domains
+      pod_identity                   = var.pod_identity
     })
   ]
 
