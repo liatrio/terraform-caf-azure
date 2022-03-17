@@ -19,8 +19,7 @@ module "external_dns_private" {
   ]
   namespace                    = kubernetes_namespace.toolchain_namespace.metadata.0.name
   dns_zone_resource_group_name = var.dns_zone_resource_group_name
-  // tenant_id                    = var.tenant_id
-  tenant_id             = data.azurerm_client_config.current.tenant_id
-  azure_subscription_id = var.azure_subscription_id
-  release_name          = "external-dns-private"
+  tenant_id                    = data.azurerm_client_config.current.tenant_id
+  azure_subscription_id        = var.azure_subscription_id
+  release_name                 = "external-dns-private"
 }
