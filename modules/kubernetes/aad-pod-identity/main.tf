@@ -6,12 +6,7 @@ resource "helm_release" "aad_pod_identity_controller" {
   version    = "4.1.8"
   wait       = true
 
-  values = [<<-EOF
-  rbac:
-    allowAccessToSecrets: false
-  installCRDs: true
-  nmi:
-    allowNetworkPluginKubenet: false
-  EOF
+  values = [
+    templatefile("${path.module}/values.yaml.tpl", {})
   ]
 }

@@ -9,7 +9,7 @@ variable "name" {
 }
 
 variable "internal" {
-  type        = string
+  type        = bool
   description = "If true, sets Azure load balancer internal annotation"
 }
 

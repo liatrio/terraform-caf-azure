@@ -1,4 +1,6 @@
 controller:
+  publishService:
+    enabled: true
   service:
     type: LoadBalancer
     %{ if internal == true }

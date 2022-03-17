@@ -14,7 +14,7 @@ module "external_dns_private" {
   pod_identity = module.external_dns_pod_identity.identity_name
   dns_provider  = "azure-private-dns"
   domain_filters = [
-    var.dns_zone_name
+    "internal.${var.dns_zone_name}"
   ]
   namespace       = kubernetes_namespace.toolchain_namespace.metadata.0.name
   resource_group  = var.resource_group_name

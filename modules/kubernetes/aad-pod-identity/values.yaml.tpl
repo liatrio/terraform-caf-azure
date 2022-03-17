@@ -1,0 +1,5 @@
+rbac:
+  allowAccessToSecrets: false
+installCRDs: true
+nmi:
+  allowNetworkPluginKubenet: false

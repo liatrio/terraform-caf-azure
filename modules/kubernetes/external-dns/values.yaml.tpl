@@ -17,3 +17,4 @@ azure:
   userAssignedIdentityID: ${user_assigned_identity_id}
 podLabels:
   aadpodidbinding: ${pod_identity}
+txtOwnerId: "default"
