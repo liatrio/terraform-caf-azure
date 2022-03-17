@@ -15,7 +15,7 @@ variable "azure_subscription_id" {
   description = "Azure subscription ID to associate with issuer helm chart"
 }
 
-variable "resource_group_name" {
+variable "dns_zone_resource_group_name" {
   type        = string
   description = "Azure resource group name to associate with issuer helm chart. Must match resource group of dns zone"
 }
@@ -65,9 +65,5 @@ variable "monitoring_namespace" {
 }
 
 variable "key_vault_id" {
-  type = string
-}
-
-variable "tenant_id" {
   type = string
 }

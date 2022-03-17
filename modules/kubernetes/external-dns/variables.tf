@@ -15,7 +15,7 @@ variable "release_name" {
   type = string
 }
 
-variable "resource_group" {
+variable "dns_zone_resource_group_name" {
   type = string
 }
 
@@ -34,14 +34,4 @@ variable "domain_filters" {
 variable "pod_identity" {
   type        = string
   description = "Identity label to be used by AAD Pod Identities to bind to cert-manager pod"
-}
-
-variable "use_managed_identity_extension" {
-  type    = string
-  default = true
-}
-
-variable "exclude_domains" {
-  type    = list(string)
-  default = []
 }

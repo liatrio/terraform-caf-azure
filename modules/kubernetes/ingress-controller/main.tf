@@ -14,8 +14,9 @@ resource "helm_release" "nginx_ingress" {
 
   values = [
     templatefile("${path.module}/values.yaml.tpl", {
-      internal   = var.internal
-      extra_args = local.extra_args
+      internal      = var.internal
+      extra_args    = local.extra_args
+      ingress_class = var.ingress_class
     })
   ]
 }

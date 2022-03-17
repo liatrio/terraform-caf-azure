@@ -7,6 +7,6 @@ resource "helm_release" "aad_pod_identity_controller" {
   wait       = true
 
   values = [
-    templatefile("${path.module}/values.yaml.tpl", {})
+    file("${path.module}/values.yaml")
   ]
 }

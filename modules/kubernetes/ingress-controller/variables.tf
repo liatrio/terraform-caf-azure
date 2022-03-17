@@ -20,3 +20,8 @@ variable "default_certificate" {
 variable "extra_args" {
   default = {}
 }
+
+variable "ingress_class" {
+  type        = string
+  description = "ingress class key"
+}

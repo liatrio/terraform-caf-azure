@@ -32,7 +32,7 @@ resource "azurerm_role_assignment" "subscription_connectivity_dns_contributor" {
 }
 
 resource "azurerm_user_assigned_identity" "external_dns_pod_identity" {
-  name                = "external-dns"
+  name                = "${var.prefix}-external-dns"
   resource_group_name = azurerm_resource_group.resource_group.name
   location            = var.location
 }

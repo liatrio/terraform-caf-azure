@@ -8,34 +8,16 @@ resource "helm_release" "external_dns" {
 
   values = [
     templatefile("${path.module}/values.yaml.tpl", {
-      resource_group                 = var.resource_group
-      tenant_id                      = var.tenant_id
-      subscription_id                = var.azure_subscription_id
-      use_managed_identity_extension = var.use_managed_identity_extension
-      user_assigned_identity_id      = ""
-      dns_provider                   = var.dns_provider
-      domain_filters                 = yamlencode(var.domain_filters)
-      exclude_domains                = var.exclude_domains
-      pod_identity                   = var.pod_identity
+      resource_group            = var.dns_zone_resource_group_name
+      tenant_id                 = var.tenant_id
+      subscription_id           = var.azure_subscription_id
+      user_assigned_identity_id = ""
+      dns_provider              = var.dns_provider
+      domain_filters            = yamlencode(var.domain_filters)
+      pod_identity              = var.pod_identity
+      service_account_name      = kubernetes_service_account.external_dns_service_account.metadata[0].name
     })
   ]
-
-  set {
-    name  = "serviceAccount.name"
-    value = kubernetes_service_account.external_dns_service_account.metadata[0].name
-  }
-  set {
-    name  = "serviceAccount.create"
-    value = "false"
-  }
-  set {
-    name  = "policy"
-    value = "sync"
-  }
-  set {
-    name  = "logLevel"
-    value = "debug"
-  }
 }
 
 resource "kubernetes_service_account" "external_dns_service_account" {
@@ -74,20 +56,6 @@ resource "kubernetes_cluster_role" "external_dns_role" {
     ]
     resources = [
       "ingresses"
-    ]
-    verbs = [
-      "get",
-      "list",
-      "watch"
-    ]
-  }
-
-  rule {
-    api_groups = [
-      "networking.istio.io"
-    ]
-    resources = [
-      "gateways"
     ]
     verbs = [
       "get",
