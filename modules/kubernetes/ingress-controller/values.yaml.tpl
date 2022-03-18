@@ -1,4 +1,6 @@
 controller:
+  publishService:
+    enabled: true
   service:
     type: LoadBalancer
     %{ if internal == true }
@@ -9,6 +11,7 @@ controller:
   extraArgs:
     ${indent(4, yamlencode(extra_args))}
   %{~endif~}
+  ingressClass: ${ingress_class}
   autoscaling:
     enabled: true
     targetCPUUtilizationPercentage: 70

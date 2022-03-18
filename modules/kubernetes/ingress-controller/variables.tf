@@ -9,7 +9,7 @@ variable "name" {
 }
 
 variable "internal" {
-  type        = string
+  type        = bool
   description = "If true, sets Azure load balancer internal annotation"
 }
 
@@ -19,4 +19,9 @@ variable "default_certificate" {
 
 variable "extra_args" {
   default = {}
+}
+
+variable "ingress_class" {
+  type        = string
+  description = "ingress class key"
 }

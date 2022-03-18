@@ -49,6 +49,16 @@ variable "aad_pod_identity_resource_id" {
   description = "AAD Pod Identities managed identity resource ID"
 }
 
+variable "external_dns_aad_pod_identity_client_id" {
+  type        = string
+  description = "AAD Pod Identities managed identity client ID for External-DNS"
+}
+
+variable "external_dns_aad_pod_identity_resource_id" {
+  type        = string
+  description = "AAD Pod Identities managed identity resource ID for External-DNS"
+}
+
 variable "monitoring_namespace" {
   type    = string
   default = "monitoring"

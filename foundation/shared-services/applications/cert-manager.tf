@@ -1,7 +1,3 @@
-locals {
-  internal_dns_zone_name = "internal.${var.dns_zone_name}"
-}
-
 module "cert_manager_pod_identity" {
   depends_on = [module.aad_pod_identity]
   source     = "../../../modules/kubernetes/aad-pod-identity-instance"
@@ -35,13 +31,13 @@ module "external_issuer" {
   ]
   source = "../../../modules/kubernetes/cert-manager-issuer"
 
-  namespace                    = kubernetes_namespace.toolchain_namespace.metadata.0.name
-  issuer_name                  = "external-issuer"
-  issuer_server                = var.issuer_server
-  issuer_email                 = var.issuer_email
-  azure_subscription_id        = var.azure_subscription_id
-  dns_zone_resource_group_name = var.dns_zone_resource_group_name
-  dns_zone_name                = var.dns_zone_name
+  namespace             = kubernetes_namespace.toolchain_namespace.metadata.0.name
+  issuer_name           = "external-issuer"
+  issuer_server         = var.issuer_server
+  issuer_email          = var.issuer_email
+  azure_subscription_id = var.azure_subscription_id
+  resource_group_name   = var.dns_zone_resource_group_name
+  dns_zone_name         = var.dns_zone_name
 }
 
 module "internal_issuer" {
@@ -50,13 +46,13 @@ module "internal_issuer" {
   ]
   source = "../../../modules/kubernetes/cert-manager-issuer"
 
-  namespace                    = kubernetes_namespace.toolchain_namespace.metadata.0.name
-  issuer_name                  = "internal-issuer"
-  issuer_server                = var.issuer_server
-  issuer_email                 = var.issuer_email
-  azure_subscription_id        = var.azure_subscription_id
-  dns_zone_resource_group_name = var.dns_zone_resource_group_name
-  dns_zone_name                = local.internal_dns_zone_name
+  namespace             = kubernetes_namespace.toolchain_namespace.metadata.0.name
+  issuer_name           = "internal-issuer"
+  issuer_server         = var.issuer_server
+  issuer_email          = var.issuer_email
+  azure_subscription_id = var.azure_subscription_id
+  resource_group_name   = var.dns_zone_resource_group_name
+  dns_zone_name         = local.internal_dns_zone_name
 }
 
 module "external_wildcard" {

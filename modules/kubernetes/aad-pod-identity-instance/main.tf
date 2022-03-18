@@ -4,17 +4,11 @@ resource "helm_release" "identity" {
 
   namespace = var.namespace
 
-  values = [<<-EOF
-  azureIdentity:
-    name: "${var.identity_name}"
-    behavior: namespaced
-    type: 0
-    resourceID: "${var.identity_resource_id}"
-    clientID: "${var.identity_client_id}"
-  
-  azureIdentityBinding:
-    name: "${var.identity_name}-binding"
-    selector: "${var.identity_name}"
-  EOF
+  values = [
+    templatefile("${path.module}/values.yaml.tpl", {
+      identity_name        = var.identity_name
+      identity_resource_id = var.identity_resource_id
+      identity_client_id   = var.identity_client_id
+    })
   ]
 }

@@ -7,18 +7,10 @@ resource "helm_release" "cert_manager" {
   version    = "v1.7.1"
   wait       = true
 
-  values = [<<-EOF
-  global:
-    leaderElection:
-      namespace: ${var.namespace}
-  installCRDs: true
-  serviceAccount:
-    name: cert-manager
-  securityContext:
-    enabled: true
-    fsGroup: 1001
-  podLabels:
-    aadpodidbinding: ${var.pod_identity}
-  EOF
+  values = [
+    templatefile("${path.module}/values.yaml.tpl", {
+      namespace    = var.namespace
+      pod_identity = var.pod_identity
+    })
   ]
 }
