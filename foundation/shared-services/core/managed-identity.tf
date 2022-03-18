@@ -55,8 +55,14 @@ resource "azurerm_user_assigned_identity" "cert_manager_pod_identity" {
   location            = var.location
 }
 
-resource "azurerm_role_assignment" "dns_contributor" {
+resource "azurerm_role_assignment" "cert_manager_dns_contributor" {
   scope                = module.shared_services_public_dns_zone.dns_zone_id
+  role_definition_name = "DNS Zone Contributor"
+  principal_id         = azurerm_user_assigned_identity.cert_manager_pod_identity.principal_id
+}
+
+resource "azurerm_role_assignment" "cert_manager_internal_dns_contributor" {
+  scope                = module.shared_services_internal_public_dns_zone.dns_zone_id
   role_definition_name = "DNS Zone Contributor"
   principal_id         = azurerm_user_assigned_identity.cert_manager_pod_identity.principal_id
 }
