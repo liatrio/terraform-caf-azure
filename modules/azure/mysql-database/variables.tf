@@ -15,3 +15,18 @@ variable "prefix" {
     type = string
     description = "prefix"
 }
+
+variable "ss_kv" {
+    type = string
+    description = "shared service Key Vault"
+}
+
+variable "ss_rg" {
+    type = string
+    description = "shared service kv RG"
+}
+
+variable "environment" {
+    type = string
+    description = "environment shortname"
+}
