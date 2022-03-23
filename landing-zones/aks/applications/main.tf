@@ -15,10 +15,6 @@ terraform {
   }
 }
 
-locals {
-  internal_dns_zone_name = "internal.${var.dns_zone_name}"
-}
-
 data "azurerm_client_config" "current" {}
 resource "kubernetes_namespace" "toolchain_namespace" {
   metadata {
