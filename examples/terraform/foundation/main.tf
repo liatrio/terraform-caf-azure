@@ -1,27 +1,27 @@
 provider "azurerm" {
   tenant_id = var.tenant_id
-  features  {}
+  features {}
 }
 
 provider "azurerm" {
   alias           = "connectivity"
   tenant_id       = var.tenant_id
   subscription_id = var.connectivity_subscription_id
-  features        {}
+  features {}
 }
 
 provider "azurerm" {
   alias           = "identity"
   tenant_id       = var.tenant_id
   subscription_id = var.identity_subscription_id
-  features        {}
+  features {}
 }
 
 provider "azurerm" {
   alias           = "management"
   tenant_id       = var.tenant_id
   subscription_id = var.management_subscription_id
-  features        {}
+  features {}
 }
 
 module "liatrio_caf_foundation" {
@@ -34,7 +34,7 @@ module "liatrio_caf_foundation" {
   }
 
   tenant_id                            = var.tenant_id
-  group_prefix = "example"
+  group_prefix                         = "example"
   virtual_hub_address_cidr             = "10.130.0.0/23"
   vpn_client_pool_address_cidr         = "10.130.2.0/24"
   connectivity_apps_address_cidr       = "10.130.3.0/24"
