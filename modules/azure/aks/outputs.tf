@@ -34,5 +34,5 @@ output "cluster_node_resource_group" {
 }
 
 output "cluster_id" {
-  value = azurerm_kubernetes_cluster.id
+  value = azurerm_kubernetes_cluster.aks.id
 }

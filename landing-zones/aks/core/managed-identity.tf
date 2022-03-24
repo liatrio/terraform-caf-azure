@@ -36,3 +36,9 @@ resource "azurerm_role_assignment" "subscription_connectivity_dns_contributor" {
   role_definition_name = "Private DNS Zone Contributor"
   principal_id         = azurerm_user_assigned_identity.aks_msi.principal_id
 }
+
+resource "azurerm_user_assigned_identity" "cert_manager_pod_identity" {
+  name                = "${var.prefix}-${var.name}-cert-manager-msi"
+  resource_group_name = azurerm_resource_group.lz_resource_group.name
+  location            = var.location
+}

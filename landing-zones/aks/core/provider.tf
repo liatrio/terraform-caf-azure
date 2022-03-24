@@ -1,9 +1,9 @@
-# This is a placehold to allow terraform validate to run
+# # This is a placehold to allow terraform validate to run
 
-provider "azurerm" {
-  alias = "connectivity"
-  features {}
-}
-provider "azurerm" {
-  features {}
-}
+# provider "azurerm" {
+#   alias = "connectivity"
+#   features {}
+# }
+# provider "azurerm" {
+#   features {}
+# }
