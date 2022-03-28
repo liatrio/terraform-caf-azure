@@ -17,11 +17,15 @@ resource "azrurerm_keyvault_secret" "sql_conn_string" {
 }
 
 resource "azurerm_mysql_server" "db_server" {
-  name                         = "${var.prefix}${var.environment}"
-  location                     = var.location
-  resource_group_name          = var.resource_group_name
-  administrator_login          = "${azurerm_sql_database.sql_db.name}_adm"
-  administrator_login_password = random_password.sql_pass.result
+  name                             = "${var.prefix}${var.environment}"
+  location                         = var.location
+  resource_group_name              = var.resource_group_name
+  administrator_login              = "${azurerm_sql_database.sql_db.name}_adm"
+  administrator_login_password     = random_password.sql_pass.result
+  ssl_minimal_tls_version_enforced = "TLS1_2"
+  ssl_enforcement_enabled          = true
+  public_network_access_enabled    = false
+
 
   sku_name   = "B_Gen5_2"
   storage_mb = 5120
@@ -39,6 +43,14 @@ resource "azurerm_storage_account" "db_storage_account" {
   account_tier             = "Standard"
   account_replication_type = "LRS"
   min_tls_version          = "TLS1_2"
+  logging {
+    delete                 = true
+    read                   = true
+    write                  = true
+    version                = "1.0"
+    retention_in_days      = 10
+  }
+
 }
 
 resource "azurerm_mysql_database" "sql_db" {
@@ -65,7 +77,7 @@ resource "azurerm_private_endpoint" "db-endpoint" {
   name                = "${var.prefix}${var.environment}mysql-ep"
   location            = var.location
   resource_group_name = var.resource_group_name
-  subnet_id           = ""
+  subnet_id           = data.azurerm_subnet.snet.id
 
   private_service_connection {
     name                                   = "${var.prefix}${var.environment}mysql-db-endpoint"
