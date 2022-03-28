@@ -12,10 +12,9 @@ data "azurerm_private_dns_zone" "k8_connectivity" {
 }
 
 resource "azurerm_user_assigned_identity" "aks_msi" {
+  name                = "${var.prefix}-${var.name}-msi"
   resource_group_name = azurerm_resource_group.lz_resource_group.name
   location            = var.location
-
-  name = "${var.prefix}-${var.name}-msi"
 }
 
 resource "azurerm_role_assignment" "cluster_contributor" {
