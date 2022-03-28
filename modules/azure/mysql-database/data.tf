@@ -5,7 +5,7 @@ data "azurerm_key_vault" "ss_kv" {
 }
 
 data "azurerm_resource_group" "vnet_rg" {
-  name   = var.resource_group_name
+  name = var.resource_group_name
 }
 
 data "azurerm_virtual_network" "vnet" {

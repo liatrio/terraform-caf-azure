@@ -38,6 +38,7 @@ resource "azurerm_storage_account" "db_storage_account" {
   location                 = var.location
   account_tier             = "Standard"
   account_replication_type = "LRS"
+  min_tls_version          = "TLS1_2"
 }
 
 resource "azurerm_mysql_database" "sql_db" {
@@ -65,12 +66,12 @@ resource "azurerm_private_endpoint" "db-endpoint" {
   location            = var.location
   resource_group_name = var.resource_group_name
   subnet_id           = ""
-  
+
   private_service_connection {
     name                                   = "${var.prefix}${var.environment}mysql-db-endpoint"
     is_is_manual_connection                = "false"
     private_private_connection_resource_id = azurerm_mysql_database.sql_db.id
-    subresource_names                      = ["sqlServer"]  
+    subresource_names                      = ["sqlServer"]
   }
 }
 
