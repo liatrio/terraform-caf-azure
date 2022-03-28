@@ -1,3 +1,15 @@
+terraform {
+  required_providers {
+    azurerm = {
+      source  = "hashicorp/azurerm"
+      version = "~> 2.96.0"
+      configuration_aliases = [
+        azurerm.shared_services
+      ]
+    }
+  }
+}
+
 resource "random_password" "sql_pass" {
   length           = 16
   special          = true
@@ -43,12 +55,29 @@ resource "azurerm_storage_account" "db_storage_account" {
   account_tier             = "Standard"
   account_replication_type = "LRS"
   min_tls_version          = "TLS1_2"
-  logging {
-    delete                 = true
-    read                   = true
-    write                  = true
-    version                = "1.0"
-    retention_in_days      = 10
+  queue_properties {
+
+    logging {
+      delete                = true
+      read                  = true
+      write                 = true
+      version               = "1.0"
+      retention_policy_days = 10
+    }
+
+    hour_metrics {
+      enabled               = true
+      include_apis          = true
+      version               = "1.0"
+      retention_policy_days = 10
+    }
+
+    minute_metrics {
+      enabled               = true
+      include_apis          = true
+      version               = "1.0"
+      retention_policy_days = 10
+    }
   }
 
 }
