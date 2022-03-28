@@ -3,6 +3,9 @@ terraform {
     azurerm = {
       source  = "hashicorp/azurerm"
       version = "~> 2.96.0"
+      configuration_aliases = [
+        azurerm.connectivity
+      ]
     }
   }
 }
@@ -13,7 +16,7 @@ resource "azurerm_resource_group" "lz_resource_group" {
 }
 
 module "aks_vnet" {
-  source = "../../modules/azure/aks-vnet"
+  source = "../../../modules/azure/aks-vnet"
 
   name                = var.name
   location            = var.location
@@ -28,7 +31,7 @@ data "azurerm_private_dns_zone" "aks_private_dns_id" {
 }
 
 module "aks" {
-  source = "../../modules/azure/aks"
+  source = "../../../modules/azure/aks"
 
   location                    = var.location
   name                        = var.name
@@ -45,7 +48,6 @@ module "aks" {
   private_dns_zone_id         = data.azurerm_private_dns_zone.aks_private_dns_id.id
   depends_on = [
     azurerm_role_assignment.network_contributor,
-    azurerm_role_assignment.cluster_contributor,
     azurerm_role_assignment.subscription_connectivity_dns_contributor
   ]
 }
