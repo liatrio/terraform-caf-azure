@@ -18,7 +18,7 @@ jobs:
         run: |
           set -e
           
-          rootModules=$(find . ! -path "*/modules/*" -name "main.tf" | sed 's:[^/]*$::')
+          rootModules=$(find . -name main.tf | grep -wv 'modules\|landing-zones')
           
           for rootModule in ${rootModules}; do
             printf "\n\nValidating root module %s\n" ${rootModule}
