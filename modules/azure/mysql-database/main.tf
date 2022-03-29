@@ -115,7 +115,7 @@ resource "azurerm_private_endpoint" "db_endpoint" {
 
 resource "azurerm_key_vault_certificate" "ssl" {
   name         = "mysql-cert"
-  key_vault_id = azurerm_key_vault.shrdsvcs_kv.id
+  key_vault_id = data.azurerm_key_vault.ss_kv.id
 
   certificate_policy {
     issuer_parameters {
