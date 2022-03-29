@@ -27,7 +27,7 @@ resource "azurerm_key_vault_secret" "sql_pass" {
 
 resource "azurerm_keyvault_secret" "sql_conn_string" {
   name         = "${azurerm_sql_database.sql_db.name}-conn-string"
-  value        = "mysql.createConnection({host: {${azurerm_mysql_server.db_server.name}.mysql.database.azure.com}, user: {${azure_mysql_server.db_server.administrator_login}@${azurerm_mysql_server.db_server.name}.mysql.database.azure.com}, password: {${random_password.sql_pass.result}}, database: {${azurerm_mysql_database.sql_db.name}, Port: {3306});"
+  value        = "host: ${azurerm_sql_server.db_server.name}.mysql.database.azure.com, user: ${azure_mysql_server.db_server.administrator_login}@${azurerm_sql_server.db_server.name}.mysql.database.azure.com, password: ${random_password.sql_pass.result}, database: ${azurerm_mysql_database.sql_db.name}, port: \"3306\""
   key_vault_id = data.azurerm_key_vault.ss_kv.id
   content_type = "string"
 }
