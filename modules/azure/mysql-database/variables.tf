@@ -9,6 +9,11 @@ variable "location" {
 variable "storage_account_name" {
   type        = string
   description = "storage account name must not exceed 18 characters"
+
+  validation {
+    condition     = length(var.storage_account_name) < 18
+    error_message = "Name must be less than 18 characters"
+  }
 }
 
 variable "prefix" {
@@ -16,12 +21,12 @@ variable "prefix" {
   description = "prefix"
 }
 
-variable "ss_kv" {
+variable "shrdsvcs_kv" {
   type        = string
   description = "shared service Key Vault"
 }
 
-variable "ss_rg" {
+variable "shrdsvcs_rg" {
   type        = string
   description = "shared service kv RG"
 }

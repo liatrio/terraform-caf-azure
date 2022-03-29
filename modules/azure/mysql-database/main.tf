@@ -19,7 +19,7 @@ resource "random_password" "sql_pass" {
 resource "azurerm_key_vault_secret" "sql_pass" {
   name            = azurerm_sql_database.sql_db.name
   value           = random_password.sql_pass.result
-  key_vault_id    = azurerm_key_vault.ss_kv.id
+  key_vault_id    = azurerm_key_vault.shrdsvcs_kv.id
   content_type    = "password"
   expiration_date = "2023-12-31T00:00:00Z"
 }
@@ -27,7 +27,7 @@ resource "azurerm_key_vault_secret" "sql_pass" {
 resource "azurerm_keyvault_secret" "sql_conn_string" {
   name            = "${azurerm_sql_database.sql_db.name}-conn-string"
   value           = "mysql.createConnection({host: {${azurerm_sql_server.db_server.name}.mysql.database.azure.com}, user: {${azure_mysql_server.db_server.administrator_login}@${azurerm_sql_server.db_server.name}.mysql.database.azure.com}, password: {${random_password.sql_pass.result}}, database: {${azurerm_mysql_database.sql_db.name}, Port: {3306});"
-  key_vault_id    = azurerm_key_vault.ss_kv.id
+  key_vault_id    = azurerm_key_vault.shrdsvcs_kv.id
   content_type    = "string"
   expiration_date = "2023-12-31T00:00:00Z"
 }
@@ -106,7 +106,7 @@ resource "azurerm_mysql_database" "sql_db" {
   }
 }
 
-resource "azurerm_private_endpoint" "db-endpoint" {
+resource "azurerm_private_endpoint" "db_endpoint" {
   name                = "${var.prefix}${var.environment}mysql-ep"
   location            = var.location
   resource_group_name = var.resource_group_name
@@ -124,7 +124,7 @@ resource "azurerm_private_endpoint" "db-endpoint" {
 
 resource "azurerm_key_vault_certificate" "ssl" {
   name         = "mysql-cert"
-  key_vault_id = azurerm_key_vault.ss_kv.id
+  key_vault_id = azurerm_key_vault.shrdsvcs_kv.id
 
   certificate_policy {
     issuer_parameters {
