@@ -35,7 +35,7 @@ resource "azurerm_mysql_server" "db_server" {
   public_network_access_enabled    = false
 
 
-  sku_name   = "B_Gen5_2"
+  sku_name   = "GP_Gen5_2"
   storage_mb = 5120
   version    = "5.7"
 
@@ -62,7 +62,7 @@ resource "azurerm_private_endpoint" "db_endpoint" {
     name                           = "${var.app_name}-${var.environment}-mysql-db-endpoint"
     is_manual_connection           = "false"
     private_connection_resource_id = azurerm_mysql_database.sql_db.id
-    subresource_names              = ["sqlServer"]
+    subresource_names              = ["mysqlServer"]
   }
 }
 
