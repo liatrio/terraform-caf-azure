@@ -25,7 +25,7 @@ resource "azurerm_key_vault_secret" "sql_pass" {
 }
 
 resource "azurerm_mysql_server" "db_server" {
-  name                             = "${var.prefix}${var.environment}"
+  name                             = "${var.app_name}-${var.environment}-db-server"
   location                         = var.location
   resource_group_name              = var.resource_group_name
   administrator_login              = local.db_server_admin_login
@@ -44,77 +44,31 @@ resource "azurerm_mysql_server" "db_server" {
   }
 }
 
-resource "azurerm_storage_account" "db_storage_account" {
-  name                     = "${var.prefix}${var.environment}${var.storage_account_name}"
-  resource_group_name      = var.resource_group_name
-  location                 = var.location
-  account_tier             = "Standard"
-  account_replication_type = "LRS"
-  min_tls_version          = "TLS1_2"
-  queue_properties {
-
-    logging {
-      delete                = true
-      read                  = true
-      write                 = true
-      version               = "1.0"
-      retention_policy_days = 10
-    }
-
-    hour_metrics {
-      enabled               = true
-      include_apis          = true
-      version               = "1.0"
-      retention_policy_days = 10
-    }
-
-    minute_metrics {
-      enabled               = true
-      include_apis          = true
-      version               = "1.0"
-      retention_policy_days = 10
-    }
-  }
-
-}
-
 resource "azurerm_mysql_database" "sql_db" {
-  name                = var.prefix
+  name                = "${var.app_name}-mysql-db"
   resource_group_name = var.resource_group_name
-  location            = var.location
   server_name         = azurerm_mysql_server.db_server.name
   charset             = "utf8"
   collation           = "utf8_unicode_ci"
-
-  extended_auditing_policy {
-    storage_endpoint                        = azurerm_storage_account.db_storage_account.primary_blob_endpoint
-    storage_account_access_key              = azurerm_storage_account.db_storage_account.primary_access_key
-    storage_account_access_key_is_secondary = true
-    retention_in_days                       = 6
-  }
-
-  tags = {
-    environment = var.environment
-  }
 }
 
 resource "azurerm_private_endpoint" "db_endpoint" {
-  name                = "${var.prefix}${var.environment}mysql-ep"
+  name                = "${var.app_name}-${var.environment}-mysql-ep"
   location            = var.location
   resource_group_name = var.resource_group_name
   subnet_id           = data.azurerm_subnet.snet.id
 
   private_service_connection {
-    name                                   = "${var.prefix}${var.environment}mysql-db-endpoint"
-    is_is_manual_connection                = "false"
-    private_private_connection_resource_id = azurerm_mysql_database.sql_db.id
-    subresource_names                      = ["sqlServer"]
+    name                           = "${var.app_name}-${var.environment}-mysql-db-endpoint"
+    is_manual_connection           = "false"
+    private_connection_resource_id = azurerm_mysql_database.sql_db.id
+    subresource_names              = ["sqlServer"]
   }
 }
 
 
 resource "azurerm_key_vault_certificate" "ssl" {
-  name         = "mysql-cert"
+  name         = "${var.app_name}-${var.environment}-mysql-cert"
   key_vault_id = data.azurerm_key_vault.ss_kv.id
 
   certificate_policy {

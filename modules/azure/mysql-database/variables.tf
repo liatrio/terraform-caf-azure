@@ -16,9 +16,9 @@ variable "storage_account_name" {
   }
 }
 
-variable "prefix" {
+variable "app_name" {
   type        = string
-  description = "prefix"
+  description = "Application Name"
 }
 
 variable "shared_services_keyvault" {
