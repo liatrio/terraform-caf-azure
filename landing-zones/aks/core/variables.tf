@@ -42,3 +42,9 @@ variable "prefix" {
   type        = string
   default     = "caf"
 }
+variable "connectivity_resource_group_name" {
+  type = string
+}
+variable "connectivity_k8_private_dns_zone_name" {
+  type = string
+}
