@@ -12,7 +12,7 @@ variable "storage_account_name" {
 
   validation {
     condition     = length(var.storage_account_name) < 18
-    error_message = "Name must be less than 18 characters"
+    error_message = "Name must be less than 18 characters."
   }
 }
 
