@@ -14,14 +14,17 @@ resource "random_password" "sql_pass" {
   length           = 16
   special          = true
   override_special = "!#$%&*()-_=+[]{}<>:?"
+  keepers = {
+    last_updated = "2022-03-29"
+  }
 }
 
 #tfsec:ignore:azure-keyvault-ensure-secret-expiry
 resource "azurerm_key_vault_secret" "sql_pass" {
+  provider     = azurerm.shared_services
   name         = azurerm_mysql_database.sql_db.name
   value        = random_password.sql_pass.result
   key_vault_id = data.azurerm_key_vault.ss_kv.id
-  content_type = "password"
 }
 
 resource "azurerm_mysql_server" "db_server" {
