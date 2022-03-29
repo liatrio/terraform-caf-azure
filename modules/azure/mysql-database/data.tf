@@ -1,7 +1,7 @@
-data "azurerm_key_vault" "shrdsvcs_kv" {
+data "azurerm_key_vault" "ss_kv" {
   provider            = azurerm.shared_services
-  name                = var.shrdsvcs_kv
-  resource_group_name = var.shrdsvcs_rg
+  name                = var.shared_services_keyvault
+  resource_group_name = var.shared_services_resource_group
 }
 
 data "azurerm_resource_group" "vnet_rg" {

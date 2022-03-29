@@ -21,12 +21,12 @@ variable "prefix" {
   description = "prefix"
 }
 
-variable "shrdsvcs_kv" {
+variable "shared_services_keyvault" {
   type        = string
   description = "shared service Key Vault"
 }
 
-variable "shrdsvcs_rg" {
+variable "shared_services_resource_group" {
   type        = string
   description = "shared service kv RG"
 }

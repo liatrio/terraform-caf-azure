@@ -1,3 +1,5 @@
+#tfsec:ignore:azure-keyvault-ensure-secret-expiry
+
 terraform {
   required_providers {
     azurerm = {
@@ -17,26 +19,24 @@ resource "random_password" "sql_pass" {
 }
 
 resource "azurerm_key_vault_secret" "sql_pass" {
-  name            = azurerm_sql_database.sql_db.name
-  value           = random_password.sql_pass.result
-  key_vault_id    = azurerm_key_vault.shrdsvcs_kv.id
-  content_type    = "password"
-  expiration_date = "2023-12-31T00:00:00Z"
+  name         = azurerm_mysql_database.sql_db.name
+  value        = random_password.sql_pass.result
+  key_vault_id = data.azurerm_key_vault.ss_kv.id
+  content_type = "password"
 }
 
 resource "azurerm_keyvault_secret" "sql_conn_string" {
-  name            = "${azurerm_sql_database.sql_db.name}-conn-string"
-  value           = "mysql.createConnection({host: {${azurerm_sql_server.db_server.name}.mysql.database.azure.com}, user: {${azure_mysql_server.db_server.administrator_login}@${azurerm_sql_server.db_server.name}.mysql.database.azure.com}, password: {${random_password.sql_pass.result}}, database: {${azurerm_mysql_database.sql_db.name}, Port: {3306});"
-  key_vault_id    = azurerm_key_vault.shrdsvcs_kv.id
-  content_type    = "string"
-  expiration_date = "2023-12-31T00:00:00Z"
+  name         = "${azurerm_sql_database.sql_db.name}-conn-string"
+  value        = "mysql.createConnection({host: {${azurerm_mysql_server.db_server.name}.mysql.database.azure.com}, user: {${azure_mysql_server.db_server.administrator_login}@${azurerm_mysql_server.db_server.name}.mysql.database.azure.com}, password: {${random_password.sql_pass.result}}, database: {${azurerm_mysql_database.sql_db.name}, Port: {3306});"
+  key_vault_id = data.azurerm_key_vault.ss_kv.id
+  content_type = "string"
 }
 
 resource "azurerm_mysql_server" "db_server" {
   name                             = "${var.prefix}${var.environment}"
   location                         = var.location
   resource_group_name              = var.resource_group_name
-  administrator_login              = "${azurerm_sql_database.sql_db.name}_adm"
+  administrator_login              = "${azurerm_mysql_database.sql_db.name}_adm"
   administrator_login_password     = random_password.sql_pass.result
   ssl_minimal_tls_version_enforced = "TLS1_2"
   ssl_enforcement_enabled          = true
@@ -90,7 +90,7 @@ resource "azurerm_mysql_database" "sql_db" {
   name                = var.prefix
   resource_group_name = var.resource_group_name
   location            = var.location
-  server_name         = azurerm_sql_server.db_server.name
+  server_name         = azurerm_mysql_server.db_server.name
   charset             = "utf8"
   collation           = "utf8_unicode_ci"
 
@@ -167,10 +167,10 @@ resource "azurerm_key_vault_certificate" "ssl" {
       ]
 
       subject_alternative_names {
-        dns_names = ["${azurerm_sql_server.db_server.name}.mysql.database.azure.com"]
+        dns_names = ["${azurerm_mysql_server.db_server.name}.mysql.database.azure.com"]
       }
 
-      subject            = "CN=${azurerm_sql_server.db_server.name}.mysql.database.azure.com"
+      subject            = "CN=${azurerm_mysql_server.db_server.name}.mysql.database.azure.com"
       validity_in_months = 12
     }
   }
