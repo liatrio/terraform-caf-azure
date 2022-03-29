@@ -35,3 +35,8 @@ variable "environment" {
   type        = string
   description = "environment shortname"
 }
+
+variable "vnet_name" {
+  type        = string
+  description = "Name assigned to VNET"
+}

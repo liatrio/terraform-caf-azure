@@ -23,7 +23,7 @@ resource "azurerm_key_vault_secret" "sql_pass" {
   content_type = "password"
 }
 #tfsec:ignore:azure-keyvault-ensure-secret-expiry
-resource "azurerm_keyvault_secret" "sql_conn_string" {
+resource "azurerm_key_vault_secret" "sql_conn_string" {
   name         = "${azurerm_sql_database.sql_db.name}-conn-string"
   value        = "host: ${azurerm_mysql_server.db_server.name}.mysql.database.azure.com, user: ${azure_mysql_server.db_server.administrator_login}@${azurerm_mysql_server.db_server.name}.mysql.database.azure.com, password: ${random_password.sql_pass.result}, database: ${azurerm_mysql_database.sql_db.name}, port: \"3306\""
   key_vault_id = data.azurerm_key_vault.ss_kv.id
