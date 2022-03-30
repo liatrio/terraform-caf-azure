@@ -66,6 +66,6 @@ resource "azurerm_private_endpoint" "db_endpoint" {
     name                           = "${var.app_name}-${var.environment}-mysql-privateserviceconnection"
     is_manual_connection           = false
     private_connection_resource_id = azurerm_mysql_server.db_server.id
-    subresource_names              = [ "mysqlServer" ]
+    subresource_names              = ["mysqlServer"]
   }
 }
