@@ -4,8 +4,7 @@ terraform {
       source  = "hashicorp/azurerm"
       version = "~> 2.96.0"
       configuration_aliases = [
-        azurerm.shared_services,
-        azurerm.connectivity
+        azurerm.shared_services
       ]
     }
   }
@@ -58,8 +57,7 @@ resource "azurerm_mysql_database" "sql_db" {
 }
 
 resource "azurerm_private_endpoint" "db_endpoint" {
-  provider            = azurerm.connectivity
-  name                = "${var.app_name}-${var.environment}-mysql-ep"
+  name                = "${var.app_name}-${var.environment}-mysql-pe"
   location            = var.location
   resource_group_name = var.connectivity_resource_group
   subnet_id           = data.azurerm_subnet.snet.id
