@@ -8,7 +8,12 @@ variable "location" {
 
 variable "app_name" {
   type        = string
-  description = "Application Name"
+  description = "app name must not exceed 16 characters"
+
+  validation {
+    condition     = length(var.app_name) < 16
+    error_message = "Name must be less than 16 characters."
+  }
 }
 
 variable "shared_services_keyvault" {
