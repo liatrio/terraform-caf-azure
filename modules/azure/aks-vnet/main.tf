@@ -40,6 +40,13 @@ resource "azurerm_virtual_network" "aks_vnet" {
   tags                = var.tags
 }
 
+resource "azurerm_virtual_network_dns_servers" "aks_vnet" {
+  count = length(var.connectivity_dns_servers) > 0 ? 1 : 0
+
+  virtual_network_id = azurerm_virtual_network.aks_vnet.id
+  dns_servers        = var.connectivity_dns_servers
+}
+
 resource "azurerm_subnet" "aks_nodes_and_pods" {
   name                 = var.name
   resource_group_name  = azurerm_virtual_network.aks_vnet.resource_group_name
