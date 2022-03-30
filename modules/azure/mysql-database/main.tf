@@ -4,7 +4,7 @@ terraform {
       source  = "hashicorp/azurerm"
       version = "~> 2.96.0"
       configuration_aliases = [
-        azurerm.shared_services
+        azurerm.shared_services,
         azurerm.connectivity
       ]
     }
