@@ -6,16 +6,6 @@ variable "location" {
   type = string
 }
 
-variable "storage_account_name" {
-  type        = string
-  description = "storage account name must not exceed 18 characters"
-
-  validation {
-    condition     = length(var.storage_account_name) < 18
-    error_message = "Name must be less than 18 characters."
-  }
-}
-
 variable "app_name" {
   type        = string
   description = "Application Name"
