@@ -11,8 +11,8 @@ variable "app_name" {
   description = "app name must not exceed 16 characters"
 
   validation {
-    condition     = length(var.app_name) < 16
-    error_message = "Name must be less than 16 characters."
+    condition     = length(var.app_name) < 17
+    error_message = "Name must be less than 17 characters."
   }
 }
 
