@@ -59,7 +59,7 @@ resource "azurerm_mysql_database" "sql_db" {
 resource "azurerm_private_endpoint" "db_endpoint" {
   name                = "${var.app_name}-${var.environment}-mysql-pe"
   location            = var.location
-  resource_group_name = var.connectivity_resource_group
+  resource_group_name = var.resource_group_name
   subnet_id           = data.azurerm_subnet.snet.id
 
   private_service_connection {
