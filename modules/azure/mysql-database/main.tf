@@ -5,6 +5,7 @@ terraform {
       version = "~> 2.96.0"
       configuration_aliases = [
         azurerm.shared_services
+        azurerm.connectivity
       ]
     }
   }
@@ -57,6 +58,7 @@ resource "azurerm_mysql_database" "sql_db" {
 }
 
 resource "azurerm_private_endpoint" "db_endpoint" {
+  provider            = azurerm.connectivity
   name                = "${var.app_name}-${var.environment}-mysql-ep"
   location            = var.location
   resource_group_name = var.resource_group_name
