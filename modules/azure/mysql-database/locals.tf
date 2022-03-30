@@ -1,3 +1,3 @@
 locals {
-  db_server_admin_login = "${var.app_name}"
+  db_server_admin_login = var.app_name
 }
