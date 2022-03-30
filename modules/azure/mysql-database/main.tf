@@ -55,3 +55,17 @@ resource "azurerm_mysql_database" "sql_db" {
   charset             = "utf8"
   collation           = "utf8_unicode_ci"
 }
+
+resource "azurerm_private_endpoint" "db_endpoint" {
+  name                = "${var.app_name}-${var.environment}-mysql-pe"
+  location            = var.location
+  resource_group_name = var.resource_group_name
+  subnet_id           = data.azurerm_subnet.snet.id
+
+  private_service_connection {
+    name                           = "${var.app_name}-${var.environment}-mysql-privateserviceconnection"
+    is_manual_connection           = false
+    private_connection_resource_id = azurerm_mysql_server.db_server.id
+    subresource_names              = ["mysqlServer"]
+  }
+}
