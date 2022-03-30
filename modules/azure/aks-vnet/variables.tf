@@ -17,6 +17,12 @@ variable "vnet_address_range" {
   }
 }
 
+variable "connectivity_dns_servers" {
+  type        = list(string)
+  description = "List of IP addresses to set as vnet DNS servers"
+  default     = []
+}
+
 variable "tags" {
   description = "Resource tags"
   type        = map(any)
