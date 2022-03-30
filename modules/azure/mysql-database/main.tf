@@ -25,7 +25,7 @@ resource "azurerm_key_vault_secret" "sql_pass" {
   name         = azurerm_mysql_database.sql_db.name
   value        = random_password.sql_pass.result
   key_vault_id = data.azurerm_key_vault.ss_kv.id
-  type         = "password"
+  content_type = "password"
 }
 
 resource "azurerm_mysql_server" "db_server" {
