@@ -8,7 +8,7 @@ variable "location" {
 
 variable "app_name" {
   type        = string
-  description = "app name must not exceed 16 characters"
+  description = "Application Name"
 
   validation {
     condition     = length(var.app_name) < 17
