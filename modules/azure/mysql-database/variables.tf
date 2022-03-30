@@ -40,3 +40,8 @@ variable "vnet_name" {
   type        = string
   description = "Name assigned to VNET"
 }
+
+variable "connectivity_resource_group" {
+  type        = string
+  description = "Name of Connectivity Resource Group"
+}
