@@ -32,7 +32,7 @@ resource "azurerm_mysql_server" "db_server" {
   name                             = var.app_name
   location                         = var.location
   resource_group_name              = var.resource_group_name
-  administrator_login              = local.db_server_admin_login
+  administrator_login              = var.app_name
   administrator_login_password     = random_password.sql_pass.result
   ssl_minimal_tls_version_enforced = "TLS1_2"
   ssl_enforcement_enabled          = true
