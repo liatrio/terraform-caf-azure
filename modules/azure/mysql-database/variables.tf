@@ -35,3 +35,15 @@ variable "vnet_name" {
   type        = string
   description = "Name assigned to VNET"
 }
+
+variable "mssql_enabled" {
+  type        = bool
+  default     = 0
+  description = "Change value to 1 to enable mssql paas build"
+}
+
+variable "mssql_database_map" {
+  type        = "map"
+  description = "Map of MS Sql Databases with db number, db name, collation, size, and sku"
+}
+
