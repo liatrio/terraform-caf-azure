@@ -3,7 +3,8 @@ provider "azurerm" {
 }
 
 module "foundation_subscriptions" {
-  source = "git@github.com:liatrio/terraform-caf-azure//subscriptions/foundation"
+  # source = "git@github.com:liatrio/terraform-caf-azure//subscriptions/foundation"
+  source = "../../..//subscriptions/foundation"
 
   group_prefix         = "example"
   billing_account_name = var.billing_account_name
@@ -12,7 +13,8 @@ module "foundation_subscriptions" {
 }
 
 module "shared_services_subscription" {
-  source = "git@github.com:liatrio/terraform-caf-azure//subscriptions/landing-zone"
+  # source = "git@github.com:liatrio/terraform-caf-azure//subscriptions/landing-zone"
+  source = "../../..//subscriptions/landing-zone"
 
   management_group_name = "example-shared-svc"
   name                  = "example-shared-services"
