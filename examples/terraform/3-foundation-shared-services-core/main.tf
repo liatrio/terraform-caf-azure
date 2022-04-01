@@ -13,18 +13,18 @@ module "liatrio_caf_shared_services" {
   # source = "git@github.com:liatrio/terraform-caf-azure//foundation/shared-services/core?ref=examples"
   source = "../../../..//foundation/shared-services/core"
   providers = {
-    azurerm      = azurerm
+    azurerm              = azurerm
     azurerm.connectivity = azurerm.connectivity
   }
 
-  prefix = "example"
+  prefix                           = "example"
   connectivity_resource_group_name = "example-connectivity"
-  environment = "prod"
-  kubernetes_version = "1.21.9"
-  parent_dns_zone_name = "azurecaf-example.liatr.io"
-  vnet_address_range = "10.133.0.0/16"
-  public_dns_zone_name = "shared-svc.azurecaf-example.liatr.io"
-  vm_size = "Standard_D1_v2"
+  environment                      = "prod"
+  kubernetes_version               = "1.21.9"
+  parent_dns_zone_name             = "azurecaf-example.liatr.io"
+  vnet_address_range               = "10.133.0.0/16"
+  public_dns_zone_name             = "shared-svc.azurecaf-example.liatr.io"
+  vm_size                          = "Standard_D1_v2"
   # tenant_id                            = var.tenant_id
   # group_prefix                         = "example"
   # virtual_hub_address_cidr             = "10.130.0.0/23"
