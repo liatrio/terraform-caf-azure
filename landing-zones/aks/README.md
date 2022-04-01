@@ -29,5 +29,5 @@ The intended use of this module is to create a well provisioned AKS cluster that
 
 Additional resources required by the application could be deployed on top of the default landing zone setup.
 
-An Example workflow would contain the following</br></br>
+An example workflow would contain the following</br></br>
 ![Landing Zone](../../images/aks-lz.png "Landing Zone")
