@@ -21,7 +21,8 @@ provider "azurerm" {
 }
 
 module "liatrio_caf_foundation" {
-  source = "git@github.com:liatrio/terraform-caf-azure//foundation/core?ref=examples"
+  # source = "git@github.com:liatrio/terraform-caf-azure//foundation/core"
+  source = "../../..//foundation/core"
   providers = {
     azurerm.default      = azurerm
     azurerm.identity     = azurerm.identity
