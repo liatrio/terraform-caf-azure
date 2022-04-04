@@ -5,6 +5,7 @@ locals {
     kubernetes_cluster = "privatelink.${var.location}.azmk8s.io"
     container_registry = "privatelink.azurecr.io"
     key_vault          = "privatelink.vaultcore.azure.net"
+    mysql              = "mysql.database.azure.com"
   }
 }
 

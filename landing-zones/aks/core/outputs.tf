@@ -2,6 +2,10 @@ output "resource_group_name" {
   value = azurerm_resource_group.lz_resource_group.name
 }
 
+output "resource_group_id" {
+  value = azurerm_resource_group.lz_resource_group.id
+}
+
 output "aad_pod_identity_client_id" {
   value = azurerm_user_assigned_identity.cert_manager_pod_identity.client_id
 }
