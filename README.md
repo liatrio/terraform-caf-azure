@@ -6,7 +6,7 @@ This is Liatrio’s implementation of a [Cloud Adoption Framework on Azure](http
 
 ## Subscriptions
 
-Several subscriptions are required for the CAF foundation as well as shared services and landing zones. Each top level Terraform modules need azurerm Terraform providers configured with the need subscriptions. See the [examples](./examples/) folder for examples configuring the providers use Terraform and Terragrunt.
+Several subscriptions are required for the CAF foundation as well as shared services and landing zones. Each top level Terraform modules need azurerm Terraform providers configured with the needed subscriptions. See the [examples](./examples/) folder for examples configuring the providers use Terraform and Terragrunt.
 
 - **Foundation**: Requires subscriptions for connectivity, identity, management resources
 - **Shared Services**: Each shared services environment requires its own subscriptions
