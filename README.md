@@ -6,20 +6,20 @@ This is Liatrio’s implementation of a [Cloud Adoption Framework on Azure](http
 
 ## Subscriptions
 
-Several subscriptions are required for the CAF foundation as well as shared services and landing zones. Each top level Terraform modules need azurerm Terraform providers configured with the need subscriptions. See the [examples](./examples/) folder for examples configuring the providers use Terraform and Terragrunt. 
+Several subscriptions are required for the CAF foundation as well as shared services and landing zones. Each top level Terraform modules need azurerm Terraform providers configured with the need subscriptions. See the [examples](./examples/) folder for examples configuring the providers use Terraform and Terragrunt.
 
- - **Foundation**: Requires subscriptions for connectivity, identity, management resources
- - **Shared Services**: Each shared services environment requires its own subscriptions
- - **Landing Zones**: Each landing zone requires its own subscription
+- **Foundation**: Requires subscriptions for connectivity, identity, management resources
+- **Shared Services**: Each shared services environment requires its own subscriptions
+- **Landing Zones**: Each landing zone requires its own subscription
 
-Creation of subscriptions is not handled as part of the main CAF Terraform modules. This is done to allow them to be managed by an external process and to avoid requiring extra billing permissions to apply the CAF modules. 
+Creation of subscriptions is not handled as part of the main CAF Terraform modules. This is done to allow them to be managed by an external process and to avoid requiring extra billing permissions to apply the CAF modules.
 
 There are also several extra Terraform modules included in this repo which can manage the creation of subscriptions if the extra billing permissions are not a concern and you would like to manage them as part of the same process.
 
 **Terraform Modules**:
- - [subscriptions/foundation](./subscriptions/foundation): Creates connectivity, identity and management subscriptions
- - [subscriptions/landing-zone](./subscriptions/landing-zone): Creates a subscription which can be used for Landing Zones or Shared Services Environments
 
+- [subscriptions/foundation](./subscriptions/foundation): Creates connectivity, identity and management subscriptions
+- [subscriptions/landing-zone](./subscriptions/landing-zone): Creates a subscription which can be used for Landing Zones or Shared Services Environments
 
 ## Foundation Deployment
 
@@ -27,7 +27,7 @@ The framework foundation sets up the required resources to support shared servic
 
 ### Foundation Core
 
-This Terraform module manages areas of concern using three sub modules. Connectivity for managing the networking required for our hub and spoke model to connect shared services resources to our landing zones; Identity to manage authentication and authorization services and Management to manage logging, monitoring and billing services.
+This Terraform module manages areas of concern Including management groups, Connectivity, Identity and Management. Connectivity concerns managing the networking required for our hub and spoke model to connect shared services resources to our landing zones; Identity concerns managing authentication and authorization services and Management concerns managing logging, monitoring and billing services. The management groups are deployed according the Microsoft Azure CAF designs.
 
 **Terraform Module**: [foundation/core](./foundation/core/)
 
@@ -47,8 +47,16 @@ Landing Zones are the infrastructure needed to support a specific type or catego
 
 ### Landing Zone Core
 
-There are several landing zone types to support different workload requirements. 
+There are several landing zone types to support different workload requirements.
 
-**Terraform Modules**: 
+**Terraform Modules**:
+
 - AKS [landing-zones/aks](./landing-zones/aks/)
 
+## Azure Policy and Policy Set Deployment
+
+There are several default Policy Sets (Initiatives) assigned to the Management groups defined in [foundation/core](./foundation/core/).
+
+Any dynamically created management groups can have Custom or Built-in Policy sets applied by specificing the Set ids in either tfvars or terragrunt.
+
+The Policy Sets utilized in this framework are created via a separate repo that has a GitHub Action for creating and updating Policies and Policy Sets. For more information check out the [liatrio/azure-policies](https://github.com/liatrio/azure-policies) repo.
