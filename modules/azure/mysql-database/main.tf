@@ -35,12 +35,12 @@ resource "azurerm_mysql_server" "db_server" {
   resource_group_name              = var.resource_group_name
   administrator_login              = var.app_name
   administrator_login_password     = random_password.sql_pass.result
-  ssl_minimal_tls_version_enforced = "TLS1_2"
-  ssl_enforcement_enabled          = true
+  ssl_minimal_tls_version_enforced = "TLSEnforcementDisabled"
+  ssl_enforcement_enabled          = false
   public_network_access_enabled    = false
-  sku_name   = "GP_Gen5_2"
-  storage_mb = 5120
-  version    = "5.7"
+  sku_name                         = "GP_Gen5_2"
+  storage_mb                       = 5120
+  version                          = "5.7"
 
   tags = {
     environment = var.environment

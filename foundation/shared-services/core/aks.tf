@@ -1,9 +1,10 @@
 module "aks_vnet" {
-  source              = "../../../modules/azure/aks-vnet"
-  name                = local.shared_services_name
-  location            = var.location
-  vnet_address_range  = var.vnet_address_range
-  resource_group_name = azurerm_resource_group.resource_group.name
+  source                   = "../../../modules/azure/aks-vnet"
+  name                     = local.shared_services_name
+  location                 = var.location
+  vnet_address_range       = var.vnet_address_range
+  resource_group_name      = azurerm_resource_group.resource_group.name
+  connectivity_dns_servers = var.connectivity_dns_servers
 }
 
 data "azurerm_private_dns_zone" "aks_private_dns_id" {

@@ -20,6 +20,11 @@ variable "vnet_address_range" {
   type        = string
 }
 
+variable "connectivity_dns_servers" {
+  type        = list(string)
+  description = "List of IP addresses to set as vnet DNS servers"
+}
+
 variable "pool_name" {
   type        = string
   default     = "default"

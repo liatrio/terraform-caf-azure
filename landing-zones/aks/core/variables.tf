@@ -7,6 +7,11 @@ variable "vnet_address_range" {
   type        = string
 }
 
+variable "connectivity_dns_servers" {
+  type        = list(string)
+  description = "List of IP addresses to set as vnet DNS servers"
+}
+
 variable "name" {
   description = "A prefix used for resources"
 }
@@ -47,4 +52,10 @@ variable "connectivity_resource_group_name" {
 }
 variable "connectivity_k8_private_dns_zone_name" {
   type = string
+}
+
+variable "include_rules_allow_web_inbound" {
+  type        = bool
+  description = "Enables web hosting ports 80 and 443 externally if set to true"
+  default     = false
 }

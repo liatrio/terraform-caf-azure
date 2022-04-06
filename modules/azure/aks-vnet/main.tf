@@ -16,7 +16,11 @@ resource "azurerm_network_security_group" "aks_vnet" {
 }
 
 resource "azurerm_network_security_rule" "aks_vnet" {
-  for_each                    = local.nsgrules
+  for_each = {
+    for rule_name, rule in local.nsgrules : rule_name => rule
+    if rule.include
+  }
+
   name                        = each.key
   direction                   = each.value.direction
   description                 = each.value.description
@@ -38,6 +42,13 @@ resource "azurerm_virtual_network" "aks_vnet" {
   resource_group_name = var.resource_group_name
   address_space       = [var.vnet_address_range]
   tags                = var.tags
+}
+
+resource "azurerm_virtual_network_dns_servers" "aks_vnet" {
+  count = length(var.connectivity_dns_servers) > 0 ? 1 : 0
+
+  virtual_network_id = azurerm_virtual_network.aks_vnet.id
+  dns_servers        = var.connectivity_dns_servers
 }
 
 resource "azurerm_subnet" "aks_nodes_and_pods" {

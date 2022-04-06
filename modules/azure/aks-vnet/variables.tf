@@ -17,6 +17,12 @@ variable "vnet_address_range" {
   }
 }
 
+variable "connectivity_dns_servers" {
+  type        = list(string)
+  description = "List of IP addresses to set as vnet DNS servers"
+  default     = []
+}
+
 variable "tags" {
   description = "Resource tags"
   type        = map(any)
@@ -26,4 +32,10 @@ variable "tags" {
 variable "resource_group_name" {
   type        = string
   description = "Resource group name the resources in this module"
+}
+
+variable "include_rules_allow_web_inbound" {
+  type        = bool
+  description = "Flag to enable web hosting NSG rules. Defaults to false"
+  default     = false
 }
