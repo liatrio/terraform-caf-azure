@@ -5,6 +5,10 @@
 *.tfstate
 *.tfstate.*
 
+# tfvars files
+*.tfvars
+*.tfvars.json
+
 # Crash log files
 crash.log
 
@@ -30,3 +34,4 @@ override.tf.json
 .DS_Store
 .vscode/
 .idea/
+.DS_Store
