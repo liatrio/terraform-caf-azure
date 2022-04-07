@@ -33,3 +33,19 @@ output "cluster_ca_certificate" {
   value     = module.aks.cluster_ca_certificate
   sensitive = true
 }
+
+output "external_app" {
+  value = var.external_app
+}
+
+output "external_dns_aad_pod_identity_client_id" {
+  value = var.external_app ? azurerm_user_assigned_identity.external_dns_pod_identity[0].client_id : ""
+}
+
+output "external_dns_aad_pod_identity_resource_id" {
+  value = var.external_app ? azurerm_user_assigned_identity.external_dns_pod_identity[0].id : ""
+}
+
+output "dns_zone_name" {
+  value = var.external_app ? var.dns_zone_name : ""
+}

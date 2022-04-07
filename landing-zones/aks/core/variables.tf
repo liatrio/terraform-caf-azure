@@ -54,8 +54,18 @@ variable "connectivity_k8_private_dns_zone_name" {
   type = string
 }
 
-variable "include_rules_allow_web_inbound" {
+variable "external_app" {
   type        = bool
-  description = "Enables web hosting ports 80 and 443 externally if set to true"
+  description = "If true the following occurs: enables web hosting ports 80 and 443 externally, creates public DNS zone, creates external wildcard cert"
   default     = false
+}
+
+variable "dns_zone_name" {
+  type        = string
+  description = "External Public Azure DNS zone name to associate with issuer helm chart"
+}
+
+variable "parent_dns_zone_name" {
+  type        = string
+  description = "Optional parent DNS zone name which causes a child zone to be created"
 }

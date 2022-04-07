@@ -23,7 +23,7 @@ module "aks_vnet" {
   vnet_address_range              = var.vnet_address_range
   resource_group_name             = azurerm_resource_group.lz_resource_group.name
   connectivity_dns_servers        = var.connectivity_dns_servers
-  include_rules_allow_web_inbound = var.include_rules_allow_web_inbound
+  include_rules_allow_web_inbound = var.external_app
 }
 
 data "azurerm_private_dns_zone" "aks_private_dns_id" {
