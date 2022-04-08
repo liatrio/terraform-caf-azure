@@ -29,6 +29,8 @@ resource "azurerm_key_vault_secret" "sql_pass" {
   content_type = "password"
 }
 
+#tfsec:ignore:secure-tls-policy/
+#tfsec:ignore:enable-ssl-enforcement
 resource "azurerm_mysql_server" "db_server" {
   name                             = var.app_name
   location                         = var.location
