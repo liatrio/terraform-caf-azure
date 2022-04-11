@@ -30,7 +30,7 @@ resource "azurerm_key_vault_secret" "sql_pass" {
 }
 
 #tfsec:ignore:azure-database-secure-tls-policy
-#tfsec:ignore:enable-ssl-enforcement
+#tfsec:ignore:azure-database-secure-enable-ssl-enforcement
 resource "azurerm_mysql_server" "db_server" {
   name                             = var.app_name
   location                         = var.location
