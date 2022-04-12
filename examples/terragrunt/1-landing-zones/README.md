@@ -56,4 +56,4 @@ __You will need the 'Billing Contributor' in the tenant you're trying to use__
         * Reauthenticate to your Azure account (`az logout` -> `az login`)
           * This will ensure that your account can interact with the newly created subscription. Otherwise you might hit a `Terraform` error saying your subscription could not be found.
         * The `apply` might timeout. Meaning you might need to import tfstates to your state file to verify that everything was created properly.
-          * For more information on `terragrunt import`, please refer to correct's resource documentation page (for [example](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/kubernetes_cluster#import)).
+          * For more information on `terragrunt import`, please refer to correct resource's documentation page (for [example](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/kubernetes_cluster#import)).
