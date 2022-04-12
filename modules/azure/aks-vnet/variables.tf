@@ -33,3 +33,9 @@ variable "resource_group_name" {
   type        = string
   description = "Resource group name the resources in this module"
 }
+
+variable "include_rules_allow_web_inbound" {
+  type        = bool
+  description = "Flag to enable web hosting NSG rules. Defaults to false"
+  default     = false
+}

@@ -11,6 +11,7 @@ locals {
       destination_port_range     = "*"
       source_address_prefix      = "VirtualNetwork"
       destination_address_prefix = "VirtualNetwork"
+      include                    = true
     }
     AllowVnetOutBound = {
       name                       = "AllowVnetOutBound"
@@ -23,6 +24,7 @@ locals {
       destination_port_range     = "*"
       source_address_prefix      = "VirtualNetwork"
       destination_address_prefix = "VirtualNetwork"
+      include                    = true
     }
     AllowAzureLoadBalancerInBound = {
       name                       = "AllowAzureLoadBalancerInBound"
@@ -35,6 +37,7 @@ locals {
       destination_port_range     = "*"
       source_address_prefix      = "AzureLoadBalancer"
       destination_address_prefix = "*"
+      include                    = true
     }
     AllowInternetOutBound = {
       name                       = "AllowInternetOutBound"
@@ -47,6 +50,7 @@ locals {
       destination_port_range     = "*"
       source_address_prefix      = "*"
       destination_address_prefix = "Internet"
+      include                    = true
     }
     DenyAllOutBound = {
       name                       = "DenyAllOutBound"
@@ -59,6 +63,7 @@ locals {
       destination_port_range     = "*"
       source_address_prefix      = "*"
       destination_address_prefix = "*"
+      include                    = true
     }
     DenyAllInBound = {
       name                       = "DenyAllInboundTraffic"
@@ -71,6 +76,33 @@ locals {
       destination_port_range     = "*"
       source_address_prefix      = "*"
       destination_address_prefix = "*"
+      include                    = true
+    }
+    AllowWebHTTPInbound = {
+      name                       = "AllowWebHTTPInbound"
+      description                = "Allow inbound http traffic"
+      priority                   = 2000
+      direction                  = "Inbound"
+      access                     = "Allow"
+      protocol                   = "tcp"
+      source_port_range          = "*"
+      destination_port_range     = "80"
+      source_address_prefix      = "Internet"
+      destination_address_prefix = "AzureCloud"
+      include                    = var.include_rules_allow_web_inbound
+    }
+    AllowWebHTTPSInbound = {
+      name                       = "AllowWebHTTPSInbound"
+      description                = "Allow inbound https traffic"
+      priority                   = 2001
+      direction                  = "Inbound"
+      access                     = "Allow"
+      protocol                   = "tcp"
+      source_port_range          = "*"
+      destination_port_range     = "443"
+      source_address_prefix      = "Internet"
+      destination_address_prefix = "AzureCloud"
+      include                    = var.include_rules_allow_web_inbound
     }
   }
 }
