@@ -34,7 +34,7 @@ dependency "subscription" {
 
 ## Deploying aks-lz-dev
 
-_Dislcaimer_: Deploying the Kubernetes cluster may take well above 50 minutes.
+_Disclaimer_: Deploying the Kubernetes cluster may take well above 50 minutes.
 
 __You will need the 'Billing Contributor' in the tenant you're trying to use__
 
