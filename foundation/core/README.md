@@ -6,6 +6,29 @@ This module requires three subscriptions (connectivity, identity and management)
 
 This module also requires that Custom Policies and Policy Sets have been deployed to this tenant, as described in [liatrio/azure-policies](https://github.com/liatrio/azure-policies)
 
+## Inputs Required
+
+This module depends on the subscriptions being created before use, as well as a few resource dependencies from your existing Azure foundation. Here is the list of inputs.
+
+Inputs:
+
+Name|Source|Description|Sample Values
+--|--|--|--
+location|variable (.tfvars or terragrunt)|short code form for Azure region|`eastus` or `westus` etc
+virtual_hub_address_cidr|variable (.tfvars or terragrunt)|RFC 1918 CIDR network range for your entire landing zone|`10.100.0.0/23` or `172.18.0.0/23` etc
+connectivity_apps_address_cidr|variable (.tfvars or terragrunt)|CIDR network range for any shared connectivity apps|`10.100.3.0/24`
+tenant_id|variable (.tfvars or terragrunt)|Your Azure Tenant ID|`abcd1234-ef56-ab12-ab12-abcdef123456`
+prefix|variable (.tfvars or terragrunt)|Naming prefix to use for your landing zone|`pre`
+root_dns_zone|variable (.tfvars or terragrunt)|Your preferred root DNS zone name as configured in Azure. From this root dns zone, child zones and records will be created|`mycorp.com`
+root_dns_tags|variable (.tfvars or terragrunt)|Your preferred tags to apply to the root dns zone|`my-tag`
+vpn_client_pool_address_cidr|variable (.tfvars or terragrunt)|`OPTIONAL` - CIDR network range for VPN users|`10.100.2.0/24`
+vpn_service_principal_application_id|upstream dependency on creation of an `azuread_service_principal` for your VPN application registration|`OPTIONAL` - `application_id` of service principal for VPN|`abcd1234-ef56-ab12-ab12-abcdef123456`
+landing_zone_mg|variable (.tfvars or terragrunt)|`OPTIONAL` - map of objects defining the management group(s) in which your landing zone will exist|`{ management_group_1 : { display_name = "Management Group 1", policy_ids = [ { policy_set_id : "/providers/Microsoft.Authorization/policySetDefinitions/abcd1234-ef56-ab12-ab12-abcdef123456" } ] }, management_group_2 : { display_name = "Management Group 2", policy_ids = [] } }`
+
+
+
+It also requires a few inputs.
+
 ## Resources Created
 
 This module creates the following resources.
@@ -47,7 +70,6 @@ azurerm_virtual_network.connectivity_vnet
 azurerm_virtual_wan.caf_vwan
 
 ```
-
   ![](../../images/vwan-topology.svg)
 
 #### Public DNS Zone
@@ -98,11 +120,9 @@ module.vpn_dns_resolver
 azurerm_point_to_site_vpn_gateway.hub_vpn_gateway
 azurerm_vpn_server_configuration.vpn_server_config
 ```
-  ![]()
-
 ### Policy
 
-Policy configuration is known to Terraform via this module, but not fully managed here. Instead, policy-as-code is managed via 
+Policy configuration is known to Terraform via this module, but not fully managed here. Instead, policy-as-code is managed via a linked git repo
 
 ```yaml
 module.connectivity-policy-sets
@@ -126,4 +146,3 @@ module.shared_svc-policy-sets
     azurerm_management_group_policy_assignment.policy_set_assignment
     random_id.policy_association_name
 ```
-  ![]()
