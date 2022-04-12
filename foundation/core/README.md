@@ -12,20 +12,21 @@ This module creates the following resources.
 
 ### Management Groups
 
-This list of management groups allows hierarchically assigned role based access control.
+This list of management groups allows hierarchically assigned role based access control. Their relationships are also managed via the terraform module
 
 ```yaml
-azurerm_management_group.connectivity
-azurerm_management_group.decommissioned
-azurerm_management_group.dynamic["corp"]
-azurerm_management_group.dynamic["online"]
-azurerm_management_group.foundation
-azurerm_management_group.identity
-azurerm_management_group.landing_zones
-azurerm_management_group.management
-azurerm_management_group.platform
-azurerm_management_group.sandboxes
-azurerm_management_group.shared_svc
+azurerm_management_group
+  foundation
+    decommissioned
+    landing_zones
+      dynamic["corp"]
+      dynamic["online"]
+      shared_svc
+  platform
+    connectivity
+    identity
+    management
+  sandboxes
 ```
 
   ![Management Groups](../../images/management-groups.png "Management Groups")
@@ -51,6 +52,8 @@ azurerm_virtual_wan.caf_vwan
 
 #### Public DNS Zone
 
+A Public DNS Zone is configured for any public app hosting or name resolution needs.
+
 ```yaml
 module.public_dns
   azurerm_dns_zone.public_dns_zone
@@ -58,20 +61,29 @@ module.public_dns
 
 #### Private DNS Zones
 
+Private DNS zones are created for each internal service deployed.
 
 ```yaml
-module.azure_paas_private_dns["container_registry"].azurerm_private_dns_zone.private_dns_zone
-module.azure_paas_private_dns["container_registry"].azurerm_private_dns_zone_virtual_network_link.private_dns_zone_link
-module.azure_paas_private_dns["key_vault"].azurerm_private_dns_zone.private_dns_zone
-module.azure_paas_private_dns["key_vault"].azurerm_private_dns_zone_virtual_network_link.private_dns_zone_link
-module.azure_paas_private_dns["kubernetes_cluster"].azurerm_private_dns_zone.private_dns_zone
-module.azure_paas_private_dns["kubernetes_cluster"].azurerm_private_dns_zone_virtual_network_link.private_dns_zone_link
-module.azure_paas_private_dns["mysql"].azurerm_private_dns_zone.private_dns_zone
-module.azure_paas_private_dns["mysql"].azurerm_private_dns_zone_virtual_network_link.private_dns_zone_link
+module.azure_paas_private_dns["container_registry"]
+  azurerm_private_dns_zone.private_dns_zone
+  azurerm_private_dns_zone_virtual_network_link.private_dns_zone_link
+module.azure_paas_private_dns["key_vault"]
+  azurerm_private_dns_zone.private_dns_zone
+  azurerm_private_dns_zone_virtual_network_link.private_dns_zone_link
+module.azure_paas_private_dns["kubernetes_cluster"]
+  azurerm_private_dns_zone.private_dns_zone
+  azurerm_private_dns_zone_virtual_network_link.private_dns_zone_link
+module.azure_paas_private_dns["mysql"]
+  azurerm_private_dns_zone.private_dns_zone
+  azurerm_private_dns_zone_virtual_network_link.private_dns_zone_link
 
 ```
 
+  ![](../../images/private-dns.png "Private DNS Zones")
+
 #### Self Managed Private DNS resolver
+
+To run private networking and integrate it with your environments, private DNS
 
 ```yaml
 module.vpn_dns_resolver
@@ -93,15 +105,25 @@ azurerm_vpn_server_configuration.vpn_server_config
 Policy configuration is known to Terraform via this module, but not fully managed here. Instead, policy-as-code is managed via 
 
 ```yaml
-module.connectivity-policy-sets.module.policy_assignment[0].azurerm_management_group_policy_assignment.policy_set_assignment
-module.connectivity-policy-sets.module.policy_assignment[0].random_id.policy_association_name
-module.foundation-policy-sets.module.policy_assignment[0].azurerm_management_group_policy_assignment.policy_set_assignment
-module.foundation-policy-sets.module.policy_assignment[0].random_id.policy_association_name
-module.landing_zones-policy-sets.module.policy_assignment[0].azurerm_management_group_policy_assignment.policy_set_assignment
-module.landing_zones-policy-sets.module.policy_assignment[0].random_id.policy_association_name
-module.policy-sets-dynamic-mgs["corp"].module.policy_assignment[0].azurerm_management_group_policy_assignment.policy_set_assignment
-module.policy-sets-dynamic-mgs["corp"].module.policy_assignment[0].random_id.policy_association_name
-module.shared_svc-policy-sets.module.policy_assignment[0].azurerm_management_group_policy_assignment.policy_set_assignment
-module.shared_svc-policy-sets.module.policy_assignment[0].random_id.policy_association_name
+module.connectivity-policy-sets
+  module.policy_assignment[0]
+    azurerm_management_group_policy_assignment.policy_set_assignment
+    random_id.policy_association_name
+module.foundation-policy-sets
+  module.policy_assignment[0]
+    azurerm_management_group_policy_assignment.policy_set_assignment
+    random_id.policy_association_name
+module.landing_zones-policy-sets
+  module.policy_assignment[0]
+    azurerm_management_group_policy_assignment.policy_set_assignment
+    random_id.policy_association_name
+module.policy-sets-dynamic-mgs["corp"]
+  module.policy_assignment[0]
+    azurerm_management_group_policy_assignment.policy_set_assignment
+    random_id.policy_association_name
+module.shared_svc-policy-sets
+  module.policy_assignment[0]
+    azurerm_management_group_policy_assignment.policy_set_assignment
+    random_id.policy_association_name
 ```
   ![]()
