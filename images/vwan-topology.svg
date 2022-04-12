@@ -1,0 +1,458 @@
+<svg xmlns:xlink="http://www.w3.org/1999/xlink"
+    xmlns="http://www.w3.org/2000/svg" width="642px" height="459px" viewBox="0 0 642 459" style="overflow: auto; display: block; width: 642px; height: 459px;">
+    <defs/>
+    <g style="pointer-events:visiblePainted" transform="translate(0 0)" image-rendering="auto" shape-rendering="auto">
+        <g>
+            <path fill="none" stroke="rgb(127,127,127)" d="M 90,241 L 190,241" stroke-opacity="1" stroke-width="1" stroke-linecap="butt" stroke-linejoin="miter" stroke-miterlimit="10"/>
+        </g>
+        <g>
+            <path fill="none" stroke="rgb(127,127,127)" d="M 220,241 L 322,241 L 407,39 L 422,39" stroke-opacity="1" stroke-width="1" stroke-linecap="butt" stroke-linejoin="miter" stroke-miterlimit="10"/>
+        </g>
+        <g>
+            <path fill="none" stroke="rgb(127,127,127)" d="M 452,39 L 552,39" stroke-opacity="1" stroke-width="1" stroke-linecap="butt" stroke-linejoin="miter" stroke-miterlimit="10"/>
+        </g>
+        <g>
+            <path fill="none" stroke="rgb(127,127,127)" d="M 220,241 L 322,241 L 407,120 L 422,120" stroke-opacity="1" stroke-width="1" stroke-linecap="butt" stroke-linejoin="miter" stroke-miterlimit="10"/>
+        </g>
+        <g>
+            <path fill="none" stroke="rgb(127,127,127)" d="M 452,120 L 552,120" stroke-opacity="1" stroke-width="1" stroke-linecap="butt" stroke-linejoin="miter" stroke-miterlimit="10"/>
+        </g>
+        <g>
+            <path fill="none" stroke="rgb(127,127,127)" d="M 220,241 L 322,241 L 407,201 L 422,201" stroke-opacity="1" stroke-width="1" stroke-linecap="butt" stroke-linejoin="miter" stroke-miterlimit="10"/>
+        </g>
+        <g>
+            <path fill="none" stroke="rgb(127,127,127)" d="M 452,201 L 552,201" stroke-opacity="1" stroke-width="1" stroke-linecap="butt" stroke-linejoin="miter" stroke-miterlimit="10"/>
+        </g>
+        <g>
+            <path fill="none" stroke="rgb(127,127,127)" d="M 220,241 L 322,241 L 407,282 L 422,282" stroke-opacity="1" stroke-width="1" stroke-linecap="butt" stroke-linejoin="miter" stroke-miterlimit="10"/>
+        </g>
+        <g>
+            <path fill="none" stroke="rgb(127,127,127)" d="M 452,282 L 552,282" stroke-opacity="1" stroke-width="1" stroke-linecap="butt" stroke-linejoin="miter" stroke-miterlimit="10"/>
+        </g>
+        <g>
+            <path fill="none" stroke="rgb(127,127,127)" d="M 220,241 L 322,241 L 407,363 L 422,363" stroke-opacity="1" stroke-width="1" stroke-linecap="butt" stroke-linejoin="miter" stroke-miterlimit="10"/>
+        </g>
+        <g>
+            <path fill="none" stroke="rgb(127,127,127)" d="M 452,363 L 552,363" stroke-opacity="1" stroke-width="1" stroke-linecap="butt" stroke-linejoin="miter" stroke-miterlimit="10"/>
+        </g>
+        <g id="detailNodeStyleTemplate" transform="translate(60 226)">
+            <svg width="30" height="30" preserveAspectRatio="none" viewBox="0 0 18 18" fill="msportalfx-svg-placeholder" role="presentation" focusable="false">
+                <g>
+                    <title/>
+                    <defs>
+                        <linearGradient id="ygc5_0" x1="9" y1="13.07" x2="9" y2=".31" gradientUnits="userSpaceOnUse">
+                            <stop offset="0" stop-color="#0078d4"/>
+                            <stop offset=".82" stop-color="#5ea0ef"/>
+                        </linearGradient>
+                        <linearGradient id="ygc5_1" x1="9" y1="17.69" x2="9" y2="7.94" gradientUnits="userSpaceOnUse">
+                            <stop offset="0" stop-color="#6f4bb2"/>
+                            <stop offset=".19" stop-color="#7854b8"/>
+                            <stop offset=".51" stop-color="#926bc9"/>
+                            <stop offset=".91" stop-color="#bb90e4"/>
+                            <stop offset="1" stop-color="#c69aeb"/>
+                        </linearGradient>
+                    </defs>
+                    <title>Icon-networking-74</title>
+                    <path d="M18 9.07a4.05 4.05 0 0 0-3.51-3.89A5.1 5.1 0 0 0 9.24.31a5.23 5.23 0 0 0-5 3.41A4.82 4.82 0 0 0 0 8.36a4.9 4.9 0 0 0 5.07 4.71h8.65a.78.78 0 0 0 .22 0 4.09 4.09 0 0 0 4.06-4Z" fill="url(#ygc5_0)"/>
+                    <path d="M9 17.48a4.66 4.66 0 1 1 4.66-4.66A4.66 4.66 0 0 1 9 17.48Z" fill="#fff"/>
+                    <path d="M9 7.94a4.88 4.88 0 0 0-2.79 8.87A4.88 4.88 0 1 0 9 7.94Zm4.44 4.88a3.77 3.77 0 0 1 0 .58 5.32 5.32 0 0 0-.78-.32.92.92 0 0 0-1.3-.74 5.32 5.32 0 0 0-2.5-2 1 1 0 0 0-.25-.48 4.85 4.85 0 0 1 1.92-1.22 4.46 4.46 0 0 1 2.91 4.18Zm-1.79 3.56a4.37 4.37 0 0 1-2.31.86 4.78 4.78 0 0 1-1.56-1.73.88.88 0 0 0 .29-.41.9.9 0 0 0-.07-.77 5 5 0 0 1 2.79-1 .92.92 0 0 0 .59.72 1.06 1.06 0 0 0 .23.05 5 5 0 0 1 .04 2.28Zm-4.07-5a.92.92 0 0 0 1.17-.55A4.79 4.79 0 0 1 11 12.62a1.14 1.14 0 0 0-.12.22A5.47 5.47 0 0 0 7.67 14l-.14-.07a.74.74 0 0 0-.28-.06 4.84 4.84 0 0 1 .33-2.53Zm-.76 4.28h.08a.84.84 0 0 0 .47 0 5.14 5.14 0 0 0 1.23 1.58 4.42 4.42 0 0 1-2.19-.81 5.12 5.12 0 0 1 .41-.81ZM9 8.37a4.9 4.9 0 0 1 .77.07 5.17 5.17 0 0 0-1.59 1.17.92.92 0 0 0-1 .38h-.26a5.51 5.51 0 0 0-1.51.22A4.48 4.48 0 0 1 9 8.37Zm-4.44 4.45a4.41 4.41 0 0 1 .48-2 4.94 4.94 0 0 1 2-.38 1 1 0 0 0 .22.65A5.32 5.32 0 0 0 6.81 14a.92.92 0 0 0-.46.51.94.94 0 0 0 .11.85 5.52 5.52 0 0 0-.42.8 4.41 4.41 0 0 1-1.48-3.34Zm7.62 3.1v-.64a5.38 5.38 0 0 0-.11-1.28.88.88 0 0 0 .47-.46 5.25 5.25 0 0 1 .77.33 4.37 4.37 0 0 1-1.13 2.05Z" fill="url(#ygc5_1)"/>
+                </g>
+            </svg>
+            <g transform=" translate(30 22)"/>
+        </g>
+        <g id="detailNodeStyleTemplate" transform="translate(190 226)">
+            <svg width="30" height="30" preserveAspectRatio="none" viewBox="0 0 18 18" fill="msportalfx-svg-placeholder" role="presentation" focusable="false">
+                <g>
+                    <title/>
+                    <defs>
+                        <linearGradient id="ygc5_2" x1="9.05" y1="3.517" x2="9.05" y2="14.558" gradientUnits="userSpaceOnUse">
+                            <stop offset="0" stop-color="#5ea0ef"/>
+                            <stop offset="1" stop-color="#0078d4"/>
+                        </linearGradient>
+                    </defs>
+                    <path d="M5.539 5.111 3.148 1.553l.7-.471L6.239 4.64Zm.779 8.512-.681-.5-2.48 3.383.681.5ZM3.969 8.615l-2.675-.062-.019.847 2.675.062Zm11.136-7.052-.687-.491-2.545 3.558.686.491Zm0 14.944-2.546-3.473-.68.5 2.545 3.473ZM16.984 9.4l-.019-.844-2.706.062.02.844Z" fill="#83b9f9"/>
+                    <path d="M13.46 5.709A5.53 5.53 0 0 0 5.724 4.63l-.056.043a5.523 5.523 0 0 0 6.77 8.729 5.545 5.545 0 0 0 1.022-7.693ZM4.255 8.683a4.825 4.825 0 0 1 .533-1.874h1.338a8.969 8.969 0 0 0-.257 1.874Zm2.612-1.874H8.7v1.874H6.579a8.2 8.2 0 0 1 .288-1.874Zm2.54 0h1.832a8.2 8.2 0 0 1 .288 1.874h-2.12ZM8.7 9.392v1.874H6.867a8.208 8.208 0 0 1-.288-1.874Zm.709 0h2.12a8.208 8.208 0 0 1-.288 1.874H9.407Zm2.83 0h1.608a4.855 4.855 0 0 1-.53 1.874H11.98a9.055 9.055 0 0 0 .257-1.874Zm0-.709a9.036 9.036 0 0 0-.257-1.874h1.338a4.779 4.779 0 0 1 .529 1.874Zm.626-2.583h-1.1a5.38 5.38 0 0 0-.778-1.469A4.775 4.775 0 0 1 12.865 6.1ZM11 6.1H9.407V4.3A2.875 2.875 0 0 1 11 6.1ZM8.7 4.3v1.8H7.109A2.876 2.876 0 0 1 8.7 4.3Zm-2.6.936.051-.036a4.835 4.835 0 0 1 .972-.568A5.375 5.375 0 0 0 6.342 6.1h-1.1a4.822 4.822 0 0 1 .858-.867ZM4.254 9.392h1.615a8.988 8.988 0 0 0 .257 1.874H4.787a4.8 4.8 0 0 1-.533-1.874Zm1 2.6-.009-.012h1.1a5.409 5.409 0 0 0 .78 1.471 4.781 4.781 0 0 1-1.876-1.464Zm1.86-.012H8.7v1.8a2.882 2.882 0 0 1-1.591-1.805Zm2.3 1.8v-1.8H11a2.88 2.88 0 0 1-1.593 1.798Zm2.6-.937a4.8 4.8 0 0 1-1.021.607 5.383 5.383 0 0 0 .781-1.473h1.1a4.773 4.773 0 0 1-.874.864Z" fill="url(#ygc5_2)"/>
+                    <path d="M17.991 9.037A1.294 1.294 0 1 1 16.7 7.743a1.294 1.294 0 0 1 1.291 1.294ZM1.284 7.743a1.294 1.294 0 1 0 1.294 1.294 1.294 1.294 0 0 0-1.294-1.294ZM3.5 15.389a1.294 1.294 0 1 0 1.293 1.294A1.294 1.294 0 0 0 3.5 15.389Zm11.07 0a1.294 1.294 0 1 0 1.294 1.294 1.294 1.294 0 0 0-1.296-1.294ZM3.5.024a1.294 1.294 0 1 0 1.291 1.293A1.293 1.293 0 0 0 3.5.024Zm11.165 0a1.294 1.294 0 1 0 1.294 1.293A1.294 1.294 0 0 0 14.663.024Z" fill="#a67af4"/>
+                </g>
+            </svg>
+            <g transform=" translate(30 22)">
+                <g>
+                    <circle cx="8" cy="8" r="9" fill="#ffffff"/>
+                    <circle cx="8" cy="8" r="8" fill="#7fba00"/>
+                    <path d="M3.989 8.469L3.7 8.156a.207.207 0 0 1 .012-.293l.835-.772a.204.204 0 0 1 .289.012l2.296 2.462 3.951-5.06a.204.204 0 0 1 .289-.035l.903.697a.198.198 0 0 1 .035.285l-5.075 6.497-3.246-3.48z" fill="#fff"/>
+                </g>
+            </g>
+        </g>
+        <g id="detailNodeStyleTemplate" transform="translate(422 24)">
+            <svg width="30" height="30" preserveAspectRatio="none" viewBox="0 0 18 18" fill="msportalfx-svg-placeholder" role="presentation" focusable="false">
+                <g>
+                    <title/>
+                    <defs>
+                        <linearGradient id="ygc5_3" x1="8.59" y1="-7.79" x2="9.12" y2="20.05" gradientUnits="userSpaceOnUse">
+                            <stop offset=".22" stop-color="#32d4f5"/>
+                            <stop offset=".47" stop-color="#31d1f3"/>
+                            <stop offset=".63" stop-color="#2ec9eb"/>
+                            <stop offset=".77" stop-color="#29bade"/>
+                            <stop offset=".89" stop-color="#22a5cb"/>
+                            <stop offset="1" stop-color="#198ab3"/>
+                            <stop offset="1" stop-color="#198ab3"/>
+                        </linearGradient>
+                    </defs>
+                    <title>Icon-networking-63</title>
+                    <path d="M15.06 8.67h-1V5.59a5.81 5.81 0 0 0-1.49-3.92A4.79 4.79 0 0 0 8.91 0a4.79 4.79 0 0 0-3.7 1.67 5.73 5.73 0 0 0-1.49 3.92v3.08h-.81a.7.7 0 0 0-.69.69v8a.7.7 0 0 0 .69.69h12.15a.71.71 0 0 0 .7-.69v-8a.71.71 0 0 0-.7-.69Zm-3.37 0H6.13V5.54A3.18 3.18 0 0 1 7 3.39a2.51 2.51 0 0 1 1.88-.86 2.54 2.54 0 0 1 1.89.86 3.19 3.19 0 0 1 .32.43 3 3 0 0 1 .61 1.71Z" fill="url(#ygc5_3)"/>
+                    <path d="M15.09 8.67H2.92a.66.66 0 0 0-.44.17l13.05 9a.67.67 0 0 0 .25-.52v-8a.71.71 0 0 0-.69-.65Z" fill="#50e6ff"/>
+                    <path d="M2.94 8.67H15.1a.7.7 0 0 1 .45.17l-13.06 9a.7.7 0 0 1-.25-.52v-8a.72.72 0 0 1 .7-.65Z" opacity=".2" fill="#fff"/>
+                    <path d="M7.8 10.6 9 9.4a.07.07 0 0 1 .09 0l1.19 1.2a.06.06 0 0 1 0 .1h-.7a.06.06 0 0 0-.06.06v1.54a.06.06 0 0 1-.06.06h-.79a.05.05 0 0 1-.06-.06v-1.54a.07.07 0 0 0-.07-.06h-.7a.06.06 0 0 1-.04-.1Zm2.47 5.48-1.19 1.19a.06.06 0 0 1-.09 0L7.8 16.08a.06.06 0 0 1 0-.1h.7a.07.07 0 0 0 .07-.06v-1.55a.06.06 0 0 1 .06-.06h.74a.06.06 0 0 1 .06.06v1.55a.06.06 0 0 0 .06.06h.7a.06.06 0 0 1 .08.1Zm-4.7-1.55v-.7a.06.06 0 0 0-.06-.06H4a.06.06 0 0 1-.06-.06V13a.06.06 0 0 1 .06-.09h1.51a.06.06 0 0 0 .06-.06v-.7a.07.07 0 0 1 .11-.05l1.19 1.2a.06.06 0 0 1 0 .08l-1.19 1.2a.07.07 0 0 1-.11-.05Zm6.93-2.38v.7a.06.06 0 0 0 .06.06h1.54s.07 0 .07.06v.74a.07.07 0 0 1-.07.06h-1.54a.06.06 0 0 0-.06.06v.7a.06.06 0 0 1-.1.05l-1.19-1.2v-.08l1.19-1.2s.1-.01.1.05Z" fill="#fff"/>
+                </g>
+            </svg>
+            <g transform=" translate(30 22)">
+                <g>
+                    <circle cx="8" cy="8" r="9" fill="#ffffff"/>
+                    <circle cx="8" cy="8" r="8" fill="#7fba00"/>
+                    <path d="M3.989 8.469L3.7 8.156a.207.207 0 0 1 .012-.293l.835-.772a.204.204 0 0 1 .289.012l2.296 2.462 3.951-5.06a.204.204 0 0 1 .289-.035l.903.697a.198.198 0 0 1 .035.285l-5.075 6.497-3.246-3.48z" fill="#fff"/>
+                </g>
+            </g>
+        </g>
+        <g id="detailNodeStyleTemplate" transform="translate(552 24)">
+            <svg width="30" height="30" preserveAspectRatio="none" viewBox="0 0 18 18" fill="msportalfx-svg-placeholder" role="presentation" focusable="false">
+                <g>
+                    <title/>
+                    <defs>
+                        <clipPath id="ygc5_4">
+                            <path d="M10.58 8.34 13 10.92a.22.22 0 0 1 0 .3l-.47.49a.2.2 0 0 1-.3 0L9 8.34A.22.22 0 0 1 9 8l3.15-3.32a.2.2 0 0 1 .3 0l.47.49a.23.23 0 0 1 0 .31L10.58 8a.22.22 0 0 0 0 .34Z" fill="none"/>
+                        </clipPath>
+                        <clipPath id="ygc5_5">
+                            <path d="m7.11 9.91-2.43 2.57a.23.23 0 0 0 0 .31l.47.49a.2.2 0 0 0 .3 0l3.2-3.37a.22.22 0 0 0 0-.3L5.5 6.29a.2.2 0 0 0-.3 0l-.47.49a.22.22 0 0 0 0 .3l2.38 2.53a.2.2 0 0 1 0 .3Z" fill="none"/>
+                        </clipPath>
+                        <radialGradient id="ygc5_6" cx="46.42" cy="43.21" r="9" gradientTransform="matrix(.94 0 0 .94 -34.84 -31.81)" gradientUnits="userSpaceOnUse">
+                            <stop offset=".18" stop-color="#5ea0ef"/>
+                            <stop offset=".56" stop-color="#5c9fee"/>
+                            <stop offset=".69" stop-color="#559ced"/>
+                            <stop offset=".78" stop-color="#4a97e9"/>
+                            <stop offset=".86" stop-color="#3990e4"/>
+                            <stop offset=".93" stop-color="#2387de"/>
+                            <stop offset=".99" stop-color="#087bd6"/>
+                            <stop offset="1" stop-color="#0078d4"/>
+                        </radialGradient>
+                    </defs>
+                    <title>Icon-networking-81</title>
+                    <circle cx="9" cy="9" r="8.5" fill="url(#ygc5_6)"/>
+                    <circle cx="9" cy="9" r="7.4" fill="#fff"/>
+                    <g clip-path="url(#ygc5_4)">
+                        <path fill="#5e9624" d="m10.43 8.19 2.73 2.88-.77.8-3.5-3.68 3.45-3.63.77.8-2.68 2.83z"/>
+                        <path fill="#86d633" d="m13.16 11.07-2.73-2.88-.76.8 2.72 2.88.77-.8z"/>
+                    </g>
+                    <g clip-path="url(#ygc5_5)">
+                        <path fill="#5e9624" d="m7.26 9.76-2.72 2.88.76.8 3.5-3.68-3.45-3.63-.77.8 2.68 2.83z"/>
+                        <path fill="#86d633" d="m4.54 12.64 2.72-2.88.76.8-2.72 2.88-.76-.8z"/>
+                    </g>
+                </g>
+            </svg>
+            <g transform=" translate(30 22)"/>
+        </g>
+        <g id="detailNodeStyleTemplate" transform="translate(422 105)">
+            <svg width="30" height="30" preserveAspectRatio="none" viewBox="0 0 18 18" fill="msportalfx-svg-placeholder" role="presentation" focusable="false">
+                <g>
+                    <title/>
+                    <defs>
+                        <clipPath id="ygc5_7">
+                            <path d="M10.58 8.34 13 10.92a.22.22 0 0 1 0 .3l-.47.49a.2.2 0 0 1-.3 0L9 8.34A.22.22 0 0 1 9 8l3.15-3.32a.2.2 0 0 1 .3 0l.47.49a.23.23 0 0 1 0 .31L10.58 8a.22.22 0 0 0 0 .34Z" fill="none"/>
+                        </clipPath>
+                        <clipPath id="ygc5_8">
+                            <path d="m7.11 9.91-2.43 2.57a.23.23 0 0 0 0 .31l.47.49a.2.2 0 0 0 .3 0l3.2-3.37a.22.22 0 0 0 0-.3L5.5 6.29a.2.2 0 0 0-.3 0l-.47.49a.22.22 0 0 0 0 .3l2.38 2.53a.2.2 0 0 1 0 .3Z" fill="none"/>
+                        </clipPath>
+                        <radialGradient id="ygc5_9" cx="46.42" cy="43.21" r="9" gradientTransform="matrix(.94 0 0 .94 -34.84 -31.81)" gradientUnits="userSpaceOnUse">
+                            <stop offset=".18" stop-color="#5ea0ef"/>
+                            <stop offset=".56" stop-color="#5c9fee"/>
+                            <stop offset=".69" stop-color="#559ced"/>
+                            <stop offset=".78" stop-color="#4a97e9"/>
+                            <stop offset=".86" stop-color="#3990e4"/>
+                            <stop offset=".93" stop-color="#2387de"/>
+                            <stop offset=".99" stop-color="#087bd6"/>
+                            <stop offset="1" stop-color="#0078d4"/>
+                        </radialGradient>
+                    </defs>
+                    <title>Icon-networking-81</title>
+                    <circle cx="9" cy="9" r="8.5" fill="url(#ygc5_9)"/>
+                    <circle cx="9" cy="9" r="7.4" fill="#fff"/>
+                    <g clip-path="url(#ygc5_7)">
+                        <path fill="#5e9624" d="m10.43 8.19 2.73 2.88-.77.8-3.5-3.68 3.45-3.63.77.8-2.68 2.83z"/>
+                        <path fill="#86d633" d="m13.16 11.07-2.73-2.88-.76.8 2.72 2.88.77-.8z"/>
+                    </g>
+                    <g clip-path="url(#ygc5_8)">
+                        <path fill="#5e9624" d="m7.26 9.76-2.72 2.88.76.8 3.5-3.68-3.45-3.63-.77.8 2.68 2.83z"/>
+                        <path fill="#86d633" d="m4.54 12.64 2.72-2.88.76.8-2.72 2.88-.76-.8z"/>
+                    </g>
+                </g>
+            </svg>
+            <g transform=" translate(30 22)"/>
+        </g>
+        <g id="detailNodeStyleTemplate" transform="translate(552 105)">
+            <svg width="30" height="30" preserveAspectRatio="none" viewBox="0 0 18 18" fill="msportalfx-svg-placeholder" role="presentation" focusable="false">
+                <g>
+                    <title/>
+                    <defs>
+                        <linearGradient id="ygc5_10" x1="9.88" y1="8.59" x2="11.52" y2="10.23" gradientTransform="rotate(-.08 -285.464 -1454.08)" gradientUnits="userSpaceOnUse">
+                            <stop offset="0" stop-color="#86d633"/>
+                            <stop offset="1" stop-color="#5e9624"/>
+                        </linearGradient>
+                        <linearGradient id="ygc5_11" x1="6.18" y1="8.59" x2="7.81" y2="10.23" gradientUnits="userSpaceOnUse">
+                            <stop offset="0" stop-color="#86d633"/>
+                            <stop offset="1" stop-color="#5e9624"/>
+                        </linearGradient>
+                        <linearGradient id="ygc5_12" x1="2.48" y1="8.59" x2="4.11" y2="10.23" gradientUnits="userSpaceOnUse">
+                            <stop offset="0" stop-color="#86d633"/>
+                            <stop offset="1" stop-color="#5e9624"/>
+                        </linearGradient>
+                    </defs>
+                    <title>Icon-networking-61</title>
+                    <circle cx="12.74" cy="8.99" r="1.16" fill="url(#ygc5_10)"/>
+                    <circle cx="9.04" cy="9" r="1.16" fill="url(#ygc5_11)"/>
+                    <circle cx="5.34" cy="9" r="1.16" fill="url(#ygc5_12)"/>
+                    <path d="m6.182 13.638-.664.665a.3.3 0 0 1-.424 0L.18 9.404a.6.6 0 0 1-.001-.848l.663-.666 5.34 5.324a.3.3 0 0 1 0 .425Z" fill="#50e6ff"/>
+                    <path d="m5.418 3.708.666.664a.3.3 0 0 1 0 .424L.838 10.057l-.666-.663a.6.6 0 0 1-.001-.849L4.994 3.71a.3.3 0 0 1 .424 0Z" fill="#1490df"/>
+                    <path d="m17.157 7.88.663.666a.6.6 0 0 1 0 .848l-4.915 4.9a.3.3 0 0 1-.424 0l-.664-.666a.3.3 0 0 1 0-.424l5.34-5.324Z" fill="#50e6ff"/>
+                    <path d="m17.818 9.387-.665.664-5.247-5.261a.3.3 0 0 1 0-.425l.674-.67a.3.3 0 0 1 .424 0l4.823 4.836a.6.6 0 0 1-.002.849Z" fill="#1490df"/>
+                </g>
+            </svg>
+            <g transform=" translate(30 22)"/>
+        </g>
+        <g id="detailNodeStyleTemplate" transform="translate(422 186)">
+            <svg width="30" height="30" preserveAspectRatio="none" viewBox="0 0 18 18" fill="msportalfx-svg-placeholder" role="presentation" focusable="false">
+                <g>
+                    <title/>
+                    <defs>
+                        <clipPath id="ygc5_13">
+                            <path d="M10.58 8.34 13 10.92a.22.22 0 0 1 0 .3l-.47.49a.2.2 0 0 1-.3 0L9 8.34A.22.22 0 0 1 9 8l3.15-3.32a.2.2 0 0 1 .3 0l.47.49a.23.23 0 0 1 0 .31L10.58 8a.22.22 0 0 0 0 .34Z" fill="none"/>
+                        </clipPath>
+                        <clipPath id="ygc5_14">
+                            <path d="m7.11 9.91-2.43 2.57a.23.23 0 0 0 0 .31l.47.49a.2.2 0 0 0 .3 0l3.2-3.37a.22.22 0 0 0 0-.3L5.5 6.29a.2.2 0 0 0-.3 0l-.47.49a.22.22 0 0 0 0 .3l2.38 2.53a.2.2 0 0 1 0 .3Z" fill="none"/>
+                        </clipPath>
+                        <radialGradient id="ygc5_15" cx="46.42" cy="43.21" r="9" gradientTransform="matrix(.94 0 0 .94 -34.84 -31.81)" gradientUnits="userSpaceOnUse">
+                            <stop offset=".18" stop-color="#5ea0ef"/>
+                            <stop offset=".56" stop-color="#5c9fee"/>
+                            <stop offset=".69" stop-color="#559ced"/>
+                            <stop offset=".78" stop-color="#4a97e9"/>
+                            <stop offset=".86" stop-color="#3990e4"/>
+                            <stop offset=".93" stop-color="#2387de"/>
+                            <stop offset=".99" stop-color="#087bd6"/>
+                            <stop offset="1" stop-color="#0078d4"/>
+                        </radialGradient>
+                    </defs>
+                    <title>Icon-networking-81</title>
+                    <circle cx="9" cy="9" r="8.5" fill="url(#ygc5_15)"/>
+                    <circle cx="9" cy="9" r="7.4" fill="#fff"/>
+                    <g clip-path="url(#ygc5_13)">
+                        <path fill="#5e9624" d="m10.43 8.19 2.73 2.88-.77.8-3.5-3.68 3.45-3.63.77.8-2.68 2.83z"/>
+                        <path fill="#86d633" d="m13.16 11.07-2.73-2.88-.76.8 2.72 2.88.77-.8z"/>
+                    </g>
+                    <g clip-path="url(#ygc5_14)">
+                        <path fill="#5e9624" d="m7.26 9.76-2.72 2.88.76.8 3.5-3.68-3.45-3.63-.77.8 2.68 2.83z"/>
+                        <path fill="#86d633" d="m4.54 12.64 2.72-2.88.76.8-2.72 2.88-.76-.8z"/>
+                    </g>
+                </g>
+            </svg>
+            <g transform=" translate(30 22)"/>
+        </g>
+        <g id="detailNodeStyleTemplate" transform="translate(552 186)">
+            <svg width="30" height="30" preserveAspectRatio="none" viewBox="0 0 18 18" fill="msportalfx-svg-placeholder" role="presentation" focusable="false">
+                <g>
+                    <title/>
+                    <defs>
+                        <linearGradient id="ygc5_16" x1="9.88" y1="8.59" x2="11.52" y2="10.23" gradientTransform="rotate(-.08 -285.464 -1454.08)" gradientUnits="userSpaceOnUse">
+                            <stop offset="0" stop-color="#86d633"/>
+                            <stop offset="1" stop-color="#5e9624"/>
+                        </linearGradient>
+                        <linearGradient id="ygc5_17" x1="6.18" y1="8.59" x2="7.81" y2="10.23" gradientUnits="userSpaceOnUse">
+                            <stop offset="0" stop-color="#86d633"/>
+                            <stop offset="1" stop-color="#5e9624"/>
+                        </linearGradient>
+                        <linearGradient id="ygc5_18" x1="2.48" y1="8.59" x2="4.11" y2="10.23" gradientUnits="userSpaceOnUse">
+                            <stop offset="0" stop-color="#86d633"/>
+                            <stop offset="1" stop-color="#5e9624"/>
+                        </linearGradient>
+                    </defs>
+                    <title>Icon-networking-61</title>
+                    <circle cx="12.74" cy="8.99" r="1.16" fill="url(#ygc5_16)"/>
+                    <circle cx="9.04" cy="9" r="1.16" fill="url(#ygc5_17)"/>
+                    <circle cx="5.34" cy="9" r="1.16" fill="url(#ygc5_18)"/>
+                    <path d="m6.182 13.638-.664.665a.3.3 0 0 1-.424 0L.18 9.404a.6.6 0 0 1-.001-.848l.663-.666 5.34 5.324a.3.3 0 0 1 0 .425Z" fill="#50e6ff"/>
+                    <path d="m5.418 3.708.666.664a.3.3 0 0 1 0 .424L.838 10.057l-.666-.663a.6.6 0 0 1-.001-.849L4.994 3.71a.3.3 0 0 1 .424 0Z" fill="#1490df"/>
+                    <path d="m17.157 7.88.663.666a.6.6 0 0 1 0 .848l-4.915 4.9a.3.3 0 0 1-.424 0l-.664-.666a.3.3 0 0 1 0-.424l5.34-5.324Z" fill="#50e6ff"/>
+                    <path d="m17.818 9.387-.665.664-5.247-5.261a.3.3 0 0 1 0-.425l.674-.67a.3.3 0 0 1 .424 0l4.823 4.836a.6.6 0 0 1-.002.849Z" fill="#1490df"/>
+                </g>
+            </svg>
+            <g transform=" translate(30 22)"/>
+        </g>
+        <g id="detailNodeStyleTemplate" transform="translate(422 267)">
+            <svg width="30" height="30" preserveAspectRatio="none" viewBox="0 0 18 18" fill="msportalfx-svg-placeholder" role="presentation" focusable="false">
+                <g>
+                    <title/>
+                    <defs>
+                        <clipPath id="ygc5_19">
+                            <path d="M10.58 8.34 13 10.92a.22.22 0 0 1 0 .3l-.47.49a.2.2 0 0 1-.3 0L9 8.34A.22.22 0 0 1 9 8l3.15-3.32a.2.2 0 0 1 .3 0l.47.49a.23.23 0 0 1 0 .31L10.58 8a.22.22 0 0 0 0 .34Z" fill="none"/>
+                        </clipPath>
+                        <clipPath id="ygc5_20">
+                            <path d="m7.11 9.91-2.43 2.57a.23.23 0 0 0 0 .31l.47.49a.2.2 0 0 0 .3 0l3.2-3.37a.22.22 0 0 0 0-.3L5.5 6.29a.2.2 0 0 0-.3 0l-.47.49a.22.22 0 0 0 0 .3l2.38 2.53a.2.2 0 0 1 0 .3Z" fill="none"/>
+                        </clipPath>
+                        <radialGradient id="ygc5_21" cx="46.42" cy="43.21" r="9" gradientTransform="matrix(.94 0 0 .94 -34.84 -31.81)" gradientUnits="userSpaceOnUse">
+                            <stop offset=".18" stop-color="#5ea0ef"/>
+                            <stop offset=".56" stop-color="#5c9fee"/>
+                            <stop offset=".69" stop-color="#559ced"/>
+                            <stop offset=".78" stop-color="#4a97e9"/>
+                            <stop offset=".86" stop-color="#3990e4"/>
+                            <stop offset=".93" stop-color="#2387de"/>
+                            <stop offset=".99" stop-color="#087bd6"/>
+                            <stop offset="1" stop-color="#0078d4"/>
+                        </radialGradient>
+                    </defs>
+                    <title>Icon-networking-81</title>
+                    <circle cx="9" cy="9" r="8.5" fill="url(#ygc5_21)"/>
+                    <circle cx="9" cy="9" r="7.4" fill="#fff"/>
+                    <g clip-path="url(#ygc5_19)">
+                        <path fill="#5e9624" d="m10.43 8.19 2.73 2.88-.77.8-3.5-3.68 3.45-3.63.77.8-2.68 2.83z"/>
+                        <path fill="#86d633" d="m13.16 11.07-2.73-2.88-.76.8 2.72 2.88.77-.8z"/>
+                    </g>
+                    <g clip-path="url(#ygc5_20)">
+                        <path fill="#5e9624" d="m7.26 9.76-2.72 2.88.76.8 3.5-3.68-3.45-3.63-.77.8 2.68 2.83z"/>
+                        <path fill="#86d633" d="m4.54 12.64 2.72-2.88.76.8-2.72 2.88-.76-.8z"/>
+                    </g>
+                </g>
+            </svg>
+            <g transform=" translate(30 22)"/>
+        </g>
+        <g id="detailNodeStyleTemplate" transform="translate(552 267)">
+            <svg width="30" height="30" preserveAspectRatio="none" viewBox="0 0 18 18" fill="msportalfx-svg-placeholder" role="presentation" focusable="false">
+                <g>
+                    <title/>
+                    <defs>
+                        <linearGradient id="ygc5_22" x1="9.88" y1="8.59" x2="11.52" y2="10.23" gradientTransform="rotate(-.08 -285.464 -1454.08)" gradientUnits="userSpaceOnUse">
+                            <stop offset="0" stop-color="#86d633"/>
+                            <stop offset="1" stop-color="#5e9624"/>
+                        </linearGradient>
+                        <linearGradient id="ygc5_23" x1="6.18" y1="8.59" x2="7.81" y2="10.23" gradientUnits="userSpaceOnUse">
+                            <stop offset="0" stop-color="#86d633"/>
+                            <stop offset="1" stop-color="#5e9624"/>
+                        </linearGradient>
+                        <linearGradient id="ygc5_24" x1="2.48" y1="8.59" x2="4.11" y2="10.23" gradientUnits="userSpaceOnUse">
+                            <stop offset="0" stop-color="#86d633"/>
+                            <stop offset="1" stop-color="#5e9624"/>
+                        </linearGradient>
+                    </defs>
+                    <title>Icon-networking-61</title>
+                    <circle cx="12.74" cy="8.99" r="1.16" fill="url(#ygc5_22)"/>
+                    <circle cx="9.04" cy="9" r="1.16" fill="url(#ygc5_23)"/>
+                    <circle cx="5.34" cy="9" r="1.16" fill="url(#ygc5_24)"/>
+                    <path d="m6.182 13.638-.664.665a.3.3 0 0 1-.424 0L.18 9.404a.6.6 0 0 1-.001-.848l.663-.666 5.34 5.324a.3.3 0 0 1 0 .425Z" fill="#50e6ff"/>
+                    <path d="m5.418 3.708.666.664a.3.3 0 0 1 0 .424L.838 10.057l-.666-.663a.6.6 0 0 1-.001-.849L4.994 3.71a.3.3 0 0 1 .424 0Z" fill="#1490df"/>
+                    <path d="m17.157 7.88.663.666a.6.6 0 0 1 0 .848l-4.915 4.9a.3.3 0 0 1-.424 0l-.664-.666a.3.3 0 0 1 0-.424l5.34-5.324Z" fill="#50e6ff"/>
+                    <path d="m17.818 9.387-.665.664-5.247-5.261a.3.3 0 0 1 0-.425l.674-.67a.3.3 0 0 1 .424 0l4.823 4.836a.6.6 0 0 1-.002.849Z" fill="#1490df"/>
+                </g>
+            </svg>
+            <g transform=" translate(30 22)"/>
+        </g>
+        <g id="detailNodeStyleTemplate" transform="translate(422 348)">
+            <svg width="30" height="30" preserveAspectRatio="none" viewBox="0 0 18 18" fill="msportalfx-svg-placeholder" role="presentation" focusable="false">
+                <g>
+                    <title/>
+                    <defs>
+                        <clipPath id="ygc5_25">
+                            <path d="M10.58 8.34 13 10.92a.22.22 0 0 1 0 .3l-.47.49a.2.2 0 0 1-.3 0L9 8.34A.22.22 0 0 1 9 8l3.15-3.32a.2.2 0 0 1 .3 0l.47.49a.23.23 0 0 1 0 .31L10.58 8a.22.22 0 0 0 0 .34Z" fill="none"/>
+                        </clipPath>
+                        <clipPath id="ygc5_26">
+                            <path d="m7.11 9.91-2.43 2.57a.23.23 0 0 0 0 .31l.47.49a.2.2 0 0 0 .3 0l3.2-3.37a.22.22 0 0 0 0-.3L5.5 6.29a.2.2 0 0 0-.3 0l-.47.49a.22.22 0 0 0 0 .3l2.38 2.53a.2.2 0 0 1 0 .3Z" fill="none"/>
+                        </clipPath>
+                        <radialGradient id="ygc5_27" cx="46.42" cy="43.21" r="9" gradientTransform="matrix(.94 0 0 .94 -34.84 -31.81)" gradientUnits="userSpaceOnUse">
+                            <stop offset=".18" stop-color="#5ea0ef"/>
+                            <stop offset=".56" stop-color="#5c9fee"/>
+                            <stop offset=".69" stop-color="#559ced"/>
+                            <stop offset=".78" stop-color="#4a97e9"/>
+                            <stop offset=".86" stop-color="#3990e4"/>
+                            <stop offset=".93" stop-color="#2387de"/>
+                            <stop offset=".99" stop-color="#087bd6"/>
+                            <stop offset="1" stop-color="#0078d4"/>
+                        </radialGradient>
+                    </defs>
+                    <title>Icon-networking-81</title>
+                    <circle cx="9" cy="9" r="8.5" fill="url(#ygc5_27)"/>
+                    <circle cx="9" cy="9" r="7.4" fill="#fff"/>
+                    <g clip-path="url(#ygc5_25)">
+                        <path fill="#5e9624" d="m10.43 8.19 2.73 2.88-.77.8-3.5-3.68 3.45-3.63.77.8-2.68 2.83z"/>
+                        <path fill="#86d633" d="m13.16 11.07-2.73-2.88-.76.8 2.72 2.88.77-.8z"/>
+                    </g>
+                    <g clip-path="url(#ygc5_26)">
+                        <path fill="#5e9624" d="m7.26 9.76-2.72 2.88.76.8 3.5-3.68-3.45-3.63-.77.8 2.68 2.83z"/>
+                        <path fill="#86d633" d="m4.54 12.64 2.72-2.88.76.8-2.72 2.88-.76-.8z"/>
+                    </g>
+                </g>
+            </svg>
+            <g transform=" translate(30 22)"/>
+        </g>
+        <g id="detailNodeStyleTemplate" transform="translate(552 348)">
+            <svg width="30" height="30" preserveAspectRatio="none" viewBox="0 0 18 18" fill="msportalfx-svg-placeholder" role="presentation" focusable="false">
+                <g>
+                    <title/>
+                    <defs>
+                        <linearGradient id="ygc5_28" x1="9.88" y1="8.59" x2="11.52" y2="10.23" gradientTransform="rotate(-.08 -285.464 -1454.08)" gradientUnits="userSpaceOnUse">
+                            <stop offset="0" stop-color="#86d633"/>
+                            <stop offset="1" stop-color="#5e9624"/>
+                        </linearGradient>
+                        <linearGradient id="ygc5_29" x1="6.18" y1="8.59" x2="7.81" y2="10.23" gradientUnits="userSpaceOnUse">
+                            <stop offset="0" stop-color="#86d633"/>
+                            <stop offset="1" stop-color="#5e9624"/>
+                        </linearGradient>
+                        <linearGradient id="ygc5_30" x1="2.48" y1="8.59" x2="4.11" y2="10.23" gradientUnits="userSpaceOnUse">
+                            <stop offset="0" stop-color="#86d633"/>
+                            <stop offset="1" stop-color="#5e9624"/>
+                        </linearGradient>
+                    </defs>
+                    <title>Icon-networking-61</title>
+                    <circle cx="12.74" cy="8.99" r="1.16" fill="url(#ygc5_28)"/>
+                    <circle cx="9.04" cy="9" r="1.16" fill="url(#ygc5_29)"/>
+                    <circle cx="5.34" cy="9" r="1.16" fill="url(#ygc5_30)"/>
+                    <path d="m6.182 13.638-.664.665a.3.3 0 0 1-.424 0L.18 9.404a.6.6 0 0 1-.001-.848l.663-.666 5.34 5.324a.3.3 0 0 1 0 .425Z" fill="#50e6ff"/>
+                    <path d="m5.418 3.708.666.664a.3.3 0 0 1 0 .424L.838 10.057l-.666-.663a.6.6 0 0 1-.001-.849L4.994 3.71a.3.3 0 0 1 .424 0Z" fill="#1490df"/>
+                    <path d="m17.157 7.88.663.666a.6.6 0 0 1 0 .848l-4.915 4.9a.3.3 0 0 1-.424 0l-.664-.666a.3.3 0 0 1 0-.424l5.34-5.324Z" fill="#50e6ff"/>
+                    <path d="m17.818 9.387-.665.664-5.247-5.261a.3.3 0 0 1 0-.425l.674-.67a.3.3 0 0 1 .424 0l4.823 4.836a.6.6 0 0 1-.002.849Z" fill="#1490df"/>
+                </g>
+            </svg>
+            <g transform=" translate(30 22)"/>
+        </g>
+        <foreignObject x="0" y="0" width="150" height="19" transform="translate(0 202)" style="text-align: center;">
+            <div xmlns="http://www.w3.org/1999/xhtml" title="caf-vwan-centralus" style="overflow: hidden; white-space: nowrap; text-overflow: ellipsis; width: 150px; height: 19px; font-family: &quot;Segoe UI&quot;; font-size: 16px;">caf-vwan-centralus</div>
+        </foreignObject>
+        <foreignObject x="0" y="0" width="150" height="19" transform="translate(130 202)" style="text-align: center;">
+            <div xmlns="http://www.w3.org/1999/xhtml" title="caf-hub-centralus" style="overflow: hidden; white-space: nowrap; text-overflow: ellipsis; width: 150px; height: 19px; font-family: &quot;Segoe UI&quot;; font-size: 16px;">caf-hub-centralus</div>
+        </foreignObject>
+        <foreignObject x="0" y="0" width="150" height="19" transform="translate(362 0)" style="text-align: center;">
+            <div xmlns="http://www.w3.org/1999/xhtml" title="caf-hub-vpn-gateway-centralus" style="overflow: hidden; white-space: nowrap; text-overflow: ellipsis; width: 150px; height: 19px; font-family: &quot;Segoe UI&quot;; font-size: 16px;">caf-hub-vpn-gateway-centralus</div>
+        </foreignObject>
+        <foreignObject x="0" y="0" width="150" height="19" transform="translate(492 0)" style="text-align: center;">
+            <div xmlns="http://www.w3.org/1999/xhtml" title="hub-vpn-gateway-config" style="overflow: hidden; white-space: nowrap; text-overflow: ellipsis; width: 150px; height: 19px; font-family: &quot;Segoe UI&quot;; font-size: 16px;">hub-vpn-gateway-config</div>
+        </foreignObject>
+        <foreignObject x="0" y="0" width="150" height="19" transform="translate(362 81)" style="text-align: center;">
+            <div xmlns="http://www.w3.org/1999/xhtml" title="connectivity" style="overflow: hidden; white-space: nowrap; text-overflow: ellipsis; width: 150px; height: 19px; font-family: &quot;Segoe UI&quot;; font-size: 16px;">connectivity</div>
+        </foreignObject>
+        <foreignObject x="0" y="0" width="150" height="19" transform="translate(492 81)" style="text-align: center;">
+            <div xmlns="http://www.w3.org/1999/xhtml" title="connectivity-apps" style="overflow: hidden; white-space: nowrap; text-overflow: ellipsis; width: 150px; height: 19px; font-family: &quot;Segoe UI&quot;; font-size: 16px;">connectivity-apps</div>
+        </foreignObject>
+        <foreignObject x="0" y="0" width="150" height="19" transform="translate(362 162)" style="text-align: center;">
+            <div xmlns="http://www.w3.org/1999/xhtml" title="caf-shared-services-staging-connection" style="overflow: hidden; white-space: nowrap; text-overflow: ellipsis; width: 150px; height: 19px; font-family: &quot;Segoe UI&quot;; font-size: 16px;">caf-shared-services-staging-connection</div>
+        </foreignObject>
+        <foreignObject x="0" y="0" width="150" height="19" transform="translate(492 162)" style="text-align: center;">
+            <div xmlns="http://www.w3.org/1999/xhtml" title="shared-services-staging" style="overflow: hidden; white-space: nowrap; text-overflow: ellipsis; width: 150px; height: 19px; font-family: &quot;Segoe UI&quot;; font-size: 16px;">shared-services-staging</div>
+        </foreignObject>
+        <foreignObject x="0" y="0" width="150" height="19" transform="translate(362 243)" style="text-align: center;">
+            <div xmlns="http://www.w3.org/1999/xhtml" title="caf-shared-services-prod-connection" style="overflow: hidden; white-space: nowrap; text-overflow: ellipsis; width: 150px; height: 19px; font-family: &quot;Segoe UI&quot;; font-size: 16px;">caf-shared-services-prod-connection</div>
+        </foreignObject>
+        <foreignObject x="0" y="0" width="150" height="19" transform="translate(492 243)" style="text-align: center;">
+            <div xmlns="http://www.w3.org/1999/xhtml" title="shared-services-prod" style="overflow: hidden; white-space: nowrap; text-overflow: ellipsis; width: 150px; height: 19px; font-family: &quot;Segoe UI&quot;; font-size: 16px;">shared-services-prod</div>
+        </foreignObject>
+        <foreignObject x="0" y="0" width="150" height="19" transform="translate(362 324)" style="text-align: center;">
+            <div xmlns="http://www.w3.org/1999/xhtml" title="aks-lz-dev-connection" style="overflow: hidden; white-space: nowrap; text-overflow: ellipsis; width: 150px; height: 19px; font-family: &quot;Segoe UI&quot;; font-size: 16px;">aks-lz-dev-connection</div>
+        </foreignObject>
+        <foreignObject x="0" y="0" width="150" height="19" transform="translate(492 324)" style="text-align: center;">
+            <div xmlns="http://www.w3.org/1999/xhtml" title="aks-lz-dev" style="overflow: hidden; white-space: nowrap; text-overflow: ellipsis; width: 150px; height: 19px; font-family: &quot;Segoe UI&quot;; font-size: 16px;">aks-lz-dev</div>
+        </foreignObject>
+    </g>
+</svg>
