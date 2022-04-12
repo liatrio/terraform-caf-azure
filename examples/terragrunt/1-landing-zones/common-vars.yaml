@@ -1,0 +1,12 @@
+tenant_id: id_of_the_tenant_to_use
+terraform_state_subscription_id: id_of_your_state_storage_account
+prefix: "caf"
+location: "centralus"
+billing_account_name: "a0000000-000a-0000-aa00-000a0aa00000:000000a0-00a0-000a-aaaa-00aa00a000a0_0000-00-00"
+billing_profile_name: "ABCD1-DEFG-HI2-JKL"
+invoice_section_name: "3MNO-PQRS-TUV-WXY"
+connectivity_subscription_id: 0000a000-a000-0000-a000-aa0000aaa000
+pay-as-you-go_subscription_id: 0000a000-a000-0000-a000-aa0000aaa000
+shared_services_staging_subscription_id: 0000a000-a000-0000-a000-aa0000aaa000
+connectivity_dns_servers:
+  - "0.0.0.0"
