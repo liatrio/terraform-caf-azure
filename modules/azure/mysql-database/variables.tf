@@ -45,3 +45,9 @@ variable "connectivity_resource_group_name" {
   type        = string
   description = "Connectivity resource group"
 }
+
+variable "database_password_change_date" {
+  type        = string
+  description = "Tracks database password change date in YYYY-MM-DD format. Changing this value causes a new random password to be generated."
+  default     = "0001-01-01"
+}

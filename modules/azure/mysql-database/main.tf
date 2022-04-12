@@ -16,7 +16,7 @@ resource "random_password" "sql_pass" {
   special          = true
   override_special = "!#$%&*()-_=+[]{}<>:?"
   keepers = {
-    last_updated = "2022-04-01"
+    last_updated = var.database_password_change_date
   }
 }
 
