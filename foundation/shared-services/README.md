@@ -1,6 +1,6 @@
 # Shared Services
 
-The goal of Shared Services is to create the infrastrusture necessary for hosting a hub of reusable workloads.
+The goal of Shared Services is to create the infrastructure necessary for hosting a hub of reusable workloads.
 
 Shared Services is split into two stages: core and applications.
 
