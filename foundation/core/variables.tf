@@ -115,3 +115,12 @@ variable "enable_point_to_site_vpn" {
   description = "If enabled, creates User Point to Site VPN configuration in CAF foundation."
   default     = true
 }
+
+variable "slack_func_identifier" {
+  type    = string
+  default = "slack-alert-func"
+}
+
+variable "slack_webhook_url" {
+  type = string
+}
