@@ -26,7 +26,7 @@ The application components are the deployed workloads that facilitate use of an 
   - Cert Manager
   - Ingress Controller
   - External DNS
-- github-runners
+- github-runners (runners host workflow deployments within CAF for github actions.)
   - github-runners
   - github-runners controller
 - monitoring
