@@ -60,3 +60,7 @@ There are several default Policy Sets (Initiatives) assigned to the Management g
 Any dynamically created management groups can have Custom or Built-in Policy sets applied by specificing the Set ids in either tfvars or terragrunt.
 
 The Policy Sets utilized in this framework are created via a separate repo that has a GitHub Action for creating and updating Policies and Policy Sets. For more information check out the [liatrio/azure-policies](https://github.com/liatrio/azure-policies) repo.
+
+## CAF Architecture Diagram
+
+![](./images/caf-architecture.png)
