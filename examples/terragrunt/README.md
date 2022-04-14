@@ -1,5 +1,11 @@
 # Overview
 
+## Note
+* These sample files are only deploying one `shared-services` as well as one `landing-zones`. In a real-world environment, one would most likely have more than that due to different existing environments. Nonetheless, these samples should help quickstart your Azure journey.
+* All the required inputs are documented and referenced in each module's `README.md` file.
+
+---
+
 ## Folder structure
 
 To be able to properly use our Terragrunt files, we suggest setting up your folder structure like so:

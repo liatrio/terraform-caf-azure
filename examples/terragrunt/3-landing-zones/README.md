@@ -18,6 +18,13 @@ To be able to properly use our Terragrunt files, we suggest setting up your fold
 * [subscriptions/terragrunt.hcl](./subscriptions/terragrunt.hcl)
 * [core/terragrunt.hcl](./core/terragrunt.hcl)
 
+# Required inputs
+
+These links reference the Terraform modules' `README.md` files at the "Required Inputs" section.
+
+* [subscription](https://github.com/liatrio/terraform-caf-azure/tree/main/landing-zones/aks)
+* [core](https://github.com/liatrio/terraform-caf-azure/tree/main/landing-zones/aks)
+
 # Deploying the Liatrio-CAF landing-zone resources
 
 **You will need to modify `../common_vars.yaml` to use your own infrastructure values**
