@@ -23,7 +23,7 @@
 These links reference the Terraform modules' `README.md` files at the "Required Inputs" section.
 
 * [subscriptions](https://github.com/liatrio/terraform-caf-azure/tree/main/subscriptions/foundation#variables)
-* active-directory (WIP)
+* [active-directory](../../../foundation/active-directory/variables.tf)
 * [core](https://github.com/liatrio/terraform-caf-azure/tree/main/foundation/core#inputs-required)
 
 # Deploying the Liatrio-CAF foundation resources

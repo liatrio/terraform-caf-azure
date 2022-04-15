@@ -22,8 +22,8 @@ To be able to properly use our Terragrunt files, we suggest setting up your fold
 
 These links reference the Terraform modules' `README.md` files at the "Required Inputs" section.
 
-* [subscription](https://github.com/liatrio/terraform-caf-azure/tree/main/landing-zones/aks)
-* [core](https://github.com/liatrio/terraform-caf-azure/tree/main/landing-zones/aks)
+* [subscription](../../../subscriptions/landing-zone/README.md)
+* [core](../../../landing-zones/aks/core/variables.tf)
 
 # Deploying the Liatrio-CAF landing-zone resources
 

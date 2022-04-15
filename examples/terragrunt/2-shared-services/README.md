@@ -34,8 +34,8 @@ dependency "subscription" {
 
 These links reference the Terraform modules' `README.md` files at the "Required Inputs" section.
 
-* subscriptions (WIP)
-* [core](https://github.com/liatrio/terraform-caf-azure/blob/main/foundation/shared-services/core/README.md)
+* [subscription](../../../subscriptions/landing-zone/README.md)
+* [core](../../../foundation/shared-services/core/README.md)
 
 # Deploying the Liatrio-CAF shared-services resources
 
