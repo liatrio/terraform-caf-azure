@@ -1,7 +1,7 @@
 # Overview
 
 ## Note
-* These sample files are only deploying one `shared-services` as well as one `landing-zones`. In a real-world environment, one would most likely have more than that due to different existing environments. Nonetheless, these samples should help quickstart your Azure journey.
+* These sample files are only deploying one shared-services subscription as well as one landing zone. In a real-world environment, you would most likely have more than one landing zone and either one shared-services or a dev, qa, and prod shared services. Nonetheless, the samples are intended to quickstart your Azure journey.
 * All the required inputs are documented and referenced in each module's `README.md` file.
 
 ---
