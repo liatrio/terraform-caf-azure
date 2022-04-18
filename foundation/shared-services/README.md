@@ -11,7 +11,6 @@ The core components are the AKS cluster itself, along with the required resource
 - Resource Group
 - AKS Cluster
 - Virtual Network
-- Privatelink DNS Zone for Kubernetes(a prexisting)
 - Virtual Network connection to a pre-existing Virtual Hub
 - AAD Managed Identities (Each identity is scoped and assigned roles to support its specific service)
 - KeyVault (This instance of keyVault is only to be utilized by shared services workloads)
