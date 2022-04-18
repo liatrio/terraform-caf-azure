@@ -35,3 +35,18 @@ variable "vnet_name" {
   type        = string
   description = "Name assigned to VNET"
 }
+
+variable "privatelink_mysql_dns_zone" {
+  type        = string
+  description = "Privatelink DNS zone for mysql"
+}
+
+variable "connectivity_resource_group_name" {
+  type        = string
+  description = "Connectivity resource group"
+}
+
+variable "database_password_change_date" {
+  type        = string
+  description = "Tracks database password change date in YYYY-MM-DD format. Changing this value causes a new random password to be generated."
+}

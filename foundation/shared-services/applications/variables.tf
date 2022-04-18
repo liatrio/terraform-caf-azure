@@ -5,7 +5,6 @@ variable "issuer_server" {
 }
 
 variable "issuer_email" {
-  default     = "cloudservices@liatr.io"
   type        = string
   description = "Email address to associate with cert issuer"
 }

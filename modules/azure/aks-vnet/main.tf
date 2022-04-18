@@ -16,7 +16,11 @@ resource "azurerm_network_security_group" "aks_vnet" {
 }
 
 resource "azurerm_network_security_rule" "aks_vnet" {
-  for_each                    = local.nsgrules
+  for_each = {
+    for rule_name, rule in local.nsgrules : rule_name => rule
+    if rule.include
+  }
+
   name                        = each.key
   direction                   = each.value.direction
   description                 = each.value.description
