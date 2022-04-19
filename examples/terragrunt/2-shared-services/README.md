@@ -30,7 +30,12 @@ dependency "subscription" {
 * [staging/subscriptions/terragrunt.hcl](./staging/subscription/terragrunt.hcl)
 * [staging/core/terragrunt.hcl](./staging/core/terragrunt.hcl)
 
+# Required inputs
 
+These links reference the Terraform modules' `README.md` files at the "Required Inputs" section.
+
+* [subscription](../../../subscriptions/landing-zone/README.md)
+* [core](../../../foundation/shared-services/core/README.md)
 
 # Deploying the Liatrio-CAF shared-services resources
 
