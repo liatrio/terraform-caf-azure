@@ -1,4 +1,4 @@
-variable "group_prefix" {
+variable "prefix" {
   type    = string
   default = "caf"
 }
