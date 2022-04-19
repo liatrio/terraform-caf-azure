@@ -6,7 +6,6 @@ variable "environment" {
 variable "prefix" {
   description = "A prefix used for resources"
   type        = string
-  default     = "caf"
 }
 
 variable "location" {

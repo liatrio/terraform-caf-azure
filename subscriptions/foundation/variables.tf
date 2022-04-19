@@ -1,6 +1,5 @@
-variable "group_prefix" {
-  type    = string
-  default = "caf"
+variable "prefix" {
+  type = string
 }
 
 variable "billing_account_name" {

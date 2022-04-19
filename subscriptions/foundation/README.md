@@ -4,7 +4,7 @@ This Terraform module creates subscriptions required by the [foundation](./found
 
 ## Variables
 
- - group_prefix: prefix to add to resource names
+ - prefix: prefix to add to resource names
  - billing_account_name: MCA billing account name
  - billing_profile_name: The billing profile name in the MCA billing account
  - invoice_section_name: The invoice section name in the MCA billing account
