@@ -1,6 +1,5 @@
 variable "prefix" {
   type    = string
-  default = "caf"
 }
 
 variable "billing_account_name" {
