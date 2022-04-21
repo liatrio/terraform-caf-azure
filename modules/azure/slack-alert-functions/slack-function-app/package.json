@@ -1,0 +1,13 @@
+{
+  "name": "slack-alert-function-app",
+  "version": "1.0.0",
+  "description": "",
+  "scripts": {
+    "start": "func start",
+    "test": "echo \"No tests yet...\""
+  },
+  "dependencies": {
+    "@azure/functions": "^3.0.0",
+    "axios": "^0.26.1"
+  }
+}
