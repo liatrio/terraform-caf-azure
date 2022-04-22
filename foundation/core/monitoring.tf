@@ -9,6 +9,6 @@ resource "azurerm_log_analytics_workspace" "log_analytics_workspace" {
   name                = "log-${var.prefix}-management"
   location            = azurerm_resource_group.caf_management.location
   resource_group_name = azurerm_resource_group.caf_management.name
-  sku                 = "PerGB2018"
+  sku                 = var.log_analytics_ws_sku
   retention_in_days   = 30
 }
