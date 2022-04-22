@@ -58,6 +58,7 @@ resource "azurerm_kubernetes_cluster" "aks" {
 
     oms_agent {
       enabled = false
+      log_analytics_workspace_id = var.log_analytics_workspace_id
     }
   }
 
