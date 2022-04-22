@@ -10,6 +10,14 @@ terraform {
   }
 }
 
+data "azurerm_client_config" "azurerm_provider" {
+  provider = azurerm
+}
+
+data "azurerm_subscription" "subscription" {
+  subscription_id = data.azurerm_client_config.azurerm_provider.subscription_id
+}
+
 resource "azurerm_resource_group" "main" {
   name     = "rg-${var.slack_func_identifier}"
   location = var.location
@@ -104,5 +112,39 @@ resource "azurerm_function_app" "main" {
   site_config {
     linux_fx_version          = "node|16"
     use_32_bit_worker_process = false
+  }
+}
+
+resource "azurerm_monitor_action_group" "example" {
+  name                = "action-group-${var.slack_func_identifier}"
+  resource_group_name = azurerm_resource_group.main.name
+  short_name          = "slack-ag"
+
+  webhook_receiver {
+    name                    = "callazurefuncapi"
+    service_uri             = azurerm_function_app.main.default_hostname
+    use_common_alert_schema = false
+  }
+}
+
+resource "azurerm_consumption_budget_subscription" "example" {
+  name            = "budget-${var.slack_func_identifier}"
+  subscription_id = data.azurerm_subscription.subscription.id
+  amount          = 1000
+  time_grain      = "Monthly"
+
+  time_period {
+    start_date = "2022-06-01T00:00:00Z"
+    end_date   = "2022-07-01T00:00:00Z"
+  }
+
+  notification {
+    enabled   = true
+    threshold = 1.0
+    operator  = "EqualTo"
+
+    contact_groups = [
+      azurerm_monitor_action_group.example.id,
+    ]
   }
 }
