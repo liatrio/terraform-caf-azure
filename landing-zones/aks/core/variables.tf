@@ -69,8 +69,3 @@ variable "parent_dns_zone_name" {
   type        = string
   description = "Optional parent DNS zone name which causes a child zone to be created"
 }
-
-variable "log_analytics_workspace" {
-  type = string
-  description = "Log analytics workspace to link the AKS cluster to" 
-}

@@ -76,6 +76,6 @@ variable "aks_dns_service_ip" {
 }
 
 variable "log_analytics_workspace" {
-  type = string
-  description = "Log analytics workspace to link the AKS cluster to" 
+  type        = string
+  description = "Log analytics workspace to link the AKS cluster to"
 }
