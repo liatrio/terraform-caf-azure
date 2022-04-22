@@ -93,7 +93,7 @@ variable "default_policies_enabled" {
 }
 
 variable "log_analytics_ws_sku" {
-  type = string
+  type        = string
   description = "SKU for the Log Analytics Workspace"
-  default = "PerGB2018"
+  default     = "PerGB2018"
 }
