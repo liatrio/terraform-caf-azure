@@ -1,6 +1,15 @@
 # Code adapted from:
 # https://github.com/dzeyelid/azure-cost-alert-webhook-to-slack/blob/main/iac/terraform/modules/mediation_functions/main.tf
 
+terraform {
+  required_providers {
+    azurerm = {
+      source  = "hashicorp/azurerm"
+      version = "~> 2.96.0"
+    }
+  }
+}
+
 resource "azurerm_resource_group" "main" {
   name     = "rg-${var.slack_func_identifier}"
   location = var.location
@@ -81,14 +90,19 @@ resource "azurerm_function_app" "main" {
   app_service_plan_id        = azurerm_app_service_plan.main.id
   storage_account_name       = azurerm_storage_account.func.name
   storage_account_access_key = azurerm_storage_account.func.primary_access_key
-  version                    = "~3"
+  version                    = "~4"
 
   app_settings = {
-    "APPINSIGHTS_INSTRUMENTATIONKEY" = azurerm_application_insights.main.instrumentation_key
-    "FUNCTIONS_WORKER_RUNTIME"       = "node"
-    "WEBSITE_NODE_DEFAULT_VERSION"   = "~16"
-    "slackWebhookUrl"                = var.slack_webhook_url
-    "WEBSITE_RUN_FROM_PACKAGE"       = "https://${azurerm_storage_account.func.name}.blob.core.windows.net/${azurerm_storage_container.deployments.name}/${azurerm_storage_blob.storage_blob.name}${data.azurerm_storage_account_blob_container_sas.storage_account_blob_container_sas.sas}",
-    # "AzureWebJobsStorage"            = ""
+    # maybe uncomment this for insights?
+    # "APPINSIGHTS_INSTRUMENTATIONKEY" = azurerm_application_insights.main.instrumentation_key
+    "FUNCTIONS_WORKER_RUNTIME"    = "node",
+    "slackWebhookUrl"             = var.slack_webhook_url,
+    "WEBSITE_RUN_FROM_PACKAGE"    = "https://${azurerm_storage_account.func.name}.blob.core.windows.net/${azurerm_storage_container.deployments.name}/${azurerm_storage_blob.storage_blob.name}${data.azurerm_storage_account_blob_container_sas.storage_account_blob_container_sas.sas}",
+    "AzureWebJobsDisableHomepage" = "true",
+  }
+
+  site_config {
+    linux_fx_version          = "node|16"
+    use_32_bit_worker_process = false
   }
 }
