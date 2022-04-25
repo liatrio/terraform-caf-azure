@@ -9,6 +9,13 @@ provider "azurerm" {
   features {}
 }
 
+provider "azurerm" {
+  alias           = "management"
+  subscription_id = var.management_subscription_id
+  features {}
+}
+
+
 module "liatrio_caf_shared_services" {
   # source = "git@github.com:liatrio/terraform-caf-azure//foundation/shared-services/core?ref=examples"
   source = "../../..//foundation/shared-services/core"
