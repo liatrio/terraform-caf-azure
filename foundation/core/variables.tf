@@ -97,3 +97,9 @@ variable "log_analytics_ws_sku" {
   description = "SKU for the Log Analytics Workspace"
   default     = "PerGB2018"
 }
+
+variable "enable_ms_defender" {
+  type        = bool
+  description = "Feature flag to enable MS Defender for Cloud"
+  default     = false
+}

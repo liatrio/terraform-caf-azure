@@ -69,3 +69,9 @@ variable "parent_dns_zone_name" {
   type        = string
   description = "Optional parent DNS zone name which causes a child zone to be created"
 }
+
+variable "enable_ms_defender" {
+  type        = bool
+  description = "Feature flag to enable MS Defender for Cloud"
+  default     = false
+}

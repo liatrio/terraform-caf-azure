@@ -14,6 +14,7 @@ resource "azurerm_log_analytics_workspace" "log_analytics_workspace" {
 }
 
 resource "azurerm_security_center_workspace" "defender" {
+  count        = var.enable_ms_defender == true ? 1 : 0
   scope        = data.azurerm_subscription.current.id
   workspace_id = azurerm_log_analytics_workspace.log_analytics_workspace.id
 }
