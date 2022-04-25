@@ -35,3 +35,8 @@ variable "app_service_plan" {
 variable "slack_webhook_url" {
   type = string
 }
+
+variable "to_provision" {
+  type    = bool
+  default = true
+}
