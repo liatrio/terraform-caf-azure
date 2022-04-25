@@ -4,7 +4,8 @@ terraform {
       source  = "hashicorp/azurerm"
       version = "~> 2.96.0"
       configuration_aliases = [
-        azurerm.connectivity
+        azurerm.connectivity,
+        azurerm.management
       ]
     }
   }
@@ -32,9 +33,15 @@ data "azurerm_private_dns_zone" "aks_private_dns_id" {
   provider            = azurerm.connectivity
 }
 
-data "azurerm_log_analytics_workspace" "log_analytics_workspace" {
+data "azurerm_log_analytics_workspace" "management" {
+  provider            = azurerm.management
   name                = "log-${var.prefix}-management"
   resource_group_name = "rg-${var.prefix}-management"
+}
+
+resource "azurerm_security_center_workspace" "defender" {
+  scope        = "/subscriptions/${data.azurerm_subscription.current.id}"
+  workspace_id = data.azurerm_log_analytics_workspace.management.id
 }
 
 module "aks" {
@@ -53,7 +60,7 @@ module "aks" {
   kubernetes_managed_identity = azurerm_user_assigned_identity.aks_msi.id
   lz_resource_group           = azurerm_resource_group.lz_resource_group.name
   private_dns_zone_id         = data.azurerm_private_dns_zone.aks_private_dns_id.id
-  log_analytics_workspace     = data.azurerm_log_analytics_workspace.log_analytics_workspace.id
+  log_analytics_workspace     = data.azurerm_log_analytics_workspace.management.id
   depends_on = [
     azurerm_role_assignment.network_contributor,
     azurerm_role_assignment.subscription_connectivity_dns_contributor
