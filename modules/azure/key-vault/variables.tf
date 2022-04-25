@@ -23,3 +23,8 @@ variable "tags" {
   type        = map(any)
   default     = {}
 }
+
+variable "workload" {
+  description = "workload/application this key vault is being deployed for"
+  type        = string
+}

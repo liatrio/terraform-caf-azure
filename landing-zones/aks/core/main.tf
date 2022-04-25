@@ -27,13 +27,14 @@ module "aks_vnet" {
   include_rules_allow_web_inbound = var.external_app
 }
 
-module "aks_core_key_vault" {
+module "key_vault" {
   source = "../../../modules/azure/key-vault"
 
   name                = var.name
   location            = var.location
   resource_group_name = azurerm_resource_group.lz_resource_group.name
   environment         = var.environment
+  workload            = "lzcore"
 }
 
 data "azurerm_private_dns_zone" "aks_private_dns_id" {
