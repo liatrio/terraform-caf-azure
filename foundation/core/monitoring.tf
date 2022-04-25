@@ -12,3 +12,8 @@ resource "azurerm_log_analytics_workspace" "log_analytics_workspace" {
   sku                 = var.log_analytics_ws_sku
   retention_in_days   = 30
 }
+
+resource "azurerm_security_center_workspace" "defender" {
+  scope        = data.azurerm_subscription.current.id
+  workspace_id = azurerm_log_analytics_workspace.log_analytics_workspace.id
+}
