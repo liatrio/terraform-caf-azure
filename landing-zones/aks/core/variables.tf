@@ -1,3 +1,8 @@
+variable "environment" {
+  description = "The env dev, qa, prod that the lz is in"
+  type        = string
+}
+
 variable "location" {
   description = "The Azure Region in which all resources should be provisioned"
 }
