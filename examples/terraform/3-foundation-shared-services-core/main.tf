@@ -15,6 +15,7 @@ module "liatrio_caf_shared_services" {
   providers = {
     azurerm              = azurerm
     azurerm.connectivity = azurerm.connectivity
+    azurerm.management   = azurerm.management
   }
 
   prefix                           = "example"
