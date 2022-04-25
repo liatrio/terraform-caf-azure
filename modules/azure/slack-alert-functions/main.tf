@@ -122,42 +122,16 @@ resource "azurerm_function_app" "main" {
   }
 }
 
-resource "azurerm_monitor_action_group" "example" {
-  count               = var.to_provision == true ? 1 : 0
-  name                = "action-group-${var.slack_func_identifier}"
-  resource_group_name = azurerm_resource_group.main[count.index].name
-  short_name          = "slack-ag"
-
-  webhook_receiver {
-    name                    = "callazurefuncapi"
-    # Using string interpolation to get full hostname of function. "/api/slack-budget-alert" doesn't change
-    service_uri             = "https://${azurerm_function_app.main[count.index].default_hostname}/api/slack-budget-alert" // TODO: use variable instead of "/slack-budget-alert/"
-    use_common_alert_schema = false
+module "subscription_budgets" {
+  # If to_provision is set to true, run this module for how many subscriptions are passed in
+  count = var.to_provision == true ? length(var.subscriptions) : 0
+  providers = {
+    azurerm               = azurerm.management
   }
-}
+  source = "./subscription-budgets"
 
-// TODO: move this into a separate module so we can send a list of subscription ids to create a number of budgets
-// TODO: define budget alerts for other subscriptions (CAF-Connectivity, Landing zones, ...variable number)
-
-resource "azurerm_consumption_budget_subscription" "example" {
-  count           = var.to_provision == true ? 1 : 0
-  name            = "budget-${var.slack_func_identifier}"
-  subscription_id = data.azurerm_subscription.subscription.id
-  amount          = 1000 // TODO: turn this into a variable
-  time_grain      = "Monthly" // TODO: turn into variable with choices
-
-  time_period {
-    start_date = "2022-06-01T00:00:00Z" 
-    # end_date   = "2022-07-01T00:00:00Z"
-  }
-
-  notification {
-    enabled   = true
-    threshold = 1.0 // TODO: variable
-    operator  = "EqualTo" // TODO: variable?
-
-    contact_groups = [
-      azurerm_monitor_action_group.example[count.index].id,
-    ]
-  }
+  subscriptions = var.subscriptions
+  threshold = 1.0
+  slack_func_identifier   = var.slack_func_identifier
+  // TODO: have it consume list of subscription ids, budget amounts, and time frames
 }

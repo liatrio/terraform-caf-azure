@@ -5,6 +5,10 @@ variable "slack_func_identifier" {
   type = string
 }
 
+variable "subscriptions" {
+  type = map
+}
+
 variable "location" {
   type    = string
   default = "westus"
