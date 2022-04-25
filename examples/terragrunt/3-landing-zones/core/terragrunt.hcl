@@ -54,5 +54,11 @@ generate "provider" {
       subscription_id = "${local.common_vars.shared_services_staging_subscription_id}"
       features {}
     }  
+    provider "azurerm" {
+      alias           = "management"
+      tenant_id       = "${local.common_vars.tenant_id}"
+      subscription_id = "${dependency.subscriptions.outputs.management_subscription_id}"
+      features {}
+    }
     EOF
 }

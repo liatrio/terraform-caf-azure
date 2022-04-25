@@ -67,3 +67,9 @@ variable "public_dns_zone_name" {
   type        = string
   description = "public dns zone to create"
 }
+
+variable "enable_ms_defender" {
+  type        = bool
+  description = "Feature flag to enable MS Defender for Cloud"
+  default     = false
+}

@@ -14,6 +14,7 @@ data "azurerm_private_dns_zone" "aks_private_dns_id" {
 }
 
 data "azurerm_log_analytics_workspace" "log_analytics_workspace" {
+  provider            = azurerm.management
   name                = "log-${var.prefix}-management"
   resource_group_name = "rg-${var.prefix}-management"
 }
