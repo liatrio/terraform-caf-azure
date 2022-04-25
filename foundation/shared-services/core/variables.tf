@@ -73,3 +73,14 @@ variable "enable_ms_defender" {
   description = "Feature flag to enable MS Defender for Cloud"
   default     = false
 }
+
+variable "enable_aks_policy_addon" {
+  type        = bool
+  description = "Feature flag to enable AKS Policy Add On"
+  default     = false
+}
+
+variable "ms_defender_enabled_resources" {
+  type        = map
+  description = "Enables MS Defender for resources when resource type name = true (e.g. 'Containers' = true)"
+}
