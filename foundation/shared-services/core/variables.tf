@@ -81,6 +81,7 @@ variable "enable_aks_policy_addon" {
 }
 
 variable "ms_defender_enabled_resources" {
-  type        = map
+  type        = map(any)
   description = "Enables MS Defender for resources when resource type name = true (e.g. 'Containers' = true)"
+  default     = {}
 }
