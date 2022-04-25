@@ -35,6 +35,7 @@ module "aks" {
   lz_resource_group           = azurerm_resource_group.resource_group.name
   private_dns_zone_id         = data.azurerm_private_dns_zone.aks_private_dns_id.id
   log_analytics_workspace     = data.azurerm_log_analytics_workspace.log_analytics_workspace.id
+  enable_aks_policy_addon     = var.enable_aks_policy_addon
   depends_on = [
     azurerm_role_assignment.network_contributor,
     azurerm_role_assignment.cluster_contributor,

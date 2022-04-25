@@ -79,3 +79,9 @@ variable "log_analytics_workspace" {
   type        = string
   description = "Log analytics workspace to link the AKS cluster to"
 }
+
+variable "enable_aks_policy_addon" {
+  type        = bool
+  description = "Feature flag to enable AKS Policy Add On"
+  default     = false
+}
