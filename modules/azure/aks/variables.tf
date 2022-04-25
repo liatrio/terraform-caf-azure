@@ -74,3 +74,8 @@ variable "aks_dns_service_ip" {
   type        = string
   description = "IP drawn from service address range to be used for cluster discover service (kube-dns)"
 }
+
+variable "log_analytics_workspace" {
+  type        = string
+  description = "Log analytics workspace to link the AKS cluster to"
+}

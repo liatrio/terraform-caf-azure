@@ -31,3 +31,8 @@ output "decommissioned" {
 output "shared_svc" {
   value = azurerm_management_group.shared_svc.id
 }
+
+
+output "log_analytics_workspace" {
+  value = azurerm_log_analytics_workspace.log_analytics_workspace.id
+}
