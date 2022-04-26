@@ -36,7 +36,7 @@ resource "azurerm_consumption_budget_subscription" "example" {
 
   notification {
     enabled   = true
-    threshold = var.threshold
+    threshold = var.budget_threshold[each.key]
     operator  = var.operator
 
     contact_groups = [
