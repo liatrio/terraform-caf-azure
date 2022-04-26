@@ -124,3 +124,7 @@ variable "slack_func_identifier" {
 variable "slack_webhook_url" {
   type = string
 }
+
+variable "subscriptions" {
+  type = map
+}

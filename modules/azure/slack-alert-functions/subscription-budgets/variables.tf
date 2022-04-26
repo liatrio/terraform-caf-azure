@@ -3,32 +3,40 @@ variable "slack_func_identifier" {
 }
 
 variable "subscriptions" {
-  type = map
+  type = map(any)
 }
 
 variable "operator" {
   description = "A choice of operator, options are: EqualTo, GreaterThan, or GreaterThanOrEqualTo"
-  type = string
-  default = "EqualTo"
+  type        = string
+  default     = "EqualTo"
 }
 
 variable "amount" {
-    type = number
-    default = 1000
+  type    = number
+  default = 1000
 }
 
 variable "time_grain" {
-    description = "A choice of time grain, options are: Annually, BillingAnnual, BillingMonth, BillingQuarter, Monthly, and Quarterly"
-    type = string
-    default = "Monthly"
+  description = "A choice of time grain, options are: Annually, BillingAnnual, BillingMonth, BillingQuarter, Monthly, and Quarterly"
+  type        = string
+  default     = "Monthly"
 }
 
 variable "threshold" {
-  type = number
+  type    = number
   default = 80.0
 }
 
 variable "to_provision" {
-    type    = bool
-    default = true
+  type    = bool
+  default = true
+}
+
+variable "resource_group_name" {
+  type = string
+}
+
+variable "default_hostname" {
+  type = string
 }

@@ -6,7 +6,7 @@ variable "slack_func_identifier" {
 }
 
 variable "subscriptions" {
-  type = map
+  type = map(any)
 }
 
 variable "location" {
