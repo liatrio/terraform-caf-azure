@@ -13,7 +13,7 @@ module "slack_alert_functions" {
   subscriptions         = var.subscriptions
   budget_threshold      = var.budget_threshold
   budget_operator       = var.budget_operator
-  budget_time_frames    = var.budget_time_frames
+  budget_time_grains    = var.budget_time_grains
   budget_amounts        = var.budget_amounts 
   // TODO: have it consume list of subscription ids, budget amounts, and time frames
 }

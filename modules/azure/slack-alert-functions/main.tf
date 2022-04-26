@@ -133,7 +133,7 @@ module "subscription_budgets" {
   subscriptions         = var.subscriptions
   budget_threshold      = var.budget_threshold
   budget_operator       = var.budget_operator
-  budget_time_frames    = var.budget_time_frames
+  budget_time_grains    = var.budget_time_grains
   budget_amounts        = var.budget_amounts
   resource_group_name   = azurerm_resource_group.main[count.index].name
   default_hostname      = azurerm_function_app.main[count.index].default_hostname

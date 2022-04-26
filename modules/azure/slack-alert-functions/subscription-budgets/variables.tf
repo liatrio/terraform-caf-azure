@@ -24,7 +24,7 @@ variable "budget_amounts" {
   default = {"default" : 1000}
 }
 
-variable "budget_time_frames" {
+variable "budget_time_grains" {
   description = "A choice of time grain, options are: Annually, BillingAnnual, BillingMonth, BillingQuarter, Monthly, and Quarterly"
   type = map(any)
   default = {"default" : "Monthly"}

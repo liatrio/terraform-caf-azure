@@ -26,8 +26,8 @@ resource "azurerm_consumption_budget_subscription" "example" {
   for_each        = var.subscriptions
   name            = "budget-${var.slack_func_identifier}"
   subscription_id = each.value
-  amount          = var.amount
-  time_grain      = var.time_grain
+  amount          = var.budget_amounts[each.key]
+  time_grain      = var.budget_time_grains[each.key]
 
   time_period {
     start_date = "2022-06-01T00:00:00Z"
@@ -37,7 +37,7 @@ resource "azurerm_consumption_budget_subscription" "example" {
   notification {
     enabled   = true
     threshold = var.budget_threshold[each.key]
-    operator  = var.operator
+    operator  = var.budget_operator[each.key]
 
     contact_groups = [
       azurerm_monitor_action_group.example[0].id,
