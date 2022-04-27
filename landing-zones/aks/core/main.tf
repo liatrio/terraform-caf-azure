@@ -27,6 +27,16 @@ module "aks_vnet" {
   include_rules_allow_web_inbound = var.external_app
 }
 
+module "key_vault" {
+  source = "../../../modules/azure/key-vault"
+
+  name                = var.name
+  location            = var.location
+  resource_group_name = azurerm_resource_group.lz_resource_group.name
+  environment         = var.environment
+  workload            = "lzcore"
+}
+
 data "azurerm_private_dns_zone" "aks_private_dns_id" {
   name                = "privatelink.${var.location}.azmk8s.io"
   resource_group_name = var.connectivity_resource_group_name
@@ -37,12 +47,6 @@ data "azurerm_log_analytics_workspace" "management" {
   provider            = azurerm.management
   name                = "log-${var.prefix}-management"
   resource_group_name = "rg-${var.prefix}-management"
-}
-
-resource "azurerm_security_center_workspace" "defender" {
-  count        = var.enable_ms_defender == true ? 1 : 0
-  scope        = data.azurerm_subscription.current.id
-  workspace_id = data.azurerm_log_analytics_workspace.management.id
 }
 
 module "aks" {
@@ -62,6 +66,7 @@ module "aks" {
   lz_resource_group           = azurerm_resource_group.lz_resource_group.name
   private_dns_zone_id         = data.azurerm_private_dns_zone.aks_private_dns_id.id
   log_analytics_workspace     = data.azurerm_log_analytics_workspace.management.id
+  enable_aks_policy_addon     = var.enable_aks_policy_addon
   depends_on = [
     azurerm_role_assignment.network_contributor,
     azurerm_role_assignment.subscription_connectivity_dns_contributor

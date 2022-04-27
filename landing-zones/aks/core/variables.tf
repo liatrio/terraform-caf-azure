@@ -1,3 +1,8 @@
+variable "environment" {
+  description = "The env dev, qa, prod that the lz is in"
+  type        = string
+}
+
 variable "location" {
   description = "The Azure Region in which all resources should be provisioned"
 }
@@ -86,4 +91,15 @@ variable "enable_virtual_hub_connection" {
   type        = bool
   description = "Feature flag to enable connecting the lz VNet to a virtual hub"
   default     = true
+  
+variable "enable_aks_policy_addon" {
+  type        = bool
+  description = "Feature flag to enable AKS Policy Add On"
+  default     = false
+}
+
+variable "ms_defender_enabled_resources" {
+  type        = map(any)
+  description = "Enables MS Defender for resources when resource type name = true (e.g. 'Containers' = true)"
+  default     = {}
 }
