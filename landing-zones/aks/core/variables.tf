@@ -91,7 +91,8 @@ variable "enable_virtual_hub_connection" {
   type        = bool
   description = "Feature flag to enable connecting the lz VNet to a virtual hub"
   default     = true
-  
+}
+
 variable "enable_aks_policy_addon" {
   type        = bool
   description = "Feature flag to enable AKS Policy Add On"

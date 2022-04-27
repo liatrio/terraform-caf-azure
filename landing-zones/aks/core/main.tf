@@ -83,7 +83,7 @@ data "azurerm_virtual_hub" "connectivity_hub" {
 resource "azurerm_virtual_hub_connection" "aks_vnet_hub_connection" {
   count                     = var.enable_virtual_hub_connection == true ? 1 : 0
   provider                  = azurerm.connectivity
-  name                      = "${var.name}-connection"
+  name                      = "con-${var.name}-connection"
   virtual_hub_id            = data.azurerm_virtual_hub.connectivity_hub[0].id
   remote_virtual_network_id = module.aks_vnet.vnet_id
 }
