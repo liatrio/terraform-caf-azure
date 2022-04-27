@@ -1,5 +1,9 @@
 # Liatrio Cloud Adoption Framework for Azure
 
+[![release](https://img.shields.io/github/v/release/liatrio/terraform-caf-azure?sort=semver)](https://github.com/liatrio/terraform-caf-azure/tags)
+[![build](https://img.shields.io/github/workflow/status/liatrio/terraform-caf-azure/Terraform%20Code%20Quality)](https://github.com/liatrio/terraform-caf-azure/actions/workflows/terraform-validate.yml)
+[![Contributor Covenant](https://img.shields.io/badge/Contributor%20Covenant-2.1-4baaaa.svg)](code_of_conduct.md)
+
 This is Liatrio’s implementation of a [Cloud Adoption Framework on Azure](https://docs.microsoft.com/en-us/azure/cloud-adoption-framework/) using Terraform to build a foundation for deploying workload [landing zones](https://docs.microsoft.com/en-us/azure/cloud-adoption-framework/ready/landing-zone/). This repo is composed of several Terraform modules designed to make getting started with Azure using best practices easier.
 
 ![](./images/LiatrioCAFAzure.png)
