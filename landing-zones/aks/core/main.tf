@@ -69,14 +69,32 @@ module "aks" {
 }
 
 data "azurerm_virtual_hub" "connectivity_hub" {
+  count               = var.enable_virtual_hub_connection == true ? 1 : 0
   provider            = azurerm.connectivity
   name                = "${var.prefix}-hub-${var.location}"
   resource_group_name = "${var.prefix}-connectivity"
 }
 
 resource "azurerm_virtual_hub_connection" "aks_vnet_hub_connection" {
+  count                     = var.enable_virtual_hub_connection == true ? 1 : 0
   provider                  = azurerm.connectivity
   name                      = "${var.name}-connection"
-  virtual_hub_id            = data.azurerm_virtual_hub.connectivity_hub.id
+  virtual_hub_id            = data.azurerm_virtual_hub.connectivity_hub[0].id
+  remote_virtual_network_id = module.aks_vnet.vnet_id
+}
+
+data "azurerm_virtual_network" "target_virtual_network" {
+  count               = var.enable_vnet_peering == true ? 1 : 0
+  provider            = azurerm.connectivity
+  name                = "${var.prefix}-vnet-hub-${var.location}"
+  resource_group_name = "${var.prefix}-connectivity"
+}
+
+resource "azurerm_virtual_network_peering" "peer_virtual_network" {
+  count                     = var.enable_vnet_peering == true ? 1 : 0
+  provider                  = azurerm.connectivity
+  name                      = "peer-${var.name}"
+  resource_group_name       = "${var.prefix}-connectivity"
+  virtual_network_name      = data.azurerm_virtual_network.target_virtual_network[0].name
   remote_virtual_network_id = module.aks_vnet.vnet_id
 }
