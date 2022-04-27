@@ -42,8 +42,8 @@ resource "azurerm_storage_container" "deployments" {
 
 data "archive_file" "file_function_app" {
   type        = "zip"
-  source_dir  = "${path.module}/slack-function-app"
-  output_path = "slack-function-app.zip"
+  source_dir  = "${path.module}/function-app"
+  output_path = "function-app.zip"
 }
 
 resource "azurerm_storage_blob" "storage_blob" {

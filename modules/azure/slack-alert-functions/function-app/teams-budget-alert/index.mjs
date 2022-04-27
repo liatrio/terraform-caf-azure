@@ -43,6 +43,6 @@ export default async function (context, req) {
     }
 
     //Sending to Slack via Webhook
-    const result = await axios.post(process.env["slackWebhookUrl"], body);
+    const result = await axios.post(process.env["teamsWebhookUrl"], body);
     context.done();
 };

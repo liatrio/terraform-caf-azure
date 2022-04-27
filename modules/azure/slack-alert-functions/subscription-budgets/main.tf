@@ -24,9 +24,9 @@ resource "azurerm_monitor_action_group" "slack" {
 
 resource "azurerm_monitor_action_group" "teams" {
   count               = var.enable_teams == true ? 1 : 0
-  name                = "action-group-${var.slack_func_identifier}"
+  name                = "action-group-teams-${var.slack_func_identifier}"
   resource_group_name = var.resource_group_name
-  short_name          = "slack-ag"
+  short_name          = "teams-ag"
 
   webhook_receiver {
     name = "callazurefuncapi"
