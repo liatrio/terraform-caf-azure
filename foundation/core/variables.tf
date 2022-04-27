@@ -123,6 +123,12 @@ variable "slack_func_identifier" {
 
 variable "slack_webhook_url" {
   type = string
+  default = ""
+}
+
+variable "teams_webhook_url" {
+  type = string
+  default = ""
 }
 
 variable "subscriptions" {

@@ -40,3 +40,13 @@ variable "budget_threshold" {
   type = map(any)
   default = {"default" = 80.0}
 }
+
+variable "enable_slack" {
+  type = bool
+  default = false
+}
+
+variable "enable_teams" {
+  type = bool
+  default = false
+}

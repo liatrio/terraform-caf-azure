@@ -112,6 +112,7 @@ resource "azurerm_function_app" "main" {
     "APPINSIGHTS_INSTRUMENTATIONKEY" = azurerm_application_insights.main[count.index].instrumentation_key
     "FUNCTIONS_WORKER_RUNTIME"       = "node",
     "slackWebhookUrl"                = var.slack_webhook_url,
+    "teamsWebhookUrl"                = var.teams_webhook_url,
     "WEBSITE_RUN_FROM_PACKAGE"       = "https://${azurerm_storage_account.func[count.index].name}.blob.core.windows.net/${azurerm_storage_container.deployments[count.index].name}/${azurerm_storage_blob.storage_blob[count.index].name}${data.azurerm_storage_account_blob_container_sas.storage_account_blob_container_sas[count.index].sas}",
     "AzureWebJobsDisableHomepage"    = "true",
   }
@@ -130,6 +131,8 @@ module "subscription_budgets" {
   }
   source = "./subscription-budgets"
 
+  enable_slack          = var.slack_webhook_url != "" ? true : false
+  enable_teams          = var.teams_webhook_url != "" ? true : false
   subscriptions         = var.subscriptions
   budget_threshold      = var.budget_threshold
   budget_operator       = var.budget_operator
@@ -138,5 +141,4 @@ module "subscription_budgets" {
   resource_group_name   = azurerm_resource_group.main[count.index].name
   default_hostname      = azurerm_function_app.main[count.index].default_hostname
   slack_func_identifier = var.slack_func_identifier
-  // TODO: have it consume list of subscription ids, budget amounts, and time frames
 }

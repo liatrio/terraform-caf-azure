@@ -38,11 +38,17 @@ variable "app_service_plan" {
 
 variable "slack_webhook_url" {
   type = string
+  default = ""
+}
+
+variable "teams_webhook_url" {
+  type = string
+  default = ""
 }
 
 variable "to_provision" {
   type    = bool
-  default = true
+  default = false
 }
 
 variable "budget_amounts" {

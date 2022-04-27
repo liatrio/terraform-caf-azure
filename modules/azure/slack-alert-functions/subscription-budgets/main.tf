@@ -7,8 +7,8 @@ terraform {
   }
 }
 
-resource "azurerm_monitor_action_group" "example" {
-  count               = var.to_provision == true ? 1 : 0
+resource "azurerm_monitor_action_group" "slack" {
+  count               = var.enable_slack == true ? 1 : 0
   name                = "action-group-${var.slack_func_identifier}"
   resource_group_name = var.resource_group_name
   short_name          = "slack-ag"
@@ -20,6 +20,28 @@ resource "azurerm_monitor_action_group" "example" {
     service_uri             = "https://${var.default_hostname}/api/slack-budget-alert"
     use_common_alert_schema = false
   }
+}
+
+resource "azurerm_monitor_action_group" "teams" {
+  count               = var.enable_teams == true ? 1 : 0
+  name                = "action-group-${var.slack_func_identifier}"
+  resource_group_name = var.resource_group_name
+  short_name          = "slack-ag"
+
+  webhook_receiver {
+    name = "callazurefuncapi"
+    # Using string interpolation to get full hostname of function. 
+    # teams-budget-alert comes from the package directory inside the function
+    service_uri             = "https://${var.default_hostname}/api/teams-budget-alert"
+    use_common_alert_schema = false
+  }
+}
+
+locals {
+  contact_groups = flatten([
+    var.enable_slack == true ? [azurerm_monitor_action_group.slack[0].id] : [],
+    var.enable_teams == true ? [azurerm_monitor_action_group.teams[0].id] : []
+  ])
 }
 
 resource "azurerm_consumption_budget_subscription" "example" {
@@ -39,8 +61,6 @@ resource "azurerm_consumption_budget_subscription" "example" {
     threshold = var.budget_threshold[each.key]
     operator  = var.budget_operator[each.key]
 
-    contact_groups = [
-      azurerm_monitor_action_group.example[0].id,
-    ]
+    contact_groups = local.contact_groups
   }
 }

@@ -7,13 +7,13 @@ module "slack_alert_functions" {
   }
   source = "../../modules/azure/slack-alert-functions"
 
-  # to_provision          = false # feature flag
+  to_provision          = true # feature flag
   slack_func_identifier = var.slack_func_identifier
   slack_webhook_url     = var.slack_webhook_url
+  teams_webhook_url     = var.teams_webhook_url
   subscriptions         = var.subscriptions
   budget_threshold      = var.budget_threshold
   budget_operator       = var.budget_operator
   budget_time_grains    = var.budget_time_grains
-  budget_amounts        = var.budget_amounts 
-  // TODO: have it consume list of subscription ids, budget amounts, and time frames
+  budget_amounts        = var.budget_amounts
 }
