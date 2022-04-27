@@ -81,6 +81,18 @@ variable "enable_ms_defender" {
   default     = false
 }
 
+variable "enable_vnet_peering" {
+  type        = bool
+  description = "Feature flag to enable peering the lz VNet to a hub VNet"
+  default     = false
+}
+
+variable "enable_virtual_hub_connection" {
+  type        = bool
+  description = "Feature flag to enable connecting the lz VNet to a virtual hub"
+  default     = true
+}
+
 variable "enable_aks_policy_addon" {
   type        = bool
   description = "Feature flag to enable AKS Policy Add On"
