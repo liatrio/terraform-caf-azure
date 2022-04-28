@@ -8,7 +8,7 @@ module "billing_alert_functions" {
   source = "../../modules/azure/billing-alert-functions"
 
   to_provision       = true # feature flag
-  func_identifier    = var.slack_func_identifier
+  func_identifier    = var.func_identifier
   slack_webhook_url  = var.slack_webhook_url
   teams_webhook_url  = var.teams_webhook_url
   subscriptions      = var.subscriptions

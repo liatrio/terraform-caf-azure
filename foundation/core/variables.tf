@@ -118,7 +118,7 @@ variable "enable_point_to_site_vpn" {
 
 variable "slack_func_identifier" {
   type    = string
-  default = "slack-alert-func"
+  default = "billing-alert-func"
 }
 
 variable "slack_webhook_url" {
