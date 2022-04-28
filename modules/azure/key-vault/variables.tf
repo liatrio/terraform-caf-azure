@@ -28,3 +28,12 @@ variable "workload" {
   description = "workload/application this key vault is being deployed for"
   type        = string
 }
+
+variable "service_endpoints_subnet_id" {
+  description = "Subnet ID in which to place Key Vault private endpoint"
+  type        = string
+}
+
+variable "connectivity_resource_group_name" {
+  type = string
+}

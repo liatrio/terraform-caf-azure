@@ -30,11 +30,18 @@ module "aks_vnet" {
 module "key_vault" {
   source = "../../../modules/azure/key-vault"
 
-  name                = var.name
-  location            = var.location
-  resource_group_name = azurerm_resource_group.lz_resource_group.name
-  environment         = var.environment
-  workload            = "lzcore"
+  providers = {
+    azurerm              = azurerm,
+    azurerm.connectivity = azurerm.connectivity
+  }
+
+  name                             = var.name
+  location                         = var.location
+  resource_group_name              = azurerm_resource_group.lz_resource_group.name
+  environment                      = var.environment
+  workload                         = "lzcore"
+  service_endpoints_subnet_id      = module.aks_vnet.service_endpoints_subnet_id
+  connectivity_resource_group_name = var.connectivity_resource_group_name
 }
 
 data "azurerm_private_dns_zone" "aks_private_dns_id" {
