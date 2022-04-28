@@ -132,7 +132,7 @@ variable "teams_webhook_url" {
 }
 
 variable "subscriptions" {
-  type = map(any)
+  type    = map(any)
   default = { "default" = "" }
 }
 

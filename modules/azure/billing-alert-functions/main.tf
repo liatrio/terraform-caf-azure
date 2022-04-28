@@ -32,6 +32,14 @@ resource "azurerm_storage_account" "func" {
   account_tier             = var.storage.tier
   account_replication_type = var.storage.replication_type
   min_tls_version          = "TLS1_2"
+
+  logging {
+    delete                = enabled
+    read                  = enabled
+    write                 = enabled
+    version               = "2"
+    retention_policy_days = "7"
+  }
 }
 
 resource "azurerm_storage_container" "deployments" {
