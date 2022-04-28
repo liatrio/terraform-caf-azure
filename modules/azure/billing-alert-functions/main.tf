@@ -33,13 +33,35 @@ resource "azurerm_storage_account" "func" {
   account_replication_type = var.storage.replication_type
   min_tls_version          = "TLS1_2"
 
-  logging {
-    delete                = enabled
-    read                  = enabled
-    write                 = enabled
-    version               = "2"
-    retention_policy_days = "7"
+  queue_properties {
+    logging {
+      delete                = true
+      read                  = true
+      write                 = true
+      version               = "1.0"
+      retention_policy_days = 7
+    }
+
+    hour_metrics {
+      enabled               = true
+      include_apis          = true
+      version               = "1.0"
+      retention_policy_days = 7
+    }
+
+    minute_metrics {
+      enabled               = true
+      include_apis          = true
+      version               = "1.0"
+      retention_policy_days = 7
+    }
   }
+}
+
+resource "azurerm_storage_queue" "main" {
+  count                = var.to_provision == true ? 1 : 0
+  name                 = "funcqueue"
+  storage_account_name = azurerm_storage_account.func[count.index].name
 }
 
 resource "azurerm_storage_container" "deployments" {
