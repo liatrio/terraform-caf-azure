@@ -1,7 +1,7 @@
 # Code adapted from:
 # https://github.com/dzeyelid/azure-cost-alert-webhook-to-slack/blob/main/iac/terraform/modules/mediation_functions/variables.tf
 
-variable "slack_func_identifier" {
+variable "func_identifier" {
   type = string
 }
 

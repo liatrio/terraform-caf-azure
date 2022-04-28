@@ -20,13 +20,13 @@ data "azurerm_subscription" "subscription" {
 
 resource "azurerm_resource_group" "main" {
   count    = var.to_provision == true ? 1 : 0
-  name     = "rg-${var.slack_func_identifier}"
+  name     = "rg-${var.func_identifier}"
   location = var.location
 }
 
 resource "azurerm_storage_account" "func" {
   count                    = var.to_provision == true ? 1 : 0
-  name                     = format("st%s", replace(var.slack_func_identifier, "-", ""))
+  name                     = format("st%s", replace(var.func_identifier, "-", ""))
   resource_group_name      = azurerm_resource_group.main[count.index].name
   location                 = azurerm_resource_group.main[count.index].location
   account_tier             = var.storage.tier
@@ -57,7 +57,7 @@ resource "azurerm_storage_blob" "storage_blob" {
 
 resource "azurerm_app_service_plan" "main" {
   count               = var.to_provision == true ? 1 : 0
-  name                = "plan-${var.slack_func_identifier}"
+  name                = "plan-${var.func_identifier}"
   location            = azurerm_resource_group.main[count.index].location
   resource_group_name = azurerm_resource_group.main[count.index].name
   kind                = "Linux"
@@ -71,7 +71,7 @@ resource "azurerm_app_service_plan" "main" {
 
 resource "azurerm_application_insights" "main" {
   count               = var.to_provision == true ? 1 : 0
-  name                = "appi-${var.slack_func_identifier}"
+  name                = "appi-${var.func_identifier}"
   location            = azurerm_resource_group.main[count.index].location
   resource_group_name = azurerm_resource_group.main[count.index].name
   application_type    = "Node.JS"
@@ -98,7 +98,7 @@ data "azurerm_storage_account_blob_container_sas" "storage_account_blob_containe
 
 resource "azurerm_function_app" "main" {
   count               = var.to_provision == true ? 1 : 0
-  name                = "func-${var.slack_func_identifier}"
+  name                = "func-${var.func_identifier}"
   resource_group_name = azurerm_resource_group.main[count.index].name
   location            = azurerm_resource_group.main[count.index].location
   os_type             = "linux"
@@ -140,5 +140,5 @@ module "subscription_budgets" {
   budget_amounts        = var.budget_amounts
   resource_group_name   = azurerm_resource_group.main[count.index].name
   default_hostname      = azurerm_function_app.main[count.index].default_hostname
-  slack_func_identifier = var.slack_func_identifier
+  func_identifier       = var.func_identifier
 }

@@ -1,4 +1,4 @@
-variable "slack_func_identifier" {
+variable "func_identifier" {
   type = string
 }
 
