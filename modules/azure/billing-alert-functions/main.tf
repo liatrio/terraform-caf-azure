@@ -31,6 +31,7 @@ resource "azurerm_storage_account" "func" {
   location                 = azurerm_resource_group.main[count.index].location
   account_tier             = var.storage.tier
   account_replication_type = var.storage.replication_type
+  min_tls_version          = "TLS1_2"
 }
 
 resource "azurerm_storage_container" "deployments" {
@@ -102,6 +103,7 @@ resource "azurerm_function_app" "main" {
   resource_group_name = azurerm_resource_group.main[count.index].name
   location            = azurerm_resource_group.main[count.index].location
   os_type             = "linux"
+  https_only          = true
 
   app_service_plan_id        = azurerm_app_service_plan.main[count.index].id
   storage_account_name       = azurerm_storage_account.func[count.index].name
