@@ -20,7 +20,6 @@ resource "azurerm_virtual_hub" "caf_hub" {
   address_prefix      = var.virtual_hub_address_cidr
 }
 
-
 resource "azurerm_firewall" "firewall" {
   provider          = azurerm.connectivity
   name              = "afw-${var.prefix}-${azurerm_resource_group.caf_connectivity.location}"
