@@ -16,7 +16,7 @@ resource "azurerm_key_vault" "key_vault" {
   name                        = "kv-${var.workload}-${var.environment}"
   location                    = var.location
   resource_group_name         = var.resource_group_name
-  enabled_for_disk_encryption = true
+  enabled_for_disk_encryption = var.enabled_for_disk_encryption
   tenant_id                   = data.azurerm_client_config.current.tenant_id
   soft_delete_retention_days  = 7
   purge_protection_enabled    = true
@@ -44,4 +44,14 @@ resource "azurerm_key_vault" "key_vault" {
       "Get",
     ]
   }
+}
+
+resource "azurerm_key_vault_key" "generated" {
+  for_each = var.vault_keys
+
+  name         = each.value.name
+  key_vault_id = azurerm_key_vault.key_vault.id
+  key_type     = each.value.key_type
+  key_size     = each.value.key_size
+  key_opts     = each.value.key_opts
 }

@@ -104,3 +104,15 @@ variable "ms_defender_enabled_resources" {
   description = "Enables MS Defender for resources when resource type name = true (e.g. 'Containers' = true)"
   default     = {}
 }
+
+variable "enabled_for_disk_encryption" {
+  description = "Whether or not to allow the Azure Disk Encryption to retrieve certs stored in key vault"
+  type        = bool
+  default     = true
+}
+
+variable "vault_keys" {
+  description = "A map of keys to generate in the Azure Key Vault"
+  type        = map(any)
+  default     = {}
+}

@@ -42,6 +42,8 @@ module "key_vault" {
   workload                         = "lzcore"
   service_endpoints_subnet_id      = module.aks_vnet.service_endpoints_subnet_id
   connectivity_resource_group_name = var.connectivity_resource_group_name
+  vault_keys                       = var.vault_keys
+  enabled_for_disk_encryption      = var.enabled_for_disk_encryption
 }
 
 data "azurerm_private_dns_zone" "aks_private_dns_id" {
