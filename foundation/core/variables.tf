@@ -103,3 +103,8 @@ variable "enable_ms_defender" {
   description = "Feature flag to enable MS Defender for Cloud"
   default     = false
 }
+variable "firewall_sku" {
+  type        = string
+  description = "AZFW_Hub or AZFW_VNet"
+  default     = "AZFW_Hub"
+}

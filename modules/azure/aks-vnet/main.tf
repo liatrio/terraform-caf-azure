@@ -77,11 +77,3 @@ resource "azurerm_subnet" "service_endpoints" {
 
   service_endpoints = ["Microsoft.KeyVault"]
 }
-
-resource "azurerm_firewall" "firewall" {
-  name                = "afw-${var.name}"
-  location            = var.location
-  
-
-  resource_group_name = var.resource_group_name
-}
