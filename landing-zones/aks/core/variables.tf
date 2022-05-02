@@ -119,6 +119,6 @@ variable "vault_keys" {
 
 variable "log_analytics_workspace_id" {
   description = "Log analytics workspace ID. If none is supplied, local will default to sourcing from CAF management"
-  type = string
-  default = ""
+  type        = string
+  default     = ""
 }
