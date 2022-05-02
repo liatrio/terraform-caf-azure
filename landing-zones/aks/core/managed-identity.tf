@@ -1,16 +1,3 @@
-data "azurerm_subscription" "current" {
-}
-
-data "azurerm_subscription" "connectivity" {
-  provider = azurerm.connectivity
-}
-
-data "azurerm_private_dns_zone" "k8_connectivity" {
-  provider            = azurerm.connectivity
-  name                = var.connectivity_k8_private_dns_zone_name
-  resource_group_name = var.connectivity_resource_group_name
-}
-
 resource "azurerm_user_assigned_identity" "aks_msi" {
   name                = "${var.prefix}-${var.name}-msi"
   resource_group_name = azurerm_resource_group.lz_resource_group.name
