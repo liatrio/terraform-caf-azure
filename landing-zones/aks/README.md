@@ -1,6 +1,6 @@
 # AKS Landing Zone
 
-The goal of this landing zone is to create the infrastrusture necessary for hosting containerized applications on Azure Kubernetes Service.
+The goal of this landing zone is to create the infrastructure necessary for hosting containerized applications on Azure Kubernetes Service.
 
 The AKS landing zone is split into two stages: core and applications.
 

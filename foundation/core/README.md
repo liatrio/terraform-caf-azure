@@ -24,6 +24,7 @@ root_dns_tags|variable (.tfvars or terragrunt)|Your preferred tags to apply to t
 vpn_client_pool_address_cidr|variable (.tfvars or terragrunt)|`OPTIONAL` - CIDR network range for VPN users|`10.100.2.0/24`
 vpn_service_principal_application_id|upstream dependency on creation of an `azuread_service_principal` for your VPN application registration|`OPTIONAL` - `application_id` of service principal for VPN|`abcd1234-ef56-ab12-ab12-abcdef123456`
 landing_zone_mg|variable (.tfvars or terragrunt)|`OPTIONAL` - map of objects defining the management group(s) in which your landing zone will exist|`{ management_group_1 : { display_name = "Management Group 1", policy_ids = [ { policy_set_id : "/providers/Microsoft.Authorization/policySetDefinitions/abcd1234-ef56-ab12-ab12-abcdef123456" } ] }, management_group_2 : { display_name = "Management Group 2", policy_ids = [] } }`
+enable_point_to_site_vpn|variable (.tfvars or terragrunt)|`OPTIONAL` - Boolean to enable/disable creation of user p2s vpn. Defaults to true.|`true`
 
 
 
