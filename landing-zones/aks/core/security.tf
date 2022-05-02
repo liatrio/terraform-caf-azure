@@ -1,7 +1,7 @@
 resource "azurerm_security_center_workspace" "defender" {
   count        = var.enable_ms_defender == true ? 1 : 0
   scope        = data.azurerm_subscription.current.id
-  workspace_id = data.azurerm_log_analytics_workspace.management.id
+  workspace_id = local.log_analytics_workspace_id
 }
 
 resource "azurerm_security_center_subscription_pricing" "enabled_resource" {
