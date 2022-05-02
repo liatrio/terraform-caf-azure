@@ -55,3 +55,18 @@ resource "azurerm_key_vault_key" "generated" {
   key_size     = each.value.key_size
   key_opts     = each.value.key_opts
 }
+
+resource "azurerm_disk_encryption_set" "generated" {
+  for_each = {
+    for k, v in var.vault_keys : k => v
+    if v.used_for_disk_encryption == true
+  }
+  name                = each.value.name
+  resource_group_name = var.resource_group_name
+  location            = var.location
+  key_vault_key_id    = azurerm_key_vault_key.generated[each.key].id
+
+  identity {
+    type = "SystemAssigned"
+  }
+}
