@@ -71,19 +71,13 @@ resource "azurerm_storage_container" "deployments" {
   container_access_type = "private"
 }
 
-data "archive_file" "file_function_app" {
-  type        = "zip"
-  source_dir  = "${path.module}/function-app"
-  output_path = "function-app.zip"
-}
-
 resource "azurerm_storage_blob" "storage_blob" {
   count                  = var.to_provision == true ? 1 : 0
-  name                   = filesha256(data.archive_file.file_function_app.output_path)
+  name                   = "${filesha256("${path.module}/billing-alert-function-app.zip")}.zip"
   storage_account_name   = azurerm_storage_account.func[count.index].name
   storage_container_name = azurerm_storage_container.deployments[count.index].name
   type                   = "Block"
-  source                 = data.archive_file.file_function_app.output_path
+  source                 = "${path.module}/billing-alert-function-app.zip"
 }
 
 resource "azurerm_app_service_plan" "main" {
