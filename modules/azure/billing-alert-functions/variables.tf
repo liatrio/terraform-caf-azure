@@ -51,6 +51,10 @@ variable "to_provision" {
   default = false
 }
 
+variable "budget_time_start" {
+  type = string
+}
+
 variable "budget_amounts" {
   type    = map(any)
   default = { "default" : 1000 }

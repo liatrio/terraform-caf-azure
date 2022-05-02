@@ -9,6 +9,7 @@ module "billing_alert_functions" {
 
   to_provision       = true # feature flag
   func_identifier    = var.func_identifier
+  budget_time_start  = var.budget_time_start
   slack_webhook_url  = var.slack_webhook_url
   teams_webhook_url  = var.teams_webhook_url
   subscriptions      = var.subscriptions

@@ -107,7 +107,7 @@ data "azurerm_storage_account_blob_container_sas" "storage_account_blob_containe
   connection_string = azurerm_storage_account.func[count.index].primary_connection_string
   container_name    = azurerm_storage_container.deployments[count.index].name
 
-  start  = "2022-01-01T00:00:00Z"
+  start  = var.budget_time_start
   expiry = "2023-01-01T00:00:00Z"
 
   permissions {
@@ -159,6 +159,7 @@ module "subscription_budgets" {
   enable_slack        = var.slack_webhook_url != "" ? true : false
   enable_teams        = var.teams_webhook_url != "" ? true : false
   subscriptions       = var.subscriptions
+  budget_time_start   = var.budget_time_start
   budget_threshold    = var.budget_threshold
   budget_operator     = var.budget_operator
   budget_time_grains  = var.budget_time_grains

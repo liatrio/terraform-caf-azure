@@ -131,6 +131,10 @@ variable "teams_webhook_url" {
   default = ""
 }
 
+variable "budget_time_start" {
+  type = string
+}
+
 variable "subscriptions" {
   type    = map(any)
   default = { "default" = "" }
