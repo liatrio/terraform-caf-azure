@@ -107,3 +107,16 @@ resource "azurerm_virtual_network_peering" "peer_virtual_network" {
   virtual_network_name      = data.azurerm_virtual_network.target_virtual_network[0].name
   remote_virtual_network_id = module.aks_vnet.vnet_id
 }
+
+module "app_service" {
+  source = "../../../modules/azure/app-service"
+
+  environment               = var.env
+  short_location            = var.short_location
+  location                  = var.location
+  workload                  = var.workload
+  vnet_rg_name              = var.vnet_rg_name
+  vnet_name                 = var.vnet_name
+  subnet_name               = var.subnet_name
+  dns_rg_name               = var.dns_rg_name
+}
