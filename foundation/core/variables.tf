@@ -109,3 +109,9 @@ variable "firewall_sku" {
   description = "AZFW_Hub or AZFW_VNet"
   default     = "AZFW_Hub"
 }
+
+variable "enable_point_to_site_vpn" {
+  type        = string
+  description = "If enabled, creates User Point to Site VPN configuration in CAF foundation."
+  default     = true
+}
