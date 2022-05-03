@@ -42,8 +42,22 @@ module "key_vault" {
   workload                         = "lzcore"
   service_endpoints_subnet_id      = module.aks_vnet.service_endpoints_subnet_id
   connectivity_resource_group_name = var.connectivity_resource_group_name
-  vault_keys                       = var.vault_keys
   enabled_for_disk_encryption      = var.enabled_for_disk_encryption
+}
+
+module "key_gen" {
+  source = "../../../modules/azure/key-gen"
+
+  providers = {
+    azurerm              = azurerm,
+    azurerm.connectivity = azurerm.connectivity
+  }
+
+  location                    = var.location
+  resource_group_name         = azurerm_resource_group.lz_resource_group.name
+  vault_key_to_create         = var.vault_key_to_create
+  enabled_for_disk_encryption = var.enabled_for_disk_encryption
+  key_vault_id                = module.key_vault.key_vault_id
 }
 
 module "aks" {
@@ -68,6 +82,9 @@ module "aks" {
     azurerm_role_assignment.network_contributor,
     azurerm_role_assignment.subscription_connectivity_dns_contributor
   ]
+  aks_disk_encryption_key_name = "aks-key"
+  aks_enable_disk_encryption   = var.aks_enable_disk_encryption
+  disk_encryption_set_id       = module.key_gen.disk_encryption_set_id != null ? module.key_gen.disk_encryption_set_id : null
 }
 
 resource "azurerm_virtual_hub_connection" "aks_vnet_hub_connection" {
