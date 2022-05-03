@@ -13,7 +13,7 @@ terraform {
 data "azurerm_client_config" "current" {}
 
 resource "azurerm_key_vault_key" "key" {
-  count = var.vault_key_to_create != {} ? 1 : 0
+  count = length(var.vault_key_to_create) > 0 ? 1 : 0
 
   name         = var.vault_key_to_create.name
   key_vault_id = var.key_vault_id
@@ -34,7 +34,7 @@ resource "azurerm_key_vault_key" "key" {
 }
 
 resource "azurerm_disk_encryption_set" "encryption_set" {
-  count = var.vault_key_to_create != {} ? 1 : 0
+  count = length(var.vault_key_to_create) > 0 ? 1 : 0
 
   name                      = var.vault_key_to_create.name
   auto_key_rotation_enabled = true
