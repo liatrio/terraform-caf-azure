@@ -30,6 +30,10 @@ As with the `terragrunt` examples, the `terraform` ones will show you how to dep
 * [Deploying foundation](./examples/terraform/README.md#2-foundation)
 * [Deploying shared-services](./examples/terraform/README.md#3-shared-services)
 
+# Glossary
+
+Liatrio provides a [CAF Glossary](./GLOSSARY.md). Very helpful when just getting started with Azure (or the Cloud). Our Glossary provides definitions as well as a reference to the `terraform` modules representing those terms.
+
 # Contributing
 Whether it's a bug report or code, any contribution is appreciated. To learn about coding conventions, general strucutre of the project, or how to get started, please refer to our [CONTRIBUTING.md](./CONTRIBUTING.md) file.
 
