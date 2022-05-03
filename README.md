@@ -10,7 +10,7 @@ This is Liatrio’s implementation of a [Cloud Adoption Framework (CAF) on Azure
 ## Architecture
 * [Architecture diagram](./images/caf-architecture.png)
   * Represents everything that is created through Liatrio's CAF, as well as how the resources interact with one another.
-* [Project structure diagram](./images/caf-architecture.png)
+* [Project structure diagram](./images/LiatrioCAFAzure.png)
   * Represents a simplified view of how our general `terraform` modules are structured and how that translates in terms of `subscriptions` on Azure
 
 # Getting Started
