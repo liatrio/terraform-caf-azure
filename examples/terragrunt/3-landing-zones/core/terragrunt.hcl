@@ -33,13 +33,11 @@ inputs = {
   ms_defender_enabled_resources = {
     "Containers" = false
   }
-  vault_keys =  {
-    mykey = {
-      name                        = "mykey"
-      used_for_disk_encryption    = true
-      # Key type defaulted to EC - select elliptical curve strength below
-      curve                       = "P-384"
-    }
+  vault_key_to_create =  {
+    name                        = "mykey"
+    used_for_disk_encryption    = true
+    # Key type defaulted to EC - select elliptical curve strength below
+    curve                       = "P-384"
   }
 }
 

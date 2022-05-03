@@ -45,37 +45,3 @@ resource "azurerm_key_vault" "key_vault" {
     ]
   }
 }
-
-resource "azurerm_key_vault_key" "generated" {
-  for_each = var.vault_keys
-
-  name         = each.value.name
-  key_vault_id = azurerm_key_vault.key_vault.id
-
-  # Defaulting to EC key type as elliptical curve encryption is more secure
-  # than RSA and has no mathematical means of breaking the encryption.
-  key_type = "EC"
-  curve    = can(var.vault_keys[each.key].curve) ? each.value.curve : "P-384"
-  key_opts = [
-    "decrypt",
-    "encrypt",
-    "sign",
-    "unwrapKey",
-    "verify",
-    "wrapKey",
-  ]
-}
-
-resource "azurerm_disk_encryption_set" "generated" {
-  for_each = {
-    for k, v in var.vault_keys : k => v
-    if v.used_for_disk_encryption == true
-  }
-  name                = each.value.name
-  resource_group_name = var.resource_group_name
-  location            = var.location
-  key_vault_key_id    = azurerm_key_vault_key.generated[each.key].id
-  identity {
-    type = "SystemAssigned"
-  }
-}

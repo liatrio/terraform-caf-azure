@@ -111,8 +111,8 @@ variable "enabled_for_disk_encryption" {
   default     = true
 }
 
-variable "vault_keys" {
-  description = "A map of keys to generate in the Azure Key Vault"
+variable "vault_key_to_create" {
+  description = "A map with a key to generate in the Azure Key Vault"
   type        = map(any)
   default     = {}
 }
@@ -121,4 +121,16 @@ variable "log_analytics_workspace_id" {
   description = "Log analytics workspace ID. If none is supplied, local will default to sourcing from CAF management"
   type        = string
   default     = ""
+}
+
+variable "aks_disk_encryption_key_name" {
+  type        = string
+  description = "The key name to use for disk encryption created in the Azure Key Vault"
+  default     = null
+}
+
+variable "aks_enable_disk_encryption" {
+  type        = bool
+  description = "Wether or not to enable disk encryption in the AKS Cluster"
+  default     = true
 }
