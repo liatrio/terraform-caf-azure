@@ -37,7 +37,7 @@ This Terraform module manages areas of concern including management groups, **Co
 
 Shared services are similar to landing zones in that they create an environment to run applications in, however they have special significance in our framework and therefore are managed separately. Shared services manage tools and services to deploy and be used by workloads in our landing zones. They represent the center of our hub and spoke networking model.
 
-Each shared services environment is deployed separately after foundation core. Any number of shared services environment can be created but we recommend one staging environment to test changes to the shared tools and services and one production environment which supports production landing zone workloads.
+Each shared services environment is deployed separately after foundation core. Any number of shared services environments can be created but we recommend one staging environment to test changes to the shared tools and services and one production environment which supports production landing zone workloads.
 
 Shared services deploy an AKS cluster and software delivery toolchain and configures the environment to be used as a shared hub for our landing zones.
 
