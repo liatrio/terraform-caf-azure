@@ -123,12 +123,6 @@ variable "log_analytics_workspace_id" {
   default     = ""
 }
 
-variable "aks_disk_encryption_key_name" {
-  type        = string
-  description = "The key name to use for disk encryption created in the Azure Key Vault"
-  default     = null
-}
-
 variable "aks_enable_disk_encryption" {
   type        = bool
   description = "Whether or not to enable disk encryption in the AKS Cluster"

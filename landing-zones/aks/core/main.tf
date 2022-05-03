@@ -82,9 +82,8 @@ module "aks" {
     azurerm_role_assignment.network_contributor,
     azurerm_role_assignment.subscription_connectivity_dns_contributor
   ]
-  aks_disk_encryption_key_name = "aks-key"
-  aks_enable_disk_encryption   = var.aks_enable_disk_encryption
-  disk_encryption_set_id       = module.key_gen.disk_encryption_set_id != null ? module.key_gen.disk_encryption_set_id : null
+  aks_enable_disk_encryption = var.aks_enable_disk_encryption
+  disk_encryption_set_id     = module.key_gen.disk_encryption_set_id != null ? module.key_gen.disk_encryption_set_id : null
 }
 
 resource "azurerm_virtual_hub_connection" "aks_vnet_hub_connection" {
