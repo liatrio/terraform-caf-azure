@@ -39,7 +39,7 @@ Shared services are similar to landing zones in that they create an environment 
 
 Each shared services environment is deployed separately after foundation core. Any number of shared services environments can be created but we recommend one staging environment to test changes to the shared tools and services and one production environment which supports production landing zone workloads.
 
-Shared services deploy an AKS cluster and software delivery toolchain and configures the environment to be used as a shared hub for our landing zones.
+Shared services deploys an AKS cluster and software delivery toolchain and configures the environment to be used as a shared hub for our landing zones.
 
 **Terraform Modules**: [foundation/shared-services](./foundation/shared-services/)
 
@@ -47,7 +47,7 @@ Shared services deploy an AKS cluster and software delivery toolchain and config
 
 ## Landing Zones Deployment
 
-Landing Zones are the infrastructure needed to support a specific type or category of workloads. They can be as small as a project or as large as an environment depending on the type of workload and the structure of the organization. For example a landing zone may be an entire AKS cluster for running production workloads or a testing environment for staging an product deployed via Virtual Machine Scale Sets.
+Landing Zones are the infrastructure needed to support a specific type or category of workloads. They can be as small as a project or as large as an environment depending on the type of workload and the structure of the organization. For example a landing zone may be an entire AKS cluster for running production workloads or a testing environment for staging a product deployed via Virtual Machine Scale Sets.
 
 ### Landing Zone Core
 
@@ -63,6 +63,6 @@ There are several landing zone types to support different workload requirements.
 
 There are several default Policy Sets (Initiatives) assigned to the Management groups defined in [foundation/core](./foundation/core/).
 
-Any dynamically created management groups can have Custom or Built-in Policy sets applied by specificing the Set ids in either tfvars or terragrunt.
+Any dynamically created management groups can have Custom or Built-in Policy sets applied by specifying the Set ids in either tfvars or terragrunt.
 
 The Policy Sets utilized in this framework are created via a separate repo that has a GitHub Action for creating and updating Policies and Policy Sets. For more information check out the [liatrio/azure-policies](https://github.com/liatrio/azure-policies) repo.
