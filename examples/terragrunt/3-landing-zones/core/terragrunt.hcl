@@ -25,11 +25,27 @@ inputs = {
   shared_services_keyvault              = "caf-staging"
   shared_services_resource_group        = "caf-shared-services-staging-rg"
   connectivity_dns_servers              = local.common_vars.connectivity_dns_servers
+  external_app                          = true
+  dns_zone_name                         = "your-sub.myzone.com"
+  parent_dns_zone_name                  = "myzone.com"
+  enable_aks_policy_addon               = true
+  enable_ms_defender                    = false
+  ms_defender_enabled_resources = {
+    "Containers" = false
+  }
+  vault_keys =  {
+    mykey = {
+      name                        = "mykey"
+      used_for_disk_encryption    = true
+      # Key type defaulted to EC - select elliptical curve strength below
+      curve                       = "P-384"
+    }
+  }
 }
 
 # Use the latest stable release, see https://github.com/liatrio/terraform-caf-azure/releases
 terraform {
-  source = "git@github.com:liatrio/terraform-caf-azure//landing-zones/aks/core?ref=v0.19.1"
+  source = "git@github.com:liatrio/terraform-caf-azure//landing-zones/aks/core?ref=v0.33.0"
 }
 
 # Generate the provider.tf files
