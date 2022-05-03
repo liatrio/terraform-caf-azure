@@ -1,70 +1,41 @@
-# Liatrio Cloud Adoption Framework for Azure
+# Liatrio Cloud Adoption Framework (CAF) for Azure
 
 [![release](https://img.shields.io/github/v/release/liatrio/terraform-caf-azure?sort=semver)](https://github.com/liatrio/terraform-caf-azure/tags)
 [![build](https://img.shields.io/github/workflow/status/liatrio/terraform-caf-azure/Terraform%20Code%20Quality)](https://github.com/liatrio/terraform-caf-azure/actions/workflows/terraform-validate.yml)
 [![Contributor Covenant](https://img.shields.io/badge/Contributor%20Covenant-2.1-4baaaa.svg)](code_of_conduct.md)
 
-This is Liatrio’s implementation of a [Cloud Adoption Framework on Azure](https://docs.microsoft.com/en-us/azure/cloud-adoption-framework/) using Terraform to build a foundation for deploying workload [landing zones](https://docs.microsoft.com/en-us/azure/cloud-adoption-framework/ready/landing-zone/). This repo is composed of several Terraform modules designed to make getting started with Azure using best practices easier.
+# Overview
 
-![](./images/LiatrioCAFAzure.png)
+This is Liatrio’s implementation of a [Cloud Adoption Framework (CAF) on Azure](https://docs.microsoft.com/en-us/azure/cloud-adoption-framework/) using Terraform to build a foundation for deploying workload [landing zones](https://docs.microsoft.com/en-us/azure/cloud-adoption-framework/ready/landing-zone/). This repo is composed of several Terraform modules designed to make getting started with Azure using best practices easier.
+## Architecture
+* [Architecture diagram](./images/caf-architecture.png)
+  * Represents everything that is created through Liatrio's CAF, as well as how the resources interact with one another.
+* [Project structure diagram](./images/LiatrioCAFAzure.png)
+  * Represents a simplified view of how our general `terraform` modules are structured and how that translates in terms of `subscriptions` on Azure
 
-## Subscriptions
+# Getting Started
+A great place to get started with Liatrio's Azure CAF is with the `examples/`. Here at Liatrio, we love using `terragrunt` to deploy our infrastructure. However, we also support using `terraform` as a standalone.
 
-Several subscriptions are required for the CAF foundation as well as shared services and landing zones. Each top level Terraform modules need azurerm Terraform providers configured with the needed subscriptions. See the [examples](./examples/) folder for examples configuring the providers use Terraform and Terragrunt.
+## terragrunt
+If you choose to go the `terragrunt` route. We provide the following sections as well as sample `terragrunt.hcl` files in our `examples/` folder:
 
-- **Foundation**: Requires subscriptions for connectivity, identity, management resources
-- **Shared Services**: Each shared services environment requires its own subscriptions
-- **Landing Zones**: Each landing zone requires its own subscription
+* [Folder structure](./examples/terragrunt/README.md#folder-structure)
+* [How are states handled?](./examples/terragrunt/README.md#how-are-states-handled)
+* [Deploying Liatrio CAF](./examples/terragrunt/README.md#deploying-liatrio-caf)
+## terraform
+As with the `terragrunt` examples, the `terraform` ones will show you how to deploy the following things through sample files. The `examples/terraform`'s readme will go through the following sections:
 
-Creation of subscriptions is not handled as part of the main CAF Terraform modules. This is done to allow them to be managed by an external process and to avoid requiring extra billing permissions to apply the CAF modules.
+* [Getting started](./examples/terraform/README.md#get-started)
+* [Deploying subscriptions](./examples/terraform/README.md#1-subscriptions)
+* [Deploying foundation](./examples/terraform/README.md#2-foundation)
+* [Deploying shared-services](./examples/terraform/README.md#3-shared-services)
 
-There are also several extra Terraform modules included in this repo which can manage the creation of subscriptions if the extra billing permissions are not a concern and you would like to manage them as part of the same process.
+# Glossary
 
-**Terraform Modules**:
+Liatrio provides a [CAF Glossary](./GLOSSARY.md). Very helpful when just getting started with Azure (or the Cloud). Our Glossary provides definitions as well as a reference to the `terraform` modules representing those terms.
 
-- [subscriptions/foundation](./subscriptions/foundation): Creates connectivity, identity and management subscriptions
-- [subscriptions/landing-zone](./subscriptions/landing-zone): Creates a subscription which can be used for Landing Zones or Shared Services Environments
+# Contributing
+Whether it's a bug report or code, any contribution is appreciated. To learn about coding conventions, general strucutre of the project, or how to get started, please refer to our [CONTRIBUTING.md](./CONTRIBUTING.md) file.
 
-## Foundation Deployment
-
-The framework foundation sets up the required resources to support shared services and landing zones. It uses management groups to start off with a structured approach to organizing resources and creates policies to ensure best practices continue to be observed as resources are added.
-
-### Foundation Core
-
-This Terraform module manages areas of concern Including management groups, Connectivity, Identity and Management. Connectivity concerns managing the networking required for our hub and spoke model to connect shared services resources to our landing zones; Identity concerns managing authentication and authorization services and Management concerns managing logging, monitoring and billing services. The management groups are deployed according the Microsoft Azure CAF designs.
-
-**Terraform Module**: [foundation/core](./foundation/core/)
-
-### Shared Services
-
-Shared services are similar to landing zones in that they create an environment to run applications in, however they have special significance in our framework and therefor are managed separately. Shared services manage tools and service to deploy and be used by workloads in our landing zones. They represent the center of our hub and spoke networking model.
-
-Each shared services environment is deployed separately after foundation core. Any number of shared services environment can be created but we recommend one staging environment to test changes to the shared tools and services and one production environment which supports production landing zone workloads.
-
-Shared services deploy an AKS cluster and software delivery toolchain and configures the environment to be used as a shared hub for our landing zones.
-
-**Terraform Modules**: [foundation/shared-services](./foundation/shared-services/)
-
-## Landing Zones Deployment
-
-Landing Zones are the infrastructure needed to support a specific type or category of workloads. They can be as small as a project or as large as an environment depending on the type of workload and the structure of the organization. For example a landing zone may be an entire AKS cluster for running production workloads or a testing environment for staging an product deployed via Virtual Machine Scale Sets.
-
-### Landing Zone Core
-
-There are several landing zone types to support different workload requirements.
-
-**Terraform Modules**:
-
-- AKS [landing-zones/aks](./landing-zones/aks/)
-
-## Azure Policy and Policy Set Deployment
-
-There are several default Policy Sets (Initiatives) assigned to the Management groups defined in [foundation/core](./foundation/core/).
-
-Any dynamically created management groups can have Custom or Built-in Policy sets applied by specificing the Set ids in either tfvars or terragrunt.
-
-The Policy Sets utilized in this framework are created via a separate repo that has a GitHub Action for creating and updating Policies and Policy Sets. For more information check out the [liatrio/azure-policies](https://github.com/liatrio/azure-policies) repo.
-
-## CAF Architecture Diagram
-
-![](./images/caf-architecture.png)
+# Code of Conduct
+Please refer to our [CODE_OF_CONDUCT.md](./CODE_OF_CONDUCT.md) file.
