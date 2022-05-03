@@ -29,7 +29,7 @@ The framework foundation sets up the required resources to support shared servic
 
 ### Foundation Core
 
-This Terraform module manages areas of concern Including management groups, Connectivity, Identity and Management. Connectivity concerns managing the networking required for our hub and spoke model to connect shared services resources to our landing zones; Identity concerns managing authentication and authorization services and Management concerns managing logging, monitoring and billing services. The management groups are deployed according the Microsoft Azure CAF designs.
+This Terraform module manages areas of concern including management groups, **Connectivity**, **Identity**, and **Management**. **Connectivity** concerns management of the networking required for our hub and spoke model to connect shared services resources to our landing zones; **Identity** concerns managing authentication and authorization services. **Management** concerns managing logging, monitoring and billing services. The management groups are deployed according the Microsoft Azure CAF designs.
 
 **Terraform Module**: [foundation/core](./foundation/core/)
 
