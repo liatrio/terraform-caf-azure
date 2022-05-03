@@ -16,7 +16,7 @@ resource "azurerm_kubernetes_cluster" "aks" {
   location                = var.location
   resource_group_name     = var.lz_resource_group
   dns_prefix              = var.name
-  disk_encryption_set_id  = var.disk_encryption_set_id != null ? var.disk_encryption_set_id : null
+  disk_encryption_set_id  = var.aks_enable_disk_encryption ? var.disk_encryption_set_id : null
   private_dns_zone_id     = var.private_dns_zone_id
   private_cluster_enabled = true
   kubernetes_version      = var.kubernetes_version
