@@ -131,6 +131,6 @@ variable "aks_disk_encryption_key_name" {
 
 variable "aks_enable_disk_encryption" {
   type        = bool
-  description = "Wether or not to enable disk encryption in the AKS Cluster"
+  description = "Whether or not to enable disk encryption in the AKS Cluster"
   default     = true
 }
