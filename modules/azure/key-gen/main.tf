@@ -22,7 +22,7 @@ resource "azurerm_key_vault_key" "key" {
   # than RSA and has no mathematical means of breaking the encryption.
   key_type        = "EC"
   curve           = can(var.vault_key_to_create.curve) ? var.vault_key_to_create.curve : "P-384"
-  expiration_date = can(var.vault_key_to_create.expiration_date) ? var.vault_key_to_create.expiration_date : formatdate("Y-m-d'T'H:M:S'Z'", timeadd(timestamp(), "8760h"))
+  expiration_date = can(var.vault_key_to_create.expiration_date) ? var.vault_key_to_create.expiration_date : timeadd(timestamp(), "8760h")
   key_opts = [
     "decrypt",
     "encrypt",
