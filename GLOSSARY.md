@@ -6,7 +6,7 @@ Getting started with the Cloud and all its terms can be daunting. That's why we 
 
 ## Subscriptions
 
-Several subscriptions are required for the CAF foundation as well as shared services and landing zones. Each top level Terraform modules need azurerm Terraform providers configured with the needed subscriptions. See the [examples](./examples/) folder for examples configuring the providers use Terraform and Terragrunt.
+Several subscriptions are required for the CAF foundation as well as shared services and landing zones. Each top level Terraform module needs azurerm Terraform providers configured with the needed subscriptions. See the [examples](./examples/) folder for examples configuring the providers using Terraform and Terragrunt.
 
 - **Foundation**: Requires subscriptions for connectivity, identity, management resources
 - **Shared Services**: Each shared services environment requires its own subscriptions
