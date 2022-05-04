@@ -32,16 +32,42 @@ resource "azurerm_key_vault" "key_vault" {
     tenant_id = data.azurerm_client_config.current.tenant_id
     object_id = data.azurerm_client_config.current.object_id
 
+    certificate_permissions = [
+      "Create",
+      "Delete",
+      "Get",
+      "List",
+      "Update",
+    ]
+
     key_permissions = [
       "Get",
+      "Create",
+      "Decrypt",
+      "Delete",
+      "Encrypt",
+      "List",
+      "Sign",
+      "UnwrapKey",
+      "Update",
+      "Verify",
+      "WrapKey",
     ]
 
     secret_permissions = [
       "Get",
+      "Delete",
+      "List",
+      "Set",
     ]
 
     storage_permissions = [
       "Get",
+      "Delete",
+      "List",
+      "RegenerateKey",
+      "Set",
+      "Update",
     ]
   }
 }
