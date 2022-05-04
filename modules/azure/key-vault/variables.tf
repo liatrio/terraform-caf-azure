@@ -43,3 +43,33 @@ variable "enabled_for_disk_encryption" {
   type        = bool
   default     = true
 }
+
+variable "certificate_permissions" {
+  description = "A list of certificate permissions for key vault to grant to object_id and application_id"
+  type        = list(string)
+  default     = []
+}
+
+variable "key_permissions" {
+  description = "A list of key permissions for key vault to grant to object_id and application_id"
+  type        = list(string)
+  default     = []
+}
+
+variable "secret_permissions" {
+  description = "A list of secret permissions permissions for key vault to grant to object_id and application_id"
+  type        = list(string)
+  default     = []
+}
+
+variable "storage_permissions" {
+  description = "A list of storage permissions for key vault to grant to object_id and application_id"
+  type        = list(string)
+  default     = []
+}
+
+variable "application_id" {
+  description = "The application ID to give to key vault when setting access policies"
+  type        = string
+  default     = null
+}

@@ -29,19 +29,46 @@ resource "azurerm_key_vault" "key_vault" {
   sku_name = "standard"
 
   access_policy {
-    tenant_id = data.azurerm_client_config.current.tenant_id
-    object_id = data.azurerm_client_config.current.object_id
+    tenant_id      = data.azurerm_client_config.current.tenant_id
+    object_id      = data.azurerm_client_config.current.object_id
+    application_id = var.application_id != null ? var.application_id : null
 
-    key_permissions = [
+    certificate_permissions = length(var.certificate_permissions) > 0 ? var.certificate_permissions : [
+      "Create",
+      "Delete",
       "Get",
+      "List",
+      "Update",
     ]
 
-    secret_permissions = [
+    key_permissions = length(var.key_permissions) > 0 ? var.key_permissions : [
       "Get",
+      "Create",
+      "Decrypt",
+      "Delete",
+      "Encrypt",
+      "List",
+      "Sign",
+      "UnwrapKey",
+      "Update",
+      "Verify",
+      "WrapKey",
     ]
 
-    storage_permissions = [
+    secret_permissions = length(var.secret_permissions) > 0 ? var.secret_permissions : [
       "Get",
+      "Delete",
+      "List",
+      "Set",
+    ]
+
+    storage_permissions = length(var.storage_permissions) > 0 ? var.storage_permissions : [
+      "Get",
+      "Delete",
+      "List",
+      "RegenerateKey",
+      "Set",
+      "Update",
     ]
   }
 }
