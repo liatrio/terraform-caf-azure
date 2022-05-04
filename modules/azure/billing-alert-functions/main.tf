@@ -66,7 +66,7 @@ resource "azurerm_storage_queue" "main" {
 
 resource "azurerm_storage_container" "deployments" {
   count                 = var.to_provision == true ? 1 : 0
-  name                  = "slack-alert-function-releases"
+  name                  = "billing-alert-function-releases"
   storage_account_name  = azurerm_storage_account.func[count.index].name
   container_access_type = "private"
 }
@@ -108,7 +108,7 @@ data "azurerm_storage_account_blob_container_sas" "storage_account_blob_containe
   container_name    = azurerm_storage_container.deployments[count.index].name
 
   start  = var.budget_time_start
-  expiry = "2023-01-01T00:00:00Z"
+  expiry = "2024-01-01T00:00:00Z"
 
   permissions {
     read   = true
