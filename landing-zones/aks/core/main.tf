@@ -43,6 +43,11 @@ module "key_vault" {
   service_endpoints_subnet_id      = module.aks_vnet.service_endpoints_subnet_id
   connectivity_resource_group_name = var.connectivity_resource_group_name
   enabled_for_disk_encryption      = var.enabled_for_disk_encryption
+  application_id                   = var.application_id
+  certificate_permissions          = var.certificate_permissions
+  key_permissions                  = var.key_permissions
+  secret_permissions               = var.secret_permissions
+  storage_permissions              = var.storage_permissions
 }
 
 module "key_gen" {
