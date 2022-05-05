@@ -12,7 +12,7 @@ terraform {
 }
 
 resource "azurerm_resource_group" "lz_resource_group" {
-  name     = "rg-${var.prefix}-${var.name}"
+  name     = "rg-${var.prefix}-${var.name}-${var.environment}-${var.location}"
   location = var.location
 }
 
@@ -94,7 +94,7 @@ module "aks" {
 resource "azurerm_virtual_hub_connection" "aks_vnet_hub_connection" {
   count                     = var.enable_virtual_hub_connection == true ? 1 : 0
   provider                  = azurerm.connectivity
-  name                      = "cn-${var.name}-connection-${var.location}"
+  name                      = "cn-${var.name}-connection-${var.environment}-${var.location}"
   virtual_hub_id            = data.azurerm_virtual_hub.connectivity_hub[0].id
   remote_virtual_network_id = module.aks_vnet.vnet_id
 }
@@ -103,7 +103,7 @@ resource "azurerm_virtual_network_peering" "peer_virtual_network" {
   count                     = var.enable_vnet_peering == true ? 1 : 0
   provider                  = azurerm.connectivity
   name                      = "vnet-peer-${var.name}"
-  resource_group_name       = "rg-${var.prefix}-connectivity-${var.location}"
+  resource_group_name       = "rg-${var.prefix}-connectivity-${var.environment}-${var.location}"
   virtual_network_name      = data.azurerm_virtual_network.target_virtual_network[0].name
   remote_virtual_network_id = module.aks_vnet.vnet_id
 }

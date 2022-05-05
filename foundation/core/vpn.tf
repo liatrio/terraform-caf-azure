@@ -15,7 +15,7 @@ module "vpn_dns_resolver" {
 resource "azurerm_vpn_server_configuration" "vpn_server_config" {
   provider            = azurerm.connectivity
   count               = var.enable_point_to_site_vpn == true ? 1 : 0
-  name                = "${var.prefix}-vpn-server-config-aad"
+  name                = "${var.prefix}-vpn-server-config-aad-${var.environment}-${var.location}"
   resource_group_name = azurerm_resource_group.caf_connectivity.name
   location            = azurerm_resource_group.caf_connectivity.location
 
@@ -33,7 +33,7 @@ resource "azurerm_vpn_server_configuration" "vpn_server_config" {
 resource "azurerm_point_to_site_vpn_gateway" "hub_vpn_gateway" {
   provider                    = azurerm.connectivity
   count                       = var.enable_point_to_site_vpn == true ? 1 : 0
-  name                        = "${var.prefix}-hub-vpn-gateway-${azurerm_resource_group.caf_connectivity.location}"
+  name                        = "cn-${var.prefix}-hub-vpn-gateway-${var.environment}-${azurerm_resource_group.caf_connectivity.location}"
   location                    = azurerm_resource_group.caf_connectivity.location
   resource_group_name         = azurerm_resource_group.caf_connectivity.name
   virtual_hub_id              = azurerm_virtual_hub.caf_hub.id

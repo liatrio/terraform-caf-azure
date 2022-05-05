@@ -1,5 +1,5 @@
 resource "azurerm_user_assigned_identity" "aks_msi" {
-  name                = "${var.prefix}-${var.name}-msi-${var.location}"
+  name                = "${var.prefix}-${var.name}-msi-${var.environment}-${var.location}"
   resource_group_name = azurerm_resource_group.lz_resource_group.name
   location            = var.location
 }
@@ -24,7 +24,7 @@ resource "azurerm_role_assignment" "subscription_connectivity_dns_contributor" {
 }
 
 resource "azurerm_user_assigned_identity" "cert_manager_pod_identity" {
-  name                = "${var.prefix}-${var.name}-cert-manager-msi-${var.location}"
+  name                = "${var.prefix}-${var.name}-cert-manager-msi-${var.environment}-${var.location}"
   resource_group_name = azurerm_resource_group.lz_resource_group.name
   location            = var.location
 }
@@ -32,7 +32,7 @@ resource "azurerm_user_assigned_identity" "cert_manager_pod_identity" {
 resource "azurerm_user_assigned_identity" "external_dns_pod_identity" {
   count = var.external_app ? 1 : 0
 
-  name                = "${var.prefix}-external-dns-msi-${var.location}"
+  name                = "${var.prefix}-external-dns-msi-${var.environment}-${var.location}"
   resource_group_name = azurerm_resource_group.lz_resource_group.name
   location            = var.location
 }
