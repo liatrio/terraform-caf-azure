@@ -15,7 +15,7 @@ module "vpn_dns_resolver" {
 resource "azurerm_vpn_server_configuration" "vpn_server_config" {
   provider            = azurerm.connectivity
   count               = var.enable_point_to_site_vpn == true ? 1 : 0
-  name                = "${var.prefix}-vpn-server-config-aad-${var.environment}-${var.location}"
+  name                = "vpn-${var.prefix}-config-aad-${var.environment}-${var.location}"
   resource_group_name = azurerm_resource_group.caf_connectivity.name
   location            = azurerm_resource_group.caf_connectivity.location
 
