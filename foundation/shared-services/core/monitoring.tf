@@ -1,7 +1,7 @@
 data "azurerm_log_analytics_workspace" "management" {
   provider            = azurerm.management
-  name                = "log-${var.prefix}-management"
-  resource_group_name = "rg-${var.prefix}-management"
+  name                = "log-${var.prefix}-management-${var.location}"
+  resource_group_name = "rg-${var.prefix}-management-${var.location}"
 }
 
 resource "azurerm_security_center_workspace" "defender" {
