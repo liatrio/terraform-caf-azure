@@ -11,7 +11,7 @@ resource "azurerm_firewall_policy" "firewall_policy" {
   }
 }
 
-resource "azurerm_firewall_policy_rule_collection_group" "network_security_group" {
+resource "azurerm_firewall_policy_rule_collection_group" "rule_collection_group" {
   count = var.enable_firewall == true ? 1 : 0
 
   provider           = azurerm.connectivity
