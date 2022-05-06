@@ -10,8 +10,11 @@ variable "subscriptions" {
 }
 
 variable "location" {
-  type    = string
-  default = "westus"
+  type = string
+}
+
+variable "env" {
+  type = string
 }
 
 variable "storage" {

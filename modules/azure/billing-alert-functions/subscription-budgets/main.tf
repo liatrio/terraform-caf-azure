@@ -9,7 +9,7 @@ terraform {
 
 resource "azurerm_monitor_action_group" "slack" {
   count               = var.enable_slack ? 1 : 0
-  name                = "action-group-slack-${var.func_identifier}"
+  name                = "ag-slack_${var.func_identifier}-${var.env}-${var.location}"
   resource_group_name = var.resource_group_name
   short_name          = "slack-ag"
   tags                = var.budget_tags
@@ -25,7 +25,7 @@ resource "azurerm_monitor_action_group" "slack" {
 
 resource "azurerm_monitor_action_group" "teams" {
   count               = var.enable_teams ? 1 : 0
-  name                = "action-group-teams-${var.func_identifier}"
+  name                = "ag-teams_${var.func_identifier}-${var.env}-${var.location}"
   resource_group_name = var.resource_group_name
   short_name          = "teams-ag"
   tags                = var.budget_tags
@@ -48,7 +48,7 @@ locals {
 
 resource "azurerm_consumption_budget_subscription" "example" {
   for_each        = var.subscriptions
-  name            = "budget-${var.func_identifier}"
+  name            = "bdg-${var.func_identifier}-${var.env}-${var.location}"
   subscription_id = each.value
   amount          = var.budget_amounts[each.key]
   time_grain      = var.budget_time_grains[each.key]

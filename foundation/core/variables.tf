@@ -6,6 +6,10 @@ variable "location" {
   type = string
 }
 
+variable "env" {
+  type = string
+}
+
 variable "virtual_hub_address_cidr" {
   type        = string
   description = "The network CIDR for the Virtual Hub"
@@ -118,7 +122,7 @@ variable "enable_point_to_site_vpn" {
 
 variable "slack_func_identifier" {
   type    = string
-  default = "billing-alert-func"
+  default = "billing_alert_func"
 }
 
 variable "provision_budget_alerts" {

@@ -18,4 +18,6 @@ module "billing_alert_functions" {
   budget_time_grains = var.budget_time_grains
   budget_amounts     = var.budget_amounts
   budget_tags        = var.budget_tags
+  location           = var.location
+  env                = var.env
 }

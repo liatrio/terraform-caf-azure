@@ -15,13 +15,13 @@ data "azurerm_client_config" "azurerm_provider" {
 }
 
 resource "azurerm_resource_group" "main" {
-  name     = "rg-${var.func_identifier}"
+  name     = "rg-${var.func_identifier}-${var.env}-${var.location}"
   location = var.location
   tags     = var.budget_tags
 }
 
 resource "azurerm_storage_account" "func" {
-  name                     = format("st%s", replace(var.func_identifier, "-", ""))
+  name                     = format("st%s%s%s", replace(var.func_identifier, "_", ""), var.env, var.location)
   resource_group_name      = azurerm_resource_group.main.name
   location                 = azurerm_resource_group.main.location
   account_tier             = var.storage.tier
@@ -55,18 +55,18 @@ resource "azurerm_storage_account" "func" {
 }
 
 resource "azurerm_storage_queue" "main" {
-  name                 = "funcqueue"
+  name                 = "stq-${var.func_identifier}-${var.env}-${var.location}"
   storage_account_name = azurerm_storage_account.func.name
 }
 
 resource "azurerm_storage_container" "deployments" {
-  name                  = "billing-alert-function-releases"
+  name                  = "stc-${var.func_identifier}-${var.env}-${var.location}"
   storage_account_name  = azurerm_storage_account.func.name
   container_access_type = "private"
 }
 
 resource "azurerm_storage_blob" "storage_blob" {
-  name                   = "billing-alert-function-blob"
+  name                   = "stb-${var.func_identifier}-${var.env}-${var.location}"
   storage_account_name   = azurerm_storage_account.func.name
   storage_container_name = azurerm_storage_container.deployments.name
   type                   = "Block"
@@ -80,7 +80,7 @@ resource "azurerm_storage_blob" "storage_blob" {
 }
 
 resource "azurerm_app_service_plan" "main" {
-  name                = "plan-${var.func_identifier}"
+  name                = "plan-${var.func_identifier}-${var.env}-${var.location}"
   location            = azurerm_resource_group.main.location
   resource_group_name = azurerm_resource_group.main.name
   kind                = "Linux"
@@ -100,7 +100,7 @@ resource "azurerm_app_service_plan" "main" {
 }
 
 resource "azurerm_application_insights" "main" {
-  name                = "appi-${var.func_identifier}"
+  name                = "appi-${var.func_identifier}-${var.env}-${var.location}"
   location            = azurerm_resource_group.main.location
   resource_group_name = azurerm_resource_group.main.name
   application_type    = "Node.JS"
@@ -125,7 +125,7 @@ data "azurerm_storage_account_blob_container_sas" "storage_account_blob_containe
 }
 
 resource "azurerm_function_app" "main" {
-  name                = "func-${var.func_identifier}"
+  name                = "func-${var.func_identifier}-${var.env}-${var.location}"
   resource_group_name = azurerm_resource_group.main.name
   location            = azurerm_resource_group.main.location
   os_type             = "linux"
@@ -170,4 +170,6 @@ module "subscription_budgets" {
   default_hostname    = azurerm_function_app.main.default_hostname
   func_identifier     = var.func_identifier
   budget_tags         = var.budget_tags
+  env                 = var.env
+  location            = var.location
 }

@@ -2,6 +2,14 @@ variable "func_identifier" {
   type = string
 }
 
+variable "location" {
+  type = string
+}
+
+variable "env" {
+  type = string
+}
+
 variable "subscriptions" {
   type = map(any)
 }

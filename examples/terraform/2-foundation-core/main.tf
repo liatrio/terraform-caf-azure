@@ -53,4 +53,5 @@ module "liatrio_caf_foundation" {
   budget_threshold   = { "caf-management" : 80.0, "caf-connectivity" : 80.0 }
   slack_webhook_url  = ""
   teams_webhook_url  = ""
+  env                = "example"
 }
