@@ -7,7 +7,7 @@ module "billing_alert_functions" {
   }
   source = "../../modules/azure/billing-alert-functions"
 
-  to_provision       = true # feature flag
+  count              = var.provision_budget_alerts ? 1 : 0
   func_identifier    = var.func_identifier
   budget_time_start  = var.budget_time_start
   slack_webhook_url  = var.slack_webhook_url
@@ -17,4 +17,5 @@ module "billing_alert_functions" {
   budget_operator    = var.budget_operator
   budget_time_grains = var.budget_time_grains
   budget_amounts     = var.budget_amounts
+  budget_tags        = var.budget_tags
 }

@@ -14,24 +14,20 @@ data "azurerm_client_config" "azurerm_provider" {
   provider = azurerm
 }
 
-data "azurerm_subscription" "subscription" {
-  subscription_id = data.azurerm_client_config.azurerm_provider.subscription_id
-}
-
 resource "azurerm_resource_group" "main" {
-  count    = var.to_provision == true ? 1 : 0
   name     = "rg-${var.func_identifier}"
   location = var.location
+  tags     = var.budget_tags
 }
 
 resource "azurerm_storage_account" "func" {
-  count                    = var.to_provision == true ? 1 : 0
   name                     = format("st%s", replace(var.func_identifier, "-", ""))
-  resource_group_name      = azurerm_resource_group.main[count.index].name
-  location                 = azurerm_resource_group.main[count.index].location
+  resource_group_name      = azurerm_resource_group.main.name
+  location                 = azurerm_resource_group.main.location
   account_tier             = var.storage.tier
   account_replication_type = var.storage.replication_type
   min_tls_version          = "TLS1_2"
+  tags                     = var.budget_tags
 
   queue_properties {
     logging {
@@ -59,33 +55,30 @@ resource "azurerm_storage_account" "func" {
 }
 
 resource "azurerm_storage_queue" "main" {
-  count                = var.to_provision == true ? 1 : 0
   name                 = "funcqueue"
-  storage_account_name = azurerm_storage_account.func[count.index].name
+  storage_account_name = azurerm_storage_account.func.name
 }
 
 resource "azurerm_storage_container" "deployments" {
-  count                 = var.to_provision == true ? 1 : 0
   name                  = "billing-alert-function-releases"
-  storage_account_name  = azurerm_storage_account.func[count.index].name
+  storage_account_name  = azurerm_storage_account.func.name
   container_access_type = "private"
 }
 
 resource "azurerm_storage_blob" "storage_blob" {
-  count                  = var.to_provision == true ? 1 : 0
   name                   = "billing-alert-function-blob"
-  storage_account_name   = azurerm_storage_account.func[count.index].name
-  storage_container_name = azurerm_storage_container.deployments[count.index].name
+  storage_account_name   = azurerm_storage_account.func.name
+  storage_container_name = azurerm_storage_container.deployments.name
   type                   = "Block"
 }
 
 resource "azurerm_app_service_plan" "main" {
-  count               = var.to_provision == true ? 1 : 0
   name                = "plan-${var.func_identifier}"
-  location            = azurerm_resource_group.main[count.index].location
-  resource_group_name = azurerm_resource_group.main[count.index].name
+  location            = azurerm_resource_group.main.location
+  resource_group_name = azurerm_resource_group.main.name
   kind                = "Linux"
   reserved            = true
+  tags                = var.budget_tags
 
   sku {
     tier = var.app_service_plan.tier
@@ -94,18 +87,16 @@ resource "azurerm_app_service_plan" "main" {
 }
 
 resource "azurerm_application_insights" "main" {
-  count               = var.to_provision == true ? 1 : 0
   name                = "appi-${var.func_identifier}"
-  location            = azurerm_resource_group.main[count.index].location
-  resource_group_name = azurerm_resource_group.main[count.index].name
+  location            = azurerm_resource_group.main.location
+  resource_group_name = azurerm_resource_group.main.name
   application_type    = "Node.JS"
-  tags                = {}
+  tags                = var.budget_tags
 }
 
 data "azurerm_storage_account_blob_container_sas" "storage_account_blob_container_sas" {
-  count             = var.to_provision == true ? 1 : 0
-  connection_string = azurerm_storage_account.func[count.index].primary_connection_string
-  container_name    = azurerm_storage_container.deployments[count.index].name
+  connection_string = azurerm_storage_account.func.primary_connection_string
+  container_name    = azurerm_storage_container.deployments.name
 
   start  = var.budget_time_start
   expiry = "2024-01-01T00:00:00Z"
@@ -121,24 +112,24 @@ data "azurerm_storage_account_blob_container_sas" "storage_account_blob_containe
 }
 
 resource "azurerm_function_app" "main" {
-  count               = var.to_provision == true ? 1 : 0
   name                = "func-${var.func_identifier}"
-  resource_group_name = azurerm_resource_group.main[count.index].name
-  location            = azurerm_resource_group.main[count.index].location
+  resource_group_name = azurerm_resource_group.main.name
+  location            = azurerm_resource_group.main.location
   os_type             = "linux"
   https_only          = true
 
-  app_service_plan_id        = azurerm_app_service_plan.main[count.index].id
-  storage_account_name       = azurerm_storage_account.func[count.index].name
-  storage_account_access_key = azurerm_storage_account.func[count.index].primary_access_key
+  app_service_plan_id        = azurerm_app_service_plan.main.id
+  storage_account_name       = azurerm_storage_account.func.name
+  storage_account_access_key = azurerm_storage_account.func.primary_access_key
   version                    = "~4"
+  tags                       = var.budget_tags
 
   app_settings = {
-    "APPINSIGHTS_INSTRUMENTATIONKEY" = azurerm_application_insights.main[count.index].instrumentation_key
+    "APPINSIGHTS_INSTRUMENTATIONKEY" = azurerm_application_insights.main.instrumentation_key
     "FUNCTIONS_WORKER_RUNTIME"       = "node",
     "slackWebhookUrl"                = var.slack_webhook_url,
     "teamsWebhookUrl"                = var.teams_webhook_url,
-    "WEBSITE_RUN_FROM_PACKAGE"       = "https://${azurerm_storage_account.func[count.index].name}.blob.core.windows.net/${azurerm_storage_container.deployments[count.index].name}/${azurerm_storage_blob.storage_blob[count.index].name}${data.azurerm_storage_account_blob_container_sas.storage_account_blob_container_sas[count.index].sas}",
+    "WEBSITE_RUN_FROM_PACKAGE"       = "https://${azurerm_storage_account.func.name}.blob.core.windows.net/${azurerm_storage_container.deployments.name}/${azurerm_storage_blob.storage_blob.name}${data.azurerm_storage_account_blob_container_sas.storage_account_blob_container_sas.sas}",
     "AzureWebJobsDisableHomepage"    = "true",
   }
 
@@ -149,8 +140,6 @@ resource "azurerm_function_app" "main" {
 }
 
 module "subscription_budgets" {
-  # If to_provision is set to true, run this module for how many subscriptions are passed in
-  count = var.to_provision == true ? 1 : 0
   providers = {
     azurerm = azurerm
   }
@@ -164,7 +153,8 @@ module "subscription_budgets" {
   budget_operator     = var.budget_operator
   budget_time_grains  = var.budget_time_grains
   budget_amounts      = var.budget_amounts
-  resource_group_name = azurerm_resource_group.main[count.index].name
-  default_hostname    = azurerm_function_app.main[count.index].default_hostname
+  resource_group_name = azurerm_resource_group.main.name
+  default_hostname    = azurerm_function_app.main.default_hostname
   func_identifier     = var.func_identifier
+  budget_tags         = var.budget_tags
 }

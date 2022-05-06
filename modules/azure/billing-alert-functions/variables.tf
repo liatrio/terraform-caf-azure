@@ -37,18 +37,11 @@ variable "app_service_plan" {
 }
 
 variable "slack_webhook_url" {
-  type    = string
-  default = ""
+  type = string
 }
 
 variable "teams_webhook_url" {
-  type    = string
-  default = ""
-}
-
-variable "to_provision" {
-  type    = bool
-  default = false
+  type = string
 }
 
 variable "budget_time_start" {
@@ -56,23 +49,23 @@ variable "budget_time_start" {
 }
 
 variable "budget_amounts" {
-  type    = map(any)
-  default = { "default" : 1000 }
+  type = map(any)
 }
 
 variable "budget_time_grains" {
   description = "A choice of time grain, options are: Annually, BillingAnnual, BillingMonth, BillingQuarter, Monthly, and Quarterly"
   type        = map(any)
-  default     = { "default" : "Monthly" }
 }
 
 variable "budget_operator" {
   description = "A choice of operator, options are: EqualTo, GreaterThan, or GreaterThanOrEqualTo"
   type        = map(any)
-  default     = { "default" = "EqualTo" }
 }
 
 variable "budget_threshold" {
-  type    = map(any)
-  default = { "default" = 80.0 }
+  type = map(any)
+}
+
+variable "budget_tags" {
+  type = map(any)
 }

@@ -54,3 +54,7 @@ variable "enable_teams" {
   type    = bool
   default = false
 }
+
+variable "budget_tags" {
+  type = map(any)
+}

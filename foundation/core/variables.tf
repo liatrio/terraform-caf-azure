@@ -121,14 +121,24 @@ variable "slack_func_identifier" {
   default = "billing-alert-func"
 }
 
+variable "provision_budget_alerts" {
+  type        = bool
+  description = "Boolan variable to provision the alerts module or not"
+}
+
+variable "func_identifier" {
+  type        = string
+  default     = "billing-alert-func"
+  description = "string used to identity billing alert function resources"
+}
+
 variable "slack_webhook_url" {
-  type    = string
-  default = ""
+  type        = string
+  description = "URL or a Slack webhook to send the Slack alerts to"
 }
 
 variable "teams_webhook_url" {
-  type    = string
-  default = ""
+  type = string
 }
 
 variable "budget_time_start" {
@@ -136,28 +146,27 @@ variable "budget_time_start" {
 }
 
 variable "subscriptions" {
-  type    = map(any)
-  default = { "default" = "" }
+  type = map(any)
 }
 
 variable "budget_amounts" {
-  type    = map(any)
-  default = { "default" : 1000 }
+  type = map(any)
 }
 
 variable "budget_time_grains" {
-  description = "A choice of time grain, options are: Annually, BillingAnnual, BillingMonth, BillingQuarter, Monthly, and Quarterly"
   type        = map(any)
-  default     = { "default" : "Monthly" }
+  description = "A choice of time grain, options are: Annually, BillingAnnual, BillingMonth, BillingQuarter, Monthly, and Quarterly"
 }
 
 variable "budget_operator" {
-  description = "A choice of operator, options are: EqualTo, GreaterThan, or GreaterThanOrEqualTo"
   type        = map(any)
-  default     = { "default" = "EqualTo" }
+  description = "A choice of operator, options are: EqualTo, GreaterThan, or GreaterThanOrEqualTo"
 }
 
 variable "budget_threshold" {
-  type    = map(any)
-  default = { "default" = 80.0 }
+  type = map(any)
+}
+
+variable "budget_tags" {
+  type = map(any)
 }

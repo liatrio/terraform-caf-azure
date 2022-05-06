@@ -8,10 +8,11 @@ terraform {
 }
 
 resource "azurerm_monitor_action_group" "slack" {
-  count               = var.enable_slack == true ? 1 : 0
+  count               = var.enable_slack ? 1 : 0
   name                = "action-group-slack-${var.func_identifier}"
   resource_group_name = var.resource_group_name
   short_name          = "slack-ag"
+  tags                = var.budget_tags
 
   webhook_receiver {
     name = "callazurefuncapi"
@@ -23,10 +24,11 @@ resource "azurerm_monitor_action_group" "slack" {
 }
 
 resource "azurerm_monitor_action_group" "teams" {
-  count               = var.enable_teams == true ? 1 : 0
+  count               = var.enable_teams ? 1 : 0
   name                = "action-group-teams-${var.func_identifier}"
   resource_group_name = var.resource_group_name
   short_name          = "teams-ag"
+  tags                = var.budget_tags
 
   webhook_receiver {
     name = "callazurefuncapi"
@@ -39,8 +41,8 @@ resource "azurerm_monitor_action_group" "teams" {
 
 locals {
   contact_groups = flatten([
-    var.enable_slack == true ? [azurerm_monitor_action_group.slack[0].id] : [],
-    var.enable_teams == true ? [azurerm_monitor_action_group.teams[0].id] : []
+    var.enable_slack ? [azurerm_monitor_action_group.slack[0].id] : [],
+    var.enable_teams ? [azurerm_monitor_action_group.teams[0].id] : []
   ])
 }
 
