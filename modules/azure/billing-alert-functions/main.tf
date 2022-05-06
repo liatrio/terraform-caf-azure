@@ -70,6 +70,13 @@ resource "azurerm_storage_blob" "storage_blob" {
   storage_account_name   = azurerm_storage_account.func.name
   storage_container_name = azurerm_storage_container.deployments.name
   type                   = "Block"
+  content_type           = "application/zip"
+
+  lifecycle {
+    ignore_changes = [
+      content_md5,
+    ]
+  }
 }
 
 resource "azurerm_app_service_plan" "main" {
@@ -83,6 +90,12 @@ resource "azurerm_app_service_plan" "main" {
   sku {
     tier = var.app_service_plan.tier
     size = var.app_service_plan.size
+  }
+
+  lifecycle {
+    ignore_changes = [
+      kind,
+    ]
   }
 }
 
