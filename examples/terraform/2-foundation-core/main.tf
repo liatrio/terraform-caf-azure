@@ -42,8 +42,8 @@ module "liatrio_caf_foundation" {
   vpn_service_principal_application_id = var.vpn_service_principal_application_id
   provision_budget_alerts              = true
   subscriptions = {
-    "caf-management" : "${dependency.subscriptions.outputs.management_subscription_id}",
-    "caf-connectivity" : "${dependency.subscriptions.outputs.connectivity_subscription_id}"
+    "caf-management" : "",
+    "caf-connectivity" : ""
   }
   budget_tags        = {}
   budget_time_start  = "2022-05-01T00:00:00Z"
