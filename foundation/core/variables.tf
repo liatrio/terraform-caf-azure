@@ -104,8 +104,8 @@ variable "enable_ms_defender" {
   default     = false
 }
 
-variable "firewall_sku" {
-  type        = string
-  description = "AZFW_Hub or AZFW_VNet"
-  default     = "AZFW_Hub"
+variable "enable_firewall" {
+  type        = bool
+  description = "Enables the firewall and its association with the virtual hub"
+  default     = false
 }

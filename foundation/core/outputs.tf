@@ -36,3 +36,7 @@ output "shared_svc" {
 output "log_analytics_workspace" {
   value = azurerm_log_analytics_workspace.log_analytics_workspace.id
 }
+
+output "firewall_private_ip" {
+  value = var.enable_firewall == true ? azurerm_firewall.firewall[0].virtual_hub[0].private_ip_address : ""
+}
