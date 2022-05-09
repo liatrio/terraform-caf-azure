@@ -125,9 +125,10 @@ variable "slack_func_identifier" {
   default = "billing_alert_func"
 }
 
-variable "provision_budget_alerts" {
+variable "enable_budget_alerts" {
   type        = bool
-  description = "Boolan variable to provision the alerts module or not"
+  description = "Feature flag to enable billing alerts"
+  default     = false
 }
 
 variable "func_identifier" {

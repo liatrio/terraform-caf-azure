@@ -55,7 +55,6 @@ resource "azurerm_consumption_budget_subscription" "example" {
 
   time_period {
     start_date = var.budget_time_start
-    # end_date   = "2022-07-01T00:00:00Z" # Defaults to 10 years when no end_date
   }
 
   notification {

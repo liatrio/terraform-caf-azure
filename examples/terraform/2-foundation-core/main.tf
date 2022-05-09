@@ -40,7 +40,7 @@ module "liatrio_caf_foundation" {
   vpn_client_pool_address_cidr         = "10.130.2.0/24"
   connectivity_apps_address_cidr       = "10.130.3.0/24"
   vpn_service_principal_application_id = var.vpn_service_principal_application_id
-  provision_budget_alerts              = true
+  enable_budget_alerts                 = true
   subscriptions = {
     "caf-management" : "",
     "caf-connectivity" : ""
