@@ -22,10 +22,10 @@ For our Microsoft resources for which there was no naming standard avaliable, we
 
 | Asset type | Scope | Format and examples |
 | ------ | ------ | ------ |
-| Azure Storage Blob | Storage Container | stb-<app or service name>-<environment type>-<region name> |
-| Storage Containers | Storage Accounts | stc-<app or service name>-<environment type>-<region name> |
-| Storage Queue | Storage Account | stq-<app or service name>-<environment type>-<region name>|
-| Consumption Budget Subscription | Subscription | bdg-<app or service name>-<environment type>-<region name> |
+| Azure Storage Blob | Storage Container | stb-\<app or service name\>-\<environment type\>-\<region name\> |
+| Storage Containers | Storage Accounts | stc-\<app or service name\>-\<environment type\>-\<region name\> |
+| Storage Queue | Storage Account | stq-\<app or service name\>-\<environment type\>-\<region name\>|
+| Consumption Budget Subscription | Subscription | bdg-\<app or service name\>-\<environment type\>-\<region name\> |
 
 ## Code of Conduct
 
