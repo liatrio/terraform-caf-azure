@@ -122,7 +122,7 @@ variable "enable_point_to_site_vpn" {
 
 variable "slack_func_identifier" {
   type    = string
-  default = "billing_alert_func"
+  default = "billing-alert-func"
 }
 
 variable "enable_budget_alerts" {
@@ -140,38 +140,30 @@ variable "func_identifier" {
 variable "slack_webhook_url" {
   type        = string
   description = "URL or a Slack webhook to send the Slack alerts to"
+  default     = ""
 }
 
 variable "teams_webhook_url" {
-  type = string
+  type    = string
+  default = ""
 }
 
-variable "budget_time_start" {
-  type = string
-}
-
-variable "subscriptions" {
-  type = map(any)
-}
-
-variable "budget_amounts" {
-  type = map(any)
-}
-
-variable "budget_time_grains" {
-  type        = map(any)
-  description = "A choice of time grain, options are: Annually, BillingAnnual, BillingMonth, BillingQuarter, Monthly, and Quarterly"
-}
-
-variable "budget_operator" {
-  type        = map(any)
-  description = "A choice of operator, options are: EqualTo, GreaterThan, or GreaterThanOrEqualTo"
-}
-
-variable "budget_threshold" {
-  type = map(any)
+variable "budgets" {
+  type    = map(any)
+  default = {}
 }
 
 variable "budget_tags" {
-  type = map(any)
+  type    = map(any)
+  default = {}
+}
+
+variable "sas_time_start" {
+  type = string
+  default = ""
+}
+
+variable "sas_time_end" {
+  type = string
+  default = ""
 }

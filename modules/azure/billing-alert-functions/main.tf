@@ -21,7 +21,7 @@ resource "azurerm_resource_group" "main" {
 }
 
 resource "azurerm_storage_account" "func" {
-  name                     = format("st%s%s%s", replace(var.func_identifier, "_", ""), var.env, var.location)
+  name                     = format("st%s", replace(var.func_identifier, "-", "")) # using just func_identifier for character limits
   resource_group_name      = azurerm_resource_group.main.name
   location                 = azurerm_resource_group.main.location
   account_tier             = var.storage.tier
@@ -111,8 +111,8 @@ data "azurerm_storage_account_blob_container_sas" "storage_account_blob_containe
   connection_string = azurerm_storage_account.func.primary_connection_string
   container_name    = azurerm_storage_container.deployments.name
 
-  start  = var.budget_time_start
-  expiry = "2024-01-01T00:00:00Z"
+  start  = var.sas_time_start
+  expiry = var.sas_time_end
 
   permissions {
     read   = true
@@ -152,24 +152,66 @@ resource "azurerm_function_app" "main" {
   }
 }
 
-module "subscription_budgets" {
-  providers = {
-    azurerm = azurerm
-  }
-  source = "./subscription-budgets"
+locals {
+  enable_slack = var.slack_webhook_url == "" ? false : true
+  enable_teams = var.teams_webhook_url == "" ? false : true
+}
 
-  enable_slack        = var.slack_webhook_url != "" ? true : false
-  enable_teams        = var.teams_webhook_url != "" ? true : false
-  subscriptions       = var.subscriptions
-  budget_time_start   = var.budget_time_start
-  budget_threshold    = var.budget_threshold
-  budget_operator     = var.budget_operator
-  budget_time_grains  = var.budget_time_grains
-  budget_amounts      = var.budget_amounts
+resource "azurerm_monitor_action_group" "slack" {
+  count               = local.enable_slack ? 1 : 0
+  name                = "ag-slack-${var.func_identifier}-${var.env}-${var.location}"
   resource_group_name = azurerm_resource_group.main.name
-  default_hostname    = azurerm_function_app.main.default_hostname
-  func_identifier     = var.func_identifier
-  budget_tags         = var.budget_tags
-  env                 = var.env
-  location            = var.location
+  short_name          = "slack-ag"
+  tags                = var.budget_tags
+
+  webhook_receiver {
+    name = "callazurefuncapi"
+    # Using string interpolation to get full hostname of function. 
+    # slack-budget-alert comes from the package directory inside the function
+    service_uri             = "https://${azurerm_function_app.main.default_hostname}/api/slack-budget-alert"
+    use_common_alert_schema = false
+  }
+}
+
+resource "azurerm_monitor_action_group" "teams" {
+  count               = local.enable_teams ? 1 : 0
+  name                = "ag-teams-${var.func_identifier}-${var.env}-${var.location}"
+  resource_group_name = azurerm_resource_group.main.name
+  short_name          = "teams-ag"
+  tags                = var.budget_tags
+
+  webhook_receiver {
+    name = "callazurefuncapi"
+    # Using string interpolation to get full hostname of function. 
+    # teams-budget-alert comes from the package directory inside the function
+    service_uri             = "https://${azurerm_function_app.main.default_hostname}/api/teams-budget-alert"
+    use_common_alert_schema = false
+  }
+}
+
+locals {
+  contact_groups = flatten([
+    local.enable_slack ? [azurerm_monitor_action_group.slack[0].id] : [],
+    local.enable_teams ? [azurerm_monitor_action_group.teams[0].id] : []
+  ])
+}
+
+resource "azurerm_consumption_budget_subscription" "example" {
+  for_each        = var.budgets
+  name            = "bdg-${var.func_identifier}-${var.env}-${var.location}"
+  subscription_id = each.value["subscription_id"]
+  amount          = each.value["budget_amount"]
+  time_grain      = each.value["budget_time_grain"]
+
+  time_period {
+    start_date = each.value["budget_time_start"]
+  }
+
+  notification {
+    enabled   = true
+    threshold = each.value["budget_threshold"]
+    operator  = each.value["budget_operator"]
+
+    contact_groups = local.contact_groups
+  }
 }

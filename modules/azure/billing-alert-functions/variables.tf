@@ -5,10 +5,6 @@ variable "func_identifier" {
   type = string
 }
 
-variable "subscriptions" {
-  type = map(any)
-}
-
 variable "location" {
   type = string
 }
@@ -47,28 +43,18 @@ variable "teams_webhook_url" {
   type = string
 }
 
-variable "budget_time_start" {
+variable "budget_tags" {
+  type = map(any)
+}
+
+variable "budgets" {
+  type = map(any)
+}
+
+variable "sas_time_start" {
   type = string
 }
 
-variable "budget_amounts" {
-  type = map(any)
-}
-
-variable "budget_time_grains" {
-  description = "A choice of time grain, options are: Annually, BillingAnnual, BillingMonth, BillingQuarter, Monthly, and Quarterly"
-  type        = map(any)
-}
-
-variable "budget_operator" {
-  description = "A choice of operator, options are: EqualTo, GreaterThan, or GreaterThanOrEqualTo"
-  type        = map(any)
-}
-
-variable "budget_threshold" {
-  type = map(any)
-}
-
-variable "budget_tags" {
-  type = map(any)
+variable "sas_time_end" {
+  type = string
 }
