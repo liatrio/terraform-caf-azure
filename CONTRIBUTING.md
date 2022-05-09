@@ -16,6 +16,17 @@ For our Terraform coding, we follow the Terraform standard [style conventions](h
 
 As for our naming standards, we utilize the Microsoft [standard naming conventions for Azure](https://docs.microsoft.com/en-us/azure/cloud-adoption-framework/ready/azure-best-practices/resource-naming). In place of Instance, we typically utilize a more user-friendly name.
 
+## Non-Defined Coding Conventions
+
+For our Microsoft resources for which there was no naming standard avaliable, we created our own naming standards shown below.
+
+| Asset type | Scope | Format and examples |
+| ------ | ------ | ------ |
+| Azure Storage Blob | Storage Container | stb-<app or service name>-<environment type>-<region name> |
+| Storage Containers | Storage Accounts | stc-<app or service name>-<environment type>-<region name> |
+| Storage Queue | Storage Account | stq-<app or service name>-<environment type>-<region name>|
+| Consumption Budget Subscription | Subscription | bdg-<app or service name>-<environment type>-<region name> |
+
 ## Code of Conduct
 
 Make sure you read our [Code of Conduct](https://github.com/liatrio/terraform-caf-azure/blob/main/Code_of_Conduct.md), to make sure you know the standards we expect of the community.
