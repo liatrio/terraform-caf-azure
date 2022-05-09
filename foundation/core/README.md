@@ -24,9 +24,37 @@ root_dns_tags|variable (.tfvars or terragrunt)|Your preferred tags to apply to t
 vpn_client_pool_address_cidr|variable (.tfvars or terragrunt)|`OPTIONAL` - CIDR network range for VPN users|`10.100.2.0/24`
 vpn_service_principal_application_id|upstream dependency on creation of an `azuread_service_principal` for your VPN application registration|`OPTIONAL` - `application_id` of service principal for VPN|`abcd1234-ef56-ab12-ab12-abcdef123456`
 landing_zone_mg|variable (.tfvars or terragrunt)|`OPTIONAL` - map of objects defining the management group(s) in which your landing zone will exist|`{ management_group_1 : { display_name = "Management Group 1", policy_ids = [ { policy_set_id : "/providers/Microsoft.Authorization/policySetDefinitions/abcd1234-ef56-ab12-ab12-abcdef123456" } ] }, management_group_2 : { display_name = "Management Group 2", policy_ids = [] } }`
-enable_point_to_site_vpn|variable (.tfvars or terragrunt)|`OPTIONAL` - Boolean to enable/disable creation of user p2s vpn. Defaults to true.|`true`
-
-
+enable_point_to_site_vpn|variable (.tfvars or terragrunt)|`OPTIONAL` - Boolean to enable/disable creation of user p2s vpn. Defaults to true|`true`
+enable_budget_alerts|variable (.tfvars or terragrunt)|`OPTIONAL` - Boolean to enable/disable the creation of budget alert function app and child resources. Defaults to false|`true`
+env|variable (.tfvars or terragrunt)|String describing which environment we're in. Used in creation of resource names|`dev` or `prod` etc
+sas_time_start|variable (.tfvars or terragrunt)|`OPTIONAL` - Start time for the sas token that allows the function app to access the package in blob storage|`"2022-05-01T00:00:00Z"`
+sas_time_end|variable (.tfvars or terragrunt)|`OPTIONAL` - Expiry time for the sas token that allows the function app to access the package in blob storage|`"2024-01-01T00:00:00Z"`
+slack_webhook_url|variable (.tfvars or terragrunt)|`OPTIONAL` - Incoming webhook generated in Slack that alerts will be posted to|`"https://hooks.slack.com/..."`
+teams_webhook_url|variable (.tfvars or terragrunt)|`OPTIONAL` - Incoming webhook generated in Microsoft Teams that alerts will be posted to|`"https://....webhook.office.com/webhook2/..."`
+budget_tags|variable (.tfvars or terragrunt)|`OPTIONAL` - The tags to be applied to resources created by the budget alerts module|`{"client": "internal"}`
+budgets|variable (.tfvars or terragrunt)|`OPTIONAL` - A map of maps which has at the top level each subscription, and within each subscription the variables shown in this example, which are defined below|`{"caf-management" : {
+    "subscription_id" : "\<subscription_id\>",
+    "budget_time_start" : "2022-05-01T00:00:00Z",
+    "budget_time_grain" : "Monthly"
+    "budget_amount" : "1000",
+    "budget_operator" : "EqualTo",
+    "budget_threshold" : 80.0,
+  },
+  "caf-connectivity" : {
+    "subscription_id" : "\<subscription_id\>",
+    "budget_time_start" : "2022-05-01T00:00:00Z",
+    "budget_time_grain" : "Quarterly"
+    "budget_amount" : "100",
+    "budget_operator" : "GreaterThan",
+    "budget_threshold" : 80.0,
+  }
+}`
+subscription_id|variable (.tfvars or terragrunt)|`OPTIONAL` - A map of subscription ids to add the budgets to|`{"caf-management": \<subscription-id\>, "caf-connectivity": \<subscription-id\>}`
+budget_time_start|variable (.tfvars or terragrunt)|`OPTIONAL` - The start date for the budget |`"2022-05-01T00:00:00Z"`
+budget_amounts|variable (.tfvars or terragrunt)|`OPTIONAL` - The total amount of cost to track with the budget|`{"caf-management": 1000, "caf-connectivity": 100}`
+budget_time_grains|variable (.tfvars or terragrunt)|`OPTIONAL` - The time covered by a budget. Tracking of the amount will be reset based on the time grain|`{"caf-management": "Monthly", "caf-connectivity": "Quarterly"}`
+budget_operator|variable (.tfvars or terragrunt)|`OPTIONAL` - The operator to use for budget comparison|`{"caf-management": "EqualTo", "caf-connectivity": "GreaterThan"}`
+budget_threshold|variable (.tfvars or terragrunt)|`OPTIONAL` - Threshold value associated with a notification. Notification is sent when the cost exceeded the threshold. It is always percent and has to be between 0.01 and 1000|`{"caf-management" : 80.0, "caf-connectivity" : 80.0}`
 
 It also requires a few inputs.
 
