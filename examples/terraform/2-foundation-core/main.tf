@@ -40,18 +40,4 @@ module "liatrio_caf_foundation" {
   vpn_client_pool_address_cidr         = "10.130.2.0/24"
   connectivity_apps_address_cidr       = "10.130.3.0/24"
   vpn_service_principal_application_id = var.vpn_service_principal_application_id
-  enable_budget_alerts                 = true
-  subscriptions = {
-    "caf-management" : "",
-    "caf-connectivity" : ""
-  }
-  budget_tags        = {}
-  budget_time_start  = "2022-05-01T00:00:00Z"
-  budget_amounts     = { "caf-management" : 1000, "caf-connectivity" : 100 }
-  budget_time_grains = { "caf-management" : "Monthly", "caf-connectivity" : "Quarterly" }
-  budget_operator    = { "caf-management" : "EqualTo", "caf-connectivity" : "EqualTo" }
-  budget_threshold   = { "caf-management" : 80.0, "caf-connectivity" : 80.0 }
-  slack_webhook_url  = ""
-  teams_webhook_url  = ""
-  env                = "example"
 }

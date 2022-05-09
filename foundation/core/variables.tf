@@ -7,7 +7,8 @@ variable "location" {
 }
 
 variable "env" {
-  type = string
+  type    = string
+  default = ""
 }
 
 variable "virtual_hub_address_cidr" {
@@ -159,11 +160,11 @@ variable "budget_tags" {
 }
 
 variable "sas_time_start" {
-  type = string
+  type    = string
   default = ""
 }
 
 variable "sas_time_end" {
-  type = string
+  type    = string
   default = ""
 }
