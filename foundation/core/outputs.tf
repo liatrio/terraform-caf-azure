@@ -38,5 +38,5 @@ output "log_analytics_workspace" {
 }
 
 output "firewall_private_ip" {
-  value = var.enable_firewall == true ? azurerm_firewall.firewall[0].virtual_hub[0].private_ip_address : ""
+  value = var.enable_firewall ? azurerm_firewall.firewall[0].virtual_hub[0].private_ip_address : ""
 }
