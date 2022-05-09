@@ -1,5 +1,5 @@
 resource "azurerm_firewall_policy" "firewall_policy" {
-  count = var.enable_firewall == true ? 1 : 0
+  count = var.enable_firewall ? 1 : 0
 
   name                = "afwp-${var.prefix}-${azurerm_resource_group.caf_connectivity.location}"
   provider            = azurerm.connectivity
