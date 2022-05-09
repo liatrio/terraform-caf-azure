@@ -32,24 +32,8 @@ sas_time_end|variable (.tfvars or terragrunt)|`OPTIONAL` - Expiry time for the s
 slack_webhook_url|variable (.tfvars or terragrunt)|`OPTIONAL` - Incoming webhook generated in Slack that alerts will be posted to|`"https://hooks.slack.com/..."`
 teams_webhook_url|variable (.tfvars or terragrunt)|`OPTIONAL` - Incoming webhook generated in Microsoft Teams that alerts will be posted to|`"https://....webhook.office.com/webhook2/..."`
 budget_tags|variable (.tfvars or terragrunt)|`OPTIONAL` - The tags to be applied to resources created by the budget alerts module|`{"client": "internal"}`
-budgets|variable (.tfvars or terragrunt)|`OPTIONAL` - A map of maps which has at the top level each subscription, and within each subscription the variables shown in this example, which are defined below|`{"caf-management" : {
-    "subscription_id" : "\<subscription_id\>",
-    "budget_time_start" : "2022-05-01T00:00:00Z",
-    "budget_time_grain" : "Monthly"
-    "budget_amount" : "1000",
-    "budget_operator" : "EqualTo",
-    "budget_threshold" : 80.0,
-  },
-  "caf-connectivity" : {
-    "subscription_id" : "\<subscription_id\>",
-    "budget_time_start" : "2022-05-01T00:00:00Z",
-    "budget_time_grain" : "Quarterly"
-    "budget_amount" : "100",
-    "budget_operator" : "GreaterThan",
-    "budget_threshold" : 80.0,
-  }
-}`
-subscription_id|variable (.tfvars or terragrunt)|`OPTIONAL` - A map of subscription ids to add the budgets to|`{"caf-management": \<subscription-id\>, "caf-connectivity": \<subscription-id\>}`
+budgets|variable (.tfvars or terragrunt)|`OPTIONAL` - A map of maps which has at the top level each subscription, and within each subscription the variables shown in this example, which are defined below|`{"caf-management" : {"subscription_id" : "<subscription_id>","budget_time_start" : "2022-05-01T00:00:00Z","budget_time_grain" : "Monthly""budget_amount" : "1000","budget_operator" : "EqualTo","budget_threshold" : 80.0,},"caf-connectivity" : {"subscription_id" : "<subscription_id>","budget_time_start" : "2022-05-01T00:00:00Z","budget_time_grain" : "Quarterly""budget_amount" : "100","budget_operator" : "GreaterThan","budget_threshold" : 80.0,}}`
+subscription_id|variable (.tfvars or terragrunt)|`OPTIONAL` - A map of subscription ids to add the budgets to|`{"subscription-id": <subscription-id>}`
 budget_time_start|variable (.tfvars or terragrunt)|`OPTIONAL` - The start date for the budget |`"2022-05-01T00:00:00Z"`
 budget_amounts|variable (.tfvars or terragrunt)|`OPTIONAL` - The total amount of cost to track with the budget|`{"caf-management": 1000, "caf-connectivity": 100}`
 budget_time_grains|variable (.tfvars or terragrunt)|`OPTIONAL` - The time covered by a budget. Tracking of the amount will be reset based on the time grain|`{"caf-management": "Monthly", "caf-connectivity": "Quarterly"}`
