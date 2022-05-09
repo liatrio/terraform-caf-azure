@@ -109,3 +109,9 @@ variable "enable_firewall" {
   description = "Enables the firewall and its association with the virtual hub"
   default     = false
 }
+
+variable "enable_point_to_site_vpn" {
+  type        = string
+  description = "If enabled, creates User Point to Site VPN configuration in CAF foundation."
+  default     = true
+}

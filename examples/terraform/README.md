@@ -6,7 +6,7 @@ These modules deploy the CAF foundation, a single shared services toolchain and 
 
 ## Get Started
 
-1. **Subscriptions**
+### 1. **Subscriptions**
 
 The subscription module creates the subscriptions needed for the CAF foundation, shared services and landing zone. It outputs subscriptions IDs which need to be set as variable inputs in the subsequent modules.
 
@@ -26,7 +26,7 @@ Then create the subscriptions
 terraform apply
 ```
 
-2. **Foundation**
+### 2. **Foundation**
 
 *In the examples/terraform/2-foundation-core folder...*
 
@@ -50,7 +50,7 @@ Deploy foundation
 terraform apply
 ```
 
-3. **Shared Services**
+### 3. **Shared Services**
 
 *In the examples/terraform/3-foundation-shared-services-core folder...*
 
@@ -66,8 +66,6 @@ terraform apply
 
 *In the examples/terraform/4-foundation-shared-services-app folder...*
 
-TODO
+### 4. **Landing Zone**
 
-4. **Landing Zone**
-
-TODO
+WIP.

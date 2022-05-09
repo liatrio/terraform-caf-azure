@@ -29,44 +29,46 @@ resource "azurerm_key_vault" "key_vault" {
   sku_name = "standard"
 
   access_policy {
-    tenant_id = data.azurerm_client_config.current.tenant_id
-    object_id = data.azurerm_client_config.current.object_id
+    tenant_id      = data.azurerm_client_config.current.tenant_id
+    object_id      = data.azurerm_client_config.current.object_id
+    application_id = var.application_id != null ? var.application_id : null
 
-    key_permissions = [
+    certificate_permissions = length(var.certificate_permissions) > 0 ? var.certificate_permissions : [
+      "Create",
+      "Delete",
       "Get",
+      "List",
+      "Update",
     ]
 
-    secret_permissions = [
+    key_permissions = length(var.key_permissions) > 0 ? var.key_permissions : [
       "Get",
+      "Create",
+      "Decrypt",
+      "Delete",
+      "Encrypt",
+      "List",
+      "Sign",
+      "UnwrapKey",
+      "Update",
+      "Verify",
+      "WrapKey",
     ]
 
-    storage_permissions = [
+    secret_permissions = length(var.secret_permissions) > 0 ? var.secret_permissions : [
       "Get",
+      "Delete",
+      "List",
+      "Set",
     ]
-  }
-}
 
-resource "azurerm_key_vault_key" "generated" {
-  for_each = var.vault_keys
-
-  name         = each.value.name
-  key_vault_id = azurerm_key_vault.key_vault.id
-  key_type     = each.value.key_type
-  key_size     = each.value.key_size
-  key_opts     = each.value.key_opts
-}
-
-resource "azurerm_disk_encryption_set" "generated" {
-  for_each = {
-    for k, v in var.vault_keys : k => v
-    if v.used_for_disk_encryption == true
-  }
-  name                = each.value.name
-  resource_group_name = var.resource_group_name
-  location            = var.location
-  key_vault_key_id    = azurerm_key_vault_key.generated[each.key].id
-
-  identity {
-    type = "SystemAssigned"
+    storage_permissions = length(var.storage_permissions) > 0 ? var.storage_permissions : [
+      "Get",
+      "Delete",
+      "List",
+      "RegenerateKey",
+      "Set",
+      "Update",
+    ]
   }
 }
