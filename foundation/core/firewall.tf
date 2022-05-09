@@ -7,7 +7,7 @@ resource "azurerm_firewall_policy" "firewall_policy" {
   location            = var.location
   dns {
     proxy_enabled = true
-    servers       = tolist([module.vpn_dns_resolver.ip_address])
+    servers       = tolist(["${module.vpn_dns_resolver.ip_address}"])
   }
 }
 
