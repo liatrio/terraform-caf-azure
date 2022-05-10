@@ -4,11 +4,13 @@ variable "app_service_list" {
         {
             name = "testfe"
             tier = "Standard"
+            type = "Linux"
             sku  = "S1"
         },
         {
             name = "testapi"
             tier = "Standard"
+            type = "Linux"
             sku  = "S1"
         }
     ]
