@@ -27,6 +27,7 @@ resource "azurerm_firewall" "firewall" {
   name               = "afw-${var.prefix}-${azurerm_resource_group.caf_connectivity.location}"
   location           = var.location
   sku_name           = "AZFW_Hub"
+  sku_tier           = var.firewall_sku_tier
   firewall_policy_id = azurerm_firewall_policy.firewall_policy[0].id
   threat_intel_mode  = ""
   virtual_hub {
