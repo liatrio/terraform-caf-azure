@@ -31,10 +31,10 @@ module "aks" {
   aks_service_subnet_cidr     = module.aks_vnet.aks_service_subnet_cidr
   aks_dns_service_ip          = module.aks_vnet.aks_dns_service_host
   kubernetes_version          = var.kubernetes_version
-  kubernetes_managed_identity = azurerm_user_assigned_identity.shared_services_msi.id
+  kubernetes_managed_identity = [azurerm_user_assigned_identity.shared_services_msi.id]
   lz_resource_group           = azurerm_resource_group.resource_group.name
   private_dns_zone_id         = data.azurerm_private_dns_zone.aks_private_dns_id.id
-  log_analytics_workspace     = data.azurerm_log_analytics_workspace.log_analytics_workspace.id
+  log_analytics_workspace     = data.azurerm_log_analytics_workspace.management.id
   enable_aks_policy_addon     = var.enable_aks_policy_addon
   depends_on = [
     azurerm_role_assignment.network_contributor,

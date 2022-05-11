@@ -51,7 +51,7 @@ variable "autoscaler_config" {
 }
 
 variable "kubernetes_managed_identity" {
-  type        = string
+  type        = set(string)
   description = "kubernetes managed identity"
 }
 
