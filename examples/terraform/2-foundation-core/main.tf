@@ -36,7 +36,6 @@ module "liatrio_caf_foundation" {
     features = "caf-example_root_dns"
   }
   prefix                               = "example"
-  environment                          = "dev"
   virtual_hub_address_cidr             = "10.130.0.0/23"
   vpn_client_pool_address_cidr         = "10.130.2.0/24"
   connectivity_apps_address_cidr       = "10.130.3.0/24"
