@@ -22,7 +22,7 @@ data "azurerm_private_dns_zone" "key_vault" {
 }
 
 resource "azurerm_private_endpoint" "key_vault" {
-  name                = "kv-endpoint-core-${var.location}"
+  name                = "kv-endpoint-${var.environment}-${var.location}"
   resource_group_name = azurerm_key_vault.key_vault.resource_group_name
   location            = azurerm_key_vault.key_vault.location
   subnet_id           = module.aks_vnet.service_endpoints_subnet_id

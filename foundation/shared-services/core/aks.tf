@@ -51,7 +51,7 @@ data "azurerm_virtual_hub" "connectivity_hub" {
 
 resource "azurerm_virtual_hub_connection" "aks_vnet_hub_connection" {
   provider                  = azurerm.connectivity
-  name                      = "vhub-${var.prefix}-${local.shared_services_name}-core-connection-${var.location}"
+  name                      = "vhub-${var.prefix}-${local.shared_services_name}-connection-${var.environment}-${var.location}"
   virtual_hub_id            = data.azurerm_virtual_hub.connectivity_hub.id
   remote_virtual_network_id = module.aks_vnet.vnet_id
 }
