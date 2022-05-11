@@ -11,7 +11,7 @@ terraform {
 }
 
 locals {
-  shared_services_name = "shared-services-${var.environment}"
+  shared_services_name = "core-shared-services"
 }
 
 data "azurerm_client_config" "current" {}

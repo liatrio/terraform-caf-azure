@@ -1,12 +1,12 @@
 resource "azurerm_resource_group" "caf_management" {
   provider = azurerm.management
-  name     = "rg-${var.prefix}-management-${var.environment}-${var.location}"
+  name     = "rg-${var.prefix}-core-management-${var.location}"
   location = var.location
 }
 
 resource "azurerm_log_analytics_workspace" "log_analytics_workspace" {
   provider            = azurerm.management
-  name                = "log-${var.prefix}-management-${var.environment}-${var.location}"
+  name                = "log-${var.prefix}-core-management-${var.location}"
   location            = azurerm_resource_group.caf_management.location
   resource_group_name = azurerm_resource_group.caf_management.name
   sku                 = var.log_analytics_ws_sku

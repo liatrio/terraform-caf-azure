@@ -6,22 +6,22 @@ data "azurerm_private_dns_zone" "aks_private_dns_id" {
 
 data "azurerm_log_analytics_workspace" "management" {
   provider            = azurerm.management
-  name                = "log-${var.prefix}-management-${var.environment}-${var.location}"
-  resource_group_name = "rg-${var.prefix}-management-${var.environment}-${var.location}"
+  name                = "log-${var.prefix}-core-management-${var.location}"
+  resource_group_name = "rg-${var.prefix}-core-management-${var.location}"
 }
 
 data "azurerm_virtual_hub" "connectivity_hub" {
   count               = var.enable_virtual_hub_connection == true ? 1 : 0
   provider            = azurerm.connectivity
-  name                = "vhub-${var.prefix}-${var.environment}-${var.location}"
-  resource_group_name = "rg-${var.prefix}-connectivity-${var.environment}-${var.location}"
+  name                = "vhub-${var.prefix}-core-${var.location}"
+  resource_group_name = "rg-${var.prefix}-core-connectivity-${var.location}"
 }
 
 data "azurerm_virtual_network" "target_virtual_network" {
   count               = var.enable_vnet_peering == true ? 1 : 0
   provider            = azurerm.connectivity
-  name                = "vnet-${var.prefix}-${var.environment}-${var.location}"
-  resource_group_name = "rg-${var.prefix}-connectivity-${var.environment}-${var.location}"
+  name                = "vnet-${var.prefix}-core-${var.location}"
+  resource_group_name = "rg-${var.prefix}-core-connectivity-${var.location}"
 }
 
 data "azurerm_subscription" "current" {

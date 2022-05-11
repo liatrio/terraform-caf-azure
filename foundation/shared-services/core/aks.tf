@@ -15,8 +15,8 @@ data "azurerm_private_dns_zone" "aks_private_dns_id" {
 
 data "azurerm_log_analytics_workspace" "log_analytics_workspace" {
   provider            = azurerm.management
-  name                = "log-${var.prefix}-management-${var.environment}-${var.location}"
-  resource_group_name = "rg-${var.prefix}-management-${var.environment}-${var.location}"
+  name                = "log-${var.prefix}-core-management-${var.location}"
+  resource_group_name = "rg-${var.prefix}-core-management-${var.location}"
 }
 
 module "aks" {
@@ -45,13 +45,13 @@ module "aks" {
 
 data "azurerm_virtual_hub" "connectivity_hub" {
   provider            = azurerm.connectivity
-  name                = "vhub-${var.prefix}-${var.environment}-${var.location}"
-  resource_group_name = "rg-${var.prefix}-connectivity-${var.environment}-${var.location}"
+  name                = "vhub-${var.prefix}-core-${var.location}"
+  resource_group_name = "rg-${var.prefix}-core-connectivity-${var.location}"
 }
 
 resource "azurerm_virtual_hub_connection" "aks_vnet_hub_connection" {
   provider                  = azurerm.connectivity
-  name                      = "vhub-${var.prefix}-${local.shared_services_name}-connection-${var.environment}-${var.location}"
+  name                      = "vhub-${var.prefix}-${local.shared_services_name}-core-connection-${var.location}"
   virtual_hub_id            = data.azurerm_virtual_hub.connectivity_hub.id
   remote_virtual_network_id = module.aks_vnet.vnet_id
 }
