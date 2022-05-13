@@ -117,7 +117,7 @@ variable "firewall_sku_tier" {
 }
 
 variable "enable_point_to_site_vpn" {
-  type        = string
+  type        = bool
   description = "If enabled, creates User Point to Site VPN configuration in CAF foundation."
   default     = true
 }

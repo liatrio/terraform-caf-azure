@@ -9,6 +9,19 @@ locals {
   }
 }
 
+module "dns_resolver" {
+  providers = {
+    azurerm = azurerm.connectivity
+  }
+
+  source = "../../modules/azure/vpn-dns-resolver"
+
+  location             = var.location
+  resource_group_name  = azurerm_resource_group.caf_connectivity.name
+  virtual_network_name = azurerm_virtual_network.connectivity_vnet.name
+  subnet_cidr          = local.coredns_subnet_cidr
+}
+
 module "azure_paas_private_dns" {
   providers = {
     azurerm              = azurerm.connectivity
