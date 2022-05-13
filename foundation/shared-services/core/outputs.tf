@@ -4,7 +4,7 @@ output "resource_group_name" {
 
 output "shared_services_cluster_host" {
   value     = module.aks.cluster_host
-  sensitive = false
+  sensitive = true
 }
 
 output "cluster_client_certificate" {
