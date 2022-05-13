@@ -1,10 +1,3 @@
-data "azurerm_subscription" "current" {
-}
-
-data "azurerm_subscription" "connectivity" {
-  provider = azurerm.connectivity
-}
-
 resource "azurerm_user_assigned_identity" "shared_services_msi" {
   resource_group_name = azurerm_resource_group.resource_group.name
   location            = var.location

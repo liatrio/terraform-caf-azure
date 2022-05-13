@@ -15,12 +15,6 @@ resource "azurerm_key_vault" "key_vault" {
   sku_name = "standard"
 }
 
-data "azurerm_private_dns_zone" "key_vault" {
-  provider            = azurerm.connectivity
-  name                = "privatelink.vaultcore.azure.net"
-  resource_group_name = var.connectivity_resource_group_name
-}
-
 resource "azurerm_private_endpoint" "key_vault" {
   name                = "kv-endpoint-${var.environment}-${var.location}"
   resource_group_name = azurerm_key_vault.key_vault.resource_group_name

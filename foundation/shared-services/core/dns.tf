@@ -15,12 +15,6 @@ module "shared_services_public_dns_zone" {
   parent_dns_zone_resource_group_name = var.connectivity_resource_group_name
 }
 
-data "azurerm_virtual_network" "connectivity_vnet" {
-  provider            = azurerm.connectivity
-  name                = "vnet-connectivity-apps-${var.environment}-${var.location}"
-  resource_group_name = var.connectivity_resource_group_name
-}
-
 module "shared_services_internal_public_dns_zone" {
   providers = {
     azurerm                 = azurerm

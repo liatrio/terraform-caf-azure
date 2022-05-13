@@ -7,18 +7,6 @@ module "aks_vnet" {
   connectivity_dns_servers = var.connectivity_dns_servers
 }
 
-data "azurerm_private_dns_zone" "aks_private_dns_id" {
-  name                = "privatelink.${var.location}.azmk8s.io"
-  resource_group_name = var.connectivity_resource_group_name
-  provider            = azurerm.connectivity
-}
-
-data "azurerm_log_analytics_workspace" "log_analytics_workspace" {
-  provider            = azurerm.management
-  name                = "log-${var.prefix}-core-management-${var.location}"
-  resource_group_name = "rg-${var.prefix}-core-management-${var.location}"
-}
-
 module "aks" {
   source                      = "../../../modules/azure/aks"
   location                    = var.location
@@ -41,12 +29,6 @@ module "aks" {
     azurerm_role_assignment.cluster_contributor,
     azurerm_role_assignment.subscription_connectivity_dns_contributor
   ]
-}
-
-data "azurerm_virtual_hub" "connectivity_hub" {
-  provider            = azurerm.connectivity
-  name                = "vhub-${var.prefix}-core-${var.location}"
-  resource_group_name = "rg-${var.prefix}-core-connectivity-${var.location}"
 }
 
 resource "azurerm_virtual_hub_connection" "aks_vnet_hub_connection" {
