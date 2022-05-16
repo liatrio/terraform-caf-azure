@@ -7,7 +7,7 @@ variable "location" {
 }
 
 variable "env" {
-  type    = string
+  type = string
 }
 
 variable "virtual_hub_address_cidr" {
