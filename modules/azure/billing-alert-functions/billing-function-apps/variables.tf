@@ -13,17 +13,6 @@ variable "env" {
   type = string
 }
 
-variable "storage" {
-  type = object({
-    tier             = string
-    replication_type = string
-  })
-  default = {
-    tier             = "Standard"
-    replication_type = "LRS"
-  }
-}
-
 variable "app_service_plan" {
   type = object({
     tier = string
@@ -47,14 +36,26 @@ variable "budget_tags" {
   type = map(any)
 }
 
-variable "budgets" {
-  type = map(any)
-}
-
-variable "sas_time_start" {
+variable "resource_group_name" {
   type = string
 }
 
-variable "sas_time_end" {
+variable "storage_account_name" {
+  type = string
+}
+
+variable "storage_account_primary_key" {
+  type = string
+}
+
+variable "storage_container_name" {
+  type = string
+}
+
+variable "storage_blob_name" {
+  type = string
+}
+
+variable "storage_blob_sas" {
   type = string
 }
