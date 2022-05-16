@@ -8,7 +8,6 @@ variable "location" {
 
 variable "env" {
   type    = string
-  default = ""
 }
 
 variable "virtual_hub_address_cidr" {
