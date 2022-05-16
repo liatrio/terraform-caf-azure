@@ -1,35 +1,35 @@
 variable "app_service_list" {
-    type = list(map(string))
-    default = [
-        {
-            name = "testfe"
-            tier = "Standard"
-            type = "Linux"
-            sku  = "S1"
-        },
-        {
-            name = "testapi"
-            tier = "Standard"
-            type = "Linux"
-            sku  = "S1"
-        }
-    ]
+  type = list(map(string))
+  default = [
+    {
+      name = "testfe"
+      tier = "Standard"
+      type = "Linux"
+      sku  = "S1"
+    },
+    {
+      name = "testapi"
+      tier = "Standard"
+      type = "Linux"
+      sku  = "S1"
+    }
+  ]
 }
 
 variable "app_conf_feature_list" {
-    type = list(map(string))
-    default = [
-        {
-            name = "test_conf_1"
-            description = "This is a test configuration value"
-            enabled = false
-        },
-        {
-            name = "test_conf_2"
-            description = "This is a test configuration value v2"
-            enabled = false
-        }
-    ]
+  type = list(map(string))
+  default = [
+    {
+      name        = "test_conf_1"
+      description = "This is a test configuration value"
+      enabled     = false
+    },
+    {
+      name        = "test_conf_2"
+      description = "This is a test configuration value v2"
+      enabled     = false
+    }
+  ]
 }
 
 variable "env" {
