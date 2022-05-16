@@ -16,6 +16,22 @@ variable "app_service_list" {
     ]
 }
 
+variable "app_conf_feature_list" {
+    type = list(map(string))
+    default = [
+        {
+            name = "test_conf_1"
+            description = "This is a test configuration value"
+            enabled = false
+        },
+        {
+            name = "test_conf_2"
+            description = "This is a test configuration value v2"
+            enabled = false
+        }
+    ]
+}
+
 variable "env" {
   description = "The env dev, qa, prod that the key vault is in"
   type        = string

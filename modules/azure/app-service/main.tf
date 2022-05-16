@@ -52,3 +52,24 @@ resource "azurerm_private_endpoint" "app_service_list" {
       is_manual_connection           = false
     }
 }
+
+resource "azurerm_app_configuration" "app_conf" {
+  name                = "ac-${var.workload}-${var.env}-${var.short_location}"
+  resource_group_name = azurerm_resource_group.apprg.name
+  location            = var.location
+}
+
+resource "azurerm_role_assignment" "appconf_dataowner" {
+  scope                = azurerm_app_configuration.app_conf.id
+  role_definition_name = "App Configuration Data Owner"
+  principal_id         = data.azurerm_client_config.current.object_id
+}
+
+resource "azurerm_app_configuration_feature" "app_conf_feature_list" {
+  for_each               = var.app_conf_feature_list
+  configuration_store_id = azurerm_app_configuration.app_conf.id
+  description            = each.value["description"]
+  name                   = each.value["name"]
+  label                  = var.env
+  enabled                = each.value["enabled"] 
+}
