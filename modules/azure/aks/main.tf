@@ -12,15 +12,15 @@ terraform {
 #tfsec:ignore:azure-container-limit-authorized-ips
 #tfsec:ignore:azure-container-configured-network-policy
 resource "azurerm_kubernetes_cluster" "aks" {
-  name                = var.name
-  location            = var.location
-  resource_group_name = var.lz_resource_group
-  dns_prefix          = var.name
-  //disk_encryption_set_id  = var.aks_enable_disk_encryption ? var.disk_encryption_set_id : null
+  name                    = var.name
+  location                = var.location
+  resource_group_name     = var.lz_resource_group
+  dns_prefix              = var.name
+  disk_encryption_set_id  = var.aks_enable_disk_encryption ? var.disk_encryption_set_id : null
   private_dns_zone_id     = var.private_dns_zone_id
   private_cluster_enabled = true
   kubernetes_version      = var.kubernetes_version
-  //azure_policy_enabled    = var.enable_aks_policy_addon
+  azure_policy_enabled    = var.enable_aks_policy_addon
 
   default_node_pool {
     name                = var.pool_name
@@ -45,9 +45,9 @@ resource "azurerm_kubernetes_cluster" "aks" {
     dns_service_ip     = var.aks_dns_service_ip
   }
 
-  # oms_agent {
-  #   log_analytics_workspace_id = var.log_analytics_workspace
-  # }
+  oms_agent {
+    log_analytics_workspace_id = var.log_analytics_workspace
+  }
 
   auto_scaler_profile {
     balance_similar_node_groups      = lookup(var.autoscaler_config, "balance_similar_node_groups", false)
