@@ -36,7 +36,8 @@ resource "azurerm_application_insights" "main" {
 }
 
 resource "azurerm_function_app" "main" {
-  name                = "func-${var.func_identifier}-${var.env}-${var.location}"
+  # name doesn't have env or location to fit hostname 32 character limit
+  name                = "func-${var.func_identifier}"
   resource_group_name = var.resource_group_name
   location            = var.location
   os_type             = "linux"
