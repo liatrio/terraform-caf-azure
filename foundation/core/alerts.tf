@@ -23,13 +23,16 @@ module "billing_function_apps" {
   }
   source = "../../modules/azure/billing-alert-functions/billing-function-apps"
 
-  count                       = ((var.slack_webhook_url != "" || var.teams_webhook_url != "") && var.enable_budget_alerts) ? 1 : 0
-  func_identifier             = var.func_identifier
-  slack_webhook_url           = var.slack_webhook_url
-  teams_webhook_url           = var.teams_webhook_url
-  location                    = var.location
-  env                         = var.env
-  budget_tags                 = var.budget_tags
+  # If one or both of the webhook URLs is set, and the feature flag is turned on, then call this module
+  count             = ((var.slack_webhook_url != "" || var.teams_webhook_url != "") && var.enable_budget_alerts) ? 1 : 0
+  func_identifier   = var.func_identifier
+  slack_webhook_url = var.slack_webhook_url
+  teams_webhook_url = var.teams_webhook_url
+  location          = var.location
+  env               = var.env
+  budget_tags       = var.budget_tags
+
+  # outputs needed from previous module
   resource_group_name         = module.billing_storage_accounts[0].resource_group_name
   storage_account_name        = module.billing_storage_accounts[0].storage_account_name
   storage_account_primary_key = module.billing_storage_accounts[0].storage_account_primary_key
@@ -39,12 +42,9 @@ module "billing_function_apps" {
 }
 
 locals {
-  enable_slack = var.slack_webhook_url == "" ? false : true
-  enable_teams = var.teams_webhook_url == "" ? false : true
-
   contact_groups = flatten([
-    local.enable_slack ? [module.billing_function_apps[0].slack_action_group_id] : [],
-    local.enable_teams ? [module.billing_function_apps[0].teams_action_group_id] : []
+    var.slack_webhook_url != "" ? [module.billing_function_apps[0].slack_action_group_id] : [],
+    var.teams_webhook_url != "" ? [module.billing_function_apps[0].teams_action_group_id] : []
   ])
 }
 

@@ -15,5 +15,5 @@ variable "func_identifier" {
 }
 
 variable "contact_groups" {
-  type = list
+  type = list(any)
 }
