@@ -2,23 +2,18 @@ terraform {
   required_providers {
     azurerm = {
       source  = "hashicorp/azurerm"
-      version = "~> 2.96.0"
+      version = "~> 3.5.0"
     }
   }
 }
 
-resource "azurerm_app_service_plan" "main" {
+resource "azurerm_service_plan" "main" {
   name                = "plan-${var.func_identifier}-core-${var.location}"
   location            = var.location
   resource_group_name = var.resource_group_name
-  kind                = "Linux"
-  reserved            = true
+  os_type             = "Linux"
+  sku_name            = var.app_service_plan.size
   tags                = var.budget_tags
-
-  sku {
-    tier = var.app_service_plan.tier
-    size = var.app_service_plan.size
-  }
 
   lifecycle {
     ignore_changes = [
@@ -35,19 +30,17 @@ resource "azurerm_application_insights" "main" {
   tags                = var.budget_tags
 }
 
-resource "azurerm_function_app" "main" {
+resource "azurerm_linux_function_app" "main" {
   # name doesn't have env or location to fit hostname 32 character limit
   name                = "func-${var.func_identifier}"
   resource_group_name = var.resource_group_name
   location            = var.location
-  os_type             = "linux"
   https_only          = true
 
-  app_service_plan_id        = azurerm_app_service_plan.main.id
-  storage_account_name       = var.storage_account_name
-  storage_account_access_key = var.storage_account_primary_key
-  version                    = "~4"
-  tags                       = var.budget_tags
+  service_plan_id             = azurerm_service_plan.main.id
+  storage_account_name        = var.storage_account_name
+  storage_account_access_key  = var.storage_account_primary_key
+  tags                        = var.budget_tags
 
   app_settings = {
     "APPINSIGHTS_INSTRUMENTATIONKEY" = azurerm_application_insights.main.instrumentation_key
@@ -59,8 +52,11 @@ resource "azurerm_function_app" "main" {
   }
 
   site_config {
-    linux_fx_version          = "node|16"
-    use_32_bit_worker_process = false
+    use_32_bit_worker = false
+    
+    application_stack {
+      node_version  = 16
+    }
   }
 }
 
@@ -80,7 +76,7 @@ resource "azurerm_monitor_action_group" "slack" {
     name = "callazurefuncapi"
     # Using string interpolation to get full hostname of function. 
     # slack-budget-alert comes from the package directory inside the function
-    service_uri             = "https://${azurerm_function_app.main.default_hostname}/api/slack-budget-alert"
+    service_uri             = "https://${azurerm_linux_function_app.main.default_hostname}/api/slack-budget-alert"
     use_common_alert_schema = false
   }
 }
@@ -96,7 +92,7 @@ resource "azurerm_monitor_action_group" "teams" {
     name = "callazurefuncapi"
     # Using string interpolation to get full hostname of function. 
     # teams-budget-alert comes from the package directory inside the function
-    service_uri             = "https://${azurerm_function_app.main.default_hostname}/api/teams-budget-alert"
+    service_uri             = "https://${azurerm_linux_function_app.main.default_hostname}/api/teams-budget-alert"
     use_common_alert_schema = false
   }
 }
