@@ -7,7 +7,7 @@ resource "azurerm_firewall_policy" "firewall_policy" {
   location            = var.location
   dns {
     proxy_enabled = true
-    servers       = [module.vpn_dns_resolver[0].ip_address]
+    servers       = [module.dns_resolver.ip_address]
   }
 }
 
@@ -27,8 +27,9 @@ resource "azurerm_firewall" "firewall" {
   name               = "afw-${var.prefix}-${azurerm_resource_group.caf_connectivity.location}"
   location           = var.location
   sku_name           = "AZFW_Hub"
+  sku_tier           = var.firewall_sku_tier
   firewall_policy_id = azurerm_firewall_policy.firewall_policy[0].id
-  threat_intel_mode  = ""
+  threat_intel_mode  = "Alert"
   virtual_hub {
     virtual_hub_id = azurerm_virtual_hub.caf_hub.id
   }

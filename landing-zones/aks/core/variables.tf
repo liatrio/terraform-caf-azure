@@ -158,3 +158,8 @@ variable "application_id" {
   type        = string
   default     = null
 }
+
+variable "workload" {
+  type        = string
+  description = "The workload that we are supporting"
+}

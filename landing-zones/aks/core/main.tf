@@ -2,7 +2,7 @@ terraform {
   required_providers {
     azurerm = {
       source  = "hashicorp/azurerm"
-      version = "~> 2.96.0"
+      version = "~> 3.5.0"
       configuration_aliases = [
         azurerm.connectivity,
         azurerm.management
@@ -38,8 +38,8 @@ module "key_vault" {
   name                             = var.name
   location                         = var.location
   resource_group_name              = azurerm_resource_group.lz_resource_group.name
-  environment                      = var.environment
-  workload                         = "lzcore"
+  env                              = var.environment
+  workload                         = var.workload
   service_endpoints_subnet_id      = module.aks_vnet.service_endpoints_subnet_id
   connectivity_resource_group_name = var.connectivity_resource_group_name
   enabled_for_disk_encryption      = var.enabled_for_disk_encryption
@@ -68,6 +68,7 @@ module "key_gen" {
 module "aks" {
   source = "../../../modules/azure/aks"
 
+  env                         = var.environment
   location                    = var.location
   name                        = var.name
   pool_name                   = var.pool_name

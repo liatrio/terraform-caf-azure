@@ -110,8 +110,14 @@ variable "enable_firewall" {
   default     = false
 }
 
-variable "enable_point_to_site_vpn" {
+variable "firewall_sku_tier" {
   type        = string
+  description = "SKU to use for the Firewall"
+  default     = "Standard"
+}
+
+variable "enable_point_to_site_vpn" {
+  type        = bool
   description = "If enabled, creates User Point to Site VPN configuration in CAF foundation."
   default     = true
 }

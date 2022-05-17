@@ -2,7 +2,7 @@ terraform {
   required_providers {
     azurerm = {
       source  = "hashicorp/azurerm"
-      version = "~> 2.96.0"
+      version = "~> 3.5.0"
     }
   }
 }
@@ -53,9 +53,9 @@ resource "azurerm_container_group" "coredns" {
   name                = local.name
   location            = var.location
   resource_group_name = var.resource_group_name
-  os_type             = "linux"
+  os_type             = "Linux"
 
-  ip_address_type    = "private"
+  ip_address_type    = "Private"
   network_profile_id = azurerm_network_profile.coredns_network_profile.id
 
   exposed_port {
