@@ -9,6 +9,19 @@ locals {
   }
 }
 
+module "dns_resolver" {
+  providers = {
+    azurerm = azurerm.connectivity
+  }
+
+  source = "../../modules/azure/vpn-dns-resolver"
+
+  location             = var.location
+  resource_group_name  = azurerm_resource_group.caf_connectivity.name
+  virtual_network_name = azurerm_virtual_network.connectivity_vnet.name
+  subnet_cidr          = local.coredns_subnet_cidr
+}
+
 module "azure_paas_private_dns" {
   providers = {
     azurerm              = azurerm.connectivity
@@ -18,7 +31,7 @@ module "azure_paas_private_dns" {
   source = "../../modules/azure/private-dns-zone"
 
   for_each                  = local.azure_paas_private_dns_zones
-  location                  = azurerm_resource_group.caf_connectivity.location
+  location                  = var.enable_point_to_site_vpn == true ? azurerm_point_to_site_vpn_gateway.hub_vpn_gateway[0].location : azurerm_resource_group.caf_connectivity.location
   resource_group_name       = azurerm_resource_group.caf_connectivity.name
   linked_virtual_network_id = azurerm_virtual_network.connectivity_vnet.id
   dns_zone_name             = each.value

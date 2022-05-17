@@ -104,14 +104,20 @@ variable "enable_ms_defender" {
   default     = false
 }
 
-variable "firewall_sku" {
+variable "enable_firewall" {
+  type        = bool
+  description = "Enables the firewall and its association with the virtual hub"
+  default     = false
+}
+
+variable "firewall_sku_tier" {
   type        = string
-  description = "AZFW_Hub or AZFW_VNet"
-  default     = "AZFW_Hub"
+  description = "SKU to use for the Firewall"
+  default     = "Standard"
 }
 
 variable "enable_point_to_site_vpn" {
-  type        = string
+  type        = bool
   description = "If enabled, creates User Point to Site VPN configuration in CAF foundation."
   default     = true
 }

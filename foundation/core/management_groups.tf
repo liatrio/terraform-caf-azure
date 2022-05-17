@@ -6,7 +6,7 @@ resource "azurerm_management_group" "foundation" {
 
 # foundation/platform
 resource "azurerm_management_group" "platform" {
-  name                       = "${var.prefix}-platform"
+  name                       = "mg-${var.prefix}-core-platform-${var.location}"
   display_name               = "Platform"
   parent_management_group_id = azurerm_management_group.foundation.id
 }
@@ -14,7 +14,7 @@ resource "azurerm_management_group" "platform" {
 # foundation/platform/connectivity
 resource "azurerm_management_group" "connectivity" {
   provider                   = azurerm.connectivity
-  name                       = "${var.prefix}-connectivity"
+  name                       = "mg-${var.prefix}-core-connectivity-${var.location}"
   display_name               = "Connectivity"
   parent_management_group_id = azurerm_management_group.platform.id
   subscription_ids = [
@@ -24,7 +24,7 @@ resource "azurerm_management_group" "connectivity" {
 
 # foundation/platform/management
 resource "azurerm_management_group" "management" {
-  name                       = "${var.prefix}-management"
+  name                       = "mg-${var.prefix}-core-management-${var.location}"
   display_name               = "Management"
   parent_management_group_id = azurerm_management_group.platform.id
   subscription_ids = [
@@ -34,7 +34,7 @@ resource "azurerm_management_group" "management" {
 
 # foundation/platform/identity
 resource "azurerm_management_group" "identity" {
-  name                       = "${var.prefix}-identity"
+  name                       = "mg-${var.prefix}-core-identity-${var.location}"
   display_name               = "Identity"
   parent_management_group_id = azurerm_management_group.platform.id
   subscription_ids = [
@@ -44,28 +44,28 @@ resource "azurerm_management_group" "identity" {
 
 # foundation/sandboxes
 resource "azurerm_management_group" "sandboxes" {
-  name                       = "${var.prefix}-sandboxes"
+  name                       = "mg-${var.prefix}-core-sandboxes-${var.location}"
   display_name               = "Sandboxes"
   parent_management_group_id = azurerm_management_group.foundation.id
 }
 
 # foundation/decommissioned
 resource "azurerm_management_group" "decommissioned" {
-  name                       = "${var.prefix}-decommissioned"
+  name                       = "mg-${var.prefix}-core-decommissioned-${var.location}"
   display_name               = "Decommissioned"
   parent_management_group_id = azurerm_management_group.foundation.id
 }
 
 # foundation/landing zones
 resource "azurerm_management_group" "landing_zones" {
-  name                       = "${var.prefix}-landing-zones"
+  name                       = "mg-${var.prefix}-core-landing-zones-${var.location}"
   display_name               = "Landing Zones"
   parent_management_group_id = azurerm_management_group.foundation.id
 }
 
 # foundation/landing zones/shared services
 resource "azurerm_management_group" "shared_svc" {
-  name                       = "${var.prefix}-shared-svc"
+  name                       = "mg-${var.prefix}-core-shared-svc-${var.location}"
   display_name               = "Shared Services"
   parent_management_group_id = azurerm_management_group.landing_zones.id
 }
@@ -73,7 +73,7 @@ resource "azurerm_management_group" "shared_svc" {
 # foundation/landing zones/*
 resource "azurerm_management_group" "dynamic" {
   for_each                   = var.landing_zone_mg
-  name                       = "${var.prefix}-${each.key}"
+  name                       = "mg-${var.prefix}-core-${each.key}-${var.location}"
   display_name               = each.value.display_name
   parent_management_group_id = azurerm_management_group.landing_zones.id
 }

@@ -51,7 +51,7 @@ variable "autoscaler_config" {
 }
 
 variable "kubernetes_managed_identity" {
-  type        = string
+  type        = set(string)
   description = "kubernetes managed identity"
 }
 
@@ -97,4 +97,9 @@ variable "disk_encryption_set_id" {
   description = "The disk encryption set ID"
   default     = null
 
+}
+
+variable "env" {
+  type        = string
+  description = "The env, eg. dev, qa, prod"
 }

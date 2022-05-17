@@ -2,7 +2,7 @@ terraform {
   required_providers {
     azurerm = {
       source  = "hashicorp/azurerm"
-      version = "~> 2.96.0"
+      version = "~> 3.5.0"
       configuration_aliases = [
         azurerm.connectivity
       ]
@@ -23,7 +23,7 @@ resource "azurerm_key_vault_key" "key" {
   key_type        = "EC"
   curve           = can(var.vault_key_to_create.curve) ? var.vault_key_to_create.curve : "P-384"
   expiration_date = can(var.vault_key_to_create.expiration_date) ? var.vault_key_to_create.expiration_date : timeadd(timestamp(), "8760h")
-  key_opts = [
+  key_opts = length(var.vault_key_to_create.key_opts) > 0 ? var.vault_key_to_create.key_opts : [
     "decrypt",
     "encrypt",
     "sign",

@@ -1,3 +1,12 @@
+data "azurerm_client_config" "current" {}
+
+data "azurerm_subscription" "current" {
+}
+
+data "azurerm_subscription" "connectivity" {
+  provider = azurerm.connectivity
+}
+
 data "azurerm_private_dns_zone" "aks_private_dns_id" {
   name                = "privatelink.${var.location}.azmk8s.io"
   resource_group_name = var.connectivity_resource_group_name
@@ -11,29 +20,19 @@ data "azurerm_log_analytics_workspace" "management" {
 }
 
 data "azurerm_virtual_hub" "connectivity_hub" {
-  count               = var.enable_virtual_hub_connection == true ? 1 : 0
   provider            = azurerm.connectivity
   name                = "vhub-${var.prefix}-core-${var.location}"
   resource_group_name = "rg-${var.prefix}-core-connectivity-${var.location}"
 }
 
-data "azurerm_virtual_network" "target_virtual_network" {
-  count               = var.enable_vnet_peering == true ? 1 : 0
+data "azurerm_virtual_network" "connectivity_vnet" {
   provider            = azurerm.connectivity
-  name                = "vnet-${var.prefix}-core-${var.location}"
-  resource_group_name = "rg-${var.prefix}-core-connectivity-${var.location}"
-}
-
-data "azurerm_subscription" "current" {
-}
-
-data "azurerm_subscription" "connectivity" {
-  provider = azurerm.connectivity
-}
-
-data "azurerm_private_dns_zone" "k8_connectivity" {
-  provider            = azurerm.connectivity
-  name                = var.connectivity_k8_private_dns_zone_name
+  name                = "vnet-core-connectivity-apps-${var.location}"
   resource_group_name = var.connectivity_resource_group_name
 }
 
+data "azurerm_private_dns_zone" "key_vault" {
+  provider            = azurerm.connectivity
+  name                = "privatelink.vaultcore.azure.net"
+  resource_group_name = var.connectivity_resource_group_name
+}

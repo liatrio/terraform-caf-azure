@@ -2,7 +2,7 @@ terraform {
   required_providers {
     azurerm = {
       source  = "hashicorp/azurerm"
-      version = "~> 2.96.0"
+      version = "~> 3.5.0"
       configuration_aliases = [
         azurerm.connectivity,
         azurerm.management
@@ -12,7 +12,7 @@ terraform {
 }
 
 resource "azurerm_resource_group" "lz_resource_group" {
-  name     = "${var.prefix}-${var.name}-rg"
+  name     = "rg-${var.prefix}-${var.name}-${var.environment}-${var.location}"
   location = var.location
 }
 
@@ -38,8 +38,8 @@ module "key_vault" {
   name                             = var.name
   location                         = var.location
   resource_group_name              = azurerm_resource_group.lz_resource_group.name
-  environment                      = var.environment
-  workload                         = "lzcore"
+  env                              = var.environment
+  workload                         = var.workload
   service_endpoints_subnet_id      = module.aks_vnet.service_endpoints_subnet_id
   connectivity_resource_group_name = var.connectivity_resource_group_name
   enabled_for_disk_encryption      = var.enabled_for_disk_encryption
@@ -68,6 +68,7 @@ module "key_gen" {
 module "aks" {
   source = "../../../modules/azure/aks"
 
+  env                         = var.environment
   location                    = var.location
   name                        = var.name
   pool_name                   = var.pool_name
@@ -94,7 +95,7 @@ module "aks" {
 resource "azurerm_virtual_hub_connection" "aks_vnet_hub_connection" {
   count                     = var.enable_virtual_hub_connection == true ? 1 : 0
   provider                  = azurerm.connectivity
-  name                      = "con-${var.name}-connection"
+  name                      = "cn-${var.name}-connection-${var.environment}-${var.location}"
   virtual_hub_id            = data.azurerm_virtual_hub.connectivity_hub[0].id
   remote_virtual_network_id = module.aks_vnet.vnet_id
 }
@@ -102,8 +103,8 @@ resource "azurerm_virtual_hub_connection" "aks_vnet_hub_connection" {
 resource "azurerm_virtual_network_peering" "peer_virtual_network" {
   count                     = var.enable_vnet_peering == true ? 1 : 0
   provider                  = azurerm.connectivity
-  name                      = "peer-${var.name}"
-  resource_group_name       = "${var.prefix}-connectivity"
+  name                      = "vnet-peer-${var.name}"
+  resource_group_name       = "rg-${var.prefix}-connectivity-${var.environment}-${var.location}"
   virtual_network_name      = data.azurerm_virtual_network.target_virtual_network[0].name
   remote_virtual_network_id = module.aks_vnet.vnet_id
 }

@@ -1,15 +1,8 @@
-data "azurerm_subscription" "current" {
-}
-
-data "azurerm_subscription" "connectivity" {
-  provider = azurerm.connectivity
-}
-
 resource "azurerm_user_assigned_identity" "shared_services_msi" {
   resource_group_name = azurerm_resource_group.resource_group.name
   location            = var.location
 
-  name = "${var.prefix}-${local.shared_services_name}-msi"
+  name = "uai-${var.prefix}-${local.shared_services_name}-msi-${var.environment}-${var.location}"
 }
 
 resource "azurerm_role_assignment" "cluster_contributor" {
@@ -32,7 +25,7 @@ resource "azurerm_role_assignment" "subscription_connectivity_dns_contributor" {
 }
 
 resource "azurerm_user_assigned_identity" "external_dns_pod_identity" {
-  name                = "${var.prefix}-external-dns"
+  name                = "uai-${var.prefix}-external-dns-${var.environment}-${var.location}"
   resource_group_name = azurerm_resource_group.resource_group.name
   location            = var.location
 }

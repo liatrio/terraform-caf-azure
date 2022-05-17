@@ -1,15 +1,10 @@
-variable "environment" {
+variable "env" {
   description = "The env dev, qa, prod that the key vault is in"
   type        = string
 }
 
 variable "location" {
   description = "The Azure Region in which all resources should be provisioned"
-  type        = string
-}
-
-variable "name" {
-  description = "Unique resources name"
   type        = string
 }
 
