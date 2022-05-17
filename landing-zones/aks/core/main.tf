@@ -68,7 +68,7 @@ module "key_gen" {
 module "aks" {
   source = "../../../modules/azure/aks"
 
-  environment                 = var.environment
+  env                         = var.environment
   location                    = var.location
   name                        = var.name
   pool_name                   = var.pool_name

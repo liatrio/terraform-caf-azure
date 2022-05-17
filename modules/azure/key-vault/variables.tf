@@ -1,4 +1,4 @@
-variable "environment" {
+variable "env" {
   description = "The env dev, qa, prod that the key vault is in"
   type        = string
 }
