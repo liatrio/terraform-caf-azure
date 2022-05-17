@@ -11,7 +11,7 @@ terraform {
 }
 
 resource "azurerm_resource_group" "main" {
-  name     = "rg-${var.func_identifier}-${var.env}-${var.location}"
+  name     = "rg-${var.func_identifier}-core-${var.location}"
   location = var.location
   tags     = var.budget_tags
 }
@@ -51,18 +51,18 @@ resource "azurerm_storage_account" "func" {
 }
 
 resource "azurerm_storage_queue" "main" {
-  name                 = "stq-${var.func_identifier}-${var.env}-${var.location}"
+  name                 = "stq-${var.func_identifier}-core-${var.location}"
   storage_account_name = azurerm_storage_account.func.name
 }
 
 resource "azurerm_storage_container" "deployments" {
-  name                  = "stc-${var.func_identifier}-${var.env}-${var.location}"
+  name                  = "stc-${var.func_identifier}-core-${var.location}"
   storage_account_name  = azurerm_storage_account.func.name
   container_access_type = "private"
 }
 
 resource "azurerm_storage_blob" "storage_blob" {
-  name                   = "stb-${var.func_identifier}-${var.env}-${var.location}"
+  name                   = "stb-${var.func_identifier}-core-${var.location}"
   storage_account_name   = azurerm_storage_account.func.name
   storage_container_name = azurerm_storage_container.deployments.name
   type                   = "Block"

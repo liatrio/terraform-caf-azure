@@ -11,7 +11,6 @@ module "billing_storage_accounts" {
   count           = ((var.slack_webhook_url != "" || var.teams_webhook_url != "") && var.enable_budget_alerts) ? 1 : 0
   func_identifier = var.func_identifier
   location        = var.location
-  env             = var.env
   budget_tags     = var.budget_tags
   sas_time_start  = var.sas_time_start
   sas_time_end    = var.sas_time_end
@@ -29,7 +28,6 @@ module "billing_function_apps" {
   slack_webhook_url = var.slack_webhook_url
   teams_webhook_url = var.teams_webhook_url
   location          = var.location
-  env               = var.env
   budget_tags       = var.budget_tags
 
   # outputs needed from previous module
@@ -59,5 +57,4 @@ module "billing_notifications" {
   contact_groups  = local.contact_groups
   func_identifier = var.func_identifier
   location        = var.location
-  env             = var.env
 }

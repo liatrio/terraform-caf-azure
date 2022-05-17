@@ -6,10 +6,6 @@ variable "location" {
   type = string
 }
 
-variable "env" {
-  type = string
-}
-
 variable "virtual_hub_address_cidr" {
   type        = string
   description = "The network CIDR for the Virtual Hub"

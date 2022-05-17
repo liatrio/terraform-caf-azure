@@ -9,10 +9,6 @@ variable "location" {
   type = string
 }
 
-variable "env" {
-  type = string
-}
-
 variable "app_service_plan" {
   type = object({
     tier = string
