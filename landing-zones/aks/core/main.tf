@@ -38,7 +38,7 @@ module "key_vault" {
   name                             = var.name
   location                         = var.location
   resource_group_name              = azurerm_resource_group.lz_resource_group.name
-  env                              = var.env
+  env                              = var.environment
   workload                         = var.workload
   service_endpoints_subnet_id      = module.aks_vnet.service_endpoints_subnet_id
   connectivity_resource_group_name = var.connectivity_resource_group_name
