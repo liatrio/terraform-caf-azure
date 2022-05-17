@@ -21,6 +21,7 @@ resource "azurerm_kubernetes_cluster" "aks" {
   private_cluster_enabled = true
   kubernetes_version      = var.kubernetes_version
   azure_policy_enabled    = var.enable_aks_policy_addon
+  node_resource_group     = "rg-aksng-${var.name}-${var.env}-${var.location}"
 
   default_node_pool {
     name                = var.pool_name
