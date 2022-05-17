@@ -37,10 +37,10 @@ resource "azurerm_linux_function_app" "main" {
   location            = var.location
   https_only          = true
 
-  service_plan_id             = azurerm_service_plan.main.id
-  storage_account_name        = var.storage_account_name
-  storage_account_access_key  = var.storage_account_primary_key
-  tags                        = var.budget_tags
+  service_plan_id            = azurerm_service_plan.main.id
+  storage_account_name       = var.storage_account_name
+  storage_account_access_key = var.storage_account_primary_key
+  tags                       = var.budget_tags
 
   app_settings = {
     "APPINSIGHTS_INSTRUMENTATIONKEY" = azurerm_application_insights.main.instrumentation_key
@@ -53,9 +53,9 @@ resource "azurerm_linux_function_app" "main" {
 
   site_config {
     use_32_bit_worker = false
-    
+
     application_stack {
-      node_version  = 16
+      node_version = 16
     }
   }
 }
