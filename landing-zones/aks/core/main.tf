@@ -39,7 +39,7 @@ module "key_vault" {
   location                         = var.location
   resource_group_name              = azurerm_resource_group.lz_resource_group.name
   environment                      = var.environment
-  workload                         = "lzcore"
+  workload                         = var.workload
   service_endpoints_subnet_id      = module.aks_vnet.service_endpoints_subnet_id
   connectivity_resource_group_name = var.connectivity_resource_group_name
   enabled_for_disk_encryption      = var.enabled_for_disk_encryption
