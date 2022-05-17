@@ -8,11 +8,6 @@ variable "location" {
   type        = string
 }
 
-variable "name" {
-  description = "Unique resources name"
-  type        = string
-}
-
 variable "resource_group_name" {
   type        = string
   description = "Resource group name the resources in this module"
