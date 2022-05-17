@@ -99,7 +99,7 @@ variable "disk_encryption_set_id" {
 
 }
 
-variable "environment" {
-  type = string
-  description =
+variable "env" {
+  type        = string
+  description = "The env, eg. dev, qa, prod"
 }

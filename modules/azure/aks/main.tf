@@ -12,7 +12,7 @@ terraform {
 #tfsec:ignore:azure-container-limit-authorized-ips
 #tfsec:ignore:azure-container-configured-network-policy
 resource "azurerm_kubernetes_cluster" "aks" {
-  name                    = "aks-${var.name}-${var.environment}-${var.location}"
+  name                    = "aks-${var.name}-${var.env}-${var.location}"
   location                = var.location
   resource_group_name     = var.lz_resource_group
   dns_prefix              = var.name

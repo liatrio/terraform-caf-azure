@@ -1,4 +1,4 @@
-variable "environment" {
+variable "env" {
   description = "The env dev, qa, prod that the lz is in"
   type        = string
 }
