@@ -9,6 +9,7 @@ module "aks_vnet" {
 
 module "aks" {
   source                      = "../../../modules/azure/aks"
+  env                         = var.environment
   location                    = var.location
   name                        = local.shared_services_name
   pool_name                   = var.pool_name
