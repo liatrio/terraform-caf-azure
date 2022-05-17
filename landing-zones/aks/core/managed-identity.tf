@@ -28,9 +28,19 @@ resource "azurerm_user_assigned_identity" "cert_manager_pod_identity" {
   resource_group_name = azurerm_resource_group.lz_resource_group.name
   location            = var.location
 }
+resource "azurerm_role_assignment" "cert_manager_dns_contributor" {
+  scope                = module.public_dns_zone.dns_zone_id
+  role_definition_name = "DNS Zone Contributor"
+  principal_id         = azurerm_user_assigned_identity.cert_manager_pod_identity.principal_id
+}
+
+resource "azurerm_role_assignment" "cert_manager_internal_dns_contributor" {
+  scope                = module.internal_public_dns_zone.dns_zone_id
+  role_definition_name = "DNS Zone Contributor"
+  principal_id         = azurerm_user_assigned_identity.cert_manager_pod_identity.principal_id
+}
 
 resource "azurerm_user_assigned_identity" "external_dns_pod_identity" {
-  count = var.external_app ? 1 : 0
 
   name                = "uai-${var.prefix}-external-dns-msi-${var.environment}-${var.location}"
   resource_group_name = azurerm_resource_group.lz_resource_group.name
@@ -38,11 +48,16 @@ resource "azurerm_user_assigned_identity" "external_dns_pod_identity" {
 }
 
 resource "azurerm_role_assignment" "resource_group_dns_reader" {
-  count = var.external_app ? 1 : 0
 
   scope                = azurerm_resource_group.lz_resource_group.id
   role_definition_name = "Reader"
-  principal_id         = azurerm_user_assigned_identity.external_dns_pod_identity[0].principal_id
+  principal_id         = azurerm_user_assigned_identity.external_dns_pod_identity.principal_id
+}
+
+resource "azurerm_role_assignment" "subscription_shared_services_dns_contributor" {
+  scope                = data.azurerm_subscription.current.id
+  role_definition_name = "Private DNS Zone Contributor"
+  principal_id         = azurerm_user_assigned_identity.external_dns_pod_identity.principal_id
 }
 
 resource "azurerm_role_assignment" "subscription_dns_contributor" {
@@ -50,7 +65,7 @@ resource "azurerm_role_assignment" "subscription_dns_contributor" {
 
   scope                = data.azurerm_subscription.current.id
   role_definition_name = "DNS Zone Contributor"
-  principal_id         = azurerm_user_assigned_identity.external_dns_pod_identity[0].principal_id
+  principal_id         = azurerm_user_assigned_identity.external_dns_pod_identity.principal_id
 }
 
 resource "azurerm_role_assignment" "aks_virtual_machine_contributor" {
@@ -72,9 +87,8 @@ resource "azurerm_role_assignment" "aks_managed_identity_operator_for_cert_manag
 }
 
 resource "azurerm_role_assignment" "aks_managed_identity_operator_for_external_dns_identity" {
-  count = var.external_app ? 1 : 0
 
-  scope                = azurerm_user_assigned_identity.external_dns_pod_identity[0].id
+  scope                = azurerm_user_assigned_identity.external_dns_pod_identity.id
   role_definition_name = "Managed Identity Operator"
   principal_id         = module.aks.kubelet_identity_object_id
 }

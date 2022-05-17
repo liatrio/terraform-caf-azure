@@ -37,3 +37,8 @@ data "azurerm_private_dns_zone" "k8_connectivity" {
   resource_group_name = var.connectivity_resource_group_name
 }
 
+data "azurerm_virtual_network" "connectivity_vnet" {
+  provider            = azurerm.connectivity
+  name                = "vnet-core-connectivity-apps-${var.location}"
+  resource_group_name = var.connectivity_resource_group_name
+}

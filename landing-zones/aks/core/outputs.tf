@@ -16,7 +16,8 @@ output "aad_pod_identity_resource_id" {
 }
 
 output "cluster_host" {
-  value = module.aks.cluster_host
+  sensitive = true
+  value     = module.aks.cluster_host
 }
 
 output "cluster_client_certificate" {
@@ -39,13 +40,13 @@ output "external_app" {
 }
 
 output "external_dns_aad_pod_identity_client_id" {
-  value = var.external_app ? azurerm_user_assigned_identity.external_dns_pod_identity[0].client_id : ""
+  value = azurerm_user_assigned_identity.external_dns_pod_identity.client_id
 }
 
 output "external_dns_aad_pod_identity_resource_id" {
-  value = var.external_app ? azurerm_user_assigned_identity.external_dns_pod_identity[0].id : ""
+  value = azurerm_user_assigned_identity.external_dns_pod_identity.id
 }
 
 output "dns_zone_name" {
-  value = var.external_app ? var.dns_zone_name : ""
+  value = var.dns_zone_name
 }

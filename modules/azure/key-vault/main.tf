@@ -13,7 +13,7 @@ terraform {
 data "azurerm_client_config" "current" {}
 
 resource "azurerm_key_vault" "key_vault" {
-  name                        = "kv-${var.workload}-${var.environment}"
+  name                        = "kv-${var.workload}-${var.env}"
   location                    = var.location
   resource_group_name         = var.resource_group_name
   enabled_for_disk_encryption = var.enabled_for_disk_encryption
