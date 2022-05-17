@@ -98,3 +98,8 @@ variable "disk_encryption_set_id" {
   default     = null
 
 }
+
+variable "environment" {
+  type = string
+  description =
+}
