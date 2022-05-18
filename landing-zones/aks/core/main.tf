@@ -35,7 +35,6 @@ module "key_vault" {
     azurerm.connectivity = azurerm.connectivity
   }
 
-  name                             = var.name
   location                         = var.location
   resource_group_name              = azurerm_resource_group.lz_resource_group.name
   env                              = var.environment
@@ -79,7 +78,7 @@ module "aks" {
   aks_service_subnet_cidr     = module.aks_vnet.aks_service_subnet_cidr
   aks_dns_service_ip          = module.aks_vnet.aks_dns_service_host
   kubernetes_version          = var.kubernetes_version
-  kubernetes_managed_identity = azurerm_user_assigned_identity.aks_msi.id
+  kubernetes_managed_identity = [azurerm_user_assigned_identity.aks_msi.id]
   lz_resource_group           = azurerm_resource_group.lz_resource_group.name
   private_dns_zone_id         = data.azurerm_private_dns_zone.aks_private_dns_id.id
   log_analytics_workspace     = local.log_analytics_workspace_id
