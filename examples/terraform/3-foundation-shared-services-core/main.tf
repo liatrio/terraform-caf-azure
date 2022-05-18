@@ -27,7 +27,7 @@ module "liatrio_caf_shared_services" {
 
   prefix                           = "example"
   connectivity_resource_group_name = "example-connectivity"
-  environment                      = "prod"
+  env                              = "prod"
   kubernetes_version               = "1.21.9"
   parent_dns_zone_name             = "azurecaf-example.liatr.io"
   vnet_address_range               = "10.133.0.0/16"

@@ -1,6 +1,6 @@
 #tfsec:ignore:azure-keyvault-no-purge
 resource "azurerm_key_vault" "key_vault" {
-  name                      = "${var.prefix}-${var.environment}"
+  name                      = "${var.prefix}-${var.env}"
   location                  = azurerm_resource_group.resource_group.location
   resource_group_name       = azurerm_resource_group.resource_group.name
   tenant_id                 = data.azurerm_client_config.current.tenant_id
@@ -16,7 +16,7 @@ resource "azurerm_key_vault" "key_vault" {
 }
 
 resource "azurerm_private_endpoint" "key_vault" {
-  name                = "kv-endpoint-${var.environment}-${var.location}"
+  name                = "kv-endpoint-${var.env}-${var.location}"
   resource_group_name = azurerm_key_vault.key_vault.resource_group_name
   location            = azurerm_key_vault.key_vault.location
   subnet_id           = module.aks_vnet.service_endpoints_subnet_id

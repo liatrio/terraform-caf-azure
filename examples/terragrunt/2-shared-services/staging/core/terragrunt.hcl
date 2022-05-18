@@ -17,7 +17,7 @@ inputs = {
   node_count_min                   = 2
   vm_size                          = "standard_ds2"
   pool_name                        = "default"
-  environment                      = "staging"
+  env                              = "staging"
   kubernetes_version               = "1.21.9"
   parent_dns_zone_name             = "your.dns.zone"
   connectivity_resource_group_name = "caf-connectivity"
@@ -39,7 +39,7 @@ generate "provider" {
       features {}
     }
     provider "azurerm" {
-      alias           = "connectivity" 
+      alias           = "connectivity"
       tenant_id       = "${local.common_vars.tenant_id}"
       subscription_id = "${local.common_vars.connectivity_subscription_id}"
       features {}

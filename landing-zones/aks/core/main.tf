@@ -12,7 +12,7 @@ terraform {
 }
 
 resource "azurerm_resource_group" "lz_resource_group" {
-  name     = "rg-${var.prefix}-${var.name}-${var.environment}-${var.location}"
+  name     = "rg-${var.prefix}-${var.name}-${var.env}-${var.location}"
   location = var.location
 }
 
@@ -37,7 +37,7 @@ module "key_vault" {
 
   location                         = var.location
   resource_group_name              = azurerm_resource_group.lz_resource_group.name
-  env                              = var.environment
+  env                              = var.env
   workload                         = var.workload
   service_endpoints_subnet_id      = module.aks_vnet.service_endpoints_subnet_id
   connectivity_resource_group_name = var.connectivity_resource_group_name
@@ -67,7 +67,7 @@ module "key_gen" {
 module "aks" {
   source = "../../../modules/azure/aks"
 
-  env                         = var.environment
+  env                         = var.env
   location                    = var.location
   name                        = var.name
   pool_name                   = var.pool_name
@@ -94,7 +94,7 @@ module "aks" {
 resource "azurerm_virtual_hub_connection" "aks_vnet_hub_connection" {
   count                     = var.enable_virtual_hub_connection == true ? 1 : 0
   provider                  = azurerm.connectivity
-  name                      = "cn-${var.name}-connection-${var.environment}-${var.location}"
+  name                      = "cn-${var.name}-connection-${var.env}-${var.location}"
   virtual_hub_id            = data.azurerm_virtual_hub.connectivity_hub[0].id
   remote_virtual_network_id = module.aks_vnet.vnet_id
 }
@@ -103,7 +103,7 @@ resource "azurerm_virtual_network_peering" "peer_virtual_network" {
   count                     = var.enable_vnet_peering == true ? 1 : 0
   provider                  = azurerm.connectivity
   name                      = "vnet-peer-${var.name}"
-  resource_group_name       = "rg-${var.prefix}-connectivity-${var.environment}-${var.location}"
+  resource_group_name       = "rg-${var.prefix}-connectivity-${var.env}-${var.location}"
   virtual_network_name      = data.azurerm_virtual_network.target_virtual_network[0].name
   remote_virtual_network_id = module.aks_vnet.vnet_id
 }
@@ -111,7 +111,7 @@ resource "azurerm_virtual_network_peering" "peer_virtual_network" {
 module "app_service" {
   source = "../../../modules/azure/app-service"
 
-  environment    = var.env
+  env            = var.env
   short_location = var.short_location
   location       = var.location
   workload       = var.workload

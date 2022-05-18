@@ -45,7 +45,7 @@ resource "azurerm_mysql_server" "db_server" {
   version                          = "5.7"
 
   tags = {
-    environment = var.environment
+    env = var.env
   }
 }
 

@@ -16,6 +16,6 @@ locals {
 }
 
 resource "azurerm_resource_group" "resource_group" {
-  name     = "rg-${var.prefix}-${local.shared_services_name}-${var.environment}-${var.location}"
+  name     = "rg-${var.prefix}-${local.shared_services_name}-${var.env}-${var.location}"
   location = var.location
 }

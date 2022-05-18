@@ -26,9 +26,9 @@ variable "shared_services_resource_group" {
   description = "shared service kv RG"
 }
 
-variable "environment" {
+variable "env" {
   type        = string
-  description = "environment shortname"
+  description = "env shortname"
 }
 
 variable "vnet_name" {

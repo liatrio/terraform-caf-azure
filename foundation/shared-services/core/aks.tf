@@ -9,7 +9,7 @@ module "aks_vnet" {
 
 module "aks" {
   source                      = "../../../modules/azure/aks"
-  env                         = var.environment
+  env                         = var.env
   location                    = var.location
   name                        = local.shared_services_name
   pool_name                   = var.pool_name
@@ -34,7 +34,7 @@ module "aks" {
 
 resource "azurerm_virtual_hub_connection" "aks_vnet_hub_connection" {
   provider                  = azurerm.connectivity
-  name                      = "vhub-${var.prefix}-${local.shared_services_name}-connection-${var.environment}-${var.location}"
+  name                      = "vhub-${var.prefix}-${local.shared_services_name}-connection-${var.env}-${var.location}"
   virtual_hub_id            = data.azurerm_virtual_hub.connectivity_hub.id
   remote_virtual_network_id = module.aks_vnet.vnet_id
 }

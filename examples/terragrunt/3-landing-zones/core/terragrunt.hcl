@@ -21,7 +21,7 @@ inputs = {
   kubernetes_version                    = "1.21.9"
   connectivity_resource_group_name      = "caf-connectivity"
   connectivity_k8_private_dns_zone_name = "privatelink.centralus.azmk8s.io"
-  environment                           = "stg"
+  env                                   = "stg"
   shared_services_keyvault              = "caf-staging"
   shared_services_resource_group        = "caf-shared-services-staging-rg"
   connectivity_dns_servers              = local.common_vars.connectivity_dns_servers
@@ -65,17 +65,17 @@ generate "provider" {
       features {}
     }
     provider "azurerm" {
-      alias           = "connectivity" 
+      alias           = "connectivity"
       tenant_id       = "${local.common_vars.tenant_id}"
       subscription_id = "${local.common_vars.connectivity_subscription_id}"
       features {}
     }
     provider "azurerm" {
-      alias           = "shared_services" 
+      alias           = "shared_services"
       tenant_id       = "${local.common_vars.tenant_id}"
       subscription_id = "${local.common_vars.shared_services_staging_subscription_id}"
       features {}
-    }  
+    }
     provider "azurerm" {
       alias           = "management"
       tenant_id       = "${local.common_vars.tenant_id}"
