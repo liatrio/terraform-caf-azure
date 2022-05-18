@@ -69,6 +69,8 @@ resource "azurerm_kubernetes_cluster" "aks" {
     skip_nodes_with_local_storage    = lookup(var.autoscaler_config, "skip_nodes_with_local_storage", true)
     skip_nodes_with_system_pods      = lookup(var.autoscaler_config, "skip_nodes_with_system_pods", true)
   }
+
+  network_policy = "calico"
 }
 
 data "azurerm_resource_group" "aks_node_pool_resource_group" {
