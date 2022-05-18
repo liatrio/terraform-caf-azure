@@ -35,7 +35,6 @@ module "key_vault" {
     azurerm.connectivity = azurerm.connectivity
   }
 
-  name                             = var.name
   location                         = var.location
   resource_group_name              = azurerm_resource_group.lz_resource_group.name
   env                              = var.environment
