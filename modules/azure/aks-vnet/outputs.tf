@@ -1,5 +1,5 @@
 output "vnet_name" {
-  value = azurerm.azurerm_virtual_network.name
+  value = azurerm_virtual_network.aks_vnet.name
 }
 
 output "vnet_subnet_id" {
