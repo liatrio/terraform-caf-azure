@@ -7,6 +7,11 @@ variable "location" {
   description = "The Azure Region in which all resources should be provisioned"
 }
 
+variable "short_location" {
+  description = "The truncated location name eg. cus, eus, wus, etc."
+  type        = string
+}
+
 variable "vnet_address_range" {
   description = "The CIDR address range of the vnet"
   type        = string
