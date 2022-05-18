@@ -60,6 +60,13 @@ resource "azurerm_linux_function_app" "main" {
   }
 }
 
+#Using deprecated function app resouce as a data source to read the default hostname because
+#the default hostname is not correctly set while using azurerm_linux_function_apps
+data "azurerm_function_app" "azurerm_linux_function_app_reference" {
+    name = azurerm_linux_function_app.main.name
+    resource_group_name = var.resource_group_name
+}
+
 locals {
   enable_slack = var.slack_webhook_url == "" ? false : true
   enable_teams = var.teams_webhook_url == "" ? false : true
@@ -76,7 +83,7 @@ resource "azurerm_monitor_action_group" "slack" {
     name = "callazurefuncapi"
     # Using string interpolation to get full hostname of function. 
     # slack-budget-alert comes from the package directory inside the function
-    service_uri             = "https://${azurerm_linux_function_app.main.default_hostname}/api/slack-budget-alert"
+    service_uri             = "https://${data.azurerm_function_app.azurerm_linux_function_app_reference.default_hostname}/api/slack-budget-alert"
     use_common_alert_schema = false
   }
 }
@@ -92,7 +99,7 @@ resource "azurerm_monitor_action_group" "teams" {
     name = "callazurefuncapi"
     # Using string interpolation to get full hostname of function. 
     # teams-budget-alert comes from the package directory inside the function
-    service_uri             = "https://${azurerm_linux_function_app.main.default_hostname}/api/teams-budget-alert"
+    service_uri             = "https://${data.azurerm_function_app.azurerm_linux_function_app_reference.default_hostname}/api/teams-budget-alert"
     use_common_alert_schema = false
   }
 }

@@ -10,7 +10,7 @@ terraform {
 resource "azurerm_consumption_budget_subscription" "example" {
   for_each        = var.budgets
   name            = "bdg-${var.func_identifier}-core-${var.location}"
-  subscription_id = each.value["subscription_id"]
+  subscription_id = "/subscriptions/${each.value["subscription_id"]}"
   amount          = each.value["budget_amount"]
   time_grain      = each.value["budget_time_grain"]
 
