@@ -115,8 +115,8 @@ module "app_service" {
   short_location = var.short_location
   location       = var.location
   workload       = var.workload
-  vnet_rg_name   = var.vnet_rg_name
-  vnet_name      = var.vnet_name
-  subnet_name    = var.subnet_name
-  dns_rg_name    = var.dns_rg_name
+  vnet_rg_name   = azurerm_resource_group.lz_resource_group.name
+  vnet_name      = module.aks_vnet.vnet_name
+  subnet_name    = module.aks_vnet.vnet_service_endpoints_subnet_name
+  dns_rg_name    = azurerm_resource_group.lz_resource_group.name
 }

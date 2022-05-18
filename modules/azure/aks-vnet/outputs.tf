@@ -1,5 +1,13 @@
+output "vnet_name" {
+  value = azurerm.azurerm_virtual_network.name
+}
+
 output "vnet_subnet_id" {
   value = azurerm_subnet.aks_nodes_and_pods.id
+}
+
+output "vnet_service_endpoints_subnet_name" {
+  value = azurerm_subnet.service_endpoints.name
 }
 
 output "vnet_id" {
