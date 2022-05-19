@@ -121,3 +121,30 @@ variable "enable_point_to_site_vpn" {
   description = "If enabled, creates User Point to Site VPN configuration in CAF foundation."
   default     = true
 }
+
+variable "enable_budget_alerts" {
+  type        = bool
+  description = "Feature flag to enable billing alerts"
+  default     = false
+}
+
+variable "slack_webhook_url" {
+  type        = string
+  description = "URL or a Slack webhook to send the Slack alerts to"
+  default     = ""
+}
+
+variable "teams_webhook_url" {
+  type    = string
+  default = ""
+}
+
+variable "budgets" {
+  type    = map(any)
+  default = {}
+}
+
+variable "budget_tags" {
+  type    = map(any)
+  default = {}
+}
