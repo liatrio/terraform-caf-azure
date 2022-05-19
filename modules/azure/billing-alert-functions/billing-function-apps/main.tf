@@ -8,7 +8,7 @@ terraform {
 }
 
 resource "azurerm_service_plan" "main" {
-  name                = "plan-${var.func_identifier}-core-${var.location}"
+  name                = "plan-billing-alert-func-core-${var.location}"
   location            = var.location
   resource_group_name = var.resource_group_name
   os_type             = "Linux"
@@ -23,7 +23,7 @@ resource "azurerm_service_plan" "main" {
 }
 
 resource "azurerm_application_insights" "main" {
-  name                = "appi-${var.func_identifier}-core-${var.location}"
+  name                = "appi-billing-alert-func-core-${var.location}"
   location            = var.location
   resource_group_name = var.resource_group_name
   application_type    = "Node.JS"
@@ -32,7 +32,7 @@ resource "azurerm_application_insights" "main" {
 
 resource "azurerm_linux_function_app" "main" {
   # name doesn't have env or location to fit hostname 32 character limit
-  name                = "func-${var.func_identifier}"
+  name                = "func-billing-alert-func"
   resource_group_name = var.resource_group_name
   location            = var.location
   https_only          = true
@@ -74,7 +74,7 @@ locals {
 
 resource "azurerm_monitor_action_group" "slack" {
   count               = local.enable_slack ? 1 : 0
-  name                = "ag-slack-${var.func_identifier}-core-${var.location}"
+  name                = "ag-slack-billing-alert-func-core-${var.location}"
   resource_group_name = var.resource_group_name
   short_name          = "slack-ag"
   tags                = var.budget_tags
@@ -90,7 +90,7 @@ resource "azurerm_monitor_action_group" "slack" {
 
 resource "azurerm_monitor_action_group" "teams" {
   count               = local.enable_teams ? 1 : 0
-  name                = "ag-teams-${var.func_identifier}-core-${var.location}"
+  name                = "ag-teams-billing-alert-func-core-${var.location}"
   resource_group_name = var.resource_group_name
   short_name          = "teams-ag"
   tags                = var.budget_tags

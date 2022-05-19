@@ -9,11 +9,9 @@ module "billing_storage_accounts" {
 
   # If one or both of the webhook URLs is set, and the feature flag is turned on, then call this module
   count           = ((var.slack_webhook_url != "" || var.teams_webhook_url != "") && var.enable_budget_alerts) ? 1 : 0
-  func_identifier = var.func_identifier
   location        = var.location
   budget_tags     = var.budget_tags
-  sas_time_start  = var.sas_time_start
-  sas_time_end    = var.sas_time_end
+
 }
 
 module "billing_function_apps" {
@@ -24,7 +22,6 @@ module "billing_function_apps" {
 
   # If one or both of the webhook URLs is set, and the feature flag is turned on, then call this module
   count             = ((var.slack_webhook_url != "" || var.teams_webhook_url != "") && var.enable_budget_alerts) ? 1 : 0
-  func_identifier   = var.func_identifier
   slack_webhook_url = var.slack_webhook_url
   teams_webhook_url = var.teams_webhook_url
   location          = var.location
@@ -55,6 +52,5 @@ module "billing_notifications" {
   count           = var.enable_budget_alerts ? 1 : 0
   budgets         = var.budgets
   contact_groups  = local.contact_groups
-  func_identifier = var.func_identifier
   location        = var.location
 }

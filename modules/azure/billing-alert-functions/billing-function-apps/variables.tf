@@ -1,10 +1,6 @@
 # Code adapted from:
 # https://github.com/dzeyelid/azure-cost-alert-webhook-to-slack/blob/main/iac/terraform/modules/mediation_functions/variables.tf
 
-variable "func_identifier" {
-  type = string
-}
-
 variable "location" {
   type = string
 }

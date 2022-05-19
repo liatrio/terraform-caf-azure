@@ -122,21 +122,10 @@ variable "enable_point_to_site_vpn" {
   default     = true
 }
 
-variable "slack_func_identifier" {
-  type    = string
-  default = "billing-alert-func"
-}
-
 variable "enable_budget_alerts" {
   type        = bool
   description = "Feature flag to enable billing alerts"
   default     = false
-}
-
-variable "func_identifier" {
-  type        = string
-  default     = "billing-alert-func"
-  description = "string used to identity billing alert function resources"
 }
 
 variable "slack_webhook_url" {
@@ -158,14 +147,4 @@ variable "budgets" {
 variable "budget_tags" {
   type    = map(any)
   default = {}
-}
-
-variable "sas_time_start" {
-  type    = string
-  default = ""
-}
-
-variable "sas_time_end" {
-  type    = string
-  default = ""
 }

@@ -11,13 +11,13 @@ terraform {
 }
 
 resource "azurerm_resource_group" "main" {
-  name     = "rg-${var.func_identifier}-core-${var.location}"
+  name     = "rg-billing-alert-func-core-${var.location}"
   location = var.location
   tags     = var.budget_tags
 }
 
 resource "azurerm_storage_account" "func" {
-  name                     = format("st%s", replace(var.func_identifier, "-", "")) # using just func_identifier for character limits
+  name                     = format("st%s", replace("billing-alert-func", "-", "")) # using just billing-alert-func for character limits
   resource_group_name      = azurerm_resource_group.main.name
   location                 = azurerm_resource_group.main.location
   account_tier             = var.storage.tier
@@ -51,18 +51,18 @@ resource "azurerm_storage_account" "func" {
 }
 
 resource "azurerm_storage_queue" "main" {
-  name                 = "stq-${var.func_identifier}-core-${var.location}"
+  name                 = "stq-billing-alert-func-core-${var.location}"
   storage_account_name = azurerm_storage_account.func.name
 }
 
 resource "azurerm_storage_container" "deployments" {
-  name                  = "stc-${var.func_identifier}-core-${var.location}"
+  name                  = "stc-billing-alert-func-core-${var.location}"
   storage_account_name  = azurerm_storage_account.func.name
   container_access_type = "private"
 }
 
 resource "azurerm_storage_blob" "storage_blob" {
-  name                   = "stb-${var.func_identifier}-core-${var.location}"
+  name                   = "stb-billing-alert-func-core-${var.location}"
   storage_account_name   = azurerm_storage_account.func.name
   storage_container_name = azurerm_storage_container.deployments.name
   type                   = "Block"
@@ -75,12 +75,17 @@ resource "azurerm_storage_blob" "storage_blob" {
   }
 }
 
+locals {
+  start  = timestamp()
+  expiry = timeadd(local.start, "26298h") #Represents time from starting date plus number in quotes in hours
+}
+
 data "azurerm_storage_account_blob_container_sas" "storage_account_blob_container_sas" {
   connection_string = azurerm_storage_account.func.primary_connection_string
   container_name    = azurerm_storage_container.deployments.name
 
-  start  = var.sas_time_start
-  expiry = var.sas_time_end
+  start  = local.start
+  expiry = local.expiry
 
   permissions {
     read   = true

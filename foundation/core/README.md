@@ -26,9 +26,6 @@ vpn_service_principal_application_id|upstream dependency on creation of an `azur
 landing_zone_mg|variable (.tfvars or terragrunt)|`OPTIONAL` - map of objects defining the management group(s) in which your landing zone will exist|`{ management_group_1 : { display_name = "Management Group 1", policy_ids = [ { policy_set_id : "/providers/Microsoft.Authorization/policySetDefinitions/abcd1234-ef56-ab12-ab12-abcdef123456" } ] }, management_group_2 : { display_name = "Management Group 2", policy_ids = [] } }`
 enable_point_to_site_vpn|variable (.tfvars or terragrunt)|`OPTIONAL` - Boolean to enable/disable creation of user p2s vpn. Defaults to true|`true`
 enable_budget_alerts|variable (.tfvars or terragrunt)|`OPTIONAL` - Boolean to enable/disable the creation of budget alert function app and child resources. Defaults to false|`true`
-env|variable (.tfvars or terragrunt)|String describing which environment we're in. Used in creation of resource names|`dev` or `prod` etc
-sas_time_start|variable (.tfvars or terragrunt)|`OPTIONAL` - Start time for the sas token that allows the function app to access the package in blob storage|`"2022-05-01T00:00:00Z"`
-sas_time_end|variable (.tfvars or terragrunt)|`OPTIONAL` - Expiry time for the sas token that allows the function app to access the package in blob storage|`"2024-01-01T00:00:00Z"`
 slack_webhook_url|variable (.tfvars or terragrunt)|`OPTIONAL` - Incoming webhook generated in Slack that alerts will be posted to|`"https://hooks.slack.com/..."`
 teams_webhook_url|variable (.tfvars or terragrunt)|`OPTIONAL` - Incoming webhook generated in Microsoft Teams that alerts will be posted to|`"https://....webhook.office.com/webhook2/..."`
 budget_tags|variable (.tfvars or terragrunt)|`OPTIONAL` - The tags to be applied to resources created by the budget alerts module|`{"client": "internal"}`
