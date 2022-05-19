@@ -77,7 +77,7 @@ resource "azurerm_storage_blob" "storage_blob" {
 
 locals {
   start  = timestamp()
-  expiry = timeadd(local.start, "26298h") #Represents time from starting date plus number in quotes in hours
+  expiry = timeadd(local.start, "26298h") #Represents time from starting date plus three years in hours
 }
 
 data "azurerm_storage_account_blob_container_sas" "storage_account_blob_container_sas" {

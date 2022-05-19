@@ -8,9 +8,9 @@ module "billing_storage_accounts" {
   source = "../../modules/azure/billing-alert-functions/billing-storage-accounts"
 
   # If one or both of the webhook URLs is set, and the feature flag is turned on, then call this module
-  count           = ((var.slack_webhook_url != "" || var.teams_webhook_url != "") && var.enable_budget_alerts) ? 1 : 0
-  location        = var.location
-  budget_tags     = var.budget_tags
+  count       = ((var.slack_webhook_url != "" || var.teams_webhook_url != "") && var.enable_budget_alerts) ? 1 : 0
+  location    = var.location
+  budget_tags = var.budget_tags
 
 }
 
@@ -49,8 +49,8 @@ module "billing_notifications" {
   }
   source = "../../modules/azure/billing-alert-functions/billing-notifications"
 
-  count           = var.enable_budget_alerts ? 1 : 0
-  budgets         = var.budgets
-  contact_groups  = local.contact_groups
-  location        = var.location
+  count          = var.enable_budget_alerts ? 1 : 0
+  budgets        = var.budgets
+  contact_groups = local.contact_groups
+  location       = var.location
 }
