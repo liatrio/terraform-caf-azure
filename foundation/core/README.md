@@ -30,12 +30,6 @@ slack_webhook_url|variable (.tfvars or terragrunt)|`OPTIONAL` - Incoming webhook
 teams_webhook_url|variable (.tfvars or terragrunt)|`OPTIONAL` - Incoming webhook generated in Microsoft Teams that alerts will be posted to|`"https://....webhook.office.com/webhook2/..."`
 budget_tags|variable (.tfvars or terragrunt)|`OPTIONAL` - The tags to be applied to resources created by the budget alerts module|`{"client": "internal"}`
 budgets|variable (.tfvars or terragrunt)|`OPTIONAL` - A map of maps which has at the top level each subscription, and within each subscription the variables shown in this example, which are defined below|`{"caf-management" : {"subscription_id" : "<subscription_id>", "budget_time_start" : "2022-05-01T00:00:00Z", "budget_time_grain" : "Monthly", "budget_amount" : "1000", "budget_operator" : "EqualTo", "budget_threshold" : 80.0,}, "caf-connectivity" : {"subscription_id" : "<subscription_id>", "budget_time_start" : "2022-05-01T00:00:00Z", "budget_time_grain" : "Quarterly", "budget_amount" : "100", "budget_operator" : "GreaterThan", "budget_threshold" : 80.0,}}`
-subscription_id|variable (.tfvars or terragrunt)|`OPTIONAL` - The subscription id associated with the budget|`{"subscription-id": <subscription-id>}`
-budget_time_start|variable (.tfvars or terragrunt)|`OPTIONAL` - The start date for the budget |`{"budget_start_time" : "2022-05-01T00:00:00Z"}`
-budget_amount|variable (.tfvars or terragrunt)|`OPTIONAL` - The total amount of cost to track with the budget|`{"budget_amounts": 1000}`
-budget_time_grain|variable (.tfvars or terragrunt)|`OPTIONAL` - The time covered by a budget. Tracking of the amount will be reset based on the time grain|`{"budget_time_grain": "Monthly"}`
-budget_operator|variable (.tfvars or terragrunt)|`OPTIONAL` - The operator to use for budget comparison|`{"budget_operator": "EqualTo"}`
-budget_threshold|variable (.tfvars or terragrunt)|`OPTIONAL` - Threshold value associated with a notification. Notification is sent when the cost exceeded the threshold. It is always percent and has to be between 0.01 and 1000|`{"budget_threshold" : 80.0}`
 
 It also requires a few inputs.
 
