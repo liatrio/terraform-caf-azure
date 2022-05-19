@@ -54,7 +54,7 @@ resource "azurerm_role_assignment" "resource_group_dns_reader" {
   principal_id         = azurerm_user_assigned_identity.external_dns_pod_identity.principal_id
 }
 
-resource "azurerm_role_assignment" "subscription_dns_contributor" {
+resource "azurerm_role_assignment" "subscription_private_dns_contributor" {
   scope                = data.azurerm_subscription.current.id
   role_definition_name = "Private DNS Zone Contributor"
   principal_id         = azurerm_user_assigned_identity.external_dns_pod_identity.principal_id
