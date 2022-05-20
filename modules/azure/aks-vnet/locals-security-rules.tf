@@ -84,7 +84,7 @@ locals {
       priority                   = 2000
       direction                  = "Inbound"
       access                     = "Allow"
-      protocol                   = "tcp"
+      protocol                   = "Tcp"
       source_port_range          = "*"
       destination_port_range     = "80"
       source_address_prefix      = "Internet"
@@ -97,7 +97,7 @@ locals {
       priority                   = 2001
       direction                  = "Inbound"
       access                     = "Allow"
-      protocol                   = "tcp"
+      protocol                   = "Tcp"
       source_port_range          = "*"
       destination_port_range     = "443"
       source_address_prefix      = "Internet"
