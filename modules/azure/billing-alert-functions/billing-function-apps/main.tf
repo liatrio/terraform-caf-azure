@@ -14,12 +14,6 @@ resource "azurerm_service_plan" "main" {
   os_type             = "Linux"
   sku_name            = var.app_service_plan.size
   tags                = var.budget_tags
-
-  lifecycle {
-    ignore_changes = [
-      kind,
-    ]
-  }
 }
 
 resource "azurerm_application_insights" "main" {
@@ -58,11 +52,20 @@ resource "azurerm_linux_function_app" "main" {
       node_version = 16
     }
   }
+  auth_settings {
+    enabled                       = true
+    token_refresh_extension_hours = 0
+  }
 }
 
 #Using deprecated function app resouce as a data source to read the default hostname because
 #the default hostname is not correctly set while using azurerm_linux_function_apps
 data "azurerm_function_app" "azurerm_linux_function_app_reference" {
+  name                = azurerm_linux_function_app.main.name
+  resource_group_name = var.resource_group_name
+}
+
+data "azurerm_function_app_host_keys" "hostkey" {
   name                = azurerm_linux_function_app.main.name
   resource_group_name = var.resource_group_name
 }
@@ -83,7 +86,7 @@ resource "azurerm_monitor_action_group" "slack" {
     name = "callazurefuncapi"
     # Using string interpolation to get full hostname of function. 
     # slack-budget-alert comes from the package directory inside the function
-    service_uri             = "https://${data.azurerm_function_app.azurerm_linux_function_app_reference.default_hostname}/api/slack-budget-alert"
+    service_uri             = "https://${data.azurerm_function_app.azurerm_linux_function_app_reference.default_hostname}/api/slack-budget-alert?code=${data.azurerm_function_app_host_keys.hostkey.default_function_key}"
     use_common_alert_schema = false
   }
 }
@@ -99,7 +102,7 @@ resource "azurerm_monitor_action_group" "teams" {
     name = "callazurefuncapi"
     # Using string interpolation to get full hostname of function. 
     # teams-budget-alert comes from the package directory inside the function
-    service_uri             = "https://${data.azurerm_function_app.azurerm_linux_function_app_reference.default_hostname}/api/teams-budget-alert"
+    service_uri             = "https://${data.azurerm_function_app.azurerm_linux_function_app_reference.default_hostname}/api/teams-budget-alert?code=${data.azurerm_function_app_host_keys.hostkey.default_function_key}"
     use_common_alert_schema = false
   }
 }
