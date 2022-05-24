@@ -13,7 +13,7 @@ resource "kubernetes_manifest" "global_deny_by_default" {
     count = var.default_deny ? 1 : 0
 
     manifest = {
-        apiVersion = "projectcalico.org/v3"
+        apiVersion = "crd.projectcalico.org/v1"
         kind = "GlobalNetworkPolicy"
         metadata = {
             name = "deny-by-default-unless-system"
