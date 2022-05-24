@@ -52,10 +52,6 @@ resource "azurerm_linux_function_app" "main" {
       node_version = 16
     }
   }
-  auth_settings {
-    enabled                       = true
-    token_refresh_extension_hours = 0
-  }
 }
 
 #Using deprecated function app resouce as a data source to read the default hostname because
