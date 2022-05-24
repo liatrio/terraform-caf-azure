@@ -13,7 +13,7 @@ module "public" {
 
   count = var.external_app ? 1 : 0
 
-  pod_identity = module.external_dns_pod_identity[0].identity_name
+  pod_identity = module.external_dns_pod_identity.identity_name
   dns_provider = "azure"
   domain_filters = [
     "${var.dns_zone_name}"
