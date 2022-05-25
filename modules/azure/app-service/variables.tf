@@ -1,19 +1,11 @@
 variable "app_service_list" {
-  type = list(map(string))
-  default = [
-    {
-      name = "testfe"
-      tier = "Standard"
-      type = "Linux"
-      sku  = "S1"
-    },
-    {
-      name = "testapi"
-      tier = "Standard"
-      type = "Linux"
-      sku  = "S1"
-    }
-  ]
+  type = map(string)
+  default = {
+    name = "testfe"
+    tier = "Standard"
+    type = "Linux"
+    sku  = "S1"
+  }
 }
 
 variable "app_conf_feature_list" {
