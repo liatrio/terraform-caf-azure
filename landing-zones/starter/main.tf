@@ -17,7 +17,7 @@ resource "azurerm_resource_group" "lz_resource_group" {
 }
 
 module "vnet" {
-  source = "../../../modules/azure/vnet"
+  source = "../../modules/azure/vnet"
 
   name                            = var.name
   location                        = var.location
@@ -28,7 +28,7 @@ module "vnet" {
 }
 
 module "key_vault" {
-  source = "../../../modules/azure/key-vault"
+  source = "../../modules/azure/key-vault"
 
   providers = {
     azurerm              = azurerm,
