@@ -1,4 +1,4 @@
-# Starter Landing Zone
+# Basic Landing Zone
 
 The goal of this landing zone is to create the basic infrastructure necessary
 for deploying VMs, App Services, AKS Clusters, etc.
