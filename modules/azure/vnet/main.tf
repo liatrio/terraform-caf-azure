@@ -64,8 +64,8 @@ resource "azurerm_subnet" "service_endpoints" {
   service_endpoints = ["Microsoft.KeyVault"]
 }
 
-resource "azurerm_subnet_network_security_group_association" "aks_vnet" {
+resource "azurerm_subnet_network_security_group_association" "vnet" {
   for_each                  = azurerm_virtual_network.vnet.subnet
-  network_security_group_id = azurerm_network_security_group.vnet.id
+  network_security_group_id = azurerm_network_security_group.vnet_nsg.id
   subnet_id                 = each.value.id
 }
