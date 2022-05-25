@@ -52,7 +52,6 @@ resource "azurerm_virtual_network_dns_servers" "vnet" {
 }
 
 resource "azurerm_subnet_network_security_group_association" "vnet" {
-  for_each                  = azurerm_virtual_network.vnet.subnet.*.id
   network_security_group_id = azurerm_network_security_group.vnet_nsg.id
-  subnet_id                 = each.value.id
+  subnet_id                 = azurerm_virtual_network.vnet.subnet.*.id[0]
 }
