@@ -44,6 +44,16 @@ resource "azurerm_virtual_network" "vnet" {
   tags                = var.tags
 }
 
+resource "azurerm_subnet" "subnet" {
+  name                 = var.name
+  resource_group_name  = azurerm_virtual_network.aks_vnet.resource_group_name
+  virtual_network_name = azurerm_virtual_network.aks_vnet.name
+  address_prefixes     = [var.vnet_address_range]
+
+  # This needs to be enabled for the kube-apiserver endpoint to be created
+  enforce_private_link_endpoint_network_policies = true
+}
+
 resource "azurerm_virtual_network_dns_servers" "vnet" {
   count = length(var.connectivity_dns_servers) > 0 ? 1 : 0
 
@@ -53,5 +63,5 @@ resource "azurerm_virtual_network_dns_servers" "vnet" {
 
 resource "azurerm_subnet_network_security_group_association" "vnet" {
   network_security_group_id = azurerm_network_security_group.vnet_nsg.id
-  subnet_id                 = azurerm_virtual_network.vnet.subnet.*.id[0]
+  subnet_id                 = azurerm_subnet.subnet.id
 }
