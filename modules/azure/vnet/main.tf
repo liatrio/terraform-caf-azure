@@ -51,19 +51,6 @@ resource "azurerm_virtual_network_dns_servers" "vnet" {
   dns_servers        = var.connectivity_dns_servers
 }
 
-
-resource "azurerm_subnet" "service_endpoints" {
-  name                 = "service-endpoints"
-  resource_group_name  = var.resource_group_name
-  virtual_network_name = azurerm_virtual_network.vnet.name
-  address_prefixes     = [local.service_endpoints_subnet]
-
-  # This needs to be enabled for Key Vault etc service endpoints to be created
-  enforce_private_link_endpoint_network_policies = true
-
-  service_endpoints = ["Microsoft.KeyVault"]
-}
-
 resource "azurerm_subnet_network_security_group_association" "vnet" {
   for_each                  = azurerm_virtual_network.vnet.subnet
   network_security_group_id = azurerm_network_security_group.vnet_nsg.id
