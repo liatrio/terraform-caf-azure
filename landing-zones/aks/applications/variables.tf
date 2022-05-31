@@ -51,17 +51,18 @@ variable "external_app" {
 
 variable "network_policy_default_deny" {
   description = "Apply a default deny network policy across the cluster."
-  type = bool
-  default = true
+  type        = bool
+  default     = true
 }
 
 variable "network_policy_excluded_namespaces" {
   description = "Namespaces to exclude from default-deny network policy"
-  type = list
+  type        = list(any)
+
   default = [
-    "kube-system", 
-    "gatekeeper-system", 
-    "calico-system", 
+    "kube-system",
+    "gatekeeper-system",
+    "calico-system",
     "tigera-operator",
     "toolchain"
   ]
