@@ -7,3 +7,7 @@ Each landing zone module should have a dedicated subscription which must be crea
 **Landing Zones**
 
  - [AKS cluster](./aks/)
+
+## Network Policy
+
+See the notes on [network policies](./network-policy.md)
