@@ -1,41 +1,47 @@
 package main
 
 import (
-	"context"
 	"log"
 	"strings"
 	"testing"
 
-	v1 "k8s.io/apimachinery/pkg/apis/meta/v1"
+	"github.com/gruntwork-io/terratest/modules/k8s"
+	// "github.com/gruntwork-io/terratest/modules/testing"
 )
 
 const defaultDenyNamespace = netpolNamespacePrefix + "default-deny"
+
+// Exit codes
+// https://everything.curl.dev/usingcurl/returns#available-exit-codes
+var CURL_DNS_FAILED int = 6
+var CURL_CONNECTION_FAILED int = 7
 
 // Services have DNS == ✅
 func testDNS(t *testing.T) {
 	t.Parallel()
 
-	svc, err := Client.CoreV1().Services("default").Get(context.Background(), "kubernetes", v1.GetOptions{})
-	if err != nil {
-		t.Errorf("Failed to get kubernetes svc in the default namespace")
-	}
+	kubeSystemOptions := &k8s.KubectlOptions{Namespace: "default"}
+	appOptions := &k8s.KubectlOptions{Namespace: defaultDenyNamespace}
 
-	pod, err := GetOrCreateEndpoint(defaultDenyNamespace, "netpol-testing-dns", map[string]string{}, nil)
+	svc := k8s.GetService(t, kubeSystemOptions, "kubernetes")
+	svcURL := k8s.GetServiceEndpoint(t, kubeSystemOptions, svc, 80)
+
+	pod, err := GetOrCreateEndpoint(t, appOptions, "netpol-testing-dns", map[string]string{}, nil)
 	if err != nil {
 		t.Errorf("Failed to get or create pod: %s", err.Error())
 	}
 
-	_, stderr, callerr := ExecCommand(pod, append(CurlCommand, "kubernetes.default"), "")
+	out, _ := k8s.ExecE(t, appOptions, pod.Name, "", append(CurlCommand, svcURL))
 
-	if strings.Contains(stderr, svc.Spec.ClusterIP) {
+	// The command might still fail, but what's important is that DNS worked.
+	if strings.Contains(out.Stderr, svc.Spec.ClusterIP) {
 		log.Printf("[dns] curl from %s resolved IP of %s", PodName(pod), SvcName(svc))
 		return
 	}
 
 	// DNS Could not resolve exit code 6.
-	// https://everything.curl.dev/usingcurl/returns#available-exit-codes
-	if strings.Contains(callerr, "command terminated with exit code 6") {
-		t.Errorf("Curl failed to resolve host")
+	if out.ExitCode == 6 {
+		t.Errorf("Curl failed to resolve host (exit code: ")
 	}
 }
 
@@ -43,21 +49,24 @@ func testDNS(t *testing.T) {
 func testAppToInternet(t *testing.T) {
 	t.Parallel()
 
-	pod, err := GetOrCreateEndpoint(defaultDenyNamespace, "netpol-testing-internet-egress", map[string]string{}, nil)
+	appOptions := &k8s.KubectlOptions{Namespace: defaultDenyNamespace}
+
+	pod, err := GetOrCreateEndpoint(t, appOptions, "netpol-testing-internet-egress", map[string]string{}, nil)
 	if err != nil {
 		t.Errorf("Failed to get or create pod: %s", err.Error())
 	}
 
-	_, _, callerr := ExecCommand(pod, append(CurlCommand, "google.com"), "")
+	out, err := k8s.ExecE(t, appOptions, pod.Name, "", append(CurlCommand, "google.com"))
 
-	hasInternet := (callerr == "")
-
-	if hasInternet {
+	if out.ExitCode == 0 {
 		// Bad!
 		t.Errorf("[egress] %s to internet succeeded", PodName(pod))
-	} else {
-		// Good!
+	} else if out.ExitCode == 7 {
+		// Good! DNS worked (exit code 6) but connection was blocked.
 		log.Printf("[egress] %s failed to reach to internet", PodName(pod))
+	} else {
+		// ??? Bad!
+		t.Errorf("[egress] %s had unknown error: %s", PodName(pod), out.Stderr)
 	}
 }
 
@@ -66,21 +75,24 @@ func testAppToInternet(t *testing.T) {
 func testSystemToInternet(t *testing.T) {
 	t.Parallel()
 
-	pod, err := CreateEndpoint("kube-system", "netpol-testing-internet-egress", map[string]string{"netpol-testing": "egress-to-internet"}, nil)
+	systemOptions := &k8s.KubectlOptions{Namespace: "kube-system"}
+
+	pod, err := CreateEndpoint(t, systemOptions, "netpol-testing-internet-egress", map[string]string{"netpol-testing": "egress-to-internet"}, nil)
 	if err != nil {
 		t.Errorf("Failed to get or create pod: %s", err.Error())
 	}
 
-	_, _, callerr := ExecCommand(pod, append(CurlCommand, "google.com"), "")
+	out, err := k8s.ExecE(t, systemOptions, pod.Name, "", append(CurlCommand, "google.com"))
 
-	hasInternet := (callerr == "")
-
-	if hasInternet {
-		// Good!
-		log.Printf("[egress] %s failed to reach to internet", PodName(pod))
-	} else {
+	if out.ExitCode == 0 {
+		// Good! We want to connect
+		log.Printf("[egress] %s to internet succeeded", PodName(pod))
+	} else if out.ExitCode == 7 {
 		// Bad!
-		t.Errorf("[egress] %s to internet succeeded", PodName(pod))
+		t.Errorf("[egress] %s failed to reach to internet", PodName(pod))
+	} else {
+		// ??? Bad!
+		t.Errorf("[egress] %s had unknown error: %s", PodName(pod), out.Stderr)
 	}
 }
 
@@ -88,24 +100,24 @@ func testSystemToInternet(t *testing.T) {
 func testAppToAppSameNS(t *testing.T) {
 	t.Parallel()
 
-	podA, err := CreateEndpoint(defaultDenyNamespace, "netpol-testing-app-a", map[string]string{"netpol-testing": "app-to-app"}, nil)
+	appOptions := &k8s.KubectlOptions{Namespace: defaultDenyNamespace}
+
+	podA, err := CreateEndpoint(t, appOptions, "netpol-testing-app-a", map[string]string{"netpol-testing": "app-to-app"}, nil)
 	if err != nil {
 		t.Errorf("Failed to create pod: %s", err.Error())
 	}
 
-	podB, err := CreateEndpoint(defaultDenyNamespace, "netpol-testing-app-b", map[string]string{"netpol-testing": "app-to-app"}, nil)
+	podB, err := CreateEndpoint(t, appOptions, "netpol-testing-app-b", map[string]string{"netpol-testing": "app-to-app"}, nil)
 	if err != nil {
 		t.Errorf("Failed to create pod: %s", err.Error())
 	}
 
-	_, stderr, callerr := ExecCommand(podA, append(CurlCommand, podB.Status.PodIP), "")
+	out, _ := k8s.ExecE(t, appOptions, podA.Name, "", append(CurlCommand, podB.Status.PodIP))
 
-	appToApp := (callerr == "")
-
-	if appToApp {
+	if out.ExitCode == 0 {
 		log.Printf("[app-to-app-same-ns] %s -> %s connected", PodName(podA), PodName(podB))
 	} else {
-		t.Errorf("[app-to-app-same-ns] failed to connect inside the same ns: %s", stderr)
+		t.Errorf("[app-to-app-same-ns] failed to connect inside the same ns: %s", out.Stderr)
 	}
 
 }
@@ -124,11 +136,12 @@ func testAppToAppSameNS(t *testing.T) {
 // }
 
 func TestDefaultDeny(t *testing.T) {
-	err := CreateNamespace(defaultDenyNamespace, map[string]string{})
-	if err != nil {
-		t.Errorf("Failed to create testing namespace: %s", err.Error())
-	}
-	t.Cleanup(func() { DeleteNamespace(defaultDenyNamespace) })
+
+	options := &k8s.KubectlOptions{Namespace: defaultDenyNamespace}
+
+	k8s.CreateNamespace(t, options, options.Namespace)
+
+	t.Cleanup(func() { k8s.DeleteNamespace(t, options, options.Namespace) })
 
 	t.Run("Internet egress forbidden for app namespaces", testAppToInternet)
 	t.Run("Internet egress allowed for system namespaces", testSystemToInternet)
