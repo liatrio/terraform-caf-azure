@@ -22,8 +22,9 @@ resource "azurerm_key_vault" "key_vault" {
   purge_protection_enabled    = true
   tags                        = var.tags
   network_acls {
-    bypass         = "AzureServices"
-    default_action = "Deny"
+    bypass                     = "AzureServices"
+    default_action             = "Deny"
+    virtual_network_subnet_ids = [var.service_endpoints_subnet_id]
   }
 
   sku_name = "standard"
@@ -39,6 +40,7 @@ resource "azurerm_key_vault" "key_vault" {
       "Get",
       "List",
       "Update",
+      "Manage Contacts"
     ]
 
     key_permissions = length(var.key_permissions) > 0 ? var.key_permissions : [

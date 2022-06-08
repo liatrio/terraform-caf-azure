@@ -12,13 +12,13 @@ resource "azurerm_private_endpoint" "key_vault" {
 
   private_service_connection {
     is_manual_connection           = false
-    name                           = "key-vault-service-connection"
+    name                           = "kv-service-connection"
     private_connection_resource_id = azurerm_key_vault.key_vault.id
     subresource_names              = ["vault"]
   }
 
   private_dns_zone_group {
-    name                 = "key-vault-dns-zone-group"
+    name                 = "kv-dns-zone-group"
     private_dns_zone_ids = [data.azurerm_private_dns_zone.key_vault.id]
   }
 }
