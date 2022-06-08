@@ -50,8 +50,10 @@ resource "azurerm_subnet" "subnet" {
   virtual_network_name = azurerm_virtual_network.vnet.name
   address_prefixes     = [var.vnet_address_range]
 
-  # This needs to be enabled for the kube-apiserver endpoint to be created
+  # This needs to be enabled for Key Vault etc service endpoints to be created
   enforce_private_link_endpoint_network_policies = true
+
+  service_endpoints = ["Microsoft.KeyVault"]
 }
 
 resource "azurerm_virtual_network_dns_servers" "vnet" {
