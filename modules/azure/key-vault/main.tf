@@ -40,7 +40,7 @@ resource "azurerm_key_vault" "key_vault" {
       "Get",
       "List",
       "Update",
-      "Manage Contacts"
+      "ManageContacts"
     ]
 
     key_permissions = length(var.key_permissions) > 0 ? var.key_permissions : [
