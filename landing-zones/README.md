@@ -6,4 +6,5 @@ Each landing zone module should have a dedicated subscription which must be crea
 
 **Landing Zones**
 
- - [AKS cluster](./aks/)
+- [AKS cluster](./aks/)
+- [Basic](./basic/)
