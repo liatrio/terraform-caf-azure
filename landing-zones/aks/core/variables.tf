@@ -163,3 +163,9 @@ variable "workload" {
   type        = string
   description = "The workload that we are supporting"
 }
+
+variable "keyvault_group_object_id" {
+  description = "OPTIONAL Object ID of AAD security group to which key vault access policies should be assigned."
+  type        = string
+  default     = ""
+}

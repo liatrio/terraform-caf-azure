@@ -31,7 +31,7 @@ resource "azurerm_key_vault" "key_vault" {
 
   access_policy {
     tenant_id      = data.azurerm_client_config.current.tenant_id
-    object_id      = data.azurerm_client_config.current.object_id
+    object_id      = local.keyvault_group_object_id
     application_id = var.application_id != null ? var.application_id : null
 
     certificate_permissions = length(var.certificate_permissions) > 0 ? var.certificate_permissions : [

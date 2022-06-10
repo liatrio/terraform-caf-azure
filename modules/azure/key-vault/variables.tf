@@ -68,3 +68,9 @@ variable "application_id" {
   type        = string
   default     = null
 }
+
+variable "keyvault_group_object_id" {
+  description = "OPTIONAL Object ID of AAD security group to which key vault access policies should be assigned"
+  type        = string
+  default     = null
+}
