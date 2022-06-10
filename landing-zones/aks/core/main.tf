@@ -8,6 +8,10 @@ terraform {
         azurerm.management
       ]
     }
+    azuread = {
+      source  = "hashicorp/azuread"
+      version = "~> 2.15.0"
+    }
   }
 }
 
@@ -47,6 +51,7 @@ module "key_vault" {
   key_permissions                  = var.key_permissions
   secret_permissions               = var.secret_permissions
   storage_permissions              = var.storage_permissions
+  keyvault_group_object_id         = local.keyvault_group_object_id
 }
 
 module "key_gen" {

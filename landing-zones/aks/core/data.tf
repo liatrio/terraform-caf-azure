@@ -42,3 +42,9 @@ data "azurerm_virtual_network" "connectivity_vnet" {
   name                = "vnet-core-connectivity-apps-${var.location}"
   resource_group_name = var.connectivity_resource_group_name
 }
+
+data "azuread_group" "keyvault_contributors" {
+  count            = var.keyvault_group_name != "" ? 1 : 0
+  display_name     = var.keyvault_group_name
+  security_enabled = true
+}
