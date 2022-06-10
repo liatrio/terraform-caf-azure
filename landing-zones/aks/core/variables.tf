@@ -164,8 +164,8 @@ variable "workload" {
   description = "The workload that we are supporting"
 }
 
-variable "keyvault_group_name" {
-  description = "OPTIONAL Name of AAD security group to which key vault access policies should be assigned. *MUST* include azuread provider config to use this variable"
+variable "keyvault_group_object_id" {
+  description = "OPTIONAL Object ID of AAD security group to which key vault access policies should be assigned."
   type        = string
   default     = ""
 }
