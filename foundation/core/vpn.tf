@@ -10,7 +10,7 @@ resource "azurerm_vpn_server_configuration" "vpn_server_config" {
   ]
 
   azure_active_directory_authentication {
-    audience = azuread_service_principal.azure_vpn.application_id
+    audience = azuread_service_principal.azure_vpn.application_id[0]
     issuer   = "https://sts.windows.net/${data.azurerm_client_config.default.tenant_id}/"
     tenant   = "https://login.microsoftonline.com/${data.azurerm_client_config.default.tenant_id}"
   }
@@ -69,8 +69,8 @@ data "azuread_service_principal" "windows_azure_active_directory" {
 resource "azuread_service_principal_delegated_permission_grant" "azure_vpn" {
   count = var.enable_point_to_site_vpn == true ? 1 : 0
 
-  service_principal_object_id          = azuread_service_principal.azure_vpn.object_id
-  resource_service_principal_object_id = data.azuread_service_principal.windows_azure_active_directory.object_id
+  service_principal_object_id          = azuread_service_principal.azure_vpn.object_id[0]
+  resource_service_principal_object_id = data.azuread_service_principal.windows_azure_active_directory.object_id[0]
   claim_values                         = ["User.Read", "User.ReadBasic.All"]
 }
 
@@ -83,7 +83,7 @@ resource "azuread_conditional_access_policy" "vpn_require_mfa" {
   conditions {
     applications {
       included_applications = [
-        azuread_service_principal.azure_vpn.application_id
+        azuread_service_principal.azure_vpn.application_id[0]
       ]
     }
 
