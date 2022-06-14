@@ -10,5 +10,10 @@ terraform {
         azurerm.connectivity
       ]
     }
+
+    azuread = {
+      source  = "hashicorp/azuread"
+      version = "~> 2.22.0"
+    }
   }
 }

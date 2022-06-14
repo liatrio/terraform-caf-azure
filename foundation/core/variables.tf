@@ -1,3 +1,8 @@
+variable "tenant_id" {
+  type        = string
+  description = "Tenant to deploy CAF"
+}
+
 variable "prefix" {
   type = string
 }
@@ -23,11 +28,6 @@ variable "connectivity_apps_address_cidr" {
     condition     = cidrnetmask(var.connectivity_apps_address_cidr) == "255.255.255.0"
     error_message = "The connectivity_apps_address_cidr value must be a /24."
   }
-}
-
-variable "vpn_service_principal_application_id" {
-  type        = string
-  description = "The ApplicationID of the Azure VPN service principal, used for AAD authentication to the point-to-site VPN"
 }
 
 variable "landing_zone_mg" {
