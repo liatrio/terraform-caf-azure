@@ -38,5 +38,5 @@ data "azurerm_subscription" "landing_zone" {
 
 resource "azurerm_management_group_subscription_association" "landing_zone_mg_association" {
   subscription_id     = data.azurerm_subscription.landing_zone.id
-  management_group_id = azurerm_management_group.landing_zone_mg.id
+  management_group_id = data.azurerm_management_group.landing_zone_mg.id
 }
