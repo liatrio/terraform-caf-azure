@@ -2,7 +2,7 @@ terraform {
   required_providers {
     azurerm = {
       source  = "hashicorp/azurerm"
-      version = "~> 3.5.0"
+      version = "~> 3.10.0"
     }
   }
 }
@@ -14,7 +14,7 @@ data "azurerm_billing_mca_account_scope" "billing" {
 }
 
 resource "azurerm_subscription" "landing_zone" {
-  subscription_name = "blair-${var.name}"
+  subscription_name = "${var.name}"
   billing_scope_id  = data.azurerm_billing_mca_account_scope.billing.id
 
   tags = {}
