@@ -13,12 +13,12 @@ data "azurerm_billing_mca_account_scope" "billing" {
   invoice_section_name = var.invoice_section_name
 }
 
-###resource "azurerm_subscription" "landing_zone" {
-###  subscription_name = var.name
-###  billing_scope_id  = data.azurerm_billing_mca_account_scope.billing.id
-###
-###  tags = {}
-###}
+resource "azurerm_subscription" "landing_zone" {
+  subscription_name = var.name
+  #billing_scope_id  = data.azurerm_billing_mca_account_scope.billing.id
+
+  tags = {}
+}
 
 data "azurerm_management_group" "landing_zone_mg" {
   name = var.management_group_name
