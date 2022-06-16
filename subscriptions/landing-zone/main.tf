@@ -20,13 +20,9 @@ data "azurerm_billing_mca_account_scope" "billing" {
 ###  tags = {}
 ###}
 
-resource "azurerm_management_group" "landing_zone_mg" {
+data "azurerm_management_group" "landing_zone_mg" {
   name = var.management_group_name
 }
-
-#data "azurerm_management_group" "landing_zone_mg" {
-#  name = var.management_group_name
-#}
 
 #### This is because the `azurerm_subscription` resource's `id` is actually an alias ID, not a subscription ID
 ###data "azurerm_subscription" "landing_zone" {
