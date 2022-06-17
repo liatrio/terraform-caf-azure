@@ -50,3 +50,7 @@ output "external_dns_aad_pod_identity_resource_id" {
 output "dns_zone_name" {
   value = var.dns_zone_name
 }
+
+output "key_vault_id" {
+  value = module.key_vault.key_vault_id
+}
