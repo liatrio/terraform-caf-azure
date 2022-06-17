@@ -14,7 +14,7 @@ data "azurerm_billing_mca_account_scope" "billing" {
 }
 
 resource "azurerm_subscription" "landing_zone" {
-  subscription_name = "${var.name}"
+  subscription_name = var.name
   billing_scope_id  = data.azurerm_billing_mca_account_scope.billing.id
 
   tags = {}
@@ -22,13 +22,6 @@ resource "azurerm_subscription" "landing_zone" {
 
 data "azurerm_management_group" "landing_zone_mg" {
   name = var.management_group_name
-}
-
-data "azurerm_subscriptions" "available" {
-}
-
-output "available_subscriptions" {
-  value = data.azurerm_subscriptions.available.subscriptions
 }
 
 #### This is because the `azurerm_subscription` resource's `id` is actually an alias ID, not a subscription ID
