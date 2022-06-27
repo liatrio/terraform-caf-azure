@@ -1,0 +1,19 @@
+apiVersion: backstage.io/v1alpha1
+kind: Component
+metadata:
+  name: terraform-caf-azure
+  description: |
+    This is Liatrio's implementation of a Cloud Adoption Framework (CAF)
+    on Azure using Terraform to build a foundation for deploying workload 
+    landing zones. This repo is composed of several Terraform modules 
+    designed to make getting started with Azure using best practices easier.
+  annotations:
+    github.com/project-slug: 'liatrio/terraform-caf-azure'
+  tags:
+    - terraform
+    - azure
+spec:
+  type: library
+  lifecycle: production
+  owner: liatrio
+
