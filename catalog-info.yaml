@@ -15,5 +15,5 @@ metadata:
 spec:
   type: library
   lifecycle: production
-  owner: liatrio
+  owner: azure-team
 
