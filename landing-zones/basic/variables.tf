@@ -21,41 +21,12 @@ variable "name" {
   description = "A prefix used for resources"
 }
 
-variable "pool_name" {
-  default     = "default"
-  description = "The name of the default_node pool"
-}
-
-variable "node_count_min" {
-  description = "Minimum node count"
-  type        = number
-  default     = 2
-}
-
-variable "node_count_max" {
-  description = "Maximum node count"
-  type        = number
-  default     = 3
-}
-
-variable "vm_size" {
-  description = "The size of the VM"
-}
-
-variable "kubernetes_version" {
-  type        = string
-  description = "kubernetes version"
-}
-
 variable "prefix" {
   description = "A prefix used for resources"
   type        = string
   default     = "caf"
 }
 variable "connectivity_resource_group_name" {
-  type = string
-}
-variable "connectivity_k8_private_dns_zone_name" {
   type = string
 }
 
@@ -75,12 +46,6 @@ variable "parent_dns_zone_name" {
   description = "Optional parent DNS zone name which causes a child zone to be created"
 }
 
-variable "enable_ms_defender" {
-  type        = bool
-  description = "Feature flag to enable MS Defender for Cloud"
-  default     = false
-}
-
 variable "enable_vnet_peering" {
   type        = bool
   description = "Feature flag to enable peering the lz VNet to a hub VNet"
@@ -93,41 +58,13 @@ variable "enable_virtual_hub_connection" {
   default     = true
 }
 
-variable "enable_aks_policy_addon" {
-  type        = bool
-  description = "Feature flag to enable AKS Policy Add On"
-  default     = false
-}
-
-variable "ms_defender_enabled_resources" {
-  type        = map(any)
-  description = "Enables MS Defender for resources when resource type name = true (e.g. 'Containers' = true)"
-  default     = {}
-}
-
 variable "enabled_for_disk_encryption" {
   description = "Whether or not to allow the Azure Disk Encryption to retrieve certs stored in key vault"
   type        = bool
   default     = true
 }
 
-variable "vault_key_to_create" {
-  description = "A map with a key to generate in the Azure Key Vault"
-  type        = map(any)
-  default     = {}
-}
 
-variable "log_analytics_workspace_id" {
-  description = "Log analytics workspace ID. If none is supplied, local will default to sourcing from CAF management"
-  type        = string
-  default     = ""
-}
-
-variable "aks_enable_disk_encryption" {
-  type        = bool
-  description = "Whether or not to enable disk encryption in the AKS Cluster"
-  default     = true
-}
 
 variable "certificate_permissions" {
   description = "A list of certificate permissions for key vault to grant to object_id and application_id"
@@ -162,10 +99,4 @@ variable "application_id" {
 variable "workload" {
   type        = string
   description = "The workload that we are supporting"
-}
-
-variable "keyvault_group_object_id" {
-  description = "OPTIONAL Object ID of AAD security group to which key vault access policies should be assigned."
-  type        = string
-  default     = ""
 }

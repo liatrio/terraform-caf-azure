@@ -64,6 +64,8 @@ resource "azurerm_subnet" "aks_nodes_and_pods" {
 resource "azurerm_subnet_network_security_group_association" "aks_vnet" {
   network_security_group_id = azurerm_network_security_group.aks_vnet.id
   subnet_id                 = azurerm_subnet.aks_nodes_and_pods.id
+
+  depends_on = [azurerm_virtual_network.aks_vnet]
 }
 
 resource "azurerm_subnet" "service_endpoints" {
