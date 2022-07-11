@@ -44,6 +44,7 @@ resource "azurerm_kubernetes_cluster" "aks" {
     docker_bridge_cidr = "172.17.0.1/16"
     service_cidr       = var.aks_service_subnet_cidr
     dns_service_ip     = var.aks_dns_service_ip
+    network_policy     = "calico"
   }
 
   oms_agent {
